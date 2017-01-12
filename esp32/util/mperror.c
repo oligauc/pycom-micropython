@@ -23,11 +23,12 @@
 #include "esp_spi_flash.h"
 #include "nvs_flash.h"
 #include "esp_event.h"
+#include "modled.h"
 
 #include "gpio.h"
 #include "machpin.h"
 #include "pins.h"
-
+#include "soc/soc.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/semphr.h"
@@ -45,11 +46,18 @@
 
 #define MPERROR_HEARTBEAT_PRIORITY                  (5)
 
+#define MPERROR_HEARTBEAT_LED_GPIO                  (0)
 /******************************************************************************
  DECLARE PRIVATE DATA
  ******************************************************************************/
 #ifndef BOOTLOADER_BUILD
 STATIC const mp_obj_base_t pyb_heartbeat_obj = {&pyb_heartbeat_type};
+
+led_info_t led_info = {
+    .rmt_channel = RMT_CHANNEL_1,
+    .gpio = MPERROR_HEARTBEAT_LED_GPIO,
+};
+
 #endif
 
 struct mperror_heart_beat {
@@ -71,6 +79,9 @@ void mperror_init0 (void) {
 #ifndef BOOTLOADER_BUILD
     // configure the heartbeat led pin
     pin_config(&pin_GPIO0, -1, -1, GPIO_MODE_OUTPUT, MACHPIN_PULL_NONE, 0, 0);
+    
+    led_info.access_semaphore = xSemaphoreCreateBinary();
+    led_init(&led_info);
 #else
     gpio_config_t gpioconf = {.pin_bit_mask = 1ull << MICROPY_HW_HB_PIN_NUM,
                               .mode = GPIO_MODE_OUTPUT,
@@ -88,7 +99,9 @@ void mperror_signal_error (void) {
     bool toggle = true;
     while ((MPERROR_TOOGLE_MS * count++) < MPERROR_SIGNAL_ERROR_MS) {
         // toogle the led
-        mperror_set_rgb_color(toggle ? MPERROR_HEARTBEAT_COLOR : 0);
+        uint8_t red = toggle ? MPERROR_HEARTBEAT_COLOR : 0;
+        led_info.color = (color_t){red,0,0};
+        led_set_color(&led_info);
         toggle = ~toggle;
         mp_hal_delay_ms(MPERROR_TOOGLE_MS);
     }
@@ -108,12 +121,13 @@ bool mperror_heartbeat_signal (void) {
     } else if (mperror_heart_beat.enabled) {
         if (!mperror_heart_beat.beating) {
             if ((mperror_heart_beat.on_time = mp_hal_ticks_ms()) - mperror_heart_beat.off_time > MPERROR_HEARTBEAT_OFF_MS) {
-                mperror_set_rgb_color(MPERROR_HEARTBEAT_COLOR);
+                led_info.color = (color_t){0,0,MPERROR_HEARTBEAT_COLOR};
+                led_set_color(&led_info);
                 mperror_heart_beat.beating = true;
             }
         } else {
             if ((mperror_heart_beat.off_time = mp_hal_ticks_ms()) - mperror_heart_beat.on_time > MPERROR_HEARTBEAT_ON_MS) {
-                mperror_set_rgb_color(0);
+                led_clear_color(&led_info);
                 mperror_heart_beat.beating = false;
             }
         }
