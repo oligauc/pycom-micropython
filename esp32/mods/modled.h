@@ -10,42 +10,44 @@
 #ifndef MODLED_H
 #define	MODLED_H
 
-#ifdef	__cplusplus
-extern "C" {
-#endif
-
 #include "driver/rmt.h"
 #include "driver/gpio.h"
 #include "freertos/FreeRTOS.h"
     
 /******************************************************************************
+ DEFINE PUBLIC CONSTANTS
+ ******************************************************************************/
+#define COLOR_BITS           (24) // 24 bit color
+
+/******************************************************************************
  DEFINE PUBLIC TYPES
  ******************************************************************************/
 
-typedef struct {
-    uint8_t red;
-    uint8_t green;
-    uint8_t blue;
-} color_t;
+typedef union {
+    struct component_t {
+        uint8_t blue;
+        uint8_t green;
+        uint8_t red;
+    } component;
+    uint32_t value : 24;
+} color_rgb_t; 
 
 typedef struct {
     rmt_channel_t rmt_channel;
-    gpio_num_t gpio; 
-    color_t color;
-    SemaphoreHandle_t access_semaphore;
+    gpio_num_t gpio;
+    color_rgb_t  color;
+    rmt_item32_t *rmt_grb_buf;
+    rmt_item32_t *rmt_white_buf;
 } led_info_t;
 
 /******************************************************************************
  DECLARE PUBLIC FUNCTIONS
  ******************************************************************************/
 
+bool led_send_color(led_info_t *led_info);
+bool led_send_reset(led_info_t *led_info);
+bool led_set_color(led_info_t *led_info, bool synchronize);
 bool led_init(led_info_t *led_info);
-void led_set_color(led_info_t *led_info);
-void led_clear_color(led_info_t *led_info);
-
-#ifdef	__cplusplus
-}
-#endif
 
 #endif	/* MODLED_H */
 

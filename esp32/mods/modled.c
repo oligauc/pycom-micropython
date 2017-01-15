@@ -23,14 +23,14 @@
 #define LED_BIT_1_LOW_PERIOD  (3) // 300ns 
 #define LED_BIT_0_HIGH_PERIOD (3) // 300ns 
 #define LED_BIT_0_LOW_PERIOD  (9) // 900ns 
-#define BITS_PER_COLOR        (8)
 
 /******************************************************************************
  DECLARE PRIVATE FUNCTIONS
  ******************************************************************************/
 
 static bool led_init_rmt(led_info_t *led_info);
-static void led_encode_color(color_t *color, rmt_item32_t *buf);
+static void led_encode_color(led_info_t *led_info);
+static void led_encode_white(led_info_t *led_info);
 static void set_high_bit(rmt_item32_t *item);
 static void set_low_bit(rmt_item32_t *item);
 
@@ -40,46 +40,68 @@ static void set_low_bit(rmt_item32_t *item);
 bool led_init(led_info_t *led_info)
 {
     if ((led_info == NULL) ||
+        (led_info->rmt_grb_buf == NULL) ||
+        (led_info->rmt_white_buf == NULL) ||
         (led_info->rmt_channel == RMT_CHANNEL_MAX) ||
-        (led_info->gpio > GPIO_NUM_33) || 
-        (led_info->access_semaphore == NULL)) {
+        (led_info->gpio > GPIO_NUM_33)) {
         return false;
     }
     
-    led_info->color = (color_t){0x0, 0x0, 0x0};
+    led_encode_color(led_info);
+    led_encode_white(led_info);
     
     if (!led_init_rmt(led_info)) {
         return false;
     }
-
-    xSemaphoreGive(led_info->access_semaphore);
- 
+    
     return true;
 }
 
-void led_set_color(led_info_t *led_info)
+bool led_send_color(led_info_t *led_info) 
 {
-    rmt_item32_t rmt_buf[BITS_PER_COLOR  * 3];
+    if ((led_info == NULL) || 
+        (led_info->rmt_grb_buf == NULL)){
+        return false;
+    }
+   
+    if (rmt_write_items(led_info->rmt_channel, led_info->rmt_grb_buf, COLOR_BITS, false) != ESP_OK){
+        return false;
+    }
     
-    led_encode_color(&led_info->color, rmt_buf);
-    
-    rmt_wait_tx_done(led_info->rmt_channel);
-    xSemaphoreTake(led_info->access_semaphore, portMAX_DELAY);
-    rmt_write_items(led_info->rmt_channel, rmt_buf, sizeof(rmt_item32_t) * BITS_PER_COLOR * 3, false);
-    xSemaphoreGive(led_info->access_semaphore);
+    return true;
 }
 
-void led_clear_color(led_info_t *led_info)
+bool led_send_reset(led_info_t *led_info)
 {
-    rmt_item32_t rmt_buf[BITS_PER_COLOR  * 3];
+     if ((led_info == NULL) || 
+        (led_info->rmt_white_buf == NULL)){
+        return false;
+    }
     
-    color_t color = (color_t){0x0, 0x0, 0x0};
-    led_encode_color(&color, rmt_buf);
+    if (rmt_write_items(led_info->rmt_channel, led_info->rmt_white_buf, COLOR_BITS, false) != ESP_OK) {
+        return false;
+    }
     
-    rmt_wait_tx_done(led_info->rmt_channel);
-    xSemaphoreTake(led_info->access_semaphore, portMAX_DELAY);
-    rmt_write_items(led_info->rmt_channel, rmt_buf, sizeof(rmt_item32_t) * BITS_PER_COLOR * 3, false);
-    xSemaphoreGive(led_info->access_semaphore);
+    return true;
+}
+
+bool led_set_color(led_info_t *led_info, bool synchronize)
+{
+    if ((led_info == NULL) || 
+        (led_info->rmt_grb_buf == NULL)){
+        return false;
+    }
+    
+    if (synchronize){
+        rmt_wait_tx_done(led_info->rmt_channel);
+    }
+    
+    led_encode_color(led_info);
+    if (rmt_write_items(led_info->rmt_channel, led_info->rmt_grb_buf, COLOR_BITS, false) != ESP_OK) {
+        return false;
+    }
+    
+    return true;
 }
 
 /******************************************************************************
@@ -100,48 +122,35 @@ static void set_low_bit(rmt_item32_t *item){
     item->level1    = 0;
 }
 
-static void led_encode_color(color_t *color, rmt_item32_t *buf){
-   
+static void led_encode_color(led_info_t *led_info)
+{   
     uint32_t rmt_idx = 0;
-   
-    /* Green */
-    for (uint8_t bit = BITS_PER_COLOR; bit != 0; --bit){    
-        bool is_set = (color->green >> (bit - 1)) & 0x1;
-        if (is_set){
-            set_high_bit(&(buf[rmt_idx]));
-        } else {
-            set_low_bit(&(buf[rmt_idx]));
-        }
-        
-        rmt_idx++;
-    }
+    uint32_t gbr_value = ((uint32_t)led_info->color.component.green << 16) | 
+                ((uint32_t)led_info->color.component.red << 8) | 
+                ((uint32_t)led_info->color.component.blue);
+            
+    uint32_t MSB_VALUE = 1 << (COLOR_BITS - 1);
     
-    /* Red */
-    for (uint8_t bit = BITS_PER_COLOR; bit != 0; --bit){
+    for (uint32_t bit_mask = MSB_VALUE; bit_mask != 0; bit_mask >>= 1){
         
-        bool is_set = (color->red >> (bit - 1)) & 0x1;
-        if (is_set){
-            set_high_bit(&(buf[rmt_idx]));
+        if (gbr_value & bit_mask){
+            set_high_bit(&(led_info->rmt_grb_buf[rmt_idx]));
         } else {
-            set_low_bit(&(buf[rmt_idx]));
+            set_low_bit(&(led_info->rmt_grb_buf[rmt_idx]));
         }
-        
-        rmt_idx++;
-    }
-    
-    /* Blue */
-    for (uint8_t bit = BITS_PER_COLOR; bit != 0; --bit){    
-        bool is_set = (color->blue >> (bit - 1)) & 0x1;
-        if (is_set){
-            set_high_bit(&(buf[rmt_idx]));
-        } else {
-            set_low_bit(&(buf[rmt_idx]));
-        }
-     
+           
         rmt_idx++;
     }
 }
 
+static void led_encode_white(led_info_t *led_info){
+    
+    for (uint32_t bit = 0; bit < COLOR_BITS; bit++){
+        set_low_bit(&(led_info->rmt_white_buf[bit]));
+    }
+    
+}
+   
 static bool led_init_rmt(led_info_t *led_info)
 {
     rmt_config_t rmt_info = {

@@ -46,16 +46,24 @@
 
 #define MPERROR_HEARTBEAT_PRIORITY                  (5)
 
-#define MPERROR_HEARTBEAT_LED_GPIO                  (0)
+#define MPERROR_HEARTBEAT_LED_GPIO                  (0)                
 /******************************************************************************
  DECLARE PRIVATE DATA
  ******************************************************************************/
 #ifndef BOOTLOADER_BUILD
 STATIC const mp_obj_base_t pyb_heartbeat_obj = {&pyb_heartbeat_type};
 
+static rmt_item32_t rmt_grb_items[COLOR_BITS];
+static rmt_item32_t rmt_white_items[COLOR_BITS];
+
 led_info_t led_info = {
     .rmt_channel = RMT_CHANNEL_1,
     .gpio = MPERROR_HEARTBEAT_LED_GPIO,
+    .rmt_grb_buf = rmt_grb_items,
+    .rmt_white_buf = rmt_white_items,
+    .color = {
+        .value = MPERROR_HEARTBEAT_COLOR,
+    }
 };
 
 #endif
@@ -79,8 +87,7 @@ void mperror_init0 (void) {
 #ifndef BOOTLOADER_BUILD
     // configure the heartbeat led pin
     pin_config(&pin_GPIO0, -1, -1, GPIO_MODE_OUTPUT, MACHPIN_PULL_NONE, 0, 0);
-    
-    led_info.access_semaphore = xSemaphoreCreateBinary();
+ 
     led_init(&led_info);
 #else
     gpio_config_t gpioconf = {.pin_bit_mask = 1ull << MICROPY_HW_HB_PIN_NUM,
@@ -99,9 +106,11 @@ void mperror_signal_error (void) {
     bool toggle = true;
     while ((MPERROR_TOOGLE_MS * count++) < MPERROR_SIGNAL_ERROR_MS) {
         // toogle the led
-        uint8_t red = toggle ? MPERROR_HEARTBEAT_COLOR : 0;
-        led_info.color = (color_t){red,0,0};
-        led_set_color(&led_info);
+        if (!toggle){
+            led_send_color(&led_info);
+        } else {
+            led_send_reset(&led_info);
+        }
         toggle = ~toggle;
         mp_hal_delay_ms(MPERROR_TOOGLE_MS);
     }
@@ -111,7 +120,7 @@ void mperror_heartbeat_switch_off (void) {
     if (mperror_heart_beat.enabled) {
         mperror_heart_beat.on_time = 0;
         mperror_heart_beat.off_time = 0;
-        mperror_set_rgb_color(0);
+        led_send_reset(&led_info);
     }
 }
 
@@ -121,13 +130,12 @@ bool mperror_heartbeat_signal (void) {
     } else if (mperror_heart_beat.enabled) {
         if (!mperror_heart_beat.beating) {
             if ((mperror_heart_beat.on_time = mp_hal_ticks_ms()) - mperror_heart_beat.off_time > MPERROR_HEARTBEAT_OFF_MS) {
-                led_info.color = (color_t){0,0,MPERROR_HEARTBEAT_COLOR};
-                led_set_color(&led_info);
+                led_send_color(&led_info);
                 mperror_heart_beat.beating = true;
             }
         } else {
             if ((mperror_heart_beat.off_time = mp_hal_ticks_ms()) - mperror_heart_beat.on_time > MPERROR_HEARTBEAT_ON_MS) {
-                led_clear_color(&led_info);
+                led_send_reset(&led_info);
                 mperror_heart_beat.beating = false;
             }
         }
@@ -147,7 +155,8 @@ void NORETURN __fatal_error(const char *msg) {
     }
 #endif
     // signal the crash with the system led
-    mperror_set_rgb_color(MPERROR_FATAL_COLOR);
+    led_info.color.value = MPERROR_FATAL_COLOR;
+    led_set_color(&led_info, false);
     for ( ;; ); //{__WFI();}
 }
 
@@ -174,10 +183,14 @@ void mperror_enable_heartbeat (bool enable) {
 //        // configure the led again
 //        pin_config ((pin_obj_t *)&MICROPY_SYS_LED_GPIO, -1, -1, GPIO_DIR_MODE_OUT, PIN_TYPE_STD, 0, PIN_STRENGTH_6MA);
 //    #endif
+        led_info.color.value = MPERROR_HEARTBEAT_COLOR;
+        led_set_color(&led_info, false);
+        
         mperror_heart_beat.enabled = true;
         mperror_heart_beat.do_disable = false;
         mperror_heartbeat_switch_off();
     } else {
+        led_send_reset(&led_info);
         mperror_heart_beat.do_disable = true;
         mperror_heart_beat.enabled = false;
     }
@@ -185,56 +198,4 @@ void mperror_enable_heartbeat (bool enable) {
 
 bool mperror_is_heartbeat_enabled (void) {
     return mperror_heart_beat.enabled;
-}
-
-#define BIT_1_HIGH_TIME_NS                  (950)
-#define BIT_1_LOW_TIME_NS                   (22)
-#define BIT_0_HIGH_TIME_NS                  (20)
-#define BIT_0_LOW_TIME_NS                   (500)
-#define RESET_TIME_US                       (52)
-
-#define NS_TO_COUNT(ns)                     (ns / 9)
-
-static inline uint32_t get_ccount(void) {
-    uint32_t r;
-    asm volatile ("rsr %0, ccount" : "=r"(r));
-    return r;
-}
-
-static void IRAM_ATTR wait_for_count(uint32_t count) {
-    uint32_t volatile register cr = get_ccount();
-    uint32_t volatile register ct = cr + count;
-    if (ct > cr) {
-        while (get_ccount() < ct);
-    } else {
-        while (ct < get_ccount());
-    }
-}
-
-#define DELAY_NS(ns)                        wait_for_count(NS_TO_COUNT(ns))
-#define GP0_PIN_NUMBER                      (0)
-
-void IRAM_ATTR mperror_set_rgb_color (uint32_t rgbcolor) {
-    uint32_t volatile register grbcolor =
-            ((rgbcolor << 8) & 0x00FF0000) | ((rgbcolor >> 8) & 0x0000FF00) | (rgbcolor & 0x000000FF);
-
-    uint32_t volatile register ilevel = XTOS_DISABLE_ALL_INTERRUPTS;
-
-    for (int volatile register i = 24; i != 0; --i) {
-        if (grbcolor & 0x800000) {
-            GPIO_REG_WRITE(GPIO_OUT_W1TS_REG, 1 << GP0_PIN_NUMBER);
-            DELAY_NS(BIT_1_HIGH_TIME_NS);
-            GPIO_REG_WRITE(GPIO_OUT_W1TC_REG, 1 << GP0_PIN_NUMBER);
-            DELAY_NS(BIT_1_LOW_TIME_NS);
-        } else {
-            GPIO_REG_WRITE(GPIO_OUT_W1TS_REG, 1 << GP0_PIN_NUMBER);
-            DELAY_NS(BIT_0_HIGH_TIME_NS);
-            GPIO_REG_WRITE(GPIO_OUT_W1TC_REG, 1 << GP0_PIN_NUMBER);
-            DELAY_NS(BIT_0_LOW_TIME_NS);
-        }
-        // put the next bit in place
-        grbcolor <<= 1;
-    }
-    XTOS_RESTORE_INTLEVEL(ilevel);
-    ets_delay_us(RESET_TIME_US);
 }
