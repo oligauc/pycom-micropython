@@ -125,7 +125,7 @@ static void set_low_bit(rmt_item32_t *item){
 static void led_encode_color(led_info_t *led_info)
 {   
     uint32_t rmt_idx = 0;
-    uint32_t gbr_value = ((uint32_t)led_info->color.component.green << 16) | 
+    uint32_t grb_value = ((uint32_t)led_info->color.component.green << 16) | 
                 ((uint32_t)led_info->color.component.red << 8) | 
                 ((uint32_t)led_info->color.component.blue);
             
@@ -133,7 +133,7 @@ static void led_encode_color(led_info_t *led_info)
     
     for (uint32_t bit_mask = MSB_VALUE; bit_mask != 0; bit_mask >>= 1){
         
-        if (gbr_value & bit_mask){
+        if (grb_value & bit_mask){
             set_high_bit(&(led_info->rmt_grb_buf[rmt_idx]));
         } else {
             set_low_bit(&(led_info->rmt_grb_buf[rmt_idx]));
