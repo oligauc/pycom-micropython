@@ -63,6 +63,7 @@ typedef struct {
     bool                  init;
     bool                  busy;
     bool                  scanning;
+    bool                  controller_active;
 } bt_obj_t;
 
 typedef struct {
@@ -117,7 +118,7 @@ typedef union {
 /******************************************************************************
  DECLARE PRIVATE DATA
  ******************************************************************************/
-static volatile bt_obj_t bt_obj;
+static volatile bt_obj_t bt_obj = {.controller_active = false};
 static QueueHandle_t xScanQueue;
 
 static const mp_obj_type_t mod_bt_connection_type;
@@ -318,13 +319,19 @@ static void ble_client_appRegister(void) {
 
 /// \class Bluetooth
 static mp_obj_t bt_init_helper(bt_obj_t *self, const mp_arg_val_t *args) {
-    if (!self->init) {
+   
+    if (!self->controller_active){
         bt_controller_init();
+        self->controller_active = true;
+    }
+    
+    if (!self->init){
         esp_init_bluetooth();
         esp_enable_bluetooth();
         ble_client_appRegister();
         self->init = true;
     }
+   
     return mp_const_none;
 }
 
@@ -519,6 +526,19 @@ STATIC mp_obj_t bt_connect(mp_obj_t self_in, mp_obj_t addr) {
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_2(bt_connect_obj, bt_connect);
 
+STATIC mp_obj_t bt_deinit(mp_obj_t self_in) {
+    
+    if (bt_obj.init){
+        esp_disable_bluetooth();
+        esp_deinit_bluetooth();
+        bt_obj.init = false;
+        printf("Bluetooth disabled\n");
+    }
+    
+    return mp_const_none;
+}
+STATIC MP_DEFINE_CONST_FUN_OBJ_1(bt_deinit_obj, bt_deinit);
+
 STATIC const mp_map_elem_t bt_locals_dict_table[] = {
     // instance methods
     { MP_OBJ_NEW_QSTR(MP_QSTR_init),                    (mp_obj_t)&bt_init_obj },
@@ -528,6 +548,7 @@ STATIC const mp_map_elem_t bt_locals_dict_table[] = {
     { MP_OBJ_NEW_QSTR(MP_QSTR_get_adv),                 (mp_obj_t)&bt_read_scan_obj },
     { MP_OBJ_NEW_QSTR(MP_QSTR_resolve_adv_data),        (mp_obj_t)&bt_resolve_adv_data_obj },
     { MP_OBJ_NEW_QSTR(MP_QSTR_connect),                 (mp_obj_t)&bt_connect_obj },
+    { MP_OBJ_NEW_QSTR(MP_QSTR_deinit),                  (mp_obj_t)&bt_deinit_obj },
 
     // constants
     { MP_OBJ_NEW_QSTR(MP_QSTR_CONN_ADV),                MP_OBJ_NEW_SMALL_INT(ESP_BLE_EVT_CONN_ADV) },
