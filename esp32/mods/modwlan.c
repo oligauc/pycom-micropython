@@ -282,7 +282,7 @@ void wlan_off_on (void) {
 // DEFINE STATIC FUNCTIONS
 //*****************************************************************************
 
-STATIC esp_err_t wlan_event_handler(void *ctx, system_event_t *event) {
+STATIC esp_err_t wlan_event_handler(void *ctx, system_event_t *event) {    
     switch(event->event_id) {
     case SYSTEM_EVENT_STA_START:
         esp_wifi_connect();
@@ -327,17 +327,23 @@ STATIC void wlan_clear_data (void) {
 //}
 
 STATIC void wlan_servers_start (void) {
+    
     // start the servers if they were enabled before
-    if (wlan_obj.servers_enabled) {
+    if (wlan_obj.enable_servers) {
         servers_start();
     }
 }
 
 STATIC void wlan_servers_stop (void) {
-    // Stop all other processes using the wlan engine
-    if ((wlan_obj.servers_enabled = servers_are_enabled())) {
-        servers_stop();
+    
+    if (servers_are_enabled()){
+        wlan_obj.enable_servers = true;
     }
+   
+    // Stop all other processes using the wlan engine
+    if (wlan_obj.enable_servers) {
+        servers_stop();
+    } 
 }
 
 STATIC void wlan_setup_ap (const char *ssid, uint32_t ssid_len, uint32_t auth, const char *key, uint32_t key_len,
@@ -585,7 +591,7 @@ STATIC const mp_arg_t wlan_init_args[] = {
     { MP_QSTR_channel,      MP_ARG_KW_ONLY  | MP_ARG_INT,  {.u_int = 1} },
     { MP_QSTR_antenna,      MP_ARG_KW_ONLY  | MP_ARG_INT,  {.u_int = ANTENNA_TYPE_INTERNAL} },
 };
-STATIC mp_obj_t wlan_make_new(const mp_obj_type_t *type, mp_uint_t n_args, mp_uint_t n_kw, const mp_obj_t *all_args) {
+STATIC mp_obj_t wlan_make_new(const mp_obj_type_t *type, mp_uint_t n_args, mp_uint_t n_kw, const mp_obj_t *all_args) { 
     // parse args
     mp_map_t kw_args;
     mp_map_init_fixed_table(&kw_args, n_kw, all_args + n_args);
@@ -961,6 +967,19 @@ STATIC mp_obj_t wlan_mac (mp_uint_t n_args, const mp_obj_t *args) {
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(wlan_mac_obj, 1, 2, wlan_mac);
 
+STATIC mp_obj_t wlan_deinit(mp_obj_t self_in) {
+    
+   if (servers_are_enabled()){
+       wlan_servers_stop();
+   }
+        
+   esp_wifi_set_mode(WIFI_MODE_NULL);
+   esp_wifi_deinit();
+           
+   return mp_const_none;
+}
+STATIC MP_DEFINE_CONST_FUN_OBJ_1(wlan_deinit_obj, wlan_deinit);
+
 //STATIC mp_obj_t wlan_irq (mp_uint_t n_args, const mp_obj_t *pos_args, mp_map_t *kw_args) {
 //    mp_arg_val_t args[mp_irq_INIT_NUM_ARGS];
 //    mp_arg_parse_all(n_args - 1, pos_args + 1, kw_args, mp_irq_INIT_NUM_ARGS, mp_irq_init_args, args);
@@ -1005,6 +1024,7 @@ STATIC const mp_map_elem_t wlan_locals_dict_table[] = {
     { MP_OBJ_NEW_QSTR(MP_QSTR_channel),             (mp_obj_t)&wlan_channel_obj },
     { MP_OBJ_NEW_QSTR(MP_QSTR_antenna),             (mp_obj_t)&wlan_antenna_obj },
     { MP_OBJ_NEW_QSTR(MP_QSTR_mac),                 (mp_obj_t)&wlan_mac_obj },
+    { MP_OBJ_NEW_QSTR(MP_QSTR_deinit),              (mp_obj_t)&wlan_deinit_obj },
 //    { MP_OBJ_NEW_QSTR(MP_QSTR_irq),                 (mp_obj_t)&wlan_irq_obj },
     // { MP_OBJ_NEW_QSTR(MP_QSTR_connections),         (mp_obj_t)&wlan_connections_obj },
     // { MP_OBJ_NEW_QSTR(MP_QSTR_urn),                 (mp_obj_t)&wlan_urn_obj },
