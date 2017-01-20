@@ -29,7 +29,6 @@
 #include "machpin.h"
 #include "mpirq.h"
 #include "pins.h"
-//#include "pybsleep.h"
 #include "mpexception.h"
 #include "mperror.h"
 
@@ -55,25 +54,6 @@ DEFINE CONSTANTS
 #define MACHPIN_SIMPLE_OUTPUT               0x100
 #define ETS_GPIO_INUM                       13
 
-/******************************************************************************
-DEFINE TYPES
-******************************************************************************/
-//typedef struct {
-//    bool       active;
-//    int8_t     lpds;
-//    int8_t     hib;
-//} pybpin_wake_pin_t;
-
-/******************************************************************************
-DECLARE PRIVATE DATA
-******************************************************************************/
-//STATIC pybpin_wake_pin_t pybpin_wake_pin[PYBPIN_NUM_WAKE_PINS] =
-//                                    { {.active = false, .lpds = PYBPIN_WAKES_NOT, .hib = PYBPIN_WAKES_NOT},
-//                                      {.active = false, .lpds = PYBPIN_WAKES_NOT, .hib = PYBPIN_WAKES_NOT},
-//                                      {.active = false, .lpds = PYBPIN_WAKES_NOT, .hib = PYBPIN_WAKES_NOT},
-//                                      {.active = false, .lpds = PYBPIN_WAKES_NOT, .hib = PYBPIN_WAKES_NOT},
-//                                      {.active = false, .lpds = PYBPIN_WAKES_NOT, .hib = PYBPIN_WAKES_NOT},
-//                                      {.active = false, .lpds = PYBPIN_WAKES_NOT, .hib = PYBPIN_WAKES_NOT} } ;
 /******************************************************************************
  DEFINE PUBLIC FUNCTIONS
  ******************************************************************************/
@@ -426,15 +406,6 @@ STATIC void pin_print(const mp_print_t *print, mp_obj_t self_in, mp_print_kind_t
         mp_printf(print, ", pull=Pin.%q", pull_qst);
     }
 
-//    // pin drive
-//    qstr drv_qst;
-//    if (drive == PIN_STRENGTH_2MA) {
-//        drv_qst = MP_QSTR_LOW_POWER;
-//    } else if (drive == PIN_STRENGTH_4MA) {
-//        drv_qst = MP_QSTR_MED_POWER;
-//    } else {
-//        drv_qst = MP_QSTR_HIGH_POWER;
-//    }
     qstr drv_qst = MP_QSTR_MED_POWER; // FIXME
     mp_printf(print, ", drive=Pin.%q", drv_qst);
 
@@ -560,20 +531,6 @@ STATIC mp_obj_t pin_call(mp_obj_t self_in, mp_uint_t n_args, mp_uint_t n_kw, con
     return pin_value (n_args + 1, _args);
 }
 
-//STATIC mp_obj_t pin_alt_list(mp_obj_t self_in) {
-//    pin_obj_t *self = self_in;
-//    mp_obj_t af[2];
-//    mp_obj_t afs = mp_obj_new_list(0, NULL);
-//
-//    for (int i = 0; i < self->num_afs; i++) {
-//        af[0] = MP_OBJ_NEW_QSTR(self->af_list[i].name);
-//        af[1] = mp_obj_new_int(self->af_list[i].idx);
-//        mp_obj_list_append(afs, mp_obj_new_tuple(MP_ARRAY_SIZE(af), af));
-//    }
-//    return afs;
-//}
-//STATIC MP_DEFINE_CONST_FUN_OBJ_1(pin_alt_list_obj, pin_alt_list);
-
 STATIC void set_pin_callback_helper(mp_obj_t self_in, mp_obj_t handler, mp_obj_t handler_arg) {
     pin_obj_t *self = self_in;
     if (handler == mp_const_none) {
@@ -632,7 +589,6 @@ STATIC const mp_map_elem_t pin_locals_dict_table[] = {
     { MP_OBJ_NEW_QSTR(MP_QSTR_pull),                    (mp_obj_t)&pin_pull_obj },
     { MP_OBJ_NEW_QSTR(MP_QSTR_drive),                   (mp_obj_t)&pin_drive_obj },
     { MP_OBJ_NEW_QSTR(MP_QSTR_hold),                    (mp_obj_t)&pin_hold_obj },
-//    { MP_OBJ_NEW_QSTR(MP_QSTR_alt_list),                (mp_obj_t)&pin_alt_list_obj },
     { MP_OBJ_NEW_QSTR(MP_QSTR_callback),                (mp_obj_t)&pin_callback_obj },
 
     // class attributes

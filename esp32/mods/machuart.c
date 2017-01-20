@@ -219,12 +219,6 @@ STATIC IRAM_ATTR void UARTGenericIntHandler(uint32_t uart_id, uint32_t status) {
         status = READ_PERI_REG(UART_INT_ST_REG(uart_id)) ;
     }
 
-//    // check the flags to see if the user handler should be called
-//    if ((self->irq_trigger & self->irq_flags) && self->irq_enabled) {
-//        // call the user defined handler
-//        mp_irq_handler(mp_irq_find(self));
-//    }
-
     // clear the flags
     self->irq_flags = 0;
 }
@@ -533,9 +527,7 @@ STATIC const mp_map_elem_t mach_uart_locals_dict_table[] = {
     { MP_OBJ_NEW_QSTR(MP_QSTR_init),        (mp_obj_t)&mach_uart_init_obj },
     { MP_OBJ_NEW_QSTR(MP_QSTR_deinit),      (mp_obj_t)&mach_uart_deinit_obj },
     { MP_OBJ_NEW_QSTR(MP_QSTR_any),         (mp_obj_t)&mach_uart_any_obj },
-    // { MP_OBJ_NEW_QSTR(MP_QSTR_sendbreak),   (mp_obj_t)&pyb_uart_sendbreak_obj },
-//    { MP_OBJ_NEW_QSTR(MP_QSTR_irq),         (mp_obj_t)&pyb_uart_irq_obj },
-
+   
     { MP_OBJ_NEW_QSTR(MP_QSTR_read),        (mp_obj_t)&mp_stream_read_obj },
     { MP_OBJ_NEW_QSTR(MP_QSTR_readall),     (mp_obj_t)&mp_stream_readall_obj },
     { MP_OBJ_NEW_QSTR(MP_QSTR_readline),    (mp_obj_t)&mp_stream_unbuffered_readline_obj},
@@ -614,12 +606,6 @@ STATIC const mp_stream_p_t uart_stream_p = {
     .is_text = false,
 };
 
-//STATIC const mp_irq_methods_t uart_irq_methods = {
-//    .init = pyb_uart_irq,
-//    .enable = uart_irq_enable,
-//    .disable = uart_irq_disable,
-//    .flags = uart_irq_flags
-//};
 
 const mp_obj_type_t mach_uart_type = {
     { &mp_type_type },

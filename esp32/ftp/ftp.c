@@ -15,13 +15,10 @@
 #include "py/mpstate.h"
 #include "py/obj.h"
 
-//#include "pybrtc.h"
 #include "ftp.h"
 #include "updater.h"
 #include "modnetwork.h"
-//#include "modwlan.h"
 #include "modusocket.h"
-//#include "debug.h"
 #include "serverstask.h"
 #include "ff.h"
 #include "fifo.h"

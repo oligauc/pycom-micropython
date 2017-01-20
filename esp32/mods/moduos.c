@@ -27,16 +27,12 @@
 #include "pybsd.h"
 #include "mpexception.h"
 
-/// \module os - basic "operating system" services
-///
-/// The `os` module contains functions for filesystem access and `urandom`.
-///
-/// The filesystem has `/` as the root directory, and the available physical
-/// drives are accessible from here.  They are currently:
-///
-///     /flash      -- the serial flash filesystem
-///
-/// On boot up, the current directory is `/flash`.
+/* module os - basic "operating system" services
+   The 'os' module contains functions for filesystem access and 'urandom'.
+   The filesystem has '/' as the root directory, and the available physical
+   drives are accessible from here. They are currently:
+ 		/flash      -- the serial flash filesystem
+   On boot up, the current directory is `/flash`. */
 
 /******************************************************************************
  DECLARE PRIVATE DATA

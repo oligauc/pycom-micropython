@@ -178,8 +178,6 @@ STATIC mp_obj_t mach_pwm_timer_make_new(const mp_obj_type_t *type, mp_uint_t n_a
 
 STATIC const mp_map_elem_t mach_pwm_timer_locals_dict_table[] = {
     // instance methods
-    //{ MP_OBJ_NEW_QSTR(MP_QSTR_init),        (mp_obj_t)&mach_pwm_init_obj },
-    //{ MP_OBJ_NEW_QSTR(MP_QSTR_deinit),      (mp_obj_t)&mach_pwm_deinit_obj },
     { MP_OBJ_NEW_QSTR(MP_QSTR_channel),       (mp_obj_t)&mach_pwm_channel_obj},
 
 };

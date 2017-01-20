@@ -32,9 +32,8 @@ typedef struct {
 STATIC network_server_obj_t network_server_obj;
 STATIC const mp_obj_type_t network_server_type;
 
-/// \module network - network configuration
-///
-/// This module provides network drivers and server configuration.
+// module network - network configuration
+// This module provides network drivers and server configuration.
 
 void mod_network_init0(void) {
     mp_obj_list_init(&MP_STATE_PORT(mod_network_nic_list), 0);

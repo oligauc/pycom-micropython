@@ -1556,9 +1556,3 @@ static const mp_obj_type_t mod_bt_characteristic_type = {
     .name = MP_QSTR_GATTCCharacteristic,
     .locals_dict = (mp_obj_t)&bt_characteristic_locals_dict,
 };
-
-// static const mp_obj_type_t mod_bt_descriptor_type = {
-    // { &mp_type_type },
-    // .name = MP_QSTR_BT_DESCRIPTOR,
-    // .locals_dict = (mp_obj_t)&bt_descriptor_locals_dict,
-// };
