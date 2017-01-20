@@ -838,8 +838,6 @@ STATIC const mp_map_elem_t bt_characteristic_locals_dict_table[] = {
     { MP_OBJ_NEW_QSTR(MP_QSTR_properties),              (mp_obj_t)&bt_char_properties_obj },
     { MP_OBJ_NEW_QSTR(MP_QSTR_read),                    (mp_obj_t)&bt_char_read_obj },
     { MP_OBJ_NEW_QSTR(MP_QSTR_write),                   (mp_obj_t)&bt_char_write_obj },
-    // { MP_OBJ_NEW_QSTR(MP_QSTR_descriptors),             (mp_obj_t)&bt_char_descriptors_obj },
-    // { MP_OBJ_NEW_QSTR(MP_QSTR_subscribe),               (mp_obj_t)&bt_char_subscribe_obj },
 };
 STATIC MP_DEFINE_CONST_DICT(bt_characteristic_locals_dict, bt_characteristic_locals_dict_table);
 
@@ -848,9 +846,3 @@ static const mp_obj_type_t mod_bt_characteristic_type = {
     .name = MP_QSTR_BluetoothCharacteristic,
     .locals_dict = (mp_obj_t)&bt_characteristic_locals_dict,
 };
-
-// static const mp_obj_type_t mod_bt_descriptor_type = {
-    // { &mp_type_type },
-    // .name = MP_QSTR_BT_DESCRIPTOR,
-    // .locals_dict = (mp_obj_t)&bt_descriptor_locals_dict,
-// };

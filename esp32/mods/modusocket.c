@@ -55,7 +55,6 @@ typedef struct {
  ******************************************************************************/
 STATIC const mp_obj_type_t socket_type;
 STATIC const mp_obj_type_t raw_socket_type;
-//STATIC OsiLockObj_t modusocket_LockObj;
 STATIC modusocket_sock_t modusocket_sockets[MODUSOCKET_MAX_SOCKETS] = {{.sd = -1}, {.sd = -1}, {.sd = -1}, {.sd = -1}, {.sd = -1},
                                                                        {.sd = -1}, {.sd = -1}, {.sd = -1}, {.sd = -1}, {.sd = -1},
                                                                        {.sd = -1}, {.sd = -1}, {.sd = -1}, {.sd = -1}, {.sd = -1}};
@@ -64,13 +63,10 @@ STATIC modusocket_sock_t modusocket_sockets[MODUSOCKET_MAX_SOCKETS] = {{.sd = -1
  DEFINE PUBLIC FUNCTIONS
  ******************************************************************************/
 void modusocket_pre_init (void) {
-    // create the wlan lock
-//    ASSERT(OSI_OK == sl_LockObjCreate(&modusocket_LockObj, "SockLock"));
-//    sl_LockObjUnlock (&modusocket_LockObj);
+    // Initialise resources
 }
 
 void modusocket_socket_add (int32_t sd, bool user) {
-//    sl_LockObjLock (&modusocket_LockObj, SL_OS_WAIT_FOREVER);
     for (int i = 0; i < MODUSOCKET_MAX_SOCKETS; i++) {
         if (modusocket_sockets[i].sd < 0) {
             modusocket_sockets[i].sd = sd;
@@ -78,37 +74,16 @@ void modusocket_socket_add (int32_t sd, bool user) {
             break;
         }
     }
-//    sl_LockObjUnlock (&modusocket_LockObj);
 }
 
 void modusocket_socket_delete (int32_t sd) {
-//    sl_LockObjLock (&modusocket_LockObj, SL_OS_WAIT_FOREVER);
     for (int i = 0; i < MODUSOCKET_MAX_SOCKETS; i++) {
         if (modusocket_sockets[i].sd == sd) {
             modusocket_sockets[i].sd = -1;
             break;
         }
     }
-//    sl_LockObjUnlock (&modusocket_LockObj);
 }
-
-//void modusocket_enter_sleep (void) {
-//    fd_set socketset;
-//    int32_t maxfd = 0;
-//
-//    for (int i = 0; i < MOD_NETWORK_MAX_SOCKETS; i++) {
-//        int32_t sd;
-//        if ((sd = modusocket_sockets[i].sd) >= 0) {
-//            FD_SET(sd, &socketset);
-//            maxfd = (maxfd > sd) ? maxfd : sd;
-//        }
-//    }
-//
-//    if (maxfd > 0) {
-//        // wait for any of the sockets to become ready...
-//        sl_Select(maxfd + 1, &socketset, NULL, NULL, NULL);
-//    }
-//}
 
 void modusocket_close_all_user_sockets (void) {
 //    sl_LockObjLock (&modusocket_LockObj, SL_OS_WAIT_FOREVER);

@@ -40,7 +40,6 @@ typedef struct {
  DECLARE PRIVATE DATA
  ******************************************************************************/
 static updater_data_t updater_data = { .size = 0, .offset = 0, .chunk_size = 0, .current_chunk = 0 };
-//static OsiLockObj_t updater_LockObj;
 static boot_info_t boot_info;
 static uint32_t boot_info_offset;
 
@@ -69,11 +68,11 @@ bool updater_read_boot_info (boot_info_t *boot_info, uint32_t *boot_info_offset)
 }
 
 bool updater_check_path (void *path) {
-//    sl_LockObjLock (&updater_LockObj, SL_OS_WAIT_FOREVER);
+
     if (!strcmp(UPDATER_IMG_PATH, path)) {
         return true;
     }
-//        sl_LockObjUnlock (&updater_LockObj);
+
     return false;
 }
 
@@ -114,7 +113,7 @@ uint32_t roundUp(uint32_t numToRound, uint32_t multiple)
 }
 
 bool updater_write (uint8_t *buf, uint32_t len) {
-//    sl_LockObjLock (&wlan_LockObj, SL_OS_WAIT_FOREVER);
+
     uint32_t _len = roundUp(len, 4);
     if (ESP_OK != spi_flash_write(updater_data.offset, (void *)buf, _len)) {
         return false;
@@ -130,14 +129,13 @@ bool updater_write (uint8_t *buf, uint32_t len) {
             return false;
         }
     }
-//    sl_LockObjUnlock (&wlan_LockObj);
+
     return true;
 }
 
 bool updater_finish (void) {
     if (updater_data.offset > 0) {
         ESP_LOGI(TAG, "Updater finish");
-//        sl_LockObjLock (&wlan_LockObj, SL_OS_WAIT_FOREVER);
         // if we still have an image pending for verification, leave the boot info as it is
         if (boot_info.Status != IMG_STATUS_CHECK) {
             ESP_LOGI(TAG, "Saving new boot info");
@@ -161,10 +159,8 @@ bool updater_finish (void) {
                 return false;
             }
         }
-//        sl_LockObjUnlock (&wlan_LockObj);
         updater_data.offset = 0;
     }
-//    sl_LockObjUnlock (&updater_LockObj);
     return true;
 }
 

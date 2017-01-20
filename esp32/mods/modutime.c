@@ -113,25 +113,6 @@ STATIC mp_obj_t time_ticks_ms(void) {
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_0(time_ticks_ms_obj, time_ticks_ms);
 
-//STATIC mp_obj_t time_ticks_us(void) {
-//    return MP_OBJ_NEW_SMALL_INT(mp_hal_ticks_us() & MP_SMALL_INT_POSITIVE_MASK);
-//}
-//STATIC MP_DEFINE_CONST_FUN_OBJ_0(time_ticks_us_obj, time_ticks_us);
-//
-//STATIC mp_obj_t time_ticks_cpu(void) {
-//    // TODO
-//    return MP_OBJ_NEW_SMALL_INT(0 & MP_SMALL_INT_POSITIVE_MASK);
-//}
-//STATIC MP_DEFINE_CONST_FUN_OBJ_0(time_ticks_cpu_obj, time_ticks_cpu);
-
-//STATIC mp_obj_t time_ticks_diff(mp_obj_t start_in, mp_obj_t end_in) {
-//    // we assume that the arguments come from ticks_xx so are small ints
-//    uint32_t start = MP_OBJ_SMALL_INT_VALUE(start_in);
-//    uint32_t end = MP_OBJ_SMALL_INT_VALUE(end_in);
-//    return MP_OBJ_NEW_SMALL_INT((end - start) & MP_SMALL_INT_POSITIVE_MASK);
-//}
-//STATIC MP_DEFINE_CONST_FUN_OBJ_2(time_ticks_diff_obj, time_ticks_diff);
-
 /// \function time()
 /// Returns the number of seconds, as an integer, since 1/1/2000.
 STATIC mp_obj_t time_time(void) {
@@ -149,9 +130,6 @@ STATIC const mp_map_elem_t time_module_globals_table[] = {
     { MP_OBJ_NEW_QSTR(MP_QSTR_sleep_ms),            (mp_obj_t)&time_sleep_ms_obj },
     { MP_OBJ_NEW_QSTR(MP_QSTR_sleep_us),            (mp_obj_t)&time_sleep_us_obj },
     { MP_OBJ_NEW_QSTR(MP_QSTR_ticks_ms),            (mp_obj_t)&time_ticks_ms_obj },
-//    { MP_OBJ_NEW_QSTR(MP_QSTR_ticks_us),            (mp_obj_t)&time_ticks_us_obj },
-//    { MP_OBJ_NEW_QSTR(MP_QSTR_ticks_cpu),           (mp_obj_t)&time_ticks_cpu_obj },
-//    { MP_OBJ_NEW_QSTR(MP_QSTR_ticks_diff),          (mp_obj_t)&time_ticks_diff_obj },
    { MP_OBJ_NEW_QSTR(MP_QSTR_time),                (mp_obj_t)&time_time_obj },
 };
 

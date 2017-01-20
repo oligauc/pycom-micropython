@@ -102,12 +102,6 @@ STATIC void pyb_adc_channel_init (pyb_adc_channel_obj_t *self) {
     self->enabled = true;
 }
 
-// STATIC void pyb_adc_deinit_all_channels (void) {
-//     for (int i = 0; i < PYB_ADC_NUM_CHANNELS; i++) {
-//         adc_channel_deinit(&pyb_adc_channel_obj[i]);
-//     }
-// }
-
 /******************************************************************************/
 /* Micro Python bindings : adc object                                         */
 
