@@ -53,12 +53,6 @@ MP_DEFINE_CONST_FUN_OBJ_0(machine_rng_get_obj, machine_rng_get);
 void rng_init0 (void) {
 // FIXME
     rng_id_t juggler;
-//    uint32_t seconds;
-//    uint16_t mseconds;
-
-    // get the seconds and the milliseconds from the RTC
-//    pyb_rtc_get_time(&seconds, &mseconds);
-
     esp_efuse_read_mac(juggler.id8);
 
     // flatten the 48-bit board identification to 24 bits
@@ -69,7 +63,6 @@ void rng_init0 (void) {
     juggler.id8[2]  ^= juggler.id8[5];
 
     s_seed = juggler.id32 & 0x00FFFFFF;
-//    s_seed += (seconds & 0x000FFFFF) + mseconds;
 
     // the seed must never be zero
     if (s_seed == 0) {

@@ -160,12 +160,6 @@ void NORETURN __fatal_error(const char *msg) {
     for ( ;; ); //{__WFI();}
 }
 
-// void __assert_func(const char *file, int line, const char *func, const char *expr) {
-//     (void) func;
-//     mp_printf(&mp_plat_print, "Assertion failed: %s, func %s, file %s, line %d\n", expr, func, file, line);
-//     __fatal_error(NULL);
-// }
-
 void nlr_jump_fail(void *val) {
 #ifdef DEBUG
     char msg[64];
@@ -179,10 +173,6 @@ void nlr_jump_fail(void *val) {
 
 void mperror_enable_heartbeat (bool enable) {
     if (enable) {
-//    #ifndef BOOTLOADER_BUILD
-//        // configure the led again
-//        pin_config ((pin_obj_t *)&MICROPY_SYS_LED_GPIO, -1, -1, GPIO_DIR_MODE_OUT, PIN_TYPE_STD, 0, PIN_STRENGTH_6MA);
-//    #endif
         led_info.color.value = MPERROR_HEARTBEAT_COLOR;
         led_set_color(&led_info, false);
         
