@@ -163,12 +163,6 @@ void NORETURN __fatal_error(const char *msg) {
     for ( ;; ); //{__WFI();}
 }
 
-// void __assert_func(const char *file, int line, const char *func, const char *expr) {
-//     (void) func;
-//     mp_printf(&mp_plat_print, "Assertion failed: %s, func %s, file %s, line %d\n", expr, func, file, line);
-//     __fatal_error(NULL);
-// }
-
 void nlr_jump_fail(void *val) {
 #ifdef DEBUG
     char msg[64];
