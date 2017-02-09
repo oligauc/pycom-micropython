@@ -1,0 +1,843 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="95">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df root="." name="0">
+      <df name="alljoyn">
+        <df name="build">
+          <df name="debug">
+            <df name="samples">
+              <df name="basic">
+              </df>
+            </df>
+            <df name="src">
+            </df>
+          </df>
+        </df>
+        <df name="dist">
+          <df name="include">
+            <df name="ajtcl">
+              <df name="services">
+                <in>ConfigService.h</in>
+                <in>PropertyStore.h</in>
+                <in>PropertyStoreOEMProvisioning.h</in>
+                <in>ServicesCommon.h</in>
+                <in>ServicesHandlers.h</in>
+              </df>
+              <in>aj_about.h</in>
+              <in>aj_ardp.h</in>
+              <in>aj_auth_listener.h</in>
+              <in>aj_authentication.h</in>
+              <in>aj_authorisation.h</in>
+              <in>aj_bufio.h</in>
+              <in>aj_bus.h</in>
+              <in>aj_bus_priv.h</in>
+              <in>aj_cert.h</in>
+              <in>aj_config.h</in>
+              <in>aj_connect.h</in>
+              <in>aj_conversationhash.h</in>
+              <in>aj_crc16.h</in>
+              <in>aj_creds.h</in>
+              <in>aj_crypto.h</in>
+              <in>aj_crypto_aes_priv.h</in>
+              <in>aj_crypto_drbg.h</in>
+              <in>aj_crypto_ec_p256.h</in>
+              <in>aj_crypto_ecc.h</in>
+              <in>aj_crypto_fp.h</in>
+              <in>aj_crypto_sha2.h</in>
+              <in>aj_debug.h</in>
+              <in>aj_disco.h</in>
+              <in>aj_guid.h</in>
+              <in>aj_helper.h</in>
+              <in>aj_init.h</in>
+              <in>aj_introspect.h</in>
+              <in>aj_link_timeout.h</in>
+              <in>aj_msg.h</in>
+              <in>aj_msg_priv.h</in>
+              <in>aj_net.h</in>
+              <in>aj_nvram.h</in>
+              <in>aj_peer.h</in>
+              <in>aj_security.h</in>
+              <in>aj_serial.h</in>
+              <in>aj_serial_rx.h</in>
+              <in>aj_serial_tx.h</in>
+              <in>aj_serio.h</in>
+              <in>aj_status.h</in>
+              <in>aj_std.h</in>
+              <in>aj_target.h</in>
+              <in>aj_util.h</in>
+              <in>aj_version.h</in>
+              <in>aj_wifi_ctrl.h</in>
+              <in>alljoyn.h</in>
+            </df>
+          </df>
+        </df>
+        <df name="inc">
+          <in>aj_about.h</in>
+          <in>aj_ardp.h</in>
+          <in>aj_auth_listener.h</in>
+          <in>aj_authentication.h</in>
+          <in>aj_authorisation.h</in>
+          <in>aj_bufio.h</in>
+          <in>aj_bus.h</in>
+          <in>aj_bus_priv.h</in>
+          <in>aj_cert.h</in>
+          <in>aj_config.h</in>
+          <in>aj_connect.h</in>
+          <in>aj_conversationhash.h</in>
+          <in>aj_crc16.h</in>
+          <in>aj_creds.h</in>
+          <in>aj_crypto.h</in>
+          <in>aj_crypto_aes_priv.h</in>
+          <in>aj_crypto_drbg.h</in>
+          <in>aj_crypto_ec_p256.h</in>
+          <in>aj_crypto_ecc.h</in>
+          <in>aj_crypto_fp.h</in>
+          <in>aj_crypto_sha2.h</in>
+          <in>aj_debug.h</in>
+          <in>aj_disco.h</in>
+          <in>aj_guid.h</in>
+          <in>aj_helper.h</in>
+          <in>aj_init.h</in>
+          <in>aj_introspect.h</in>
+          <in>aj_link_timeout.h</in>
+          <in>aj_msg.h</in>
+          <in>aj_msg_priv.h</in>
+          <in>aj_net.h</in>
+          <in>aj_nvram.h</in>
+          <in>aj_peer.h</in>
+          <in>aj_security.h</in>
+          <in>aj_serial.h</in>
+          <in>aj_serial_rx.h</in>
+          <in>aj_serial_tx.h</in>
+          <in>aj_serio.h</in>
+          <in>aj_status.h</in>
+          <in>aj_std.h</in>
+          <in>aj_util.h</in>
+          <in>aj_version.h</in>
+          <in>aj_wifi_ctrl.h</in>
+          <in>alljoyn.h</in>
+        </df>
+        <df name="samples">
+          <df name="basic">
+            <in>basic_client.c</in>
+            <in>basic_service.c</in>
+            <in>eventaction_service.c</in>
+            <in>nameChange_client.c</in>
+            <in>signalConsumer_client.c</in>
+            <in>signal_service.c</in>
+          </df>
+          <df name="network">
+            <in>NetworkAndBus.c</in>
+          </df>
+          <df name="secure">
+            <in>SecureClient.c</in>
+            <in>SecureClientECDHE.c</in>
+            <in>SecureService.c</in>
+            <in>SecureServiceECDHE.c</in>
+          </df>
+        </df>
+        <df name="services">
+          <df name="common">
+            <df name="inc">
+              <in>PropertyStore.h</in>
+              <in>PropertyStoreOEMProvisioning.h</in>
+              <in>ServicesCommon.h</in>
+              <in>ServicesHandlers.h</in>
+            </df>
+            <df name="src">
+              <in>PropertyStore.c</in>
+              <in>ServicesCommon.c</in>
+              <in>ServicesHandlers.c</in>
+            </df>
+          </df>
+          <df name="config">
+            <df name="inc">
+              <in>ConfigService.h</in>
+            </df>
+            <df name="samples">
+              <in>AllJoynLogo.h</in>
+              <in>ConfigSample.c</in>
+            </df>
+            <df name="src">
+              <in>ConfigService.c</in>
+            </df>
+          </df>
+        </df>
+        <df name="src">
+          <df name="bsp">
+            <in>aj_bsp.h</in>
+          </df>
+          <df name="crypto">
+            <in>aj_crypto_aes.c</in>
+            <in>aj_crypto_drbg.c</in>
+            <in>aj_crypto_ec_p256.c</in>
+            <in>aj_crypto_ecc.c</in>
+            <in>aj_crypto_field_p256.c</in>
+            <in>aj_crypto_sha2.c</in>
+            <in>aj_sw_crypto.c</in>
+          </df>
+          <df name="external">
+            <df name="sha2">
+              <in>sha2.c</in>
+              <in>sha2.h</in>
+            </df>
+          </df>
+          <df name="freertos">
+            <in>aj_rtos.h</in>
+            <in>aj_target_rtos.c</in>
+            <in>aj_target_rtos.h</in>
+          </df>
+          <df name="malloc">
+            <in>aj_malloc.c</in>
+            <in>aj_malloc.h</in>
+          </df>
+          <df name="mbedrtos">
+            <in>aj_rtos.h</in>
+            <in>aj_target_rtos.cpp</in>
+            <in>aj_target_rtos.h</in>
+          </df>
+          <df name="nvram">
+            <in>aj_nvram.c</in>
+          </df>
+          <df name="target">
+            <df name="arduino">
+              <df name="examples">
+                <df name="AJ_LedService">
+                  <in>due_led.cpp</in>
+                  <in>due_led.h</in>
+                </df>
+              </df>
+              <df name="samples">
+                <df name="AJ_basic_client">
+                </df>
+                <df name="AJ_basic_service">
+                </df>
+                <df name="AJ_nameChange_client">
+                </df>
+                <df name="AJ_SecureClient">
+                </df>
+                <df name="AJ_SecureClientECDHE">
+                </df>
+                <df name="AJ_SecureService">
+                </df>
+                <df name="AJ_SecureServiceECDHE">
+                </df>
+                <df name="AJ_signal_service">
+                </df>
+                <df name="AJ_signalConsumer_client">
+                </df>
+              </df>
+              <df name="tests">
+                <df name="AJ_aestest">
+                </df>
+                <df name="AJ_bastress2">
+                </df>
+                <df name="AJ_clientlite">
+                </df>
+                <df name="AJ_mutter">
+                </df>
+                <df name="AJ_sessions">
+                </df>
+                <df name="AJ_siglite">
+                </df>
+                <df name="AJ_svclite">
+                </df>
+              </df>
+              <in>aj_net.c</in>
+              <in>aj_target.h</in>
+              <in>aj_target_crypto.c</in>
+              <in>aj_target_nvram.c</in>
+              <in>aj_target_nvram.h</in>
+              <in>aj_target_util.c</in>
+            </df>
+            <df name="darwin">
+              <in>aj_net.c</in>
+              <in>aj_target.h</in>
+              <in>aj_target_crypto.c</in>
+              <in>aj_target_nvram.c</in>
+              <in>aj_target_util.c</in>
+            </df>
+            <df name="esp32">
+              <in>_aj_net.c</in>
+              <in>aj_net.c</in>
+              <in>aj_target.h</in>
+              <in>aj_target_crypto.c</in>
+              <in>aj_target_nvram.c</in>
+              <in>aj_target_serial.c</in>
+              <in>aj_target_util (copy).c</in>
+              <in>aj_target_util.c</in>
+              <in>esp32_net (copy).c</in>
+              <in>esp32_net.c</in>
+            </df>
+            <df name="freertos-due">
+              <df name="atmel">
+                <in>conf_uart_serial.h</in>
+              </df>
+              <in>FreeRTOSConfig.h</in>
+              <in>aj_spi.c</in>
+              <in>aj_syscalls.c</in>
+              <in>aj_target.h</in>
+              <in>aj_target_platform.c</in>
+              <in>aj_target_platform.h</in>
+              <in>aj_trng.c</in>
+            </df>
+            <df name="freertos-stm32">
+              <df name="stm32">
+                <in>FreeRTOSConfig.h</in>
+                <in>stm32f4xx_conf.h</in>
+              </df>
+              <in>aj_spi.c</in>
+              <in>aj_target.h</in>
+              <in>aj_target_platform.c</in>
+              <in>aj_target_platform.h</in>
+              <in>syscalls.c</in>
+            </df>
+            <df name="linux">
+              <in>aj_net.c</in>
+              <in>aj_target.h</in>
+              <in>aj_target_crypto.c</in>
+              <in>aj_target_nvram.c</in>
+              <in>aj_target_serial.c</in>
+              <in>aj_target_util.c</in>
+            </df>
+            <df name="mbedrtos-frdm">
+              <in>aj_nvram.cpp</in>
+              <in>aj_target.h</in>
+              <in>aj_target_mbed.cpp</in>
+              <in>aj_target_mbed.h</in>
+              <in>aj_target_platform.c</in>
+              <in>aj_target_platform.h</in>
+            </df>
+            <df name="win32">
+              <in>aj_net.c</in>
+              <in>aj_target.h</in>
+              <in>aj_target_crypto.c</in>
+              <in>aj_target_nvram.c</in>
+              <in>aj_target_util.c</in>
+            </df>
+          </df>
+          <df name="wsl">
+            <in>aj_buf.c</in>
+            <in>aj_buf.h</in>
+            <in>aj_net.c</in>
+            <in>aj_target_spi.h</in>
+            <in>aj_wifi_ctrl.c</in>
+            <in>aj_wsl_htc.c</in>
+            <in>aj_wsl_htc.h</in>
+            <in>aj_wsl_marshal.c</in>
+            <in>aj_wsl_marshal.h</in>
+            <in>aj_wsl_net.c</in>
+            <in>aj_wsl_net.h</in>
+            <in>aj_wsl_spi.h</in>
+            <in>aj_wsl_spi_constants.h</in>
+            <in>aj_wsl_spi_mbox.c</in>
+            <in>aj_wsl_target.h</in>
+            <in>aj_wsl_tasks.c</in>
+            <in>aj_wsl_tasks.h</in>
+            <in>aj_wsl_unmarshal.c</in>
+            <in>aj_wsl_unmarshal.h</in>
+            <in>aj_wsl_wmi.c</in>
+            <in>aj_wsl_wmi.h</in>
+            <in>alljoyn.c</in>
+            <in>main.c</in>
+          </df>
+          <in>aj_about.c</in>
+          <in>aj_ardp.c</in>
+          <in>aj_authentication.c</in>
+          <in>aj_authorisation.c</in>
+          <in>aj_bufio.c</in>
+          <in>aj_bus.c</in>
+          <in>aj_cert.c</in>
+          <in>aj_connect.c</in>
+          <in>aj_conversationhash.c</in>
+          <in>aj_crc16.c</in>
+          <in>aj_creds.c</in>
+          <in>aj_crypto_util.c</in>
+          <in>aj_debug.c</in>
+          <in>aj_disco.c</in>
+          <in>aj_guid.c</in>
+          <in>aj_helper.c</in>
+          <in>aj_init.c</in>
+          <in>aj_introspect.c</in>
+          <in>aj_link_timeout.c</in>
+          <in>aj_msg.c</in>
+          <in>aj_peer.c</in>
+          <in>aj_security.c</in>
+          <in>aj_serial.c</in>
+          <in>aj_serial_rx.c</in>
+          <in>aj_serial_tx.c</in>
+          <in>aj_std.c</in>
+          <in>aj_target_nvram.h</in>
+          <in>aj_util.c</in>
+        </df>
+        <df name="test">
+          <df name="WSL">
+            <in>bufferlisttest.c</in>
+            <in>spi_test.c</in>
+            <in>unit_test.c</in>
+            <in>unmarshal_test.c</in>
+          </df>
+          <in>aesbench.c</in>
+          <in>aestest.c</in>
+          <in>aestest_bigdata.h</in>
+          <in>ajlite.c</in>
+          <in>base64.c</in>
+          <in>bastress2.c</in>
+          <in>certificate.c</in>
+          <in>clientlite.c</in>
+          <in>codisco.c</in>
+          <in>ctrdrbg.c</in>
+          <in>doorsvc.c</in>
+          <in>ecctest.c</in>
+          <in>echo.c</in>
+          <in>marshal_unmarshal_test.c</in>
+          <in>mouse.c</in>
+          <in>mutter.c</in>
+          <in>nvramdump.c</in>
+          <in>nvrampersistencetest.c</in>
+          <in>nvramtest.c</in>
+          <in>pcclient.c</in>
+          <in>pcservice.c</in>
+          <in>scan-n-con.c</in>
+          <in>sessions.c</in>
+          <in>sessionslite.c</in>
+          <in>shatest.c</in>
+          <in>siglite.c</in>
+          <in>sigtest.c</in>
+          <in>svclite.c</in>
+          <in>uart_randombuffer.c</in>
+          <in>uartbigsmall.c</in>
+          <in>uartfuzztest.c</in>
+          <in>uarttest.c</in>
+        </df>
+        <df name="tools">
+        </df>
+        <df name="unit_test">
+          <df name="test_report">
+          </df>
+          <in>ARDPTest.cc</in>
+          <in>BusAttachmentTest.cc</in>
+          <in>DiscoveryTest.cc</in>
+          <in>MutterTest.cc</in>
+          <in>SecurityTest.cc</in>
+          <in>ajtclTest.cc</in>
+        </df>
+      </df>
+      <df name="boards">
+        <df name="LOPY">
+          <in>mpconfigboard.h</in>
+        </df>
+        <df name="WIPY">
+          <in>mpconfigboard.h</in>
+        </df>
+        <in>esp32_prefix.c</in>
+      </df>
+      <df name="bootloader">
+        <df name="lib">
+        </df>
+        <in>bootloader.c</in>
+        <in>bootloader.h</in>
+        <in>bootmgr.c</in>
+        <in>bootmgr.h</in>
+        <in>gpio.c</in>
+        <in>gpio.h</in>
+        <in>mperror.c</in>
+      </df>
+      <df name="build">
+        <df name="LOPY">
+          <df name="release">
+            <df name="alljoin">
+              <df name="src">
+                <df name="crypto">
+                </df>
+                <df name="crytpo">
+                </df>
+                <df name="external">
+                  <df name="sha2">
+                  </df>
+                </df>
+                <df name="freertos">
+                </df>
+                <df name="nvram">
+                </df>
+                <df name="SL">
+                </df>
+                <df name="targer">
+                  <df name="esp">
+                  </df>
+                  <df name="esp32">
+                  </df>
+                </df>
+                <df name="target">
+                  <df name="esp32">
+                  </df>
+                </df>
+                <df name="wsl">
+                </df>
+                <df name="WSL">
+                </df>
+              </df>
+              <df name="stc">
+                <df name="target">
+                  <df name="esp32">
+                  </df>
+                </df>
+              </df>
+            </df>
+            <df name="alljoyn">
+              <df name="src">
+                <df name="crypto">
+                </df>
+                <df name="external">
+                  <df name="sha2">
+                  </df>
+                </df>
+                <df name="nvram">
+                </df>
+                <df name="target">
+                  <df name="esp32">
+                  </df>
+                </df>
+              </df>
+            </df>
+            <df name="bootloader">
+            </df>
+            <df name="drivers">
+              <df name="sx127x">
+                <df name="sx1272">
+                </df>
+              </df>
+            </df>
+            <df name="extmod">
+            </df>
+            <df name="fatfs">
+              <df name="src">
+                <df name="drivers">
+                </df>
+                <df name="option">
+                </df>
+              </df>
+            </df>
+            <df name="ftp">
+            </df>
+            <df name="genhdr">
+              <df name="qstr">
+              </df>
+              <in>mpversion.h</in>
+              <in>pins.h</in>
+              <in>qstrdefs.collected.h</in>
+              <in>qstrdefs.generated.h</in>
+              <in>qstrdefs.preprocessed.h</in>
+            </df>
+            <df name="hal">
+            </df>
+            <df name="lib">
+              <df name="embed">
+              </df>
+              <df name="fatfs">
+                <df name="option">
+                </df>
+              </df>
+              <df name="libm">
+              </df>
+              <df name="lora">
+                <df name="mac">
+                </df>
+                <df name="system">
+                  <df name="crypto">
+                  </df>
+                </df>
+              </df>
+              <df name="mp-readline">
+              </df>
+              <df name="netutils">
+              </df>
+              <df name="timeutils">
+              </df>
+              <df name="utils">
+              </df>
+            </df>
+            <df name="lora">
+            </df>
+            <df name="mods">
+            </df>
+            <df name="py">
+            </df>
+            <df name="stmhal">
+            </df>
+            <df name="telnet">
+            </df>
+            <df name="util">
+            </df>
+            <in>pins.c</in>
+            <in>pins_qstr.h</in>
+          </df>
+        </df>
+        <df name="WIPY">
+          <df name="release">
+            <df name="alljoin">
+              <df name="src">
+                <df name="crypto">
+                </df>
+                <df name="external">
+                  <df name="sha2">
+                  </df>
+                </df>
+                <df name="nvram">
+                </df>
+                <df name="target">
+                  <df name="esp32">
+                  </df>
+                </df>
+              </df>
+            </df>
+            <df name="bootloader">
+            </df>
+            <df name="extmod">
+            </df>
+            <df name="fatfs">
+              <df name="src">
+                <df name="drivers">
+                </df>
+                <df name="option">
+                </df>
+              </df>
+            </df>
+            <df name="ftp">
+            </df>
+            <df name="genhdr">
+              <df name="qstr">
+              </df>
+              <in>mpversion.h</in>
+              <in>pins.h</in>
+              <in>qstrdefs.collected.h</in>
+              <in>qstrdefs.generated.h</in>
+              <in>qstrdefs.preprocessed.h</in>
+            </df>
+            <df name="hal">
+            </df>
+            <df name="lib">
+              <df name="embed">
+              </df>
+              <df name="fatfs">
+                <df name="option">
+                </df>
+              </df>
+              <df name="libm">
+              </df>
+              <df name="mp-readline">
+              </df>
+              <df name="netutils">
+              </df>
+              <df name="utils">
+              </df>
+            </df>
+            <df name="mods">
+            </df>
+            <df name="py">
+            </df>
+            <df name="stmhal">
+            </df>
+            <df name="telnet">
+            </df>
+            <df name="util">
+            </df>
+            <in>pins.c</in>
+            <in>pins_qstr.h</in>
+          </df>
+        </df>
+      </df>
+      <df name="fatfs">
+        <df name="src">
+          <df name="drivers">
+            <in>sd_diskio.c</in>
+            <in>sd_diskio.h</in>
+            <in>sflash_diskio.c</in>
+            <in>sflash_diskio.h</in>
+            <in>stdcmd.h</in>
+          </df>
+          <df name="option">
+            <in>syscall.c</in>
+          </df>
+          <in>diskio.c</in>
+          <in>ffconf.c</in>
+        </df>
+      </df>
+      <df name="ftp">
+        <in>ftp.c</in>
+        <in>ftp.h</in>
+        <in>updater.c</in>
+        <in>updater.h</in>
+      </df>
+      <df name="hal">
+        <in>esp32_mphal.c</in>
+        <in>esp32_mphal.h</in>
+      </df>
+      <df name="lib">
+      </df>
+      <df name="lora">
+        <in>board.c</in>
+        <in>board.h</in>
+        <in>gpio-board.c</in>
+        <in>gpio-board.h</in>
+        <in>pinName-board.h</in>
+        <in>spi-board.c</in>
+        <in>spi-board.h</in>
+        <in>sx1272-board.c</in>
+        <in>sx1272-board.h</in>
+        <in>timer-board.c</in>
+        <in>timer-board.h</in>
+        <in>utilities.c</in>
+        <in>utilities.h</in>
+      </df>
+      <df name="mods">
+        <in>analog.c</in>
+        <in>analog.h</in>
+        <in>machine_i2c.c</in>
+        <in>machine_i2c.h</in>
+        <in>machpin.c</in>
+        <in>machpin.h</in>
+        <in>machpwm.c</in>
+        <in>machpwm.h</in>
+        <in>machrtc.c</in>
+        <in>machrtc.h</in>
+        <in>machspi.c</in>
+        <in>machspi.h</in>
+        <in>machtimer.c</in>
+        <in>machtimer.h</in>
+        <in>machtimer_alarm.c</in>
+        <in>machtimer_alarm.h</in>
+        <in>machtimer_chrono.c</in>
+        <in>machtimer_chrono.h</in>
+        <in>machuart.c</in>
+        <in>machuart.h</in>
+        <in>modalljoyn.c</in>
+        <in>modalljoyn.h</in>
+        <in>modbt.c</in>
+        <in>modbt.h</in>
+        <in>modled.c</in>
+        <in>modled.h</in>
+        <in>modlora.c</in>
+        <in>modlora.h</in>
+        <in>modmachine.c</in>
+        <in>modnetwork.c</in>
+        <in>modnetwork.h</in>
+        <in>modpycom.c</in>
+        <in>moducrypto.c</in>
+        <in>moduhashlib.c</in>
+        <in>moduos.c</in>
+        <in>moduos.h</in>
+        <in>moduselect.c</in>
+        <in>modusocket.c</in>
+        <in>modusocket.h</in>
+        <in>modussl.c</in>
+        <in>modussl.h</in>
+        <in>modutime.c</in>
+        <in>modwlan.c</in>
+        <in>modwlan.h</in>
+        <in>pybadc.c</in>
+        <in>pybadc.h</in>
+        <in>pybdac.c</in>
+        <in>pybdac.h</in>
+        <in>pybsd.c</in>
+        <in>pybsd.h</in>
+      </df>
+      <df name="telnet">
+        <in>telnet.c</in>
+        <in>telnet.h</in>
+      </df>
+      <df name="tools">
+        <df name="lora">
+        </df>
+      </df>
+      <df name="util">
+        <in>alljoyn_interface.c</in>
+        <in>alljoyn_interface.h</in>
+        <in>alljoyn_main.c</in>
+        <in>alljoyn_main.h</in>
+        <in>antenna.c</in>
+        <in>antenna.h</in>
+        <in>fifo.c</in>
+        <in>fifo.h</in>
+        <in>gccollect.c</in>
+        <in>gccollect.h</in>
+        <in>help.c</in>
+        <in>mperror.c</in>
+        <in>mperror.h</in>
+        <in>mpexception.c</in>
+        <in>mpexception.h</in>
+        <in>mpirq.c</in>
+        <in>mpirq.h</in>
+        <in>mpsleep.c</in>
+        <in>mpsleep.h</in>
+        <in>random.c</in>
+        <in>random.h</in>
+        <in>socketfifo.c</in>
+        <in>socketfifo.h</in>
+        <in>timeutils.c</in>
+        <in>timeutils.h</in>
+      </df>
+      <in>main.c</in>
+      <in>mpconfigport.h</in>
+      <in>mptask.c</in>
+      <in>mptask.h</in>
+      <in>mpthreadport.c</in>
+      <in>mpthreadport.h</in>
+      <in>pycom_config.c</in>
+      <in>pycom_config.h</in>
+      <in>pycom_version.h</in>
+      <in>qstrdefsport.h</in>
+      <in>sdkconfig.h</in>
+      <in>serverstask.c</in>
+      <in>serverstask.h</in>
+    </df>
+  </logicalFolder>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <platform>2</platform>
+      </toolsSet>
+      <compile>
+        <compiledirpicklist>
+          <compiledirpicklistitem>.</compiledirpicklistitem>
+          <compiledirpicklistitem>${AUTO_FOLDER}</compiledirpicklistitem>
+        </compiledirpicklist>
+        <compiledir>${AUTO_FOLDER}</compiledir>
+        <compilecommandpicklist>
+          <compilecommandpicklistitem>${MAKE} ${ITEM_NAME}.o</compilecommandpicklistitem>
+          <compilecommandpicklistitem>${AUTO_COMPILE}</compilecommandpicklistitem>
+        </compilecommandpicklist>
+        <compilecommand>${AUTO_COMPILE}</compilecommand>
+      </compile>
+      <dbx_gdbdebugger version="1">
+        <gdb_pathmaps>
+        </gdb_pathmaps>
+        <gdb_interceptlist>
+          <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
+        </gdb_interceptlist>
+        <gdb_options>
+          <DebugOptions>
+          </DebugOptions>
+        </gdb_options>
+        <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
+      </dbx_gdbdebugger>
+      <nativedebugger version="1">
+        <engine>gdb</engine>
+      </nativedebugger>
+      <runprofile version="9">
+        <runcommandpicklist>
+          <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
+        </runcommandpicklist>
+        <runcommand>"${OUTPUT_PATH}"</runcommand>
+        <rundir>.</rundir>
+        <buildfirst>false</buildfirst>
+        <terminal-type>0</terminal-type>
+        <remove-instrumentation>0</remove-instrumentation>
+        <environment>
+        </environment>
+      </runprofile>
+    </conf>
+  </confs>
+</configurationDescriptor>

@@ -1,0 +1,1352 @@
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/raw.c:200:raw_bind(struct raw_pcb *pcb, const ip_addr_t *ipaddr)
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/raw.c:223:raw_connect(struct raw_pcb *pcb, const ip_addr_t *ipaddr)
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/raw.c:266:raw_sendto(struct raw_pcb *pcb, struct pbuf *p, const ip_addr_t *ipaddr)
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/raw.c:270:  const ip_addr_t *src_ip;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/raw.c:273:  const ip_addr_t *dst_ip = ipaddr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp.c:441:tcp_bind(struct tcp_pcb *pcb, const ip_addr_t *ipaddr, u16_t port)
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp.c:728:tcp_connect(struct tcp_pcb *pcb, const ip_addr_t *ipaddr, u16_t port,
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp.c:749:    const ip_addr_t *local_ip;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp.c:1851:tcp_eff_send_mss_impl(u16_t sendmss, const ip_addr_t *dest
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp.c:1853:                     , const ip_addr_t *src
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/dns.c:254:  ip_addr_t ipaddr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/dns.c:313:static void dns_recv(void *s, struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *addr, u16_t port);
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/dns.c:315:static void dns_call_found(u8_t idx, ip_addr_t* addr);
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/dns.c:329:static ip_addr_t              dns_servers[DNS_MAX_SERVERS];
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/dns.c:374:  ip_addr_t dnsserver;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/dns.c:415:dns_setserver(u8_t numdns, const ip_addr_t *dnsserver)
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/dns.c:433:ip_addr_t
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/dns.c:493:dns_lookup_local(const char *hostname, ip_addr_t *addr LWIP_DNS_ADDRTYPE_ARG(u8_t dns_addrtype))
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/dns.c:532:dns_local_removehost(const char *hostname, const ip_addr_t *addr)
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/dns.c:567:dns_local_addhost(const char *hostname, const ip_addr_t *addr)
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/dns.c:600: * @param addr the hostname's IP address, as u32_t (instead of ip_addr_t to
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/dns.c:606:dns_lookup(const char *name, ip_addr_t *addr LWIP_DNS_ADDRTYPE_ARG(u8_t dns_addrtype))
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/dns.c:876:dns_call_found(u8_t idx, ip_addr_t* addr)
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/dns.c:1057:dns_recv(void *arg, struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *addr, u16_t port)
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/dns.c:1406: * @param addr pointer to a ip_addr_t where to store the address if it is already
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/dns.c:1414:dns_gethostbyname(const char *hostname, ip_addr_t *addr, dns_found_callback found,
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/dns.c:1427:dns_gethostbyname_addrtype(const char *hostname, ip_addr_t *addr, dns_found_callback found,
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ip.c:51:const ip_addr_t ip_addr_any_type = IPADDR_ANY_TYPE_INIT;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ip.c:61:ipaddr_aton(const char *cp, ip_addr_t *addr)
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/dhcp.c:189:static void dhcp_recv(void *arg, struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *addr, u16_t port);
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/dhcp.c:666:    ip_addr_t dns_addr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/dhcp.c:1301:  ip_addr_t server_ip_addr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/dhcp.c:1685:dhcp_recv(void *arg, struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *addr, u16_t port)
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/ip4.c:462:  /* copy IP addresses to aligned ip_addr_t */
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/ip4_addr.c:48:const ip_addr_t ip_addr_any = IPADDR4_INIT(IPADDR_ANY);
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/ip4_addr.c:49:const ip_addr_t ip_addr_broadcast = IPADDR4_INIT(IPADDR_BROADCAST);
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp_out.c:1202:    const ip_addr_t *local_ip = ip_netif_get_local_ip(netif, &pcb->remote_ip);
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp_out.c:1295:  const ip_addr_t *local_ip, const ip_addr_t *remote_ip,
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/udp.c:524:  const ip_addr_t *dst_ip, u16_t dst_port)
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/udp.c:532:udp_sendto_chksum(struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *dst_ip,
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/udp.c:537:  const ip_addr_t *dst_ip_route = dst_ip;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/udp.c:607:  const ip_addr_t *dst_ip, u16_t dst_port, struct netif *netif)
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/udp.c:615:udp_sendto_if_chksum(struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *dst_ip,
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/udp.c:620:  const ip_addr_t *src_ip;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/udp.c:673:  const ip_addr_t *dst_ip, u16_t dst_port, struct netif *netif, const ip_addr_t *src_ip)
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/udp.c:681:udp_sendto_if_src_chksum(struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *dst_ip,
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/udp.c:683:                     u16_t chksum, const ip_addr_t *src_ip)
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/udp.c:892:udp_bind(struct udp_pcb *pcb, const ip_addr_t *ipaddr, u16_t port)
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/udp.c:992:udp_connect(struct udp_pcb *pcb, const ip_addr_t *ipaddr, u16_t port)
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv6/ip6_addr.c:51:const ip_addr_t ip6_addr_any = IPADDR6_INIT(0ul, 0ul, 0ul, 0ul);
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv6/ip6.c:204:const ip_addr_t *
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv6/ip6.c:207:  const ip_addr_t *src = NULL;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/inet_chksum.c:383:       const ip_addr_t *src, const ip_addr_t *dest)
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/inet_chksum.c:530:       u16_t chksum_len, const ip_addr_t *src, const ip_addr_t *dest)
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:167:  ip_addr_t addr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:192:static ip_addr_t sntp_last_server_address;
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:331:sntp_recv(void *arg, struct udp_pcb* pcb, struct pbuf *p, const ip_addr_t *addr, u16_t port)
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:432:sntp_send_request(const ip_addr_t *server_addr)
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:464:sntp_dns_found(const char* hostname, const ip_addr_t *ipaddr, void *arg)
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:489:  ip_addr_t sntp_server_address;
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:626:sntp_setserver(u8_t idx, const ip_addr_t *server)
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:656:      ip_addr_t addr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:674:ip_addr_t
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/dhcpserver.c:447:    ip_addr_t ip_temp = IPADDR4_INIT(0x0);
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/dhcpserver.c:520:    ip_addr_t ip_temp = IPADDR4_INIT(0x0);
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/dhcpserver.c:594:    ip_addr_t ip_temp = IPADDR4_INIT(0x0);
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/dhcpserver.c:860:                        const ip_addr_t *addr,
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ppp.c:1081:  ip_addr_t ns;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ppp.c:1096:  ip_addr_t nsa, nsb;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/pppol2tp.c:85:static void pppol2tp_input(void *arg, struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *addr, u16_t port);
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/pppol2tp.c:116:       struct netif *netif, ip_addr_t *ipaddr, u16_t port,
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/pppol2tp.c:348:static void pppol2tp_input(void *arg, struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *addr, u16_t port) {
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/netif.h:195:  ip_addr_t ip_addr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/netif.h:196:  ip_addr_t netmask;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/netif.h:197:  ip_addr_t gw;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/netif.h:201:  ip_addr_t ip6_addr[LWIP_IPV6_NUM_ADDRESSES];
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/netif.h:377:#define netif_ip_addr4(netif)    ((const ip_addr_t*)&((netif)->ip_addr))
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/netif.h:378:#define netif_ip_gw4(netif)      ((const ip_addr_t*)&((netif)->gw))
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/netif.h:426:#define netif_ip_addr6(netif, i)  ((const ip_addr_t*)(&((netif)->ip6_addr[i])))
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/tcp.h:377:err_t            tcp_bind    (struct tcp_pcb *pcb, const ip_addr_t *ipaddr,
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/tcp.h:379:err_t            tcp_connect (struct tcp_pcb *pcb, const ip_addr_t *ipaddr,
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/udp.h:89:    const ip_addr_t *addr, u16_t port);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/udp.h:105:  ip_addr_t multicast_ip;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/udp.h:128:err_t            udp_bind       (struct udp_pcb *pcb, const ip_addr_t *ipaddr,
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/udp.h:130:err_t            udp_connect    (struct udp_pcb *pcb, const ip_addr_t *ipaddr,
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/udp.h:136:                                 const ip_addr_t *dst_ip, u16_t dst_port,
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/udp.h:139:                                 const ip_addr_t *dst_ip, u16_t dst_port,
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/udp.h:140:                                 struct netif *netif, const ip_addr_t *src_ip);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/udp.h:142:                                 const ip_addr_t *dst_ip, u16_t dst_port);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/udp.h:147:                                 const ip_addr_t *dst_ip, u16_t dst_port,
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/udp.h:151:                                 const ip_addr_t *dst_ip, u16_t dst_port,
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/udp.h:156:                                 const ip_addr_t *dst_ip, u16_t dst_port, struct netif *netif,
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/udp.h:157:                                 u8_t have_chksum, u16_t chksum, const ip_addr_t *src_ip);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/opt.h:777: * void dhcp_set_ntp_servers(u8_t num_ntp_servers, ip_addr_t* ntp_server_addrs);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/opt.h:889: * DNS_SERVER_ADDRESS(ipaddr), where 'ipaddr' is an 'ip_addr_t*'
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/inet_chksum.h:97:       const ip_addr_t *src, const ip_addr_t *dest);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/inet_chksum.h:99:       u16_t chksum_len, const ip_addr_t *src, const ip_addr_t *dest);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/dns.h:76:  ip_addr_t addr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/dns.h:90: * @param ipaddr pointer to an ip_addr_t containing the IP address of the hostname,
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/dns.h:94:typedef void (*dns_found_callback)(const char *name, const ip_addr_t *ipaddr, void *callback_arg);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/dns.h:98:void           dns_setserver(u8_t numdns, const ip_addr_t *dnsserver);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/dns.h:99:ip_addr_t      dns_getserver(u8_t numdns);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/dns.h:100:err_t          dns_gethostbyname(const char *hostname, ip_addr_t *addr,
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/dns.h:102:err_t          dns_gethostbyname_addrtype(const char *hostname, ip_addr_t *addr,
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/dns.h:108:int            dns_local_removehost(const char *hostname, const ip_addr_t *addr);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/dns.h:109:err_t          dns_local_addhost(const char *hostname, const ip_addr_t *addr);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/netbuf.h:56:  ip_addr_t addr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/netbuf.h:64:  ip_addr_t toaddr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/pppapi.h:82:      ip_addr_t *ipaddr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/pppapi.h:130:ppp_pcb *pppapi_pppol2tp_create(struct netif *pppif, struct netif *netif, ip_addr_t *ipaddr, u16_t port,
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/dhcp.h:85:  ip_addr_t server_ip_addr; /* dhcp server address that offered this lease (ip_addr_t because passed to UDP) */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/dhcp.h:94:  ip_addr_t offered_si_addr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip_addr.h:45:/** These are the values for ip_addr_t.type */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip_addr.h:60:} ip_addr_t;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip_addr.h:62:extern const ip_addr_t ip_addr_any_type;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip_addr.h:157:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip_addr.h:166:typedef ip4_addr_t ip_addr_t;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip_addr.h:205:typedef ip6_addr_t ip_addr_t;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip_addr.h:245:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip_addr.h:246:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip_addr.h:248:/** IP_ADDR_ can be used as a fixed/const ip_addr_t
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip_addr.h:263:extern const ip_addr_t ip6_addr_any;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip_addr.h:265:/** IP6_ADDR_ANY can be used as a fixed ip_addr_t
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/inet.h:137:/* ATTENTION: the next define only works because both s_addr and ip_addr_t are an u32_t effectively! */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/inet.h:138:#define inet_addr_to_ipaddr_p(target_ipaddr_p, source_inaddr)   ((target_ipaddr_p) = (ip_addr_t*)&((source_inaddr)->s_addr))
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip.h:84:  ip_addr_t local_ip; \
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip.h:85:  ip_addr_t remote_ip; \
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip.h:128:  ip_addr_t current_iphdr_src;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip.h:130:  ip_addr_t current_iphdr_dest;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/raw.h:62:    const ip_addr_t *addr);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/raw.h:88:err_t            raw_bind       (struct raw_pcb *pcb, const ip_addr_t *ipaddr);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/raw.h:89:err_t            raw_connect    (struct raw_pcb *pcb, const ip_addr_t *ipaddr);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/raw.h:91:err_t            raw_sendto     (struct raw_pcb *pcb, struct pbuf *p, const ip_addr_t *ipaddr);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/api.h:264:err_t   netconn_getaddr(struct netconn *conn, ip_addr_t *addr,
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/api.h:269:err_t   netconn_bind(struct netconn *conn, const ip_addr_t *addr, u16_t port);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/api.h:270:err_t   netconn_connect(struct netconn *conn, const ip_addr_t *addr, u16_t port);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/api.h:279:                             const ip_addr_t *addr, u16_t port);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/api.h:289:err_t   netconn_join_leave_group(struct netconn *conn, const ip_addr_t *multiaddr,
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/api.h:290:                             const ip_addr_t *netif_addr, enum netconn_igmp join_or_leave);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/api.h:294:err_t   netconn_gethostbyname_addrtype(const char *name, ip_addr_t *addr, u8_t dns_addrtype);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/api.h:297:err_t   netconn_gethostbyname(const char *name, ip_addr_t *addr);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip6.h:165:const ip_addr_t *ip6_select_source_address(struct netif *netif, const ip6_addr_t * dest);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/priv/tcp_priv.h:491:       const ip_addr_t *local_ip, const ip_addr_t *remote_ip,
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/priv/tcp_priv.h:501:u16_t tcp_eff_send_mss_impl(u16_t sendmss, const ip_addr_t *dest
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/priv/tcp_priv.h:503:                           , const ip_addr_t *src
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/priv/api_msg.h:94:      API_MSG_M_DEF_C(ip_addr_t, ipaddr);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/priv/api_msg.h:99:      ip_addr_t API_MSG_M_DEF(ipaddr);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/priv/api_msg.h:130:      API_MSG_M_DEF_C(ip_addr_t, multiaddr);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/priv/api_msg.h:131:      API_MSG_M_DEF_C(ip_addr_t, netif_addr);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/priv/api_msg.h:176:  ip_addr_t API_MSG_M_DEF(addr);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/apps/sntp/sntp.h:53:void sntp_setserver(u8_t idx, const ip_addr_t *addr);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/apps/sntp/sntp.h:54:ip_addr_t sntp_getserver(u8_t idx);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/netif/ppp/pppol2tp.h:169:  ip_addr_t remote_ip;         /* LNS IP Address */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/netif/ppp/pppol2tp.h:196:       struct netif *netif, ip_addr_t *ipaddr, u16_t port,
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/pppapi.c:223:pppapi_pppol2tp_create(struct netif *pppif, struct netif *netif, ip_addr_t *ipaddr, u16_t port,
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/api_msg.c:90:    const ip_addr_t *addr)
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/api_msg.c:157:   const ip_addr_t *addr, u16_t port)
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/api_msg.c:1099:      const ip_addr_t *ipaddr = API_EXPR_REF(msg->msg.bc.ipaddr);
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/api_msg.c:1872:lwip_netconn_do_dns_found(const char *name, const ip_addr_t *ipaddr, void *arg)
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/sockets.c:102:static void sockaddr_to_ipaddr_port(const struct sockaddr* sockaddr, ip_addr_t* ipaddr, u16_t* port);
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/sockets.c:461:sockaddr_to_ipaddr_port(const struct sockaddr* sockaddr, ip_addr_t* ipaddr, u16_t* port)
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/sockets.c:703:  ip_addr_t naddr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/sockets.c:793:  ip_addr_t local_addr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/sockets.c:897:    ip_addr_t remote_addr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/sockets.c:1082:        ip_addr_t tmpaddr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/sockets.c:1083:        ip_addr_t *fromaddr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/sockets.c:1989:  ip_addr_t naddr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/sockets.c:3071:      ip_addr_t multi_addr, if_addr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/api_lib.c:196:netconn_getaddr(struct netconn *conn, ip_addr_t *addr, u16_t *port, u8_t local)
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/api_lib.c:233:netconn_bind(struct netconn *conn, const ip_addr_t *addr, u16_t port)
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/api_lib.c:264:netconn_connect(struct netconn *conn, const ip_addr_t *addr, u16_t port)
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/api_lib.c:645:netconn_sendto(struct netconn *conn, struct netbuf *buf, const ip_addr_t *addr, u16_t port)
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/api_lib.c:826:                         const ip_addr_t *multiaddr,
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/api_lib.c:827:                         const ip_addr_t *netif_addr,
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/api_lib.c:861: * @param addr a preallocated ip_addr_t where to store the resolved IP address
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/api_lib.c:869:netconn_gethostbyname_addrtype(const char *name, ip_addr_t *addr, u8_t dns_addrtype)
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/api_lib.c:872:netconn_gethostbyname(const char *name, ip_addr_t *addr)
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/netdb.c:52:  ip_addr_t *addr_list[2];
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/netdb.c:53:  ip_addr_t addr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/netdb.c:88:  ip_addr_t addr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/netdb.c:93:  HOSTENT_STORAGE ip_addr_t s_hostent_addr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/netdb.c:94:  HOSTENT_STORAGE ip_addr_t *s_phostent_addr[2];
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/netdb.c:115:  s_hostent.h_length = sizeof(ip_addr_t);
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/netdb.c:130:      LWIP_DEBUGF(DNS_DEBUG, ("hostent.h_addr_list[%i]-> == %s\n", idx, ipaddr_ntoa((ip_addr_t*)s_hostent.h_addr_list[idx])));
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/netdb.c:216:  ret->h_length = sizeof(ip_addr_t);
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/netdb.c:271:  ip_addr_t addr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/CHANGELOG:39:    ip_addr_t (so they can be used without conversion/temporary storage)
+/home/gauci/esp/pycom-esp-idf/components/lwip/CHANGELOG:76:    ip_addr_t to ip4_addr_t, renamed ipX_addr_t to ip_addr_t and added IP
+/home/gauci/esp/pycom-esp-idf/components/lwip/CHANGELOG:77:    version; ip_addr_t is used for all generic IP addresses for the API,
+/home/gauci/esp/pycom-esp-idf/components/lwip/CHANGELOG:1031:  * many many files: bug #27352: removed packing from ip_addr_t, the packed
+/home/gauci/esp/pycom-esp-idf/components/lwip/CHANGELOG:1173:  * nearly every file: Replaced struct ip_addr by typedef ip_addr_t to
+Binary file /home/gauci/esp/pycom-esp-idf/components/esptool_py/esptool/test/elf2image/esp8266-nonosssdk20-iotdemo.elf matches
+Binary file /home/gauci/esp/pycom-esp-idf/components/esptool_py/esptool/test/elf2image/esp8266-openrtos-blink-v2.elf matches
+Binary file /home/gauci/esp/pycom-esp-idf/components/esptool_py/esptool/test/elf2image/esp32-app-template.elf matches
+Binary file /home/gauci/esp/pycom-esp-idf/components/esptool_py/esptool/test/elf2image/esp8266-nonossdkv20-at-v2.elf matches
+/home/gauci/esp/pycom-micropython/lib/lwip/UPGRADING:13:  * Replaced struct ip_addr by typedef ip_addr_t (struct ip_addr is kept for
+/home/gauci/esp/pycom-micropython/lib/lwip/UPGRADING:138:  * Removed packing from ip_addr_t, the packed version is now only used in protocol headers
+/home/gauci/esp/pycom-micropython/lib/lwip/doc/rawapi.txt:110:- err_t tcp_bind(struct tcp_pcb *pcb, ip_addr_t *ipaddr,
+/home/gauci/esp/pycom-micropython/lib/lwip/doc/rawapi.txt:160:- err_t tcp_connect(struct tcp_pcb *pcb, ip_addr_t *ipaddr,
+/home/gauci/esp/pycom-micropython/lib/lwip/doc/rawapi.txt:331:- err_t udp_bind(struct udp_pcb *pcb, ip_addr_t *ipaddr,
+/home/gauci/esp/pycom-micropython/lib/lwip/doc/rawapi.txt:338:- err_t udp_connect(struct udp_pcb *pcb, ip_addr_t *ipaddr,
+/home/gauci/esp/pycom-micropython/lib/lwip/doc/rawapi.txt:356:                                         ip_addr_t *addr,
+/home/gauci/esp/pycom-micropython/lib/lwip/doc/rawapi.txt:417:- netif_add(struct netif *netif, ip_addr_t *ipaddr,
+/home/gauci/esp/pycom-micropython/lib/lwip/doc/rawapi.txt:418:            ip_addr_t *netmask, ip_addr_t *gw,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/raw.c:142:raw_bind(struct raw_pcb *pcb, ip_addr_t *ipaddr)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/raw.c:162:raw_connect(struct raw_pcb *pcb, ip_addr_t *ipaddr)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/raw.c:203:raw_sendto(struct raw_pcb *pcb, struct pbuf *p, ip_addr_t *ipaddr)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/raw.c:207:  ip_addr_t *src_ip;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/dhcp.c:160:static void dhcp_recv(void *arg, struct udp_pcb *pcb, struct pbuf *p, ip_addr_t *addr, u16_t port);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/dhcp.c:572:    ip_addr_t dns_addr;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/dhcp.c:803:void dhcp_arp_reply(struct netif *netif, ip_addr_t *addr)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/dhcp.c:931:  ip_addr_t sn_mask, gw_addr;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/dhcp.c:1537:dhcp_recv(void *arg, struct udp_pcb *pcb, struct pbuf *p, ip_addr_t *addr, u16_t port)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/msg_in.c:61:static void snmp_recv(void *arg, struct udp_pcb *pcb, struct pbuf *p, ip_addr_t *addr, u16_t port);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/msg_in.c:822:snmp_recv(void *arg, struct udp_pcb *pcb, struct pbuf *p, ip_addr_t *addr, u16_t port)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib_structs.c:136:snmp_oidtoip(s32_t *ident, ip_addr_t *ip)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib_structs.c:147:snmp_iptooid(ip_addr_t *ip, s32_t *ident)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/msg_out.c:58:  ip_addr_t dip;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/msg_out.c:95:snmp_trap_dst_ip_set(u8_t dst_idx, ip_addr_t *dst)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/msg_out.c:217:  ip_addr_t dst_ip;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib2.c:1089:void snmp_insert_arpidx_tree(struct netif *ni, ip_addr_t *ip)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib2.c:1161:void snmp_delete_arpidx_tree(struct netif *ni, ip_addr_t *ip)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib2.c:1442:  ip_addr_t dst;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib2.c:1519:  ip_addr_t dst;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib2.c:2726:  ip_addr_t* ipaddr_ret;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib2.c:2728:  ip_addr_t ip;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib2.c:2759:          ip_addr_t *dst = (ip_addr_t*)value;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib2.c:3074:  ip_addr_t ip;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib2.c:3094:          ip_addr_t *dst = (ip_addr_t*)value;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib2.c:3106:          ip_addr_t *dst = (ip_addr_t*)value;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib2.c:3214:  ip_addr_t dest;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib2.c:3244:          ip_addr_t *dst = (ip_addr_t*)value;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib2.c:3293:          ip_addr_t *dst = (ip_addr_t*)value;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib2.c:3340:          ip_addr_t *dst = (ip_addr_t*)value;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib2.c:3417:  ip_addr_t* ipaddr_ret;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib2.c:3419:  ip_addr_t ip;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib2.c:3450:          ip_addr_t *dst = (ip_addr_t*)value;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib2.c:3775:  ip_addr_t lip, rip;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib2.c:3884:  ip_addr_t ip;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib2.c:3908:          ip_addr_t *dst = (ip_addr_t*)value;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/tcp.c:433:tcp_bind(struct tcp_pcb *pcb, ip_addr_t *ipaddr, u16_t port)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/tcp.c:684:tcp_connect(struct tcp_pcb *pcb, ip_addr_t *ipaddr, u16_t port,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/tcp.c:1586:tcp_eff_send_mss(u16_t sendmss, ip_addr_t *addr)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/dns.c:177:  ip_addr_t ipaddr;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/dns.c:211:static void dns_recv(void *s, struct udp_pcb *pcb, struct pbuf *p, ip_addr_t *addr, u16_t port);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/dns.c:222:static ip_addr_t              dns_servers[DNS_MAX_SERVERS];
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/dns.c:234:  ip_addr_t dnsserver;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/dns.c:273:dns_setserver(u8_t numdns, ip_addr_t *dnsserver)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/dns.c:288:ip_addr_t
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/dns.c:379:dns_local_removehost(const char *hostname, const ip_addr_t *addr)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/dns.c:414:dns_local_addhost(const char *hostname, const ip_addr_t *addr)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/dns.c:445: * @return the hostname's IP address, as u32_t (instead of ip_addr_t to
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/dns.c:733:dns_recv(void *arg, struct udp_pcb *pcb, struct pbuf *p, ip_addr_t *addr, u16_t port)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/dns.c:804:             (ans.len == PP_HTONS(sizeof(ip_addr_t))) ) {
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/dns.c:811:            SMEMCPY(&(pEntry->ipaddr), (pHostname+SIZEOF_DNS_ANSWER), sizeof(ip_addr_t));
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/dns.c:928: * @param addr pointer to a ip_addr_t where to store the address if it is already
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/dns.c:936:dns_gethostbyname(const char *hostname, ip_addr_t *addr, dns_found_callback found,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/netif.c:109:  ip_addr_t loop_ipaddr, loop_netmask, loop_gw;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/netif.c:139:netif_add(struct netif *netif, ip_addr_t *ipaddr, ip_addr_t *netmask,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/netif.c:140:  ip_addr_t *gw, void *state, netif_init_fn init, netif_input_fn input)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/netif.c:221:netif_set_addr(struct netif *netif, ip_addr_t *ipaddr, ip_addr_t *netmask,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/netif.c:222:    ip_addr_t *gw)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/netif.c:323:netif_set_ipaddr(struct netif *netif, ip_addr_t *ipaddr)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/netif.c:388:netif_set_gw(struct netif *netif, ip_addr_t *gw)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/netif.c:409:netif_set_netmask(struct netif *netif, ip_addr_t *netmask)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/netif.c:611:       ip_addr_t *ipaddr)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/igmp.c:138:static struct igmp_group *igmp_lookup_group(struct netif *ifp, ip_addr_t *addr);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/igmp.c:143:static err_t  igmp_ip_output_if(struct pbuf *p, ip_addr_t *src, ip_addr_t *dest, struct netif *netif);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/igmp.c:148:static ip_addr_t     allsystems;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/igmp.c:149:static ip_addr_t     allrouters;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/igmp.c:290:igmp_lookfor_group(struct netif *ifp, ip_addr_t *addr)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/igmp.c:316:igmp_lookup_group(struct netif *ifp, ip_addr_t *addr)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/igmp.c:389:igmp_input(struct pbuf *p, struct netif *inp, ip_addr_t *dest)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/igmp.c:463:           ip_addr_t groupaddr;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/igmp.c:515:igmp_joingroup(ip_addr_t *ifaddr, ip_addr_t *groupaddr)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/igmp.c:585:igmp_leavegroup(ip_addr_t *ifaddr, ip_addr_t *groupaddr)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/igmp.c:745:igmp_ip_output_if(struct pbuf *p, ip_addr_t *src, ip_addr_t *dest, struct netif *netif)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/igmp.c:766:  ip_addr_t   src  = *IP_ADDR_ANY;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/igmp.c:767:  ip_addr_t*  dest = NULL;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/icmp.c:297:  ip_addr_t iphdr_src;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/ip_addr.c:44:const ip_addr_t ip_addr_any = { IPADDR_ANY };
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/ip_addr.c:45:const ip_addr_t ip_addr_broadcast = { IPADDR_BROADCAST };
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/ip_addr.c:57:  ip_addr_t ipaddr;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/ip_addr.c:132:  ip_addr_t val;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/ip_addr.c:152:ipaddr_aton(const char *cp, ip_addr_t *addr)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/ip_addr.c:261:ipaddr_ntoa(const ip_addr_t *addr)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/ip_addr.c:276:char *ipaddr_ntoa_r(const ip_addr_t *addr, char *buf, int buflen)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/ip.c:107:ip_addr_t current_iphdr_src;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/ip.c:109:ip_addr_t current_iphdr_dest;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/ip.c:124:ip_route(ip_addr_t *dest)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/ip.c:383:  /* copy IP addresses to aligned ip_addr_t */
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/ip.c:641:ip_output_if(struct pbuf *p, ip_addr_t *src, ip_addr_t *dest,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/ip.c:655:err_t ip_output_if_opt(struct pbuf *p, ip_addr_t *src, ip_addr_t *dest,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/ip.c:661:  ip_addr_t dest_addr;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/ip.c:818:ip_output(struct pbuf *p, ip_addr_t *src, ip_addr_t *dest,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/ip.c:857:ip_output_hinted(struct pbuf *p, ip_addr_t *src, ip_addr_t *dest,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/ip_frag.c:667:ip_frag(struct pbuf *p, struct netif *netif, ip_addr_t *dest)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/autoip.c:111:static void autoip_create_addr(struct netif *netif, ip_addr_t *ipaddr);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/autoip.c:196:autoip_create_addr(struct netif *netif, ip_addr_t *ipaddr)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/autoip.c:258:  ip_addr_t sn_mask, gw_addr;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/autoip.c:487:    ip_addr_t sipaddr, dipaddr;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/inet_chksum.c:273:       ip_addr_t *src, ip_addr_t *dest,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/inet_chksum.c:333:       ip_addr_t *src, ip_addr_t *dest,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/tcp_out.c:1196:  ip_addr_t *local_ip, ip_addr_t *remote_ip,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/udp.c:492:  ip_addr_t *dst_ip, u16_t dst_port)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/udp.c:500:udp_sendto_chksum(struct udp_pcb *pcb, struct pbuf *p, ip_addr_t *dst_ip,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/udp.c:550:  ip_addr_t *dst_ip, u16_t dst_port, struct netif *netif)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/udp.c:558:udp_sendto_if_chksum(struct udp_pcb *pcb, struct pbuf *p, ip_addr_t *dst_ip,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/udp.c:564:  ip_addr_t *src_ip;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/udp.c:766:udp_bind(struct udp_pcb *pcb, ip_addr_t *ipaddr, u16_t port)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/core/udp.c:853:udp_connect(struct udp_pcb *pcb, ip_addr_t *ipaddr, u16_t port)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/netif/ppp/ppp.c:810:pppifOutput(struct netif *netif, struct pbuf *pb, ip_addr_t *ipaddr)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/netif/ppp/ppp.h:93:  ip_addr_t our_ipaddr, his_ipaddr, netmask, dns1, dns2;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/netif/slipif.c:115:slipif_output(struct netif *netif, struct pbuf *p, ip_addr_t *ipaddr)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/netif/etharp.c:113:  ip_addr_t ipaddr;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/netif/etharp.c:266:etharp_find_entry(ip_addr_t *ipaddr, u8_t flags)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/netif/etharp.c:448:etharp_update_arp_entry(struct netif *netif, ip_addr_t *ipaddr, struct eth_addr *ethaddr, u8_t flags)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/netif/etharp.c:526:etharp_add_static_entry(ip_addr_t *ipaddr, struct eth_addr *ethaddr)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/netif/etharp.c:551:etharp_remove_static_entry(ip_addr_t *ipaddr)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/netif/etharp.c:603:etharp_find_addr(struct netif *netif, ip_addr_t *ipaddr,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/netif/etharp.c:604:         struct eth_addr **eth_ret, ip_addr_t **ip_ret)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/netif/etharp.c:643:  ip_addr_t iphdr_src;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/netif/etharp.c:693:  ip_addr_t sipaddr, dipaddr;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/netif/etharp.c:724:      (hdr->protolen != sizeof(ip_addr_t)) ||
+/home/gauci/esp/pycom-micropython/lib/lwip/src/netif/etharp.c:879:etharp_output(struct netif *netif, struct pbuf *q, ip_addr_t *ipaddr)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/netif/etharp.c:883:  ip_addr_t *dst_addr = ipaddr;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/netif/etharp.c:1016:etharp_query(struct netif *netif, ip_addr_t *ipaddr, struct pbuf *q)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/netif/etharp.c:1177:           const struct eth_addr *hwsrc_addr, const ip_addr_t *ipsrc_addr,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/netif/etharp.c:1178:           const struct eth_addr *hwdst_addr, const ip_addr_t *ipdst_addr,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/netif/etharp.c:1235:  hdr->protolen = sizeof(ip_addr_t);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/netif/etharp.c:1259:etharp_request(struct netif *netif, ip_addr_t *ipaddr)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/tcp_impl.h:445:       ip_addr_t *local_ip, ip_addr_t *remote_ip,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/tcp_impl.h:454:u16_t tcp_eff_send_mss(u16_t sendmss, ip_addr_t *addr);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netifapi.h:55:      ip_addr_t *ipaddr;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netifapi.h:56:      ip_addr_t *netmask;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netifapi.h:57:      ip_addr_t *gw;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netifapi.h:77:                                 ip_addr_t *ipaddr,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netifapi.h:78:                                 ip_addr_t *netmask,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netifapi.h:79:                                 ip_addr_t *gw,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netifapi.h:85:                                 ip_addr_t *ipaddr,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netifapi.h:86:                                 ip_addr_t *netmask,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netifapi.h:87:                                 ip_addr_t *gw );
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netif.h:119:       ip_addr_t *ipaddr);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netif.h:131:       ip_addr_t *group, u8_t action);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netif.h:141:  ip_addr_t ip_addr;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netif.h:142:  ip_addr_t netmask;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netif.h:143:  ip_addr_t gw;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netif.h:259:struct netif *netif_add(struct netif *netif, ip_addr_t *ipaddr, ip_addr_t *netmask,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netif.h:260:      ip_addr_t *gw, void *state, netif_init_fn init, netif_input_fn input);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netif.h:263:netif_set_addr(struct netif *netif, ip_addr_t *ipaddr, ip_addr_t *netmask,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netif.h:264:      ip_addr_t *gw);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netif.h:275:void netif_set_ipaddr(struct netif *netif, ip_addr_t *ipaddr);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netif.h:276:void netif_set_netmask(struct netif *netif, ip_addr_t *netmask);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netif.h:277:void netif_set_gw(struct netif *netif, ip_addr_t *gw);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netif.h:311:err_t netif_loop_output(struct netif *netif, struct pbuf *p, ip_addr_t *dest_ip);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/tcp.h:342:err_t            tcp_bind    (struct tcp_pcb *pcb, ip_addr_t *ipaddr,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/tcp.h:344:err_t            tcp_connect (struct tcp_pcb *pcb, ip_addr_t *ipaddr,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/udp.h:88:    ip_addr_t *addr, u16_t port);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/udp.h:105:  ip_addr_t multicast_ip;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/udp.h:125:err_t            udp_bind       (struct udp_pcb *pcb, ip_addr_t *ipaddr,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/udp.h:127:err_t            udp_connect    (struct udp_pcb *pcb, ip_addr_t *ipaddr,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/udp.h:133:                                 ip_addr_t *dst_ip, u16_t dst_port,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/udp.h:136:                                 ip_addr_t *dst_ip, u16_t dst_port);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/udp.h:141:                                 ip_addr_t *dst_ip, u16_t dst_port,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/udp.h:145:                                 ip_addr_t *dst_ip, u16_t dst_port,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/dns.h:86:  ip_addr_t addr;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/dns.h:100: * @param ipaddr pointer to an ip_addr_t containing the IP address of the hostname,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/dns.h:104:typedef void (*dns_found_callback)(const char *name, ip_addr_t *ipaddr, void *callback_arg);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/dns.h:108:void           dns_setserver(u8_t numdns, ip_addr_t *dnsserver);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/dns.h:109:ip_addr_t      dns_getserver(u8_t numdns);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/dns.h:110:err_t          dns_gethostbyname(const char *hostname, ip_addr_t *addr,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/dns.h:114:int            dns_local_removehost(const char *hostname, const ip_addr_t *addr);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/dns.h:115:err_t          dns_local_addhost(const char *hostname, const ip_addr_t *addr);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/snmp_msg.h:226:  ip_addr_t sip;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/snmp_msg.h:265:  ip_addr_t dip;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/snmp_msg.h:293:void snmp_trap_dst_ip_set(u8_t dst_idx, ip_addr_t *dst);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/snmp_structs.h:243:void snmp_oidtoip(s32_t *ident, ip_addr_t *ip);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/snmp_structs.h:244:void snmp_iptooid(ip_addr_t *ip, s32_t *ident);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/snmp.h:124:void snmp_insert_arpidx_tree(struct netif *ni, ip_addr_t *ip);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/snmp.h:125:void snmp_delete_arpidx_tree(struct netif *ni, ip_addr_t *ip);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netbuf.h:50:  ip_addr_t addr;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netbuf.h:58:  ip_addr_t toaddr;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/dhcp.h:52:  ip_addr_t server_ip_addr; /* dhcp server address that offered this lease */
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/dhcp.h:53:  ip_addr_t offered_ip_addr;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/dhcp.h:54:  ip_addr_t offered_sn_mask;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/dhcp.h:55:  ip_addr_t offered_gw_addr;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/dhcp.h:63:  ip_addr_t offered_si_addr;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/dhcp.h:127:void dhcp_arp_reply(struct netif *netif, ip_addr_t *addr);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/raw.h:61:    ip_addr_t *addr);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/raw.h:81:err_t            raw_bind       (struct raw_pcb *pcb, ip_addr_t *ipaddr);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/raw.h:82:err_t            raw_connect    (struct raw_pcb *pcb, ip_addr_t *ipaddr);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/raw.h:85:err_t            raw_sendto     (struct raw_pcb *pcb, struct pbuf *p, ip_addr_t *ipaddr);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/api.h:221:err_t   netconn_getaddr(struct netconn *conn, ip_addr_t *addr,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/api.h:226:err_t   netconn_bind(struct netconn *conn, ip_addr_t *addr, u16_t port);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/api.h:227:err_t   netconn_connect(struct netconn *conn, ip_addr_t *addr, u16_t port);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/api.h:236:                       ip_addr_t *addr, u16_t port);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/api.h:246:err_t   netconn_join_leave_group(struct netconn *conn, ip_addr_t *multiaddr,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/api.h:247:                                 ip_addr_t *netif_addr, enum netconn_igmp join_or_leave);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/api.h:250:err_t   netconn_gethostbyname(const char *name, ip_addr_t *addr);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/api_msg.h:78:      ip_addr_t *ipaddr;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/api_msg.h:83:      ip_addr_t *ipaddr;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/api_msg.h:107:      ip_addr_t *multiaddr;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/api_msg.h:108:      ip_addr_t *netif_addr;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/api_msg.h:139:  ip_addr_t *addr;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/igmp.h:78:  ip_addr_t          group_address;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/igmp.h:94:struct igmp_group *igmp_lookfor_group(struct netif *ifp, ip_addr_t *addr);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/igmp.h:95:void   igmp_input(struct pbuf *p, struct netif *inp, ip_addr_t *dest);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/igmp.h:96:err_t  igmp_joingroup(ip_addr_t *ifaddr, ip_addr_t *groupaddr);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/igmp.h:97:err_t  igmp_leavegroup(ip_addr_t *ifaddr, ip_addr_t *groupaddr);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip_frag.h:81:err_t ip_frag(struct pbuf *p, struct netif *netif, ip_addr_t *dest);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/inet_chksum.h:76:       ip_addr_t *src, ip_addr_t *dest,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/inet_chksum.h:79:       ip_addr_t *src, ip_addr_t *dest,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip_addr.h:42:/* This is the aligned version of ip_addr_t,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip_addr.h:48:/* This is the packed version of ip_addr_t,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip_addr.h:62:/** ip_addr_t uses a struct for convenience only, so that the same defines can
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip_addr.h:63: * operate both on ip_addr_t as well as on ip_addr_p_t. */
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip_addr.h:64:typedef struct ip_addr ip_addr_t;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip_addr.h:86:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip_addr.h:87:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip_addr.h:92:#define IP_ADDR_ANY         ((ip_addr_t *)&ip_addr_any)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip_addr.h:93:#define IP_ADDR_BROADCAST   ((ip_addr_t *)&ip_addr_broadcast)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip_addr.h:158:#define IPADDR2_COPY(dest, src) SMEMCPY(dest, src, sizeof(ip_addr_t))
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip_addr.h:235:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip_addr.h:237:char *ipaddr_ntoa(const ip_addr_t *addr);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip_addr.h:238:char *ipaddr_ntoa_r(const ip_addr_t *addr, char *buf, int buflen);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/inet.h:94:/* ATTENTION: the next define only works because both s_addr and ip_addr_t are an u32_t effectively! */
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/inet.h:95:#define inet_addr_to_ipaddr_p(target_ipaddr_p, source_inaddr)   ((target_ipaddr_p) = (ip_addr_t*)&((source_inaddr)->s_addr))
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/inet.h:99:#define inet_aton(cp, addr)   ipaddr_aton(cp, (ip_addr_t*)addr)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/inet.h:100:#define inet_ntoa(addr)       ipaddr_ntoa((ip_addr_t*)&(addr))
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/inet.h:101:#define inet_ntoa_r(addr, buf, buflen) ipaddr_ntoa_r((ip_addr_t*)&(addr), buf, buflen)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip.h:78:  ip_addr_t local_ip; \
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip.h:79:  ip_addr_t remote_ip; \
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip.h:170:extern ip_addr_t current_iphdr_src;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip.h:172:extern ip_addr_t current_iphdr_dest;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip.h:175:struct netif *ip_route(ip_addr_t *dest);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip.h:177:err_t ip_output(struct pbuf *p, ip_addr_t *src, ip_addr_t *dest,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip.h:179:err_t ip_output_if(struct pbuf *p, ip_addr_t *src, ip_addr_t *dest,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip.h:183:err_t ip_output_hinted(struct pbuf *p, ip_addr_t *src, ip_addr_t *dest,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip.h:187:err_t ip_output_if_opt(struct pbuf *p, ip_addr_t *src, ip_addr_t *dest,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/autoip.h:83:  ip_addr_t llipaddr;       /* the currently selected, probed, announced or used LL IP-Address */
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/netif/etharp.h:183:s8_t etharp_find_addr(struct netif *netif, ip_addr_t *ipaddr,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/netif/etharp.h:184:         struct eth_addr **eth_ret, ip_addr_t **ip_ret);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/netif/etharp.h:185:err_t etharp_output(struct netif *netif, struct pbuf *q, ip_addr_t *ipaddr);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/netif/etharp.h:186:err_t etharp_query(struct netif *netif, ip_addr_t *ipaddr, struct pbuf *q);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/netif/etharp.h:187:err_t etharp_request(struct netif *netif, ip_addr_t *ipaddr);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/netif/etharp.h:196:err_t etharp_add_static_entry(ip_addr_t *ipaddr, struct eth_addr *ethaddr);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/netif/etharp.h:197:err_t etharp_remove_static_entry(ip_addr_t *ipaddr);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/netif/etharp.h:203:                 const struct eth_addr *hwsrc_addr, const ip_addr_t *ipsrc_addr,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/include/netif/etharp.h:204:                 const struct eth_addr *hwdst_addr, const ip_addr_t *ipdst_addr,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/api/netifapi.c:99:                   ip_addr_t *ipaddr,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/api/netifapi.c:100:                   ip_addr_t *netmask,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/api/netifapi.c:101:                   ip_addr_t *gw,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/api/netifapi.c:127:                        ip_addr_t *ipaddr,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/api/netifapi.c:128:                        ip_addr_t *netmask,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/api/netifapi.c:129:                        ip_addr_t *gw)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/api/api_msg.c:79:    ip_addr_t *addr)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/api/api_msg.c:145:   ip_addr_t *addr, u16_t port)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/api/api_msg.c:1526:do_dns_found(const char *name, ip_addr_t *ipaddr, void *arg)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/api/sockets.c:316:  ip_addr_t naddr;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/api/sockets.c:408:  ip_addr_t local_addr;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/api/sockets.c:492:    ip_addr_t remote_addr;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/api/sockets.c:565:  ip_addr_t        *addr;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/api/sockets.c:667:      ip_addr_t fromaddr;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/api/sockets.c:830:    ip_addr_t *remote_addr;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/api/sockets.c:1412:  ip_addr_t naddr;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/api/sockets.c:2180:        ip_addr_t if_addr;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/api/sockets.c:2181:        ip_addr_t multi_addr;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/api/api_lib.c:135:netconn_getaddr(struct netconn *conn, ip_addr_t *addr, u16_t *port, u8_t local)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/api/api_lib.c:166:netconn_bind(struct netconn *conn, ip_addr_t *addr, u16_t port)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/api/api_lib.c:192:netconn_connect(struct netconn *conn, ip_addr_t *addr, u16_t port)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/api/api_lib.c:549:netconn_sendto(struct netconn *conn, struct netbuf *buf, ip_addr_t *addr, u16_t port)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/api/api_lib.c:720:                         ip_addr_t *multiaddr,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/api/api_lib.c:721:                         ip_addr_t *netif_addr,
+/home/gauci/esp/pycom-micropython/lib/lwip/src/api/api_lib.c:746: * @param addr a preallocated ip_addr_t where to store the resolved IP address
+/home/gauci/esp/pycom-micropython/lib/lwip/src/api/api_lib.c:753:netconn_gethostbyname(const char *name, ip_addr_t *addr)
+/home/gauci/esp/pycom-micropython/lib/lwip/src/api/netdb.c:52:  ip_addr_t *addr_list[2];
+/home/gauci/esp/pycom-micropython/lib/lwip/src/api/netdb.c:53:  ip_addr_t addr;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/api/netdb.c:88:  ip_addr_t addr;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/api/netdb.c:93:  HOSTENT_STORAGE ip_addr_t s_hostent_addr;
+/home/gauci/esp/pycom-micropython/lib/lwip/src/api/netdb.c:94:  HOSTENT_STORAGE ip_addr_t *s_phostent_addr[2];
+/home/gauci/esp/pycom-micropython/lib/lwip/src/api/netdb.c:111:  s_hostent.h_length = sizeof(ip_addr_t);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/api/netdb.c:132:      LWIP_DEBUGF(DNS_DEBUG, ("hostent.h_addr_list[%i]-> == %s\n", idx, ip_ntoa((ip_addr_t*)s_hostent.h_addr_list[idx])));
+/home/gauci/esp/pycom-micropython/lib/lwip/src/api/netdb.c:218:  ret->h_length = sizeof(ip_addr_t);
+/home/gauci/esp/pycom-micropython/lib/lwip/src/api/netdb.c:271:  ip_addr_t addr;
+/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/etharp/test_etharp.c:15:static ip_addr_t test_ipaddr, test_netmask, test_gw;
+/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/etharp/test_etharp.c:75:create_arp_response(ip_addr_t *adr)
+/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/etharp/test_etharp.c:94:  etharphdr->protolen = sizeof(ip_addr_t);
+/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/etharp/test_etharp.c:97:  SMEMCPY(&etharphdr->sipaddr, adr, sizeof(ip_addr_t));
+/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/etharp/test_etharp.c:98:  SMEMCPY(&etharphdr->dipaddr, &test_ipaddr, sizeof(ip_addr_t));
+/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/etharp/test_etharp.c:139:  ip_addr_t *unused_ipaddr;
+/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/etharp/test_etharp.c:153:    ip_addr_t adrs[ARP_TABLE_SIZE + 2];
+/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/tcp_helper.h:32:struct pbuf* tcp_create_segment(ip_addr_t* src_ip, ip_addr_t* dst_ip,
+/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/tcp_helper.h:39:void tcp_set_state(struct tcp_pcb* pcb, enum tcp_state state, ip_addr_t* local_ip,
+/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/tcp_helper.h:40:                   ip_addr_t* remote_ip, u16_t local_port, u16_t remote_port);
+/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/tcp_helper.h:49:                         ip_addr_t *ip_addr, ip_addr_t *netmask);
+/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/test_tcp.c:80:  ip_addr_t remote_ip, local_ip;
+/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/test_tcp.c:136:  ip_addr_t remote_ip, local_ip, netmask;
+/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/test_tcp.c:317:  ip_addr_t remote_ip, local_ip, netmask;
+/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/test_tcp.c:414:  ip_addr_t remote_ip, local_ip, netmask;
+/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/test_tcp.c:504:  ip_addr_t remote_ip, local_ip, netmask;
+/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/tcp_helper.c:41:tcp_create_segment_wnd(ip_addr_t* src_ip, ip_addr_t* dst_ip,
+/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/tcp_helper.c:105:tcp_create_segment(ip_addr_t* src_ip, ip_addr_t* dst_ip,
+/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/tcp_helper.c:139:tcp_set_state(struct tcp_pcb* pcb, enum tcp_state state, ip_addr_t* local_ip,
+/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/tcp_helper.c:140:                   ip_addr_t* remote_ip, u16_t local_port, u16_t remote_port)
+/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/tcp_helper.c:255:       ip_addr_t *ipaddr)
+/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/tcp_helper.c:277:                         ip_addr_t *ip_addr, ip_addr_t *netmask)
+/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/test_tcp_oos.c:149:  ip_addr_t remote_ip, local_ip;
+/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/test_tcp_oos.c:289:  ip_addr_t remote_ip, local_ip;
+/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/test_tcp_oos.c:460:  ip_addr_t remote_ip, local_ip;
+/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/test_tcp_oos.c:550:  ip_addr_t remote_ip, local_ip;
+/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/test_tcp_oos.c:629:  ip_addr_t remote_ip, local_ip;
+/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/test_tcp_oos.c:730:  ip_addr_t remote_ip, local_ip;
+/home/gauci/esp/pycom-micropython/lib/lwip/CHANGELOG:326:  * many many files: bug #27352: removed packing from ip_addr_t, the packed
+/home/gauci/esp/pycom-micropython/lib/lwip/CHANGELOG:468:  * nearly every file: Replaced struct ip_addr by typedef ip_addr_t to
+/home/gauci/esp/pycom-micropython/esp8266/modnetwork.c:226:    ip_addr_t dns_addr;
+/home/gauci/esp/pycom-micropython/esp8266/modesp.c:444:STATIC void esp_getaddrinfo_cb(const char *name, ip_addr_t *ipaddr, void *arg) {
+/home/gauci/esp/pycom-micropython/esp8266/modesp.c:471:    ip_addr_t ipaddr;
+Binary file /home/gauci/esp/pycom-micropython/esp32/lib/libtcpip_adapter.a matches
+Binary file /home/gauci/esp/pycom-micropython/esp32/lib/liblwip.a matches
+/home/gauci/esp/pycom-micropython/esp32/mods/modwlan.c:817:   ip_addr_t dns_addr;
+Binary file /home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/ftp/ftp.o matches
+Binary file /home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/alljoin/src/target/esp32/aj_target_util.o matches
+Binary file /home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/alljoin/src/target/esp32/esp32_net.o matches
+Binary file /home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/serverstask.o matches
+Binary file /home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/mods/modussl.o matches
+Binary file /home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/mods/modlora.o matches
+Binary file /home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/mods/modwlan.o matches
+Binary file /home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/mods/modusocket.o matches
+Binary file /home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/application.elf matches
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1194146:} ip_addr_t;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1194148:extern const ip_addr_t ip_addr_any_type;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1194243:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1194245:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1194246:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1194263:extern const ip_addr_t ip6_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1227005:} ip_addr_t;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1227007:extern const ip_addr_t ip_addr_any_type;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1227102:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1227104:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1227105:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1227122:extern const ip_addr_t ip6_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1275392:} ip_addr_t;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1275394:extern const ip_addr_t ip_addr_any_type;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1275489:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1275491:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1275492:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1275509:extern const ip_addr_t ip6_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1307732:} ip_addr_t;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1307734:extern const ip_addr_t ip_addr_any_type;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1307829:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1307831:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1307832:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1307849:extern const ip_addr_t ip6_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1367698:} ip_addr_t;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1367700:extern const ip_addr_t ip_addr_any_type;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1367795:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1367797:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1367798:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1367815:extern const ip_addr_t ip6_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1401268:} ip_addr_t;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1401270:extern const ip_addr_t ip_addr_any_type;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1401365:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1401367:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1401368:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1401385:extern const ip_addr_t ip6_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1428172:} ip_addr_t;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1428174:extern const ip_addr_t ip_addr_any_type;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1428269:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1428271:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1428272:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1428289:extern const ip_addr_t ip6_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1428866:#define inet_addr_to_ipaddr_p(target_ipaddr_p,source_inaddr) ((target_ipaddr_p) = (ip_addr_t*)&((source_inaddr)->s_addr))
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1429280:typedef void (*dns_found_callback)(const char *name, const ip_addr_t *ipaddr, void *callback_arg);
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1429284:void dns_setserver(u8_t numdns, const ip_addr_t *dnsserver);
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1429285:ip_addr_t dns_getserver(u8_t numdns);
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1429286:err_t dns_gethostbyname(const char *hostname, ip_addr_t *addr,
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1429288:err_t dns_gethostbyname_addrtype(const char *hostname, ip_addr_t *addr,
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1465577:} ip_addr_t;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1465579:extern const ip_addr_t ip_addr_any_type;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1465674:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1465676:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1465677:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1465694:extern const ip_addr_t ip6_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1466672:#define inet_addr_to_ipaddr_p(target_ipaddr_p,source_inaddr) ((target_ipaddr_p) = (ip_addr_t*)&((source_inaddr)->s_addr))
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1467311:typedef void (*dns_found_callback)(const char *name, const ip_addr_t *ipaddr, void *callback_arg);
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1467315:void dns_setserver(u8_t numdns, const ip_addr_t *dnsserver);
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1467316:ip_addr_t dns_getserver(u8_t numdns);
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1467317:err_t dns_gethostbyname(const char *hostname, ip_addr_t *addr,
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1467319:err_t dns_gethostbyname_addrtype(const char *hostname, ip_addr_t *addr,
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1475027:   ip_addr_t dns_addr;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1510988:} ip_addr_t;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1510990:extern const ip_addr_t ip_addr_any_type;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1511085:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1511087:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1511088:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1511105:extern const ip_addr_t ip6_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1537328:} ip_addr_t;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1537330:extern const ip_addr_t ip_addr_any_type;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1537425:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1537427:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1537428:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1537445:extern const ip_addr_t ip6_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1542148:#define inet_addr_to_ipaddr_p(target_ipaddr_p,source_inaddr) ((target_ipaddr_p) = (ip_addr_t*)&((source_inaddr)->s_addr))
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1689186:} ip_addr_t;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1689188:extern const ip_addr_t ip_addr_any_type;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1689283:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1689285:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1689286:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1689303:extern const ip_addr_t ip6_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1749279:} ip_addr_t;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1749281:extern const ip_addr_t ip_addr_any_type;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1749376:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1749378:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1749379:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1749396:extern const ip_addr_t ip6_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1763965:#define inet_addr_to_ipaddr_p(target_ipaddr_p,source_inaddr) ((target_ipaddr_p) = (ip_addr_t*)&((source_inaddr)->s_addr))
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1764604:typedef void (*dns_found_callback)(const char *name, const ip_addr_t *ipaddr, void *callback_arg);
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1764608:void dns_setserver(u8_t numdns, const ip_addr_t *dnsserver);
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1764609:ip_addr_t dns_getserver(u8_t numdns);
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1764610:err_t dns_gethostbyname(const char *hostname, ip_addr_t *addr,
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1764612:err_t dns_gethostbyname_addrtype(const char *hostname, ip_addr_t *addr,
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1845566:} ip_addr_t;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1845568:extern const ip_addr_t ip_addr_any_type;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1845663:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1845665:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1845666:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1845683:extern const ip_addr_t ip6_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1890311:} ip_addr_t;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1890313:extern const ip_addr_t ip_addr_any_type;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1890408:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1890410:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1890411:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:1890428:extern const ip_addr_t ip6_addr_any;
+Binary file /home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/application.a matches
+Binary file /home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/telnet/telnet.o matches
+Binary file /home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/ftp/ftp.o matches
+Binary file /home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/alljoin/src/target/esp32/aj_target_util.o matches
+Binary file /home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/alljoin/src/target/esp32/esp32_net.o matches
+Binary file /home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/serverstask.o matches
+Binary file /home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/mods/modussl.o matches
+Binary file /home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/mods/modwlan.o matches
+Binary file /home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/mods/modusocket.o matches
+Binary file /home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/application.elf matches
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1194146:} ip_addr_t;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1194148:extern const ip_addr_t ip_addr_any_type;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1194243:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1194245:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1194246:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1194263:extern const ip_addr_t ip6_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1227005:} ip_addr_t;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1227007:extern const ip_addr_t ip_addr_any_type;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1227102:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1227104:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1227105:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1227122:extern const ip_addr_t ip6_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1275392:} ip_addr_t;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1275394:extern const ip_addr_t ip_addr_any_type;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1275489:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1275491:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1275492:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1275509:extern const ip_addr_t ip6_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1307732:} ip_addr_t;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1307734:extern const ip_addr_t ip_addr_any_type;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1307829:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1307831:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1307832:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1307849:extern const ip_addr_t ip6_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1367698:} ip_addr_t;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1367700:extern const ip_addr_t ip_addr_any_type;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1367795:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1367797:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1367798:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1367815:extern const ip_addr_t ip6_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1401268:} ip_addr_t;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1401270:extern const ip_addr_t ip_addr_any_type;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1401365:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1401367:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1401368:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1401385:extern const ip_addr_t ip6_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1428172:} ip_addr_t;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1428174:extern const ip_addr_t ip_addr_any_type;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1428269:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1428271:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1428272:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1428289:extern const ip_addr_t ip6_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1428866:#define inet_addr_to_ipaddr_p(target_ipaddr_p,source_inaddr) ((target_ipaddr_p) = (ip_addr_t*)&((source_inaddr)->s_addr))
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1429280:typedef void (*dns_found_callback)(const char *name, const ip_addr_t *ipaddr, void *callback_arg);
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1429284:void dns_setserver(u8_t numdns, const ip_addr_t *dnsserver);
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1429285:ip_addr_t dns_getserver(u8_t numdns);
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1429286:err_t dns_gethostbyname(const char *hostname, ip_addr_t *addr,
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1429288:err_t dns_gethostbyname_addrtype(const char *hostname, ip_addr_t *addr,
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1465567:} ip_addr_t;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1465569:extern const ip_addr_t ip_addr_any_type;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1465664:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1465666:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1465667:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1465684:extern const ip_addr_t ip6_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1466662:#define inet_addr_to_ipaddr_p(target_ipaddr_p,source_inaddr) ((target_ipaddr_p) = (ip_addr_t*)&((source_inaddr)->s_addr))
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1467301:typedef void (*dns_found_callback)(const char *name, const ip_addr_t *ipaddr, void *callback_arg);
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1467305:void dns_setserver(u8_t numdns, const ip_addr_t *dnsserver);
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1467306:ip_addr_t dns_getserver(u8_t numdns);
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1467307:err_t dns_gethostbyname(const char *hostname, ip_addr_t *addr,
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1467309:err_t dns_gethostbyname_addrtype(const char *hostname, ip_addr_t *addr,
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1475017:   ip_addr_t dns_addr;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1510978:} ip_addr_t;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1510980:extern const ip_addr_t ip_addr_any_type;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1511075:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1511077:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1511078:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1511095:extern const ip_addr_t ip6_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1656614:} ip_addr_t;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1656616:extern const ip_addr_t ip_addr_any_type;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1656711:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1656713:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1656714:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1656731:extern const ip_addr_t ip6_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1716707:} ip_addr_t;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1716709:extern const ip_addr_t ip_addr_any_type;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1716804:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1716806:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1716807:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1716824:extern const ip_addr_t ip6_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1731393:#define inet_addr_to_ipaddr_p(target_ipaddr_p,source_inaddr) ((target_ipaddr_p) = (ip_addr_t*)&((source_inaddr)->s_addr))
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1732032:typedef void (*dns_found_callback)(const char *name, const ip_addr_t *ipaddr, void *callback_arg);
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1732036:void dns_setserver(u8_t numdns, const ip_addr_t *dnsserver);
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1732037:ip_addr_t dns_getserver(u8_t numdns);
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1732038:err_t dns_gethostbyname(const char *hostname, ip_addr_t *addr,
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1732040:err_t dns_gethostbyname_addrtype(const char *hostname, ip_addr_t *addr,
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1812994:} ip_addr_t;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1812996:extern const ip_addr_t ip_addr_any_type;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1813091:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1813093:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1813094:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1813111:extern const ip_addr_t ip6_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1857739:} ip_addr_t;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1857741:extern const ip_addr_t ip_addr_any_type;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1857836:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1857838:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1857839:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/genhdr/qstr.i.last:1857856:extern const ip_addr_t ip6_addr_any;
+Binary file /home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/application.a matches
+Binary file /home/gauci/esp/pycom-micropython/esp32/build/WIPY/release/telnet/telnet.o matches
+/home/gauci/esp/pycom-micropython/extmod/modlwip.c:124:    ip_addr_t iplocal, ipremote;
+/home/gauci/esp/pycom-micropython/extmod/modlwip.c:274:STATIC void _lwip_udp_incoming(void *arg, struct udp_pcb *upcb, struct pbuf *p, ip_addr_t *addr, u16_t port) {
+/home/gauci/esp/pycom-micropython/extmod/modlwip.c:398:        ip_addr_t dest;
+/home/gauci/esp/pycom-micropython/extmod/modlwip.c:673:    ip_addr_t bind_addr;
+/home/gauci/esp/pycom-micropython/extmod/modlwip.c:795:    ip_addr_t dest;
+/home/gauci/esp/pycom-micropython/extmod/modlwip.c:1220:    volatile ip_addr_t ipaddr;
+/home/gauci/esp/pycom-micropython/extmod/modlwip.c:1224:STATIC void lwip_getaddrinfo_cb(const char *name, ip_addr_t *ipaddr, void *arg) {
+/home/gauci/esp/pycom-micropython/extmod/modlwip.c:1244:    err_t ret = dns_gethostbyname(host, (ip_addr_t*)&state.ipaddr, lwip_getaddrinfo_cb, &state);
+/home/gauci/esp/ip_addr_t.txt:1:/home/gauci/esp/pycom-esp-idf/components/lwip/core/raw.c:200:raw_bind(struct raw_pcb *pcb, const ip_addr_t *ipaddr)
+/home/gauci/esp/ip_addr_t.txt:2:/home/gauci/esp/pycom-esp-idf/components/lwip/core/raw.c:223:raw_connect(struct raw_pcb *pcb, const ip_addr_t *ipaddr)
+/home/gauci/esp/ip_addr_t.txt:3:/home/gauci/esp/pycom-esp-idf/components/lwip/core/raw.c:266:raw_sendto(struct raw_pcb *pcb, struct pbuf *p, const ip_addr_t *ipaddr)
+/home/gauci/esp/ip_addr_t.txt:4:/home/gauci/esp/pycom-esp-idf/components/lwip/core/raw.c:270:  const ip_addr_t *src_ip;
+/home/gauci/esp/ip_addr_t.txt:5:/home/gauci/esp/pycom-esp-idf/components/lwip/core/raw.c:273:  const ip_addr_t *dst_ip = ipaddr;
+/home/gauci/esp/ip_addr_t.txt:6:/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp.c:441:tcp_bind(struct tcp_pcb *pcb, const ip_addr_t *ipaddr, u16_t port)
+/home/gauci/esp/ip_addr_t.txt:7:/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp.c:728:tcp_connect(struct tcp_pcb *pcb, const ip_addr_t *ipaddr, u16_t port,
+/home/gauci/esp/ip_addr_t.txt:8:/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp.c:749:    const ip_addr_t *local_ip;
+/home/gauci/esp/ip_addr_t.txt:9:/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp.c:1851:tcp_eff_send_mss_impl(u16_t sendmss, const ip_addr_t *dest
+/home/gauci/esp/ip_addr_t.txt:10:/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp.c:1853:                     , const ip_addr_t *src
+/home/gauci/esp/ip_addr_t.txt:11:/home/gauci/esp/pycom-esp-idf/components/lwip/core/dns.c:254:  ip_addr_t ipaddr;
+/home/gauci/esp/ip_addr_t.txt:12:/home/gauci/esp/pycom-esp-idf/components/lwip/core/dns.c:313:static void dns_recv(void *s, struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *addr, u16_t port);
+/home/gauci/esp/ip_addr_t.txt:13:/home/gauci/esp/pycom-esp-idf/components/lwip/core/dns.c:315:static void dns_call_found(u8_t idx, ip_addr_t* addr);
+/home/gauci/esp/ip_addr_t.txt:14:/home/gauci/esp/pycom-esp-idf/components/lwip/core/dns.c:329:static ip_addr_t              dns_servers[DNS_MAX_SERVERS];
+/home/gauci/esp/ip_addr_t.txt:15:/home/gauci/esp/pycom-esp-idf/components/lwip/core/dns.c:374:  ip_addr_t dnsserver;
+/home/gauci/esp/ip_addr_t.txt:16:/home/gauci/esp/pycom-esp-idf/components/lwip/core/dns.c:415:dns_setserver(u8_t numdns, const ip_addr_t *dnsserver)
+/home/gauci/esp/ip_addr_t.txt:17:/home/gauci/esp/pycom-esp-idf/components/lwip/core/dns.c:433:ip_addr_t
+/home/gauci/esp/ip_addr_t.txt:18:/home/gauci/esp/pycom-esp-idf/components/lwip/core/dns.c:493:dns_lookup_local(const char *hostname, ip_addr_t *addr LWIP_DNS_ADDRTYPE_ARG(u8_t dns_addrtype))
+/home/gauci/esp/ip_addr_t.txt:19:/home/gauci/esp/pycom-esp-idf/components/lwip/core/dns.c:532:dns_local_removehost(const char *hostname, const ip_addr_t *addr)
+/home/gauci/esp/ip_addr_t.txt:20:/home/gauci/esp/pycom-esp-idf/components/lwip/core/dns.c:567:dns_local_addhost(const char *hostname, const ip_addr_t *addr)
+/home/gauci/esp/ip_addr_t.txt:21:/home/gauci/esp/pycom-esp-idf/components/lwip/core/dns.c:600: * @param addr the hostname's IP address, as u32_t (instead of ip_addr_t to
+/home/gauci/esp/ip_addr_t.txt:22:/home/gauci/esp/pycom-esp-idf/components/lwip/core/dns.c:606:dns_lookup(const char *name, ip_addr_t *addr LWIP_DNS_ADDRTYPE_ARG(u8_t dns_addrtype))
+/home/gauci/esp/ip_addr_t.txt:23:/home/gauci/esp/pycom-esp-idf/components/lwip/core/dns.c:876:dns_call_found(u8_t idx, ip_addr_t* addr)
+/home/gauci/esp/ip_addr_t.txt:24:/home/gauci/esp/pycom-esp-idf/components/lwip/core/dns.c:1057:dns_recv(void *arg, struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *addr, u16_t port)
+/home/gauci/esp/ip_addr_t.txt:25:/home/gauci/esp/pycom-esp-idf/components/lwip/core/dns.c:1406: * @param addr pointer to a ip_addr_t where to store the address if it is already
+/home/gauci/esp/ip_addr_t.txt:26:/home/gauci/esp/pycom-esp-idf/components/lwip/core/dns.c:1414:dns_gethostbyname(const char *hostname, ip_addr_t *addr, dns_found_callback found,
+/home/gauci/esp/ip_addr_t.txt:27:/home/gauci/esp/pycom-esp-idf/components/lwip/core/dns.c:1427:dns_gethostbyname_addrtype(const char *hostname, ip_addr_t *addr, dns_found_callback found,
+/home/gauci/esp/ip_addr_t.txt:28:/home/gauci/esp/pycom-esp-idf/components/lwip/core/ip.c:51:const ip_addr_t ip_addr_any_type = IPADDR_ANY_TYPE_INIT;
+/home/gauci/esp/ip_addr_t.txt:29:/home/gauci/esp/pycom-esp-idf/components/lwip/core/ip.c:61:ipaddr_aton(const char *cp, ip_addr_t *addr)
+/home/gauci/esp/ip_addr_t.txt:30:/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/dhcp.c:189:static void dhcp_recv(void *arg, struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *addr, u16_t port);
+/home/gauci/esp/ip_addr_t.txt:31:/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/dhcp.c:666:    ip_addr_t dns_addr;
+/home/gauci/esp/ip_addr_t.txt:32:/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/dhcp.c:1301:  ip_addr_t server_ip_addr;
+/home/gauci/esp/ip_addr_t.txt:33:/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/dhcp.c:1685:dhcp_recv(void *arg, struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *addr, u16_t port)
+/home/gauci/esp/ip_addr_t.txt:34:/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/ip4.c:462:  /* copy IP addresses to aligned ip_addr_t */
+/home/gauci/esp/ip_addr_t.txt:35:/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/ip4_addr.c:48:const ip_addr_t ip_addr_any = IPADDR4_INIT(IPADDR_ANY);
+/home/gauci/esp/ip_addr_t.txt:36:/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/ip4_addr.c:49:const ip_addr_t ip_addr_broadcast = IPADDR4_INIT(IPADDR_BROADCAST);
+/home/gauci/esp/ip_addr_t.txt:37:/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp_out.c:1202:    const ip_addr_t *local_ip = ip_netif_get_local_ip(netif, &pcb->remote_ip);
+/home/gauci/esp/ip_addr_t.txt:38:/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp_out.c:1295:  const ip_addr_t *local_ip, const ip_addr_t *remote_ip,
+/home/gauci/esp/ip_addr_t.txt:39:/home/gauci/esp/pycom-esp-idf/components/lwip/core/udp.c:524:  const ip_addr_t *dst_ip, u16_t dst_port)
+/home/gauci/esp/ip_addr_t.txt:40:/home/gauci/esp/pycom-esp-idf/components/lwip/core/udp.c:532:udp_sendto_chksum(struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *dst_ip,
+/home/gauci/esp/ip_addr_t.txt:41:/home/gauci/esp/pycom-esp-idf/components/lwip/core/udp.c:537:  const ip_addr_t *dst_ip_route = dst_ip;
+/home/gauci/esp/ip_addr_t.txt:42:/home/gauci/esp/pycom-esp-idf/components/lwip/core/udp.c:607:  const ip_addr_t *dst_ip, u16_t dst_port, struct netif *netif)
+/home/gauci/esp/ip_addr_t.txt:43:/home/gauci/esp/pycom-esp-idf/components/lwip/core/udp.c:615:udp_sendto_if_chksum(struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *dst_ip,
+/home/gauci/esp/ip_addr_t.txt:44:/home/gauci/esp/pycom-esp-idf/components/lwip/core/udp.c:620:  const ip_addr_t *src_ip;
+/home/gauci/esp/ip_addr_t.txt:45:/home/gauci/esp/pycom-esp-idf/components/lwip/core/udp.c:673:  const ip_addr_t *dst_ip, u16_t dst_port, struct netif *netif, const ip_addr_t *src_ip)
+/home/gauci/esp/ip_addr_t.txt:46:/home/gauci/esp/pycom-esp-idf/components/lwip/core/udp.c:681:udp_sendto_if_src_chksum(struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *dst_ip,
+/home/gauci/esp/ip_addr_t.txt:47:/home/gauci/esp/pycom-esp-idf/components/lwip/core/udp.c:683:                     u16_t chksum, const ip_addr_t *src_ip)
+/home/gauci/esp/ip_addr_t.txt:48:/home/gauci/esp/pycom-esp-idf/components/lwip/core/udp.c:892:udp_bind(struct udp_pcb *pcb, const ip_addr_t *ipaddr, u16_t port)
+/home/gauci/esp/ip_addr_t.txt:49:/home/gauci/esp/pycom-esp-idf/components/lwip/core/udp.c:992:udp_connect(struct udp_pcb *pcb, const ip_addr_t *ipaddr, u16_t port)
+/home/gauci/esp/ip_addr_t.txt:50:/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv6/ip6_addr.c:51:const ip_addr_t ip6_addr_any = IPADDR6_INIT(0ul, 0ul, 0ul, 0ul);
+/home/gauci/esp/ip_addr_t.txt:51:/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv6/ip6.c:204:const ip_addr_t *
+/home/gauci/esp/ip_addr_t.txt:52:/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv6/ip6.c:207:  const ip_addr_t *src = NULL;
+/home/gauci/esp/ip_addr_t.txt:53:/home/gauci/esp/pycom-esp-idf/components/lwip/core/inet_chksum.c:383:       const ip_addr_t *src, const ip_addr_t *dest)
+/home/gauci/esp/ip_addr_t.txt:54:/home/gauci/esp/pycom-esp-idf/components/lwip/core/inet_chksum.c:530:       u16_t chksum_len, const ip_addr_t *src, const ip_addr_t *dest)
+/home/gauci/esp/ip_addr_t.txt:55:/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:167:  ip_addr_t addr;
+/home/gauci/esp/ip_addr_t.txt:56:/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:192:static ip_addr_t sntp_last_server_address;
+/home/gauci/esp/ip_addr_t.txt:57:/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:331:sntp_recv(void *arg, struct udp_pcb* pcb, struct pbuf *p, const ip_addr_t *addr, u16_t port)
+/home/gauci/esp/ip_addr_t.txt:58:/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:432:sntp_send_request(const ip_addr_t *server_addr)
+/home/gauci/esp/ip_addr_t.txt:59:/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:464:sntp_dns_found(const char* hostname, const ip_addr_t *ipaddr, void *arg)
+/home/gauci/esp/ip_addr_t.txt:60:/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:489:  ip_addr_t sntp_server_address;
+/home/gauci/esp/ip_addr_t.txt:61:/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:626:sntp_setserver(u8_t idx, const ip_addr_t *server)
+/home/gauci/esp/ip_addr_t.txt:62:/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:656:      ip_addr_t addr;
+/home/gauci/esp/ip_addr_t.txt:63:/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:674:ip_addr_t
+/home/gauci/esp/ip_addr_t.txt:64:/home/gauci/esp/pycom-esp-idf/components/lwip/apps/dhcpserver.c:447:    ip_addr_t ip_temp = IPADDR4_INIT(0x0);
+/home/gauci/esp/ip_addr_t.txt:65:/home/gauci/esp/pycom-esp-idf/components/lwip/apps/dhcpserver.c:520:    ip_addr_t ip_temp = IPADDR4_INIT(0x0);
+/home/gauci/esp/ip_addr_t.txt:66:/home/gauci/esp/pycom-esp-idf/components/lwip/apps/dhcpserver.c:594:    ip_addr_t ip_temp = IPADDR4_INIT(0x0);
+/home/gauci/esp/ip_addr_t.txt:67:/home/gauci/esp/pycom-esp-idf/components/lwip/apps/dhcpserver.c:860:                        const ip_addr_t *addr,
+/home/gauci/esp/ip_addr_t.txt:68:/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ppp.c:1081:  ip_addr_t ns;
+/home/gauci/esp/ip_addr_t.txt:69:/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ppp.c:1096:  ip_addr_t nsa, nsb;
+/home/gauci/esp/ip_addr_t.txt:70:/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/pppol2tp.c:85:static void pppol2tp_input(void *arg, struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *addr, u16_t port);
+/home/gauci/esp/ip_addr_t.txt:71:/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/pppol2tp.c:116:       struct netif *netif, ip_addr_t *ipaddr, u16_t port,
+/home/gauci/esp/ip_addr_t.txt:72:/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/pppol2tp.c:348:static void pppol2tp_input(void *arg, struct udp_pcb *pcb, struct pbuf *p, const ip_addr_t *addr, u16_t port) {
+/home/gauci/esp/ip_addr_t.txt:73:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/netif.h:195:  ip_addr_t ip_addr;
+/home/gauci/esp/ip_addr_t.txt:74:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/netif.h:196:  ip_addr_t netmask;
+/home/gauci/esp/ip_addr_t.txt:75:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/netif.h:197:  ip_addr_t gw;
+/home/gauci/esp/ip_addr_t.txt:76:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/netif.h:201:  ip_addr_t ip6_addr[LWIP_IPV6_NUM_ADDRESSES];
+/home/gauci/esp/ip_addr_t.txt:77:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/netif.h:377:#define netif_ip_addr4(netif)    ((const ip_addr_t*)&((netif)->ip_addr))
+/home/gauci/esp/ip_addr_t.txt:78:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/netif.h:378:#define netif_ip_gw4(netif)      ((const ip_addr_t*)&((netif)->gw))
+/home/gauci/esp/ip_addr_t.txt:79:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/netif.h:426:#define netif_ip_addr6(netif, i)  ((const ip_addr_t*)(&((netif)->ip6_addr[i])))
+/home/gauci/esp/ip_addr_t.txt:80:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/tcp.h:377:err_t            tcp_bind    (struct tcp_pcb *pcb, const ip_addr_t *ipaddr,
+/home/gauci/esp/ip_addr_t.txt:81:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/tcp.h:379:err_t            tcp_connect (struct tcp_pcb *pcb, const ip_addr_t *ipaddr,
+/home/gauci/esp/ip_addr_t.txt:82:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/udp.h:89:    const ip_addr_t *addr, u16_t port);
+/home/gauci/esp/ip_addr_t.txt:83:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/udp.h:105:  ip_addr_t multicast_ip;
+/home/gauci/esp/ip_addr_t.txt:84:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/udp.h:128:err_t            udp_bind       (struct udp_pcb *pcb, const ip_addr_t *ipaddr,
+/home/gauci/esp/ip_addr_t.txt:85:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/udp.h:130:err_t            udp_connect    (struct udp_pcb *pcb, const ip_addr_t *ipaddr,
+/home/gauci/esp/ip_addr_t.txt:86:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/udp.h:136:                                 const ip_addr_t *dst_ip, u16_t dst_port,
+/home/gauci/esp/ip_addr_t.txt:87:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/udp.h:139:                                 const ip_addr_t *dst_ip, u16_t dst_port,
+/home/gauci/esp/ip_addr_t.txt:88:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/udp.h:140:                                 struct netif *netif, const ip_addr_t *src_ip);
+/home/gauci/esp/ip_addr_t.txt:89:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/udp.h:142:                                 const ip_addr_t *dst_ip, u16_t dst_port);
+/home/gauci/esp/ip_addr_t.txt:90:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/udp.h:147:                                 const ip_addr_t *dst_ip, u16_t dst_port,
+/home/gauci/esp/ip_addr_t.txt:91:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/udp.h:151:                                 const ip_addr_t *dst_ip, u16_t dst_port,
+/home/gauci/esp/ip_addr_t.txt:92:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/udp.h:156:                                 const ip_addr_t *dst_ip, u16_t dst_port, struct netif *netif,
+/home/gauci/esp/ip_addr_t.txt:93:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/udp.h:157:                                 u8_t have_chksum, u16_t chksum, const ip_addr_t *src_ip);
+/home/gauci/esp/ip_addr_t.txt:94:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/opt.h:777: * void dhcp_set_ntp_servers(u8_t num_ntp_servers, ip_addr_t* ntp_server_addrs);
+/home/gauci/esp/ip_addr_t.txt:95:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/opt.h:889: * DNS_SERVER_ADDRESS(ipaddr), where 'ipaddr' is an 'ip_addr_t*'
+/home/gauci/esp/ip_addr_t.txt:96:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/inet_chksum.h:97:       const ip_addr_t *src, const ip_addr_t *dest);
+/home/gauci/esp/ip_addr_t.txt:97:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/inet_chksum.h:99:       u16_t chksum_len, const ip_addr_t *src, const ip_addr_t *dest);
+/home/gauci/esp/ip_addr_t.txt:98:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/dns.h:76:  ip_addr_t addr;
+/home/gauci/esp/ip_addr_t.txt:99:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/dns.h:90: * @param ipaddr pointer to an ip_addr_t containing the IP address of the hostname,
+/home/gauci/esp/ip_addr_t.txt:100:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/dns.h:94:typedef void (*dns_found_callback)(const char *name, const ip_addr_t *ipaddr, void *callback_arg);
+/home/gauci/esp/ip_addr_t.txt:101:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/dns.h:98:void           dns_setserver(u8_t numdns, const ip_addr_t *dnsserver);
+/home/gauci/esp/ip_addr_t.txt:102:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/dns.h:99:ip_addr_t      dns_getserver(u8_t numdns);
+/home/gauci/esp/ip_addr_t.txt:103:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/dns.h:100:err_t          dns_gethostbyname(const char *hostname, ip_addr_t *addr,
+/home/gauci/esp/ip_addr_t.txt:104:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/dns.h:102:err_t          dns_gethostbyname_addrtype(const char *hostname, ip_addr_t *addr,
+/home/gauci/esp/ip_addr_t.txt:105:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/dns.h:108:int            dns_local_removehost(const char *hostname, const ip_addr_t *addr);
+/home/gauci/esp/ip_addr_t.txt:106:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/dns.h:109:err_t          dns_local_addhost(const char *hostname, const ip_addr_t *addr);
+/home/gauci/esp/ip_addr_t.txt:107:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/netbuf.h:56:  ip_addr_t addr;
+/home/gauci/esp/ip_addr_t.txt:108:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/netbuf.h:64:  ip_addr_t toaddr;
+/home/gauci/esp/ip_addr_t.txt:109:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/pppapi.h:82:      ip_addr_t *ipaddr;
+/home/gauci/esp/ip_addr_t.txt:110:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/pppapi.h:130:ppp_pcb *pppapi_pppol2tp_create(struct netif *pppif, struct netif *netif, ip_addr_t *ipaddr, u16_t port,
+/home/gauci/esp/ip_addr_t.txt:111:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/dhcp.h:85:  ip_addr_t server_ip_addr; /* dhcp server address that offered this lease (ip_addr_t because passed to UDP) */
+/home/gauci/esp/ip_addr_t.txt:112:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/dhcp.h:94:  ip_addr_t offered_si_addr;
+/home/gauci/esp/ip_addr_t.txt:113:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip_addr.h:45:/** These are the values for ip_addr_t.type */
+/home/gauci/esp/ip_addr_t.txt:114:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip_addr.h:60:} ip_addr_t;
+/home/gauci/esp/ip_addr_t.txt:115:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip_addr.h:62:extern const ip_addr_t ip_addr_any_type;
+/home/gauci/esp/ip_addr_t.txt:116:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip_addr.h:157:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/ip_addr_t.txt:117:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip_addr.h:166:typedef ip4_addr_t ip_addr_t;
+/home/gauci/esp/ip_addr_t.txt:118:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip_addr.h:205:typedef ip6_addr_t ip_addr_t;
+/home/gauci/esp/ip_addr_t.txt:119:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip_addr.h:245:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/ip_addr_t.txt:120:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip_addr.h:246:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/ip_addr_t.txt:121:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip_addr.h:248:/** IP_ADDR_ can be used as a fixed/const ip_addr_t
+/home/gauci/esp/ip_addr_t.txt:122:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip_addr.h:263:extern const ip_addr_t ip6_addr_any;
+/home/gauci/esp/ip_addr_t.txt:123:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip_addr.h:265:/** IP6_ADDR_ANY can be used as a fixed ip_addr_t
+/home/gauci/esp/ip_addr_t.txt:124:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/inet.h:137:/* ATTENTION: the next define only works because both s_addr and ip_addr_t are an u32_t effectively! */
+/home/gauci/esp/ip_addr_t.txt:125:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/inet.h:138:#define inet_addr_to_ipaddr_p(target_ipaddr_p, source_inaddr)   ((target_ipaddr_p) = (ip_addr_t*)&((source_inaddr)->s_addr))
+/home/gauci/esp/ip_addr_t.txt:126:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip.h:84:  ip_addr_t local_ip; \
+/home/gauci/esp/ip_addr_t.txt:127:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip.h:85:  ip_addr_t remote_ip; \
+/home/gauci/esp/ip_addr_t.txt:128:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip.h:128:  ip_addr_t current_iphdr_src;
+/home/gauci/esp/ip_addr_t.txt:129:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip.h:130:  ip_addr_t current_iphdr_dest;
+/home/gauci/esp/ip_addr_t.txt:130:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/raw.h:62:    const ip_addr_t *addr);
+/home/gauci/esp/ip_addr_t.txt:131:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/raw.h:88:err_t            raw_bind       (struct raw_pcb *pcb, const ip_addr_t *ipaddr);
+/home/gauci/esp/ip_addr_t.txt:132:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/raw.h:89:err_t            raw_connect    (struct raw_pcb *pcb, const ip_addr_t *ipaddr);
+/home/gauci/esp/ip_addr_t.txt:133:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/raw.h:91:err_t            raw_sendto     (struct raw_pcb *pcb, struct pbuf *p, const ip_addr_t *ipaddr);
+/home/gauci/esp/ip_addr_t.txt:134:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/api.h:264:err_t   netconn_getaddr(struct netconn *conn, ip_addr_t *addr,
+/home/gauci/esp/ip_addr_t.txt:135:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/api.h:269:err_t   netconn_bind(struct netconn *conn, const ip_addr_t *addr, u16_t port);
+/home/gauci/esp/ip_addr_t.txt:136:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/api.h:270:err_t   netconn_connect(struct netconn *conn, const ip_addr_t *addr, u16_t port);
+/home/gauci/esp/ip_addr_t.txt:137:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/api.h:279:                             const ip_addr_t *addr, u16_t port);
+/home/gauci/esp/ip_addr_t.txt:138:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/api.h:289:err_t   netconn_join_leave_group(struct netconn *conn, const ip_addr_t *multiaddr,
+/home/gauci/esp/ip_addr_t.txt:139:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/api.h:290:                             const ip_addr_t *netif_addr, enum netconn_igmp join_or_leave);
+/home/gauci/esp/ip_addr_t.txt:140:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/api.h:294:err_t   netconn_gethostbyname_addrtype(const char *name, ip_addr_t *addr, u8_t dns_addrtype);
+/home/gauci/esp/ip_addr_t.txt:141:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/api.h:297:err_t   netconn_gethostbyname(const char *name, ip_addr_t *addr);
+/home/gauci/esp/ip_addr_t.txt:142:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip6.h:165:const ip_addr_t *ip6_select_source_address(struct netif *netif, const ip6_addr_t * dest);
+/home/gauci/esp/ip_addr_t.txt:143:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/priv/tcp_priv.h:491:       const ip_addr_t *local_ip, const ip_addr_t *remote_ip,
+/home/gauci/esp/ip_addr_t.txt:144:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/priv/tcp_priv.h:501:u16_t tcp_eff_send_mss_impl(u16_t sendmss, const ip_addr_t *dest
+/home/gauci/esp/ip_addr_t.txt:145:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/priv/tcp_priv.h:503:                           , const ip_addr_t *src
+/home/gauci/esp/ip_addr_t.txt:146:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/priv/api_msg.h:94:      API_MSG_M_DEF_C(ip_addr_t, ipaddr);
+/home/gauci/esp/ip_addr_t.txt:147:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/priv/api_msg.h:99:      ip_addr_t API_MSG_M_DEF(ipaddr);
+/home/gauci/esp/ip_addr_t.txt:148:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/priv/api_msg.h:130:      API_MSG_M_DEF_C(ip_addr_t, multiaddr);
+/home/gauci/esp/ip_addr_t.txt:149:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/priv/api_msg.h:131:      API_MSG_M_DEF_C(ip_addr_t, netif_addr);
+/home/gauci/esp/ip_addr_t.txt:150:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/priv/api_msg.h:176:  ip_addr_t API_MSG_M_DEF(addr);
+/home/gauci/esp/ip_addr_t.txt:151:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/apps/sntp/sntp.h:53:void sntp_setserver(u8_t idx, const ip_addr_t *addr);
+/home/gauci/esp/ip_addr_t.txt:152:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/apps/sntp/sntp.h:54:ip_addr_t sntp_getserver(u8_t idx);
+/home/gauci/esp/ip_addr_t.txt:153:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/netif/ppp/pppol2tp.h:169:  ip_addr_t remote_ip;         /* LNS IP Address */
+/home/gauci/esp/ip_addr_t.txt:154:/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/netif/ppp/pppol2tp.h:196:       struct netif *netif, ip_addr_t *ipaddr, u16_t port,
+/home/gauci/esp/ip_addr_t.txt:155:/home/gauci/esp/pycom-esp-idf/components/lwip/api/pppapi.c:223:pppapi_pppol2tp_create(struct netif *pppif, struct netif *netif, ip_addr_t *ipaddr, u16_t port,
+/home/gauci/esp/ip_addr_t.txt:156:/home/gauci/esp/pycom-esp-idf/components/lwip/api/api_msg.c:90:    const ip_addr_t *addr)
+/home/gauci/esp/ip_addr_t.txt:157:/home/gauci/esp/pycom-esp-idf/components/lwip/api/api_msg.c:157:   const ip_addr_t *addr, u16_t port)
+/home/gauci/esp/ip_addr_t.txt:158:/home/gauci/esp/pycom-esp-idf/components/lwip/api/api_msg.c:1099:      const ip_addr_t *ipaddr = API_EXPR_REF(msg->msg.bc.ipaddr);
+/home/gauci/esp/ip_addr_t.txt:159:/home/gauci/esp/pycom-esp-idf/components/lwip/api/api_msg.c:1872:lwip_netconn_do_dns_found(const char *name, const ip_addr_t *ipaddr, void *arg)
+/home/gauci/esp/ip_addr_t.txt:160:/home/gauci/esp/pycom-esp-idf/components/lwip/api/sockets.c:102:static void sockaddr_to_ipaddr_port(const struct sockaddr* sockaddr, ip_addr_t* ipaddr, u16_t* port);
+/home/gauci/esp/ip_addr_t.txt:161:/home/gauci/esp/pycom-esp-idf/components/lwip/api/sockets.c:461:sockaddr_to_ipaddr_port(const struct sockaddr* sockaddr, ip_addr_t* ipaddr, u16_t* port)
+/home/gauci/esp/ip_addr_t.txt:162:/home/gauci/esp/pycom-esp-idf/components/lwip/api/sockets.c:703:  ip_addr_t naddr;
+/home/gauci/esp/ip_addr_t.txt:163:/home/gauci/esp/pycom-esp-idf/components/lwip/api/sockets.c:793:  ip_addr_t local_addr;
+/home/gauci/esp/ip_addr_t.txt:164:/home/gauci/esp/pycom-esp-idf/components/lwip/api/sockets.c:897:    ip_addr_t remote_addr;
+/home/gauci/esp/ip_addr_t.txt:165:/home/gauci/esp/pycom-esp-idf/components/lwip/api/sockets.c:1082:        ip_addr_t tmpaddr;
+/home/gauci/esp/ip_addr_t.txt:166:/home/gauci/esp/pycom-esp-idf/components/lwip/api/sockets.c:1083:        ip_addr_t *fromaddr;
+/home/gauci/esp/ip_addr_t.txt:167:/home/gauci/esp/pycom-esp-idf/components/lwip/api/sockets.c:1989:  ip_addr_t naddr;
+/home/gauci/esp/ip_addr_t.txt:168:/home/gauci/esp/pycom-esp-idf/components/lwip/api/sockets.c:3071:      ip_addr_t multi_addr, if_addr;
+/home/gauci/esp/ip_addr_t.txt:169:/home/gauci/esp/pycom-esp-idf/components/lwip/api/api_lib.c:196:netconn_getaddr(struct netconn *conn, ip_addr_t *addr, u16_t *port, u8_t local)
+/home/gauci/esp/ip_addr_t.txt:170:/home/gauci/esp/pycom-esp-idf/components/lwip/api/api_lib.c:233:netconn_bind(struct netconn *conn, const ip_addr_t *addr, u16_t port)
+/home/gauci/esp/ip_addr_t.txt:171:/home/gauci/esp/pycom-esp-idf/components/lwip/api/api_lib.c:264:netconn_connect(struct netconn *conn, const ip_addr_t *addr, u16_t port)
+/home/gauci/esp/ip_addr_t.txt:172:/home/gauci/esp/pycom-esp-idf/components/lwip/api/api_lib.c:645:netconn_sendto(struct netconn *conn, struct netbuf *buf, const ip_addr_t *addr, u16_t port)
+/home/gauci/esp/ip_addr_t.txt:173:/home/gauci/esp/pycom-esp-idf/components/lwip/api/api_lib.c:826:                         const ip_addr_t *multiaddr,
+/home/gauci/esp/ip_addr_t.txt:174:/home/gauci/esp/pycom-esp-idf/components/lwip/api/api_lib.c:827:                         const ip_addr_t *netif_addr,
+/home/gauci/esp/ip_addr_t.txt:175:/home/gauci/esp/pycom-esp-idf/components/lwip/api/api_lib.c:861: * @param addr a preallocated ip_addr_t where to store the resolved IP address
+/home/gauci/esp/ip_addr_t.txt:176:/home/gauci/esp/pycom-esp-idf/components/lwip/api/api_lib.c:869:netconn_gethostbyname_addrtype(const char *name, ip_addr_t *addr, u8_t dns_addrtype)
+/home/gauci/esp/ip_addr_t.txt:177:/home/gauci/esp/pycom-esp-idf/components/lwip/api/api_lib.c:872:netconn_gethostbyname(const char *name, ip_addr_t *addr)
+/home/gauci/esp/ip_addr_t.txt:178:/home/gauci/esp/pycom-esp-idf/components/lwip/api/netdb.c:52:  ip_addr_t *addr_list[2];
+/home/gauci/esp/ip_addr_t.txt:179:/home/gauci/esp/pycom-esp-idf/components/lwip/api/netdb.c:53:  ip_addr_t addr;
+/home/gauci/esp/ip_addr_t.txt:180:/home/gauci/esp/pycom-esp-idf/components/lwip/api/netdb.c:88:  ip_addr_t addr;
+/home/gauci/esp/ip_addr_t.txt:181:/home/gauci/esp/pycom-esp-idf/components/lwip/api/netdb.c:93:  HOSTENT_STORAGE ip_addr_t s_hostent_addr;
+/home/gauci/esp/ip_addr_t.txt:182:/home/gauci/esp/pycom-esp-idf/components/lwip/api/netdb.c:94:  HOSTENT_STORAGE ip_addr_t *s_phostent_addr[2];
+/home/gauci/esp/ip_addr_t.txt:183:/home/gauci/esp/pycom-esp-idf/components/lwip/api/netdb.c:115:  s_hostent.h_length = sizeof(ip_addr_t);
+/home/gauci/esp/ip_addr_t.txt:184:/home/gauci/esp/pycom-esp-idf/components/lwip/api/netdb.c:130:      LWIP_DEBUGF(DNS_DEBUG, ("hostent.h_addr_list[%i]-> == %s\n", idx, ipaddr_ntoa((ip_addr_t*)s_hostent.h_addr_list[idx])));
+/home/gauci/esp/ip_addr_t.txt:185:/home/gauci/esp/pycom-esp-idf/components/lwip/api/netdb.c:216:  ret->h_length = sizeof(ip_addr_t);
+/home/gauci/esp/ip_addr_t.txt:186:/home/gauci/esp/pycom-esp-idf/components/lwip/api/netdb.c:271:  ip_addr_t addr;
+/home/gauci/esp/ip_addr_t.txt:187:/home/gauci/esp/pycom-esp-idf/components/lwip/CHANGELOG:39:    ip_addr_t (so they can be used without conversion/temporary storage)
+/home/gauci/esp/ip_addr_t.txt:188:/home/gauci/esp/pycom-esp-idf/components/lwip/CHANGELOG:76:    ip_addr_t to ip4_addr_t, renamed ipX_addr_t to ip_addr_t and added IP
+/home/gauci/esp/ip_addr_t.txt:189:/home/gauci/esp/pycom-esp-idf/components/lwip/CHANGELOG:77:    version; ip_addr_t is used for all generic IP addresses for the API,
+/home/gauci/esp/ip_addr_t.txt:190:/home/gauci/esp/pycom-esp-idf/components/lwip/CHANGELOG:1031:  * many many files: bug #27352: removed packing from ip_addr_t, the packed
+/home/gauci/esp/ip_addr_t.txt:191:/home/gauci/esp/pycom-esp-idf/components/lwip/CHANGELOG:1173:  * nearly every file: Replaced struct ip_addr by typedef ip_addr_t to
+/home/gauci/esp/ip_addr_t.txt:196:/home/gauci/esp/pycom-micropython/lib/lwip/UPGRADING:13:  * Replaced struct ip_addr by typedef ip_addr_t (struct ip_addr is kept for
+/home/gauci/esp/ip_addr_t.txt:197:/home/gauci/esp/pycom-micropython/lib/lwip/UPGRADING:138:  * Removed packing from ip_addr_t, the packed version is now only used in protocol headers
+/home/gauci/esp/ip_addr_t.txt:198:/home/gauci/esp/pycom-micropython/lib/lwip/doc/rawapi.txt:110:- err_t tcp_bind(struct tcp_pcb *pcb, ip_addr_t *ipaddr,
+/home/gauci/esp/ip_addr_t.txt:199:/home/gauci/esp/pycom-micropython/lib/lwip/doc/rawapi.txt:160:- err_t tcp_connect(struct tcp_pcb *pcb, ip_addr_t *ipaddr,
+/home/gauci/esp/ip_addr_t.txt:200:/home/gauci/esp/pycom-micropython/lib/lwip/doc/rawapi.txt:331:- err_t udp_bind(struct udp_pcb *pcb, ip_addr_t *ipaddr,
+/home/gauci/esp/ip_addr_t.txt:201:/home/gauci/esp/pycom-micropython/lib/lwip/doc/rawapi.txt:338:- err_t udp_connect(struct udp_pcb *pcb, ip_addr_t *ipaddr,
+/home/gauci/esp/ip_addr_t.txt:202:/home/gauci/esp/pycom-micropython/lib/lwip/doc/rawapi.txt:356:                                         ip_addr_t *addr,
+/home/gauci/esp/ip_addr_t.txt:203:/home/gauci/esp/pycom-micropython/lib/lwip/doc/rawapi.txt:417:- netif_add(struct netif *netif, ip_addr_t *ipaddr,
+/home/gauci/esp/ip_addr_t.txt:204:/home/gauci/esp/pycom-micropython/lib/lwip/doc/rawapi.txt:418:            ip_addr_t *netmask, ip_addr_t *gw,
+/home/gauci/esp/ip_addr_t.txt:205:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/raw.c:142:raw_bind(struct raw_pcb *pcb, ip_addr_t *ipaddr)
+/home/gauci/esp/ip_addr_t.txt:206:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/raw.c:162:raw_connect(struct raw_pcb *pcb, ip_addr_t *ipaddr)
+/home/gauci/esp/ip_addr_t.txt:207:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/raw.c:203:raw_sendto(struct raw_pcb *pcb, struct pbuf *p, ip_addr_t *ipaddr)
+/home/gauci/esp/ip_addr_t.txt:208:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/raw.c:207:  ip_addr_t *src_ip;
+/home/gauci/esp/ip_addr_t.txt:209:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/dhcp.c:160:static void dhcp_recv(void *arg, struct udp_pcb *pcb, struct pbuf *p, ip_addr_t *addr, u16_t port);
+/home/gauci/esp/ip_addr_t.txt:210:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/dhcp.c:572:    ip_addr_t dns_addr;
+/home/gauci/esp/ip_addr_t.txt:211:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/dhcp.c:803:void dhcp_arp_reply(struct netif *netif, ip_addr_t *addr)
+/home/gauci/esp/ip_addr_t.txt:212:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/dhcp.c:931:  ip_addr_t sn_mask, gw_addr;
+/home/gauci/esp/ip_addr_t.txt:213:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/dhcp.c:1537:dhcp_recv(void *arg, struct udp_pcb *pcb, struct pbuf *p, ip_addr_t *addr, u16_t port)
+/home/gauci/esp/ip_addr_t.txt:214:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/msg_in.c:61:static void snmp_recv(void *arg, struct udp_pcb *pcb, struct pbuf *p, ip_addr_t *addr, u16_t port);
+/home/gauci/esp/ip_addr_t.txt:215:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/msg_in.c:822:snmp_recv(void *arg, struct udp_pcb *pcb, struct pbuf *p, ip_addr_t *addr, u16_t port)
+/home/gauci/esp/ip_addr_t.txt:216:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib_structs.c:136:snmp_oidtoip(s32_t *ident, ip_addr_t *ip)
+/home/gauci/esp/ip_addr_t.txt:217:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib_structs.c:147:snmp_iptooid(ip_addr_t *ip, s32_t *ident)
+/home/gauci/esp/ip_addr_t.txt:218:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/msg_out.c:58:  ip_addr_t dip;
+/home/gauci/esp/ip_addr_t.txt:219:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/msg_out.c:95:snmp_trap_dst_ip_set(u8_t dst_idx, ip_addr_t *dst)
+/home/gauci/esp/ip_addr_t.txt:220:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/msg_out.c:217:  ip_addr_t dst_ip;
+/home/gauci/esp/ip_addr_t.txt:221:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib2.c:1089:void snmp_insert_arpidx_tree(struct netif *ni, ip_addr_t *ip)
+/home/gauci/esp/ip_addr_t.txt:222:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib2.c:1161:void snmp_delete_arpidx_tree(struct netif *ni, ip_addr_t *ip)
+/home/gauci/esp/ip_addr_t.txt:223:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib2.c:1442:  ip_addr_t dst;
+/home/gauci/esp/ip_addr_t.txt:224:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib2.c:1519:  ip_addr_t dst;
+/home/gauci/esp/ip_addr_t.txt:225:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib2.c:2726:  ip_addr_t* ipaddr_ret;
+/home/gauci/esp/ip_addr_t.txt:226:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib2.c:2728:  ip_addr_t ip;
+/home/gauci/esp/ip_addr_t.txt:227:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib2.c:2759:          ip_addr_t *dst = (ip_addr_t*)value;
+/home/gauci/esp/ip_addr_t.txt:228:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib2.c:3074:  ip_addr_t ip;
+/home/gauci/esp/ip_addr_t.txt:229:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib2.c:3094:          ip_addr_t *dst = (ip_addr_t*)value;
+/home/gauci/esp/ip_addr_t.txt:230:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib2.c:3106:          ip_addr_t *dst = (ip_addr_t*)value;
+/home/gauci/esp/ip_addr_t.txt:231:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib2.c:3214:  ip_addr_t dest;
+/home/gauci/esp/ip_addr_t.txt:232:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib2.c:3244:          ip_addr_t *dst = (ip_addr_t*)value;
+/home/gauci/esp/ip_addr_t.txt:233:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib2.c:3293:          ip_addr_t *dst = (ip_addr_t*)value;
+/home/gauci/esp/ip_addr_t.txt:234:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib2.c:3340:          ip_addr_t *dst = (ip_addr_t*)value;
+/home/gauci/esp/ip_addr_t.txt:235:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib2.c:3417:  ip_addr_t* ipaddr_ret;
+/home/gauci/esp/ip_addr_t.txt:236:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib2.c:3419:  ip_addr_t ip;
+/home/gauci/esp/ip_addr_t.txt:237:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib2.c:3450:          ip_addr_t *dst = (ip_addr_t*)value;
+/home/gauci/esp/ip_addr_t.txt:238:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib2.c:3775:  ip_addr_t lip, rip;
+/home/gauci/esp/ip_addr_t.txt:239:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib2.c:3884:  ip_addr_t ip;
+/home/gauci/esp/ip_addr_t.txt:240:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/snmp/mib2.c:3908:          ip_addr_t *dst = (ip_addr_t*)value;
+/home/gauci/esp/ip_addr_t.txt:241:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/tcp.c:433:tcp_bind(struct tcp_pcb *pcb, ip_addr_t *ipaddr, u16_t port)
+/home/gauci/esp/ip_addr_t.txt:242:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/tcp.c:684:tcp_connect(struct tcp_pcb *pcb, ip_addr_t *ipaddr, u16_t port,
+/home/gauci/esp/ip_addr_t.txt:243:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/tcp.c:1586:tcp_eff_send_mss(u16_t sendmss, ip_addr_t *addr)
+/home/gauci/esp/ip_addr_t.txt:244:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/dns.c:177:  ip_addr_t ipaddr;
+/home/gauci/esp/ip_addr_t.txt:245:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/dns.c:211:static void dns_recv(void *s, struct udp_pcb *pcb, struct pbuf *p, ip_addr_t *addr, u16_t port);
+/home/gauci/esp/ip_addr_t.txt:246:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/dns.c:222:static ip_addr_t              dns_servers[DNS_MAX_SERVERS];
+/home/gauci/esp/ip_addr_t.txt:247:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/dns.c:234:  ip_addr_t dnsserver;
+/home/gauci/esp/ip_addr_t.txt:248:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/dns.c:273:dns_setserver(u8_t numdns, ip_addr_t *dnsserver)
+/home/gauci/esp/ip_addr_t.txt:249:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/dns.c:288:ip_addr_t
+/home/gauci/esp/ip_addr_t.txt:250:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/dns.c:379:dns_local_removehost(const char *hostname, const ip_addr_t *addr)
+/home/gauci/esp/ip_addr_t.txt:251:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/dns.c:414:dns_local_addhost(const char *hostname, const ip_addr_t *addr)
+/home/gauci/esp/ip_addr_t.txt:252:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/dns.c:445: * @return the hostname's IP address, as u32_t (instead of ip_addr_t to
+/home/gauci/esp/ip_addr_t.txt:253:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/dns.c:733:dns_recv(void *arg, struct udp_pcb *pcb, struct pbuf *p, ip_addr_t *addr, u16_t port)
+/home/gauci/esp/ip_addr_t.txt:254:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/dns.c:804:             (ans.len == PP_HTONS(sizeof(ip_addr_t))) ) {
+/home/gauci/esp/ip_addr_t.txt:255:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/dns.c:811:            SMEMCPY(&(pEntry->ipaddr), (pHostname+SIZEOF_DNS_ANSWER), sizeof(ip_addr_t));
+/home/gauci/esp/ip_addr_t.txt:256:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/dns.c:928: * @param addr pointer to a ip_addr_t where to store the address if it is already
+/home/gauci/esp/ip_addr_t.txt:257:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/dns.c:936:dns_gethostbyname(const char *hostname, ip_addr_t *addr, dns_found_callback found,
+/home/gauci/esp/ip_addr_t.txt:258:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/netif.c:109:  ip_addr_t loop_ipaddr, loop_netmask, loop_gw;
+/home/gauci/esp/ip_addr_t.txt:259:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/netif.c:139:netif_add(struct netif *netif, ip_addr_t *ipaddr, ip_addr_t *netmask,
+/home/gauci/esp/ip_addr_t.txt:260:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/netif.c:140:  ip_addr_t *gw, void *state, netif_init_fn init, netif_input_fn input)
+/home/gauci/esp/ip_addr_t.txt:261:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/netif.c:221:netif_set_addr(struct netif *netif, ip_addr_t *ipaddr, ip_addr_t *netmask,
+/home/gauci/esp/ip_addr_t.txt:262:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/netif.c:222:    ip_addr_t *gw)
+/home/gauci/esp/ip_addr_t.txt:263:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/netif.c:323:netif_set_ipaddr(struct netif *netif, ip_addr_t *ipaddr)
+/home/gauci/esp/ip_addr_t.txt:264:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/netif.c:388:netif_set_gw(struct netif *netif, ip_addr_t *gw)
+/home/gauci/esp/ip_addr_t.txt:265:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/netif.c:409:netif_set_netmask(struct netif *netif, ip_addr_t *netmask)
+/home/gauci/esp/ip_addr_t.txt:266:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/netif.c:611:       ip_addr_t *ipaddr)
+/home/gauci/esp/ip_addr_t.txt:267:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/igmp.c:138:static struct igmp_group *igmp_lookup_group(struct netif *ifp, ip_addr_t *addr);
+/home/gauci/esp/ip_addr_t.txt:268:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/igmp.c:143:static err_t  igmp_ip_output_if(struct pbuf *p, ip_addr_t *src, ip_addr_t *dest, struct netif *netif);
+/home/gauci/esp/ip_addr_t.txt:269:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/igmp.c:148:static ip_addr_t     allsystems;
+/home/gauci/esp/ip_addr_t.txt:270:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/igmp.c:149:static ip_addr_t     allrouters;
+/home/gauci/esp/ip_addr_t.txt:271:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/igmp.c:290:igmp_lookfor_group(struct netif *ifp, ip_addr_t *addr)
+/home/gauci/esp/ip_addr_t.txt:272:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/igmp.c:316:igmp_lookup_group(struct netif *ifp, ip_addr_t *addr)
+/home/gauci/esp/ip_addr_t.txt:273:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/igmp.c:389:igmp_input(struct pbuf *p, struct netif *inp, ip_addr_t *dest)
+/home/gauci/esp/ip_addr_t.txt:274:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/igmp.c:463:           ip_addr_t groupaddr;
+/home/gauci/esp/ip_addr_t.txt:275:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/igmp.c:515:igmp_joingroup(ip_addr_t *ifaddr, ip_addr_t *groupaddr)
+/home/gauci/esp/ip_addr_t.txt:276:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/igmp.c:585:igmp_leavegroup(ip_addr_t *ifaddr, ip_addr_t *groupaddr)
+/home/gauci/esp/ip_addr_t.txt:277:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/igmp.c:745:igmp_ip_output_if(struct pbuf *p, ip_addr_t *src, ip_addr_t *dest, struct netif *netif)
+/home/gauci/esp/ip_addr_t.txt:278:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/igmp.c:766:  ip_addr_t   src  = *IP_ADDR_ANY;
+/home/gauci/esp/ip_addr_t.txt:279:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/igmp.c:767:  ip_addr_t*  dest = NULL;
+/home/gauci/esp/ip_addr_t.txt:280:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/icmp.c:297:  ip_addr_t iphdr_src;
+/home/gauci/esp/ip_addr_t.txt:281:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/ip_addr.c:44:const ip_addr_t ip_addr_any = { IPADDR_ANY };
+/home/gauci/esp/ip_addr_t.txt:282:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/ip_addr.c:45:const ip_addr_t ip_addr_broadcast = { IPADDR_BROADCAST };
+/home/gauci/esp/ip_addr_t.txt:283:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/ip_addr.c:57:  ip_addr_t ipaddr;
+/home/gauci/esp/ip_addr_t.txt:284:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/ip_addr.c:132:  ip_addr_t val;
+/home/gauci/esp/ip_addr_t.txt:285:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/ip_addr.c:152:ipaddr_aton(const char *cp, ip_addr_t *addr)
+/home/gauci/esp/ip_addr_t.txt:286:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/ip_addr.c:261:ipaddr_ntoa(const ip_addr_t *addr)
+/home/gauci/esp/ip_addr_t.txt:287:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/ip_addr.c:276:char *ipaddr_ntoa_r(const ip_addr_t *addr, char *buf, int buflen)
+/home/gauci/esp/ip_addr_t.txt:288:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/ip.c:107:ip_addr_t current_iphdr_src;
+/home/gauci/esp/ip_addr_t.txt:289:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/ip.c:109:ip_addr_t current_iphdr_dest;
+/home/gauci/esp/ip_addr_t.txt:290:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/ip.c:124:ip_route(ip_addr_t *dest)
+/home/gauci/esp/ip_addr_t.txt:291:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/ip.c:383:  /* copy IP addresses to aligned ip_addr_t */
+/home/gauci/esp/ip_addr_t.txt:292:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/ip.c:641:ip_output_if(struct pbuf *p, ip_addr_t *src, ip_addr_t *dest,
+/home/gauci/esp/ip_addr_t.txt:293:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/ip.c:655:err_t ip_output_if_opt(struct pbuf *p, ip_addr_t *src, ip_addr_t *dest,
+/home/gauci/esp/ip_addr_t.txt:294:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/ip.c:661:  ip_addr_t dest_addr;
+/home/gauci/esp/ip_addr_t.txt:295:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/ip.c:818:ip_output(struct pbuf *p, ip_addr_t *src, ip_addr_t *dest,
+/home/gauci/esp/ip_addr_t.txt:296:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/ip.c:857:ip_output_hinted(struct pbuf *p, ip_addr_t *src, ip_addr_t *dest,
+/home/gauci/esp/ip_addr_t.txt:297:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/ip_frag.c:667:ip_frag(struct pbuf *p, struct netif *netif, ip_addr_t *dest)
+/home/gauci/esp/ip_addr_t.txt:298:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/autoip.c:111:static void autoip_create_addr(struct netif *netif, ip_addr_t *ipaddr);
+/home/gauci/esp/ip_addr_t.txt:299:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/autoip.c:196:autoip_create_addr(struct netif *netif, ip_addr_t *ipaddr)
+/home/gauci/esp/ip_addr_t.txt:300:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/autoip.c:258:  ip_addr_t sn_mask, gw_addr;
+/home/gauci/esp/ip_addr_t.txt:301:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/autoip.c:487:    ip_addr_t sipaddr, dipaddr;
+/home/gauci/esp/ip_addr_t.txt:302:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/inet_chksum.c:273:       ip_addr_t *src, ip_addr_t *dest,
+/home/gauci/esp/ip_addr_t.txt:303:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/ipv4/inet_chksum.c:333:       ip_addr_t *src, ip_addr_t *dest,
+/home/gauci/esp/ip_addr_t.txt:304:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/tcp_out.c:1196:  ip_addr_t *local_ip, ip_addr_t *remote_ip,
+/home/gauci/esp/ip_addr_t.txt:305:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/udp.c:492:  ip_addr_t *dst_ip, u16_t dst_port)
+/home/gauci/esp/ip_addr_t.txt:306:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/udp.c:500:udp_sendto_chksum(struct udp_pcb *pcb, struct pbuf *p, ip_addr_t *dst_ip,
+/home/gauci/esp/ip_addr_t.txt:307:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/udp.c:550:  ip_addr_t *dst_ip, u16_t dst_port, struct netif *netif)
+/home/gauci/esp/ip_addr_t.txt:308:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/udp.c:558:udp_sendto_if_chksum(struct udp_pcb *pcb, struct pbuf *p, ip_addr_t *dst_ip,
+/home/gauci/esp/ip_addr_t.txt:309:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/udp.c:564:  ip_addr_t *src_ip;
+/home/gauci/esp/ip_addr_t.txt:310:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/udp.c:766:udp_bind(struct udp_pcb *pcb, ip_addr_t *ipaddr, u16_t port)
+/home/gauci/esp/ip_addr_t.txt:311:/home/gauci/esp/pycom-micropython/lib/lwip/src/core/udp.c:853:udp_connect(struct udp_pcb *pcb, ip_addr_t *ipaddr, u16_t port)
+/home/gauci/esp/ip_addr_t.txt:312:/home/gauci/esp/pycom-micropython/lib/lwip/src/netif/ppp/ppp.c:810:pppifOutput(struct netif *netif, struct pbuf *pb, ip_addr_t *ipaddr)
+/home/gauci/esp/ip_addr_t.txt:313:/home/gauci/esp/pycom-micropython/lib/lwip/src/netif/ppp/ppp.h:93:  ip_addr_t our_ipaddr, his_ipaddr, netmask, dns1, dns2;
+/home/gauci/esp/ip_addr_t.txt:314:/home/gauci/esp/pycom-micropython/lib/lwip/src/netif/slipif.c:115:slipif_output(struct netif *netif, struct pbuf *p, ip_addr_t *ipaddr)
+/home/gauci/esp/ip_addr_t.txt:315:/home/gauci/esp/pycom-micropython/lib/lwip/src/netif/etharp.c:113:  ip_addr_t ipaddr;
+/home/gauci/esp/ip_addr_t.txt:316:/home/gauci/esp/pycom-micropython/lib/lwip/src/netif/etharp.c:266:etharp_find_entry(ip_addr_t *ipaddr, u8_t flags)
+/home/gauci/esp/ip_addr_t.txt:317:/home/gauci/esp/pycom-micropython/lib/lwip/src/netif/etharp.c:448:etharp_update_arp_entry(struct netif *netif, ip_addr_t *ipaddr, struct eth_addr *ethaddr, u8_t flags)
+/home/gauci/esp/ip_addr_t.txt:318:/home/gauci/esp/pycom-micropython/lib/lwip/src/netif/etharp.c:526:etharp_add_static_entry(ip_addr_t *ipaddr, struct eth_addr *ethaddr)
+/home/gauci/esp/ip_addr_t.txt:319:/home/gauci/esp/pycom-micropython/lib/lwip/src/netif/etharp.c:551:etharp_remove_static_entry(ip_addr_t *ipaddr)
+/home/gauci/esp/ip_addr_t.txt:320:/home/gauci/esp/pycom-micropython/lib/lwip/src/netif/etharp.c:603:etharp_find_addr(struct netif *netif, ip_addr_t *ipaddr,
+/home/gauci/esp/ip_addr_t.txt:321:/home/gauci/esp/pycom-micropython/lib/lwip/src/netif/etharp.c:604:         struct eth_addr **eth_ret, ip_addr_t **ip_ret)
+/home/gauci/esp/ip_addr_t.txt:322:/home/gauci/esp/pycom-micropython/lib/lwip/src/netif/etharp.c:643:  ip_addr_t iphdr_src;
+/home/gauci/esp/ip_addr_t.txt:323:/home/gauci/esp/pycom-micropython/lib/lwip/src/netif/etharp.c:693:  ip_addr_t sipaddr, dipaddr;
+/home/gauci/esp/ip_addr_t.txt:324:/home/gauci/esp/pycom-micropython/lib/lwip/src/netif/etharp.c:724:      (hdr->protolen != sizeof(ip_addr_t)) ||
+/home/gauci/esp/ip_addr_t.txt:325:/home/gauci/esp/pycom-micropython/lib/lwip/src/netif/etharp.c:879:etharp_output(struct netif *netif, struct pbuf *q, ip_addr_t *ipaddr)
+/home/gauci/esp/ip_addr_t.txt:326:/home/gauci/esp/pycom-micropython/lib/lwip/src/netif/etharp.c:883:  ip_addr_t *dst_addr = ipaddr;
+/home/gauci/esp/ip_addr_t.txt:327:/home/gauci/esp/pycom-micropython/lib/lwip/src/netif/etharp.c:1016:etharp_query(struct netif *netif, ip_addr_t *ipaddr, struct pbuf *q)
+/home/gauci/esp/ip_addr_t.txt:328:/home/gauci/esp/pycom-micropython/lib/lwip/src/netif/etharp.c:1177:           const struct eth_addr *hwsrc_addr, const ip_addr_t *ipsrc_addr,
+/home/gauci/esp/ip_addr_t.txt:329:/home/gauci/esp/pycom-micropython/lib/lwip/src/netif/etharp.c:1178:           const struct eth_addr *hwdst_addr, const ip_addr_t *ipdst_addr,
+/home/gauci/esp/ip_addr_t.txt:330:/home/gauci/esp/pycom-micropython/lib/lwip/src/netif/etharp.c:1235:  hdr->protolen = sizeof(ip_addr_t);
+/home/gauci/esp/ip_addr_t.txt:331:/home/gauci/esp/pycom-micropython/lib/lwip/src/netif/etharp.c:1259:etharp_request(struct netif *netif, ip_addr_t *ipaddr)
+/home/gauci/esp/ip_addr_t.txt:332:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/tcp_impl.h:445:       ip_addr_t *local_ip, ip_addr_t *remote_ip,
+/home/gauci/esp/ip_addr_t.txt:333:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/tcp_impl.h:454:u16_t tcp_eff_send_mss(u16_t sendmss, ip_addr_t *addr);
+/home/gauci/esp/ip_addr_t.txt:334:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netifapi.h:55:      ip_addr_t *ipaddr;
+/home/gauci/esp/ip_addr_t.txt:335:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netifapi.h:56:      ip_addr_t *netmask;
+/home/gauci/esp/ip_addr_t.txt:336:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netifapi.h:57:      ip_addr_t *gw;
+/home/gauci/esp/ip_addr_t.txt:337:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netifapi.h:77:                                 ip_addr_t *ipaddr,
+/home/gauci/esp/ip_addr_t.txt:338:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netifapi.h:78:                                 ip_addr_t *netmask,
+/home/gauci/esp/ip_addr_t.txt:339:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netifapi.h:79:                                 ip_addr_t *gw,
+/home/gauci/esp/ip_addr_t.txt:340:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netifapi.h:85:                                 ip_addr_t *ipaddr,
+/home/gauci/esp/ip_addr_t.txt:341:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netifapi.h:86:                                 ip_addr_t *netmask,
+/home/gauci/esp/ip_addr_t.txt:342:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netifapi.h:87:                                 ip_addr_t *gw );
+/home/gauci/esp/ip_addr_t.txt:343:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netif.h:119:       ip_addr_t *ipaddr);
+/home/gauci/esp/ip_addr_t.txt:344:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netif.h:131:       ip_addr_t *group, u8_t action);
+/home/gauci/esp/ip_addr_t.txt:345:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netif.h:141:  ip_addr_t ip_addr;
+/home/gauci/esp/ip_addr_t.txt:346:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netif.h:142:  ip_addr_t netmask;
+/home/gauci/esp/ip_addr_t.txt:347:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netif.h:143:  ip_addr_t gw;
+/home/gauci/esp/ip_addr_t.txt:348:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netif.h:259:struct netif *netif_add(struct netif *netif, ip_addr_t *ipaddr, ip_addr_t *netmask,
+/home/gauci/esp/ip_addr_t.txt:349:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netif.h:260:      ip_addr_t *gw, void *state, netif_init_fn init, netif_input_fn input);
+/home/gauci/esp/ip_addr_t.txt:350:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netif.h:263:netif_set_addr(struct netif *netif, ip_addr_t *ipaddr, ip_addr_t *netmask,
+/home/gauci/esp/ip_addr_t.txt:351:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netif.h:264:      ip_addr_t *gw);
+/home/gauci/esp/ip_addr_t.txt:352:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netif.h:275:void netif_set_ipaddr(struct netif *netif, ip_addr_t *ipaddr);
+/home/gauci/esp/ip_addr_t.txt:353:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netif.h:276:void netif_set_netmask(struct netif *netif, ip_addr_t *netmask);
+/home/gauci/esp/ip_addr_t.txt:354:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netif.h:277:void netif_set_gw(struct netif *netif, ip_addr_t *gw);
+/home/gauci/esp/ip_addr_t.txt:355:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netif.h:311:err_t netif_loop_output(struct netif *netif, struct pbuf *p, ip_addr_t *dest_ip);
+/home/gauci/esp/ip_addr_t.txt:356:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/tcp.h:342:err_t            tcp_bind    (struct tcp_pcb *pcb, ip_addr_t *ipaddr,
+/home/gauci/esp/ip_addr_t.txt:357:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/tcp.h:344:err_t            tcp_connect (struct tcp_pcb *pcb, ip_addr_t *ipaddr,
+/home/gauci/esp/ip_addr_t.txt:358:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/udp.h:88:    ip_addr_t *addr, u16_t port);
+/home/gauci/esp/ip_addr_t.txt:359:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/udp.h:105:  ip_addr_t multicast_ip;
+/home/gauci/esp/ip_addr_t.txt:360:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/udp.h:125:err_t            udp_bind       (struct udp_pcb *pcb, ip_addr_t *ipaddr,
+/home/gauci/esp/ip_addr_t.txt:361:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/udp.h:127:err_t            udp_connect    (struct udp_pcb *pcb, ip_addr_t *ipaddr,
+/home/gauci/esp/ip_addr_t.txt:362:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/udp.h:133:                                 ip_addr_t *dst_ip, u16_t dst_port,
+/home/gauci/esp/ip_addr_t.txt:363:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/udp.h:136:                                 ip_addr_t *dst_ip, u16_t dst_port);
+/home/gauci/esp/ip_addr_t.txt:364:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/udp.h:141:                                 ip_addr_t *dst_ip, u16_t dst_port,
+/home/gauci/esp/ip_addr_t.txt:365:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/udp.h:145:                                 ip_addr_t *dst_ip, u16_t dst_port,
+/home/gauci/esp/ip_addr_t.txt:366:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/dns.h:86:  ip_addr_t addr;
+/home/gauci/esp/ip_addr_t.txt:367:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/dns.h:100: * @param ipaddr pointer to an ip_addr_t containing the IP address of the hostname,
+/home/gauci/esp/ip_addr_t.txt:368:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/dns.h:104:typedef void (*dns_found_callback)(const char *name, ip_addr_t *ipaddr, void *callback_arg);
+/home/gauci/esp/ip_addr_t.txt:369:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/dns.h:108:void           dns_setserver(u8_t numdns, ip_addr_t *dnsserver);
+/home/gauci/esp/ip_addr_t.txt:370:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/dns.h:109:ip_addr_t      dns_getserver(u8_t numdns);
+/home/gauci/esp/ip_addr_t.txt:371:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/dns.h:110:err_t          dns_gethostbyname(const char *hostname, ip_addr_t *addr,
+/home/gauci/esp/ip_addr_t.txt:372:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/dns.h:114:int            dns_local_removehost(const char *hostname, const ip_addr_t *addr);
+/home/gauci/esp/ip_addr_t.txt:373:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/dns.h:115:err_t          dns_local_addhost(const char *hostname, const ip_addr_t *addr);
+/home/gauci/esp/ip_addr_t.txt:374:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/snmp_msg.h:226:  ip_addr_t sip;
+/home/gauci/esp/ip_addr_t.txt:375:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/snmp_msg.h:265:  ip_addr_t dip;
+/home/gauci/esp/ip_addr_t.txt:376:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/snmp_msg.h:293:void snmp_trap_dst_ip_set(u8_t dst_idx, ip_addr_t *dst);
+/home/gauci/esp/ip_addr_t.txt:377:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/snmp_structs.h:243:void snmp_oidtoip(s32_t *ident, ip_addr_t *ip);
+/home/gauci/esp/ip_addr_t.txt:378:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/snmp_structs.h:244:void snmp_iptooid(ip_addr_t *ip, s32_t *ident);
+/home/gauci/esp/ip_addr_t.txt:379:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/snmp.h:124:void snmp_insert_arpidx_tree(struct netif *ni, ip_addr_t *ip);
+/home/gauci/esp/ip_addr_t.txt:380:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/snmp.h:125:void snmp_delete_arpidx_tree(struct netif *ni, ip_addr_t *ip);
+/home/gauci/esp/ip_addr_t.txt:381:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netbuf.h:50:  ip_addr_t addr;
+/home/gauci/esp/ip_addr_t.txt:382:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/netbuf.h:58:  ip_addr_t toaddr;
+/home/gauci/esp/ip_addr_t.txt:383:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/dhcp.h:52:  ip_addr_t server_ip_addr; /* dhcp server address that offered this lease */
+/home/gauci/esp/ip_addr_t.txt:384:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/dhcp.h:53:  ip_addr_t offered_ip_addr;
+/home/gauci/esp/ip_addr_t.txt:385:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/dhcp.h:54:  ip_addr_t offered_sn_mask;
+/home/gauci/esp/ip_addr_t.txt:386:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/dhcp.h:55:  ip_addr_t offered_gw_addr;
+/home/gauci/esp/ip_addr_t.txt:387:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/dhcp.h:63:  ip_addr_t offered_si_addr;
+/home/gauci/esp/ip_addr_t.txt:388:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/dhcp.h:127:void dhcp_arp_reply(struct netif *netif, ip_addr_t *addr);
+/home/gauci/esp/ip_addr_t.txt:389:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/raw.h:61:    ip_addr_t *addr);
+/home/gauci/esp/ip_addr_t.txt:390:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/raw.h:81:err_t            raw_bind       (struct raw_pcb *pcb, ip_addr_t *ipaddr);
+/home/gauci/esp/ip_addr_t.txt:391:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/raw.h:82:err_t            raw_connect    (struct raw_pcb *pcb, ip_addr_t *ipaddr);
+/home/gauci/esp/ip_addr_t.txt:392:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/raw.h:85:err_t            raw_sendto     (struct raw_pcb *pcb, struct pbuf *p, ip_addr_t *ipaddr);
+/home/gauci/esp/ip_addr_t.txt:393:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/api.h:221:err_t   netconn_getaddr(struct netconn *conn, ip_addr_t *addr,
+/home/gauci/esp/ip_addr_t.txt:394:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/api.h:226:err_t   netconn_bind(struct netconn *conn, ip_addr_t *addr, u16_t port);
+/home/gauci/esp/ip_addr_t.txt:395:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/api.h:227:err_t   netconn_connect(struct netconn *conn, ip_addr_t *addr, u16_t port);
+/home/gauci/esp/ip_addr_t.txt:396:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/api.h:236:                       ip_addr_t *addr, u16_t port);
+/home/gauci/esp/ip_addr_t.txt:397:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/api.h:246:err_t   netconn_join_leave_group(struct netconn *conn, ip_addr_t *multiaddr,
+/home/gauci/esp/ip_addr_t.txt:398:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/api.h:247:                                 ip_addr_t *netif_addr, enum netconn_igmp join_or_leave);
+/home/gauci/esp/ip_addr_t.txt:399:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/api.h:250:err_t   netconn_gethostbyname(const char *name, ip_addr_t *addr);
+/home/gauci/esp/ip_addr_t.txt:400:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/api_msg.h:78:      ip_addr_t *ipaddr;
+/home/gauci/esp/ip_addr_t.txt:401:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/api_msg.h:83:      ip_addr_t *ipaddr;
+/home/gauci/esp/ip_addr_t.txt:402:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/api_msg.h:107:      ip_addr_t *multiaddr;
+/home/gauci/esp/ip_addr_t.txt:403:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/api_msg.h:108:      ip_addr_t *netif_addr;
+/home/gauci/esp/ip_addr_t.txt:404:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/lwip/api_msg.h:139:  ip_addr_t *addr;
+/home/gauci/esp/ip_addr_t.txt:405:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/igmp.h:78:  ip_addr_t          group_address;
+/home/gauci/esp/ip_addr_t.txt:406:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/igmp.h:94:struct igmp_group *igmp_lookfor_group(struct netif *ifp, ip_addr_t *addr);
+/home/gauci/esp/ip_addr_t.txt:407:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/igmp.h:95:void   igmp_input(struct pbuf *p, struct netif *inp, ip_addr_t *dest);
+/home/gauci/esp/ip_addr_t.txt:408:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/igmp.h:96:err_t  igmp_joingroup(ip_addr_t *ifaddr, ip_addr_t *groupaddr);
+/home/gauci/esp/ip_addr_t.txt:409:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/igmp.h:97:err_t  igmp_leavegroup(ip_addr_t *ifaddr, ip_addr_t *groupaddr);
+/home/gauci/esp/ip_addr_t.txt:410:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip_frag.h:81:err_t ip_frag(struct pbuf *p, struct netif *netif, ip_addr_t *dest);
+/home/gauci/esp/ip_addr_t.txt:411:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/inet_chksum.h:76:       ip_addr_t *src, ip_addr_t *dest,
+/home/gauci/esp/ip_addr_t.txt:412:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/inet_chksum.h:79:       ip_addr_t *src, ip_addr_t *dest,
+/home/gauci/esp/ip_addr_t.txt:413:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip_addr.h:42:/* This is the aligned version of ip_addr_t,
+/home/gauci/esp/ip_addr_t.txt:414:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip_addr.h:48:/* This is the packed version of ip_addr_t,
+/home/gauci/esp/ip_addr_t.txt:415:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip_addr.h:62:/** ip_addr_t uses a struct for convenience only, so that the same defines can
+/home/gauci/esp/ip_addr_t.txt:416:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip_addr.h:63: * operate both on ip_addr_t as well as on ip_addr_p_t. */
+/home/gauci/esp/ip_addr_t.txt:417:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip_addr.h:64:typedef struct ip_addr ip_addr_t;
+/home/gauci/esp/ip_addr_t.txt:418:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip_addr.h:86:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/ip_addr_t.txt:419:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip_addr.h:87:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/ip_addr_t.txt:420:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip_addr.h:92:#define IP_ADDR_ANY         ((ip_addr_t *)&ip_addr_any)
+/home/gauci/esp/ip_addr_t.txt:421:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip_addr.h:93:#define IP_ADDR_BROADCAST   ((ip_addr_t *)&ip_addr_broadcast)
+/home/gauci/esp/ip_addr_t.txt:422:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip_addr.h:158:#define IPADDR2_COPY(dest, src) SMEMCPY(dest, src, sizeof(ip_addr_t))
+/home/gauci/esp/ip_addr_t.txt:423:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip_addr.h:235:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/ip_addr_t.txt:424:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip_addr.h:237:char *ipaddr_ntoa(const ip_addr_t *addr);
+/home/gauci/esp/ip_addr_t.txt:425:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip_addr.h:238:char *ipaddr_ntoa_r(const ip_addr_t *addr, char *buf, int buflen);
+/home/gauci/esp/ip_addr_t.txt:426:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/inet.h:94:/* ATTENTION: the next define only works because both s_addr and ip_addr_t are an u32_t effectively! */
+/home/gauci/esp/ip_addr_t.txt:427:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/inet.h:95:#define inet_addr_to_ipaddr_p(target_ipaddr_p, source_inaddr)   ((target_ipaddr_p) = (ip_addr_t*)&((source_inaddr)->s_addr))
+/home/gauci/esp/ip_addr_t.txt:428:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/inet.h:99:#define inet_aton(cp, addr)   ipaddr_aton(cp, (ip_addr_t*)addr)
+/home/gauci/esp/ip_addr_t.txt:429:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/inet.h:100:#define inet_ntoa(addr)       ipaddr_ntoa((ip_addr_t*)&(addr))
+/home/gauci/esp/ip_addr_t.txt:430:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/inet.h:101:#define inet_ntoa_r(addr, buf, buflen) ipaddr_ntoa_r((ip_addr_t*)&(addr), buf, buflen)
+/home/gauci/esp/ip_addr_t.txt:431:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip.h:78:  ip_addr_t local_ip; \
+/home/gauci/esp/ip_addr_t.txt:432:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip.h:79:  ip_addr_t remote_ip; \
+/home/gauci/esp/ip_addr_t.txt:433:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip.h:170:extern ip_addr_t current_iphdr_src;
+/home/gauci/esp/ip_addr_t.txt:434:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip.h:172:extern ip_addr_t current_iphdr_dest;
+/home/gauci/esp/ip_addr_t.txt:435:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip.h:175:struct netif *ip_route(ip_addr_t *dest);
+/home/gauci/esp/ip_addr_t.txt:436:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip.h:177:err_t ip_output(struct pbuf *p, ip_addr_t *src, ip_addr_t *dest,
+/home/gauci/esp/ip_addr_t.txt:437:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip.h:179:err_t ip_output_if(struct pbuf *p, ip_addr_t *src, ip_addr_t *dest,
+/home/gauci/esp/ip_addr_t.txt:438:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip.h:183:err_t ip_output_hinted(struct pbuf *p, ip_addr_t *src, ip_addr_t *dest,
+/home/gauci/esp/ip_addr_t.txt:439:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/ip.h:187:err_t ip_output_if_opt(struct pbuf *p, ip_addr_t *src, ip_addr_t *dest,
+/home/gauci/esp/ip_addr_t.txt:440:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/ipv4/lwip/autoip.h:83:  ip_addr_t llipaddr;       /* the currently selected, probed, announced or used LL IP-Address */
+/home/gauci/esp/ip_addr_t.txt:441:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/netif/etharp.h:183:s8_t etharp_find_addr(struct netif *netif, ip_addr_t *ipaddr,
+/home/gauci/esp/ip_addr_t.txt:442:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/netif/etharp.h:184:         struct eth_addr **eth_ret, ip_addr_t **ip_ret);
+/home/gauci/esp/ip_addr_t.txt:443:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/netif/etharp.h:185:err_t etharp_output(struct netif *netif, struct pbuf *q, ip_addr_t *ipaddr);
+/home/gauci/esp/ip_addr_t.txt:444:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/netif/etharp.h:186:err_t etharp_query(struct netif *netif, ip_addr_t *ipaddr, struct pbuf *q);
+/home/gauci/esp/ip_addr_t.txt:445:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/netif/etharp.h:187:err_t etharp_request(struct netif *netif, ip_addr_t *ipaddr);
+/home/gauci/esp/ip_addr_t.txt:446:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/netif/etharp.h:196:err_t etharp_add_static_entry(ip_addr_t *ipaddr, struct eth_addr *ethaddr);
+/home/gauci/esp/ip_addr_t.txt:447:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/netif/etharp.h:197:err_t etharp_remove_static_entry(ip_addr_t *ipaddr);
+/home/gauci/esp/ip_addr_t.txt:448:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/netif/etharp.h:203:                 const struct eth_addr *hwsrc_addr, const ip_addr_t *ipsrc_addr,
+/home/gauci/esp/ip_addr_t.txt:449:/home/gauci/esp/pycom-micropython/lib/lwip/src/include/netif/etharp.h:204:                 const struct eth_addr *hwdst_addr, const ip_addr_t *ipdst_addr,
+/home/gauci/esp/ip_addr_t.txt:450:/home/gauci/esp/pycom-micropython/lib/lwip/src/api/netifapi.c:99:                   ip_addr_t *ipaddr,
+/home/gauci/esp/ip_addr_t.txt:451:/home/gauci/esp/pycom-micropython/lib/lwip/src/api/netifapi.c:100:                   ip_addr_t *netmask,
+/home/gauci/esp/ip_addr_t.txt:452:/home/gauci/esp/pycom-micropython/lib/lwip/src/api/netifapi.c:101:                   ip_addr_t *gw,
+/home/gauci/esp/ip_addr_t.txt:453:/home/gauci/esp/pycom-micropython/lib/lwip/src/api/netifapi.c:127:                        ip_addr_t *ipaddr,
+/home/gauci/esp/ip_addr_t.txt:454:/home/gauci/esp/pycom-micropython/lib/lwip/src/api/netifapi.c:128:                        ip_addr_t *netmask,
+/home/gauci/esp/ip_addr_t.txt:455:/home/gauci/esp/pycom-micropython/lib/lwip/src/api/netifapi.c:129:                        ip_addr_t *gw)
+/home/gauci/esp/ip_addr_t.txt:456:/home/gauci/esp/pycom-micropython/lib/lwip/src/api/api_msg.c:79:    ip_addr_t *addr)
+/home/gauci/esp/ip_addr_t.txt:457:/home/gauci/esp/pycom-micropython/lib/lwip/src/api/api_msg.c:145:   ip_addr_t *addr, u16_t port)
+/home/gauci/esp/ip_addr_t.txt:458:/home/gauci/esp/pycom-micropython/lib/lwip/src/api/api_msg.c:1526:do_dns_found(const char *name, ip_addr_t *ipaddr, void *arg)
+/home/gauci/esp/ip_addr_t.txt:459:/home/gauci/esp/pycom-micropython/lib/lwip/src/api/sockets.c:316:  ip_addr_t naddr;
+/home/gauci/esp/ip_addr_t.txt:460:/home/gauci/esp/pycom-micropython/lib/lwip/src/api/sockets.c:408:  ip_addr_t local_addr;
+/home/gauci/esp/ip_addr_t.txt:461:/home/gauci/esp/pycom-micropython/lib/lwip/src/api/sockets.c:492:    ip_addr_t remote_addr;
+/home/gauci/esp/ip_addr_t.txt:462:/home/gauci/esp/pycom-micropython/lib/lwip/src/api/sockets.c:565:  ip_addr_t        *addr;
+/home/gauci/esp/ip_addr_t.txt:463:/home/gauci/esp/pycom-micropython/lib/lwip/src/api/sockets.c:667:      ip_addr_t fromaddr;
+/home/gauci/esp/ip_addr_t.txt:464:/home/gauci/esp/pycom-micropython/lib/lwip/src/api/sockets.c:830:    ip_addr_t *remote_addr;
+/home/gauci/esp/ip_addr_t.txt:465:/home/gauci/esp/pycom-micropython/lib/lwip/src/api/sockets.c:1412:  ip_addr_t naddr;
+/home/gauci/esp/ip_addr_t.txt:466:/home/gauci/esp/pycom-micropython/lib/lwip/src/api/sockets.c:2180:        ip_addr_t if_addr;
+/home/gauci/esp/ip_addr_t.txt:467:/home/gauci/esp/pycom-micropython/lib/lwip/src/api/sockets.c:2181:        ip_addr_t multi_addr;
+/home/gauci/esp/ip_addr_t.txt:468:/home/gauci/esp/pycom-micropython/lib/lwip/src/api/api_lib.c:135:netconn_getaddr(struct netconn *conn, ip_addr_t *addr, u16_t *port, u8_t local)
+/home/gauci/esp/ip_addr_t.txt:469:/home/gauci/esp/pycom-micropython/lib/lwip/src/api/api_lib.c:166:netconn_bind(struct netconn *conn, ip_addr_t *addr, u16_t port)
+/home/gauci/esp/ip_addr_t.txt:470:/home/gauci/esp/pycom-micropython/lib/lwip/src/api/api_lib.c:192:netconn_connect(struct netconn *conn, ip_addr_t *addr, u16_t port)
+/home/gauci/esp/ip_addr_t.txt:471:/home/gauci/esp/pycom-micropython/lib/lwip/src/api/api_lib.c:549:netconn_sendto(struct netconn *conn, struct netbuf *buf, ip_addr_t *addr, u16_t port)
+/home/gauci/esp/ip_addr_t.txt:472:/home/gauci/esp/pycom-micropython/lib/lwip/src/api/api_lib.c:720:                         ip_addr_t *multiaddr,
+/home/gauci/esp/ip_addr_t.txt:473:/home/gauci/esp/pycom-micropython/lib/lwip/src/api/api_lib.c:721:                         ip_addr_t *netif_addr,
+/home/gauci/esp/ip_addr_t.txt:474:/home/gauci/esp/pycom-micropython/lib/lwip/src/api/api_lib.c:746: * @param addr a preallocated ip_addr_t where to store the resolved IP address
+/home/gauci/esp/ip_addr_t.txt:475:/home/gauci/esp/pycom-micropython/lib/lwip/src/api/api_lib.c:753:netconn_gethostbyname(const char *name, ip_addr_t *addr)
+/home/gauci/esp/ip_addr_t.txt:476:/home/gauci/esp/pycom-micropython/lib/lwip/src/api/netdb.c:52:  ip_addr_t *addr_list[2];
+/home/gauci/esp/ip_addr_t.txt:477:/home/gauci/esp/pycom-micropython/lib/lwip/src/api/netdb.c:53:  ip_addr_t addr;
+/home/gauci/esp/ip_addr_t.txt:478:/home/gauci/esp/pycom-micropython/lib/lwip/src/api/netdb.c:88:  ip_addr_t addr;
+/home/gauci/esp/ip_addr_t.txt:479:/home/gauci/esp/pycom-micropython/lib/lwip/src/api/netdb.c:93:  HOSTENT_STORAGE ip_addr_t s_hostent_addr;
+/home/gauci/esp/ip_addr_t.txt:480:/home/gauci/esp/pycom-micropython/lib/lwip/src/api/netdb.c:94:  HOSTENT_STORAGE ip_addr_t *s_phostent_addr[2];
+/home/gauci/esp/ip_addr_t.txt:481:/home/gauci/esp/pycom-micropython/lib/lwip/src/api/netdb.c:111:  s_hostent.h_length = sizeof(ip_addr_t);
+/home/gauci/esp/ip_addr_t.txt:482:/home/gauci/esp/pycom-micropython/lib/lwip/src/api/netdb.c:132:      LWIP_DEBUGF(DNS_DEBUG, ("hostent.h_addr_list[%i]-> == %s\n", idx, ip_ntoa((ip_addr_t*)s_hostent.h_addr_list[idx])));
+/home/gauci/esp/ip_addr_t.txt:483:/home/gauci/esp/pycom-micropython/lib/lwip/src/api/netdb.c:218:  ret->h_length = sizeof(ip_addr_t);
+/home/gauci/esp/ip_addr_t.txt:484:/home/gauci/esp/pycom-micropython/lib/lwip/src/api/netdb.c:271:  ip_addr_t addr;
+/home/gauci/esp/ip_addr_t.txt:485:/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/etharp/test_etharp.c:15:static ip_addr_t test_ipaddr, test_netmask, test_gw;
+/home/gauci/esp/ip_addr_t.txt:486:/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/etharp/test_etharp.c:75:create_arp_response(ip_addr_t *adr)
+/home/gauci/esp/ip_addr_t.txt:487:/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/etharp/test_etharp.c:94:  etharphdr->protolen = sizeof(ip_addr_t);
+/home/gauci/esp/ip_addr_t.txt:488:/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/etharp/test_etharp.c:97:  SMEMCPY(&etharphdr->sipaddr, adr, sizeof(ip_addr_t));
+/home/gauci/esp/ip_addr_t.txt:489:/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/etharp/test_etharp.c:98:  SMEMCPY(&etharphdr->dipaddr, &test_ipaddr, sizeof(ip_addr_t));
+/home/gauci/esp/ip_addr_t.txt:490:/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/etharp/test_etharp.c:139:  ip_addr_t *unused_ipaddr;
+/home/gauci/esp/ip_addr_t.txt:491:/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/etharp/test_etharp.c:153:    ip_addr_t adrs[ARP_TABLE_SIZE + 2];
+/home/gauci/esp/ip_addr_t.txt:492:/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/tcp_helper.h:32:struct pbuf* tcp_create_segment(ip_addr_t* src_ip, ip_addr_t* dst_ip,
+/home/gauci/esp/ip_addr_t.txt:493:/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/tcp_helper.h:39:void tcp_set_state(struct tcp_pcb* pcb, enum tcp_state state, ip_addr_t* local_ip,
+/home/gauci/esp/ip_addr_t.txt:494:/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/tcp_helper.h:40:                   ip_addr_t* remote_ip, u16_t local_port, u16_t remote_port);
+/home/gauci/esp/ip_addr_t.txt:495:/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/tcp_helper.h:49:                         ip_addr_t *ip_addr, ip_addr_t *netmask);
+/home/gauci/esp/ip_addr_t.txt:496:/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/test_tcp.c:80:  ip_addr_t remote_ip, local_ip;
+/home/gauci/esp/ip_addr_t.txt:497:/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/test_tcp.c:136:  ip_addr_t remote_ip, local_ip, netmask;
+/home/gauci/esp/ip_addr_t.txt:498:/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/test_tcp.c:317:  ip_addr_t remote_ip, local_ip, netmask;
+/home/gauci/esp/ip_addr_t.txt:499:/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/test_tcp.c:414:  ip_addr_t remote_ip, local_ip, netmask;
+/home/gauci/esp/ip_addr_t.txt:500:/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/test_tcp.c:504:  ip_addr_t remote_ip, local_ip, netmask;
+/home/gauci/esp/ip_addr_t.txt:501:/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/tcp_helper.c:41:tcp_create_segment_wnd(ip_addr_t* src_ip, ip_addr_t* dst_ip,
+/home/gauci/esp/ip_addr_t.txt:502:/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/tcp_helper.c:105:tcp_create_segment(ip_addr_t* src_ip, ip_addr_t* dst_ip,
+/home/gauci/esp/ip_addr_t.txt:503:/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/tcp_helper.c:139:tcp_set_state(struct tcp_pcb* pcb, enum tcp_state state, ip_addr_t* local_ip,
+/home/gauci/esp/ip_addr_t.txt:504:/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/tcp_helper.c:140:                   ip_addr_t* remote_ip, u16_t local_port, u16_t remote_port)
+/home/gauci/esp/ip_addr_t.txt:505:/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/tcp_helper.c:255:       ip_addr_t *ipaddr)
+/home/gauci/esp/ip_addr_t.txt:506:/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/tcp_helper.c:277:                         ip_addr_t *ip_addr, ip_addr_t *netmask)
+/home/gauci/esp/ip_addr_t.txt:507:/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/test_tcp_oos.c:149:  ip_addr_t remote_ip, local_ip;
+/home/gauci/esp/ip_addr_t.txt:508:/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/test_tcp_oos.c:289:  ip_addr_t remote_ip, local_ip;
+/home/gauci/esp/ip_addr_t.txt:509:/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/test_tcp_oos.c:460:  ip_addr_t remote_ip, local_ip;
+/home/gauci/esp/ip_addr_t.txt:510:/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/test_tcp_oos.c:550:  ip_addr_t remote_ip, local_ip;
+/home/gauci/esp/ip_addr_t.txt:511:/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/test_tcp_oos.c:629:  ip_addr_t remote_ip, local_ip;
+/home/gauci/esp/ip_addr_t.txt:512:/home/gauci/esp/pycom-micropython/lib/lwip/test/unit/tcp/test_tcp_oos.c:730:  ip_addr_t remote_ip, local_ip;
+/home/gauci/esp/ip_addr_t.txt:513:/home/gauci/esp/pycom-micropython/lib/lwip/CHANGELOG:326:  * many many files: bug #27352: removed packing from ip_addr_t, the packed
+/home/gauci/esp/ip_addr_t.txt:514:/home/gauci/esp/pycom-micropython/lib/lwip/CHANGELOG:468:  * nearly every file: Replaced struct ip_addr by typedef ip_addr_t to
+/home/gauci/esp/ip_addr_t.txt:515:/home/gauci/esp/pycom-micropython/esp8266/modnetwork.c:226:    ip_addr_t dns_addr;
+/home/gauci/esp/ip_addr_t.txt:516:/home/gauci/esp/pycom-micropython/esp8266/modesp.c:444:STATIC void esp_getaddrinfo_cb(const char *name, ip_addr_t *ipaddr, void *arg) {
+/home/gauci/esp/ip_addr_t.txt:517:/home/gauci/esp/pycom-micropython/esp8266/modesp.c:471:    ip_addr_t ipaddr;
+/home/gauci/esp/ip_addr_t.txt:520:/home/gauci/esp/pycom-micropython/esp32/mods/modwlan.c:804:   ip_addr_t dns_addr;
+/home/gauci/esp/ip_addr_t.txt:530:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:25379:} ip_addr_t;
+/home/gauci/esp/ip_addr_t.txt:531:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:25381:extern const ip_addr_t ip_addr_any_type;
+/home/gauci/esp/ip_addr_t.txt:532:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:25476:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/ip_addr_t.txt:533:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:25478:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/ip_addr_t.txt:534:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:25479:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/ip_addr_t.txt:535:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:25496:extern const ip_addr_t ip6_addr_any;
+/home/gauci/esp/ip_addr_t.txt:536:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:58238:} ip_addr_t;
+/home/gauci/esp/ip_addr_t.txt:537:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:58240:extern const ip_addr_t ip_addr_any_type;
+/home/gauci/esp/ip_addr_t.txt:538:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:58335:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/ip_addr_t.txt:539:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:58337:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/ip_addr_t.txt:540:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:58338:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/ip_addr_t.txt:541:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:58355:extern const ip_addr_t ip6_addr_any;
+/home/gauci/esp/ip_addr_t.txt:542:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:113434:} ip_addr_t;
+/home/gauci/esp/ip_addr_t.txt:543:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:113436:extern const ip_addr_t ip_addr_any_type;
+/home/gauci/esp/ip_addr_t.txt:544:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:113531:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/ip_addr_t.txt:545:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:113533:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/ip_addr_t.txt:546:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:113534:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/ip_addr_t.txt:547:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:113551:extern const ip_addr_t ip6_addr_any;
+/home/gauci/esp/ip_addr_t.txt:548:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:147004:} ip_addr_t;
+/home/gauci/esp/ip_addr_t.txt:549:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:147006:extern const ip_addr_t ip_addr_any_type;
+/home/gauci/esp/ip_addr_t.txt:550:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:147101:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/ip_addr_t.txt:551:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:147103:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/ip_addr_t.txt:552:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:147104:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/ip_addr_t.txt:553:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:147121:extern const ip_addr_t ip6_addr_any;
+/home/gauci/esp/ip_addr_t.txt:554:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:173908:} ip_addr_t;
+/home/gauci/esp/ip_addr_t.txt:555:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:173910:extern const ip_addr_t ip_addr_any_type;
+/home/gauci/esp/ip_addr_t.txt:556:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:174005:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/ip_addr_t.txt:557:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:174007:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/ip_addr_t.txt:558:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:174008:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/ip_addr_t.txt:559:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:174025:extern const ip_addr_t ip6_addr_any;
+/home/gauci/esp/ip_addr_t.txt:560:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:174602:#define inet_addr_to_ipaddr_p(target_ipaddr_p,source_inaddr) ((target_ipaddr_p) = (ip_addr_t*)&((source_inaddr)->s_addr))
+/home/gauci/esp/ip_addr_t.txt:561:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:175016:typedef void (*dns_found_callback)(const char *name, const ip_addr_t *ipaddr, void *callback_arg);
+/home/gauci/esp/ip_addr_t.txt:562:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:175020:void dns_setserver(u8_t numdns, const ip_addr_t *dnsserver);
+/home/gauci/esp/ip_addr_t.txt:563:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:175021:ip_addr_t dns_getserver(u8_t numdns);
+/home/gauci/esp/ip_addr_t.txt:564:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:175022:err_t dns_gethostbyname(const char *hostname, ip_addr_t *addr,
+/home/gauci/esp/ip_addr_t.txt:565:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:175024:err_t dns_gethostbyname_addrtype(const char *hostname, ip_addr_t *addr,
+/home/gauci/esp/ip_addr_t.txt:566:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:211313:} ip_addr_t;
+/home/gauci/esp/ip_addr_t.txt:567:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:211315:extern const ip_addr_t ip_addr_any_type;
+/home/gauci/esp/ip_addr_t.txt:568:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:211410:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/ip_addr_t.txt:569:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:211412:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/ip_addr_t.txt:570:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:211413:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/ip_addr_t.txt:571:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:211430:extern const ip_addr_t ip6_addr_any;
+/home/gauci/esp/ip_addr_t.txt:572:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:212408:#define inet_addr_to_ipaddr_p(target_ipaddr_p,source_inaddr) ((target_ipaddr_p) = (ip_addr_t*)&((source_inaddr)->s_addr))
+/home/gauci/esp/ip_addr_t.txt:573:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:213047:typedef void (*dns_found_callback)(const char *name, const ip_addr_t *ipaddr, void *callback_arg);
+/home/gauci/esp/ip_addr_t.txt:574:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:213051:void dns_setserver(u8_t numdns, const ip_addr_t *dnsserver);
+/home/gauci/esp/ip_addr_t.txt:575:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:213052:ip_addr_t dns_getserver(u8_t numdns);
+/home/gauci/esp/ip_addr_t.txt:576:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:213053:err_t dns_gethostbyname(const char *hostname, ip_addr_t *addr,
+/home/gauci/esp/ip_addr_t.txt:577:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:213055:err_t dns_gethostbyname_addrtype(const char *hostname, ip_addr_t *addr,
+/home/gauci/esp/ip_addr_t.txt:578:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:218288:   ip_addr_t dns_addr;
+/home/gauci/esp/ip_addr_t.txt:579:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:244494:} ip_addr_t;
+/home/gauci/esp/ip_addr_t.txt:580:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:244496:extern const ip_addr_t ip_addr_any_type;
+/home/gauci/esp/ip_addr_t.txt:581:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:244591:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/ip_addr_t.txt:582:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:244593:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/ip_addr_t.txt:583:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:244594:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/ip_addr_t.txt:584:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:244611:extern const ip_addr_t ip6_addr_any;
+/home/gauci/esp/ip_addr_t.txt:585:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:249314:#define inet_addr_to_ipaddr_p(target_ipaddr_p,source_inaddr) ((target_ipaddr_p) = (ip_addr_t*)&((source_inaddr)->s_addr))
+/home/gauci/esp/ip_addr_t.txt:586:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:276713:} ip_addr_t;
+/home/gauci/esp/ip_addr_t.txt:587:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:276715:extern const ip_addr_t ip_addr_any_type;
+/home/gauci/esp/ip_addr_t.txt:588:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:276810:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/ip_addr_t.txt:589:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:276812:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/ip_addr_t.txt:590:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:276813:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/ip_addr_t.txt:591:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:276830:extern const ip_addr_t ip6_addr_any;
+/home/gauci/esp/ip_addr_t.txt:592:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:293459:} ip_addr_t;
+/home/gauci/esp/ip_addr_t.txt:593:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:293461:extern const ip_addr_t ip_addr_any_type;
+/home/gauci/esp/ip_addr_t.txt:594:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:293556:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/ip_addr_t.txt:595:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:293558:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/ip_addr_t.txt:596:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:293559:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/ip_addr_t.txt:597:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:293576:extern const ip_addr_t ip6_addr_any;
+/home/gauci/esp/ip_addr_t.txt:598:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:308145:#define inet_addr_to_ipaddr_p(target_ipaddr_p,source_inaddr) ((target_ipaddr_p) = (ip_addr_t*)&((source_inaddr)->s_addr))
+/home/gauci/esp/ip_addr_t.txt:599:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:308784:typedef void (*dns_found_callback)(const char *name, const ip_addr_t *ipaddr, void *callback_arg);
+/home/gauci/esp/ip_addr_t.txt:600:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:308788:void dns_setserver(u8_t numdns, const ip_addr_t *dnsserver);
+/home/gauci/esp/ip_addr_t.txt:601:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:308789:ip_addr_t dns_getserver(u8_t numdns);
+/home/gauci/esp/ip_addr_t.txt:602:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:308790:err_t dns_gethostbyname(const char *hostname, ip_addr_t *addr,
+/home/gauci/esp/ip_addr_t.txt:603:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:308792:err_t dns_gethostbyname_addrtype(const char *hostname, ip_addr_t *addr,
+/home/gauci/esp/ip_addr_t.txt:604:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:400945:} ip_addr_t;
+/home/gauci/esp/ip_addr_t.txt:605:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:400947:extern const ip_addr_t ip_addr_any_type;
+/home/gauci/esp/ip_addr_t.txt:606:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:401042:int ipaddr_aton(const char *cp, ip_addr_t *addr);
+/home/gauci/esp/ip_addr_t.txt:607:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:401044:extern const ip_addr_t ip_addr_any;
+/home/gauci/esp/ip_addr_t.txt:608:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:401045:extern const ip_addr_t ip_addr_broadcast;
+/home/gauci/esp/ip_addr_t.txt:609:/home/gauci/esp/pycom-micropython/esp32/build/LOPY/release/genhdr/qstr.i.last:401062:extern const ip_addr_t ip6_addr_any;
+/home/gauci/esp/ip_addr_t.txt:612:/home/gauci/esp/pycom-micropython/extmod/modlwip.c:124:    ip_addr_t iplocal, ipremote;
+/home/gauci/esp/ip_addr_t.txt:613:/home/gauci/esp/pycom-micropython/extmod/modlwip.c:274:STATIC void _lwip_udp_incoming(void *arg, struct udp_pcb *upcb, struct pbuf *p, ip_addr_t *addr, u16_t port) {
+/home/gauci/esp/ip_addr_t.txt:614:/home/gauci/esp/pycom-micropython/extmod/modlwip.c:398:        ip_addr_t dest;
+/home/gauci/esp/ip_addr_t.txt:615:/home/gauci/esp/pycom-micropython/extmod/modlwip.c:673:    ip_addr_t bind_addr;
+/home/gauci/esp/ip_addr_t.txt:616:/home/gauci/esp/pycom-micropython/extmod/modlwip.c:795:    ip_addr_t dest;
+/home/gauci/esp/ip_addr_t.txt:617:/home/gauci/esp/pycom-micropython/extmod/modlwip.c:1220:    volatile ip_addr_t ipaddr;
+/home/gauci/esp/ip_addr_t.txt:618:/home/gauci/esp/pycom-micropython/extmod/modlwip.c:1224:STATIC void lwip_getaddrinfo_cb(const char *name, ip_addr_t *ipaddr, void *arg) {
+/home/gauci/esp/ip_addr_t.txt:619:/home/gauci/esp/pycom-micropython/extmod/modlwip.c:1244:    err_t ret = dns_gethostbyname(host, (ip_addr_t*)&state.ipaddr, lwip_getaddrinfo_cb, &state);

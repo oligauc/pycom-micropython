@@ -1,0 +1,606 @@
+/home/gauci/esp/pycom-esp-idf/components/mbedtls/port/net.c:65:    u32_t optlen = sizeof(sock_errno);
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/stats.c:123:  LWIP_PLATFORM_DIAG(("avail: %"U32_F"\n\t", (u32_t)mem->avail));
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/stats.c:124:  LWIP_PLATFORM_DIAG(("used: %"U32_F"\n\t", (u32_t)mem->used));
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/stats.c:125:  LWIP_PLATFORM_DIAG(("max: %"U32_F"\n\t", (u32_t)mem->max));
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/stats.c:126:  LWIP_PLATFORM_DIAG(("err: %"U32_F"\n", (u32_t)mem->err));
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/stats.c:145:  LWIP_PLATFORM_DIAG(("sem.used:  %"U32_F"\n\t", (u32_t)sys->sem.used));
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/stats.c:146:  LWIP_PLATFORM_DIAG(("sem.max:   %"U32_F"\n\t", (u32_t)sys->sem.max));
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/stats.c:147:  LWIP_PLATFORM_DIAG(("sem.err:   %"U32_F"\n\t", (u32_t)sys->sem.err));
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/stats.c:148:  LWIP_PLATFORM_DIAG(("mutex.used: %"U32_F"\n\t", (u32_t)sys->mutex.used));
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/stats.c:149:  LWIP_PLATFORM_DIAG(("mutex.max:  %"U32_F"\n\t", (u32_t)sys->mutex.max));
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/stats.c:150:  LWIP_PLATFORM_DIAG(("mutex.err:  %"U32_F"\n\t", (u32_t)sys->mutex.err));
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/stats.c:151:  LWIP_PLATFORM_DIAG(("mbox.used:  %"U32_F"\n\t", (u32_t)sys->mbox.used));
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/stats.c:152:  LWIP_PLATFORM_DIAG(("mbox.max:   %"U32_F"\n\t", (u32_t)sys->mbox.max));
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/stats.c:153:  LWIP_PLATFORM_DIAG(("mbox.err:   %"U32_F"\n\t", (u32_t)sys->mbox.err));
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/stats.c:187:  LWIP_PLATFORM_DIAG(("esp.rx_rawmbox_post_fail:  %"U32_F"\n\t", (u32_t)esp->rx_rawmbox_post_fail));
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/stats.c:188:  LWIP_PLATFORM_DIAG(("esp.rx_udpmbox_post_fail:  %"U32_F"\n\t", (u32_t)esp->rx_udpmbox_post_fail));
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/stats.c:189:  LWIP_PLATFORM_DIAG(("esp.rx_tcpmbox_post_fail:  %"U32_F"\n\t", (u32_t)esp->rx_tcpmbox_post_fail));
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/stats.c:190:  LWIP_PLATFORM_DIAG(("esp.err_tcp_rxmbox_post_fail:  %"U32_F"\n\t", (u32_t)esp->err_tcp_rxmbox_post_fail));
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/stats.c:191:  LWIP_PLATFORM_DIAG(("esp.err_tcp_acceptmbox_post_fail:  %"U32_F"\n\t", (u32_t)esp->err_tcp_acceptmbox_post_fail));
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/stats.c:192:  LWIP_PLATFORM_DIAG(("esp.acceptmbox_post_fail:  %"U32_F"\n\t", (u32_t)esp->acceptmbox_post_fail));
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/stats.c:193:  LWIP_PLATFORM_DIAG(("esp.free_mbox_post_fail:  %"U32_F"\n\t", (u32_t)esp->free_mbox_post_fail));
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/stats.c:194:  LWIP_PLATFORM_DIAG(("esp.tcpip_inpkt_post_fail:  %"U32_F"\n\t", (u32_t)esp->tcpip_inpkt_post_fail));
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/stats.c:195:  LWIP_PLATFORM_DIAG(("esp.tcpip_cb_post_fail:  %"U32_F"\n\t", (u32_t)esp->tcpip_cb_post_fail));
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/stats.c:196:  LWIP_PLATFORM_DIAG(("esp.wlanif_input_pbuf_fail:  %"U32_F"\n\t", (u32_t)esp->wlanif_input_pbuf_fail));
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/stats.c:197:  LWIP_PLATFORM_DIAG(("esp.wlanif_outut_pbuf_fail:  %"U32_F"\n\t", (u32_t)esp->wlanif_outut_pbuf_fail));
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/pbuf.c:1205:  u32_t acc;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp_in.c:77:static u32_t seqno, ackno;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp_in.c:377:          /* pcb->acked is u32_t but the sent callback only takes a u16_t,
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp_in.c:379:          u32_t pcb_acked = pcb->acked;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp_in.c:958:  u32_t right_wnd_edge;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp_in.c:962:  u32_t ooseq_blen;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp_in.c:974:       (pcb->snd_wl2 == ackno && (u32_t)SND_WND_SCALE(pcb, tcphdr->wnd) > pcb->snd_wnd)) {
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp_in.c:1590:                  if (TCP_SEQ_GT((u32_t)tcplen + seqno, pcb->rcv_nxt + (u32_t)pcb->rcv_wnd)) {
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp_in.c:1680:  u32_t tsval;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp.c:95:u32_t tcp_ticks;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp.c:358:  u32_t seqno, ackno;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp.c:603:u32_t tcp_update_rcv_ann_wnd(struct tcp_pcb *pcb)
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp.c:605:  u32_t new_right_edge = pcb->rcv_nxt + pcb->rcv_wnd;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp.c:618:      u32_t new_rcv_ann_wnd = pcb->rcv_ann_right_edge - pcb->rcv_nxt;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp.c:732:  u32_t iss;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp.c:941:        if ((u32_t)(tcp_ticks - pcb->tmr) >
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp.c:953:      if ((u32_t)(tcp_ticks - pcb->tmr) >
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp.c:962:      } else if ((u32_t)(tcp_ticks - pcb->tmr) >
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp.c:978:        (u32_t)tcp_ticks - pcb->tmr >= pcb->rto * TCP_OOSEQ_TIMEOUT) {
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp.c:987:      if ((u32_t)(tcp_ticks - pcb->tmr) >
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp.c:996:      if ((u32_t)(tcp_ticks - pcb->tmr) > 2 * TCP_MSL / TCP_SLOW_INTERVAL) {
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp.c:1066:    if ((u32_t)(tcp_ticks - pcb->tmr) > 2 * TCP_MSL / TCP_SLOW_INTERVAL) {
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp.c:1310:  u32_t inactivity;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp.c:1320:       (u32_t)(tcp_ticks - pcb->tmr) >= inactivity) {
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp.c:1341:  u32_t inactivity;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp.c:1351:      if ((u32_t)(tcp_ticks - pcb->tmr) >= inactivity) {
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp.c:1373:  u32_t inactivity;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp.c:1379:    if ((u32_t)(tcp_ticks - pcb->tmr) >= inactivity) {
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp.c:1454:  u32_t iss;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp.c:1833: * @return u32_t pseudo random sequence number
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp.c:1835:u32_t
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp.c:1838:  static u32_t iss = 6510;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/timers.c:68:static u32_t timeouts_last_time;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/timers.c:335:sys_timeout_debug(u32_t msecs, sys_timeout_handler handler, void *arg, const char* handler_name)
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/timers.c:339:        u32_t LwipTimOutLim = 0;	// For light sleep. time out. limit is 3000ms
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/timers.c:343:sys_timeout(u32_t msecs, sys_timeout_handler handler, void *arg)
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/timers.c:348:  u32_t now, diff;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/timers.c:461:    u32_t diff;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/timers.c:465:    u32_t now;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/timers.c:514:u32_t
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/timers.c:517:  u32_t diff;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/timers.c:541:  u32_t time_needed;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/dns.c:244:  u32_t ttl;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/dns.c:253:  u32_t ttl;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/dns.c:600: * @param addr the hostname's IP address, as u32_t (instead of ip_addr_t to
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/netif.c:191:  u32_t i;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/netif.c:949:    ip_2_ip6(&netif->ip6_addr[0])->addr[2] = htonl((((u32_t)(netif->hwaddr[0] ^ 0x02)) << 24) |
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/netif.c:950:        ((u32_t)(netif->hwaddr[1]) << 16) |
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/netif.c:951:        ((u32_t)(netif->hwaddr[2]) << 8) |
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/netif.c:954:        ((u32_t)(netif->hwaddr[3]) << 16) |
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/netif.c:955:        ((u32_t)(netif->hwaddr[4]) << 8) |
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/netif.c:967:      ip_2_ip6(&netif->ip6_addr[0])->addr[addr_index] |= ((u32_t)(netif->hwaddr[netif->hwaddr_len - i - 1])) << (8 * (i & 0x03));
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/init.c:125:  //#error "If you want to use TCP, TCP_WND must fit in an u32_t, so, you have to reduce it in your lwipopts.h"
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/init.c:214:  #error "When using IGMP or IPv6, LWIP_RAND() needs to be defined to a random-function returning an u32_t random value"
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/dhcp.c:133:u32_t dhcp_rx_options_val[DHCP_OPTION_IDX_MAX];
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/dhcp.c:163:static u32_t xid;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/dhcp.c:206:static void dhcp_option_long(struct dhcp *dhcp, u32_t value);
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/dhcp.c:1047:  u32_t timeout;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/dhcp.c:1432:dhcp_option_long(struct dhcp *dhcp, u32_t value)
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/dhcp.c:1598:      u32_t value = 0;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/dhcp.c:1606:          /* decode more than one u32_t */
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/dhcp.c:1639:    u32_t overload = dhcp_get_option_value(dhcp, DHCP_OPTION_IDX_OVERLOAD);
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/dhcp.c:1809:  static u32_t xid;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/dhcp.c:1811:  static u32_t xid = 0xABCD0000;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/ip4.c:242:  u32_t addr = htonl(ip4_addr_get_u32(ip4_current_dest_addr()));
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/ip4.c:257:    u32_t net = addr & IP_CLASSA_NET;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/ip4.c:258:    if ((net == 0) || (net == ((u32_t)IP_LOOPBACKNET << IP_CLASSA_NSHIFT))) {
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/ip4.c:810:  u32_t chk_sum = 0;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/ip4_addr.c:59:ip4_addr_isbroadcast_u32(u32_t addr, const struct netif *netif)
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/ip4_addr.c:94:ip4_addr_netmask_valid(u32_t netmask)
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/ip4_addr.c:96:  u32_t mask;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/ip4_addr.c:97:  u32_t nm_hostorder = lwip_htonl(netmask);
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/ip4_addr.c:133:u32_t
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/ip4_addr.c:158:  u32_t val;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/ip4_addr.c:161:  u32_t parts[4];
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/ip4_addr.c:162:  u32_t *pp = parts;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/ip4_addr.c:326:  u32_t s_addr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/autoip.c:91:#define LWIP_AUTOIP_RAND(netif) ( (((u32_t)((netif->hwaddr[5]) & 0xff) << 24) | \
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/autoip.c:92:                                   ((u32_t)((netif->hwaddr[3]) & 0xff) << 16) | \
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/autoip.c:93:                                   ((u32_t)((netif->hwaddr[2]) & 0xff) << 8) | \
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/autoip.c:94:                                   ((u32_t)((netif->hwaddr[4]) & 0xff))) + \
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/autoip.c:104:  htonl(AUTOIP_RANGE_START + ((u32_t)(((u8_t)(netif->hwaddr[4])) | \
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/autoip.c:105:                 ((u32_t)((u8_t)(netif->hwaddr[5]))) << 8)))
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv4/autoip.c:203:  u32_t addr = ntohl(LWIP_AUTOIP_CREATE_SEED_ADDR(netif));
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp_out.c:110:                      u32_t seqno_be /* already in network byte order */)
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp_out.c:174:tcp_create_segment(struct tcp_pcb *pcb, struct pbuf *p, u8_t flags, u32_t seqno, u8_t optflags)
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp_out.c:291:  u32_t helper;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp_out.c:869:tcp_build_timestamp_option(struct tcp_pcb *pcb, u32_t *opts)
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp_out.c:884:tcp_build_wnd_scale_option(u32_t *opts)
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp_out.c:930:    tcp_build_timestamp_option(pcb, (u32_t *)(tcphdr + 1));
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp_out.c:973:  u32_t wnd, snd_nxt;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp_out.c:1137:  u32_t *opts;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp_out.c:1163:  opts = (u32_t *)(void *)(seg->tcphdr + 1);
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp_out.c:1230:    u32_t acc;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/tcp_out.c:1294:tcp_rst(u32_t seqno, u32_t ackno,
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/sys.c:55:sys_msleep(u32_t ms)
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/def.c:82: * Convert an u32_t from host- to network byte order.
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/def.c:84: * @param n u32_t in host byte order
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/def.c:87:u32_t
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/def.c:88:lwip_htonl(u32_t n)
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/def.c:97: * Convert an u32_t from network- to host byte order.
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/def.c:99: * @param n u32_t in network byte order
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/def.c:102:u32_t
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/def.c:103:lwip_ntohl(u32_t n)
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/udp.c:793:        u32_t acc;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/udp.c:820:          u32_t acc;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv6/ip6_addr.c:75:  u32_t addr_index, zero_blocks, current_block_index, current_block_value;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv6/ip6_addr.c:193:  u32_t current_block_index, current_block_value, next_block_value;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv6/ip6_frag.c:658:  static u32_t identification;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv6/nd6.c:70:u32_t reachable_time = LWIP_ND6_REACHABLE_TIME;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv6/nd6.c:71:u32_t retrans_timer = LWIP_ND6_RETRANS_TIMER; /* TODO implement this value in timer */
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv6/nd6.c:594:    u32_t pmtu;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv6/nd6.c:1095:  u32_t time;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv6/nd6.c:1251:  u32_t age;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv6/icmp6.c:67:static void icmp6_send_response(struct pbuf *p, u8_t code, u32_t data, u8_t type);
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv6/icmp6.c:229:icmp6_packet_too_big(struct pbuf *p, u32_t mtu)
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv6/icmp6.c:256:icmp6_param_problem(struct pbuf *p, enum icmp6_pp_code c, u32_t pointer)
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/ipv6/icmp6.c:271:icmp6_send_response(struct pbuf *p, u8_t code, u32_t data, u8_t type)
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/inet_chksum.c:85:  u32_t acc;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/inet_chksum.c:141:  u32_t sum = 0;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/inet_chksum.c:197:  const u32_t *pl;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/inet_chksum.c:198:  u32_t sum = 0, tmp;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/inet_chksum.c:214:  pl = (const u32_t *)(const void*)ps;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/inet_chksum.c:263:inet_cksum_pseudo_base(struct pbuf *p, u8_t proto, u16_t proto_len, u32_t acc)
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/inet_chksum.c:288:  acc += (u32_t)htons((u16_t)proto);
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/inet_chksum.c:289:  acc += (u32_t)htons(proto_len);
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/inet_chksum.c:316:  u32_t acc;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/inet_chksum.c:317:  u32_t addr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/inet_chksum.c:349:  u32_t acc = 0;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/inet_chksum.c:350:  u32_t addr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/inet_chksum.c:403:       u16_t chksum_len, u32_t acc)
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/inet_chksum.c:434:  acc += (u32_t)htons((u16_t)proto);
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/inet_chksum.c:435:  acc += (u32_t)htons(proto_len);
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/inet_chksum.c:462:  u32_t acc;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/inet_chksum.c:463:  u32_t addr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/inet_chksum.c:497:  u32_t acc = 0;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/inet_chksum.c:498:  u32_t addr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/core/inet_chksum.c:573:  u32_t acc;
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:141:  PACK_STRUCT_FIELD(u32_t root_delay);
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:142:  PACK_STRUCT_FIELD(u32_t root_dispersion);
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:143:  PACK_STRUCT_FIELD(u32_t reference_identifier);
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:144:  PACK_STRUCT_FIELD(u32_t reference_timestamp[2]);
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:145:  PACK_STRUCT_FIELD(u32_t originate_timestamp[2]);
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:146:  PACK_STRUCT_FIELD(u32_t receive_timestamp[2]);
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:147:  PACK_STRUCT_FIELD(u32_t transmit_timestamp[2]);
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:184:static u32_t sntp_retry_timeout;
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:198:static u32_t sntp_last_timestamp_sent[2];
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:205:sntp_process(u32_t *receive_timestamp)
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:210:  u32_t rx_secs = ntohl(receive_timestamp[0]);
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:212:  u32_t t = is_1900_based ? (rx_secs - DIFF_SEC_1900_1970) : (rx_secs + DIFF_SEC_1970_2036);
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:216:  u32_t us = ntohl(receive_timestamp[1]) / 4295;
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:243:    u32_t sntp_time_sec, sntp_time_us;
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:273:    u32_t new_retry_timeout;
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:335:  u32_t receive_timestamp[SNTP_RECEIVE_TIME_SIZE];
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:370:          u32_t originate_timestamp[2];
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:409:      sys_timeout((u32_t)SNTP_UPDATE_DELAY, sntp_request, NULL);
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:411:        (u32_t)SNTP_UPDATE_DELAY));
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:446:    sys_timeout((u32_t)SNTP_RECV_TIMEOUT, sntp_try_next_server, NULL);
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:453:      (u32_t)SNTP_RETRY_TIMEOUT));
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:455:    sys_timeout((u32_t)SNTP_RETRY_TIMEOUT, sntp_request, NULL);
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:522:    sys_timeout((u32_t)SNTP_RETRY_TIMEOUT, sntp_try_next_server, NULL);
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/sntp/sntp.c:550:        sys_timeout((u32_t)SNTP_STARTUP_DELAY_FUNC, sntp_request, NULL);
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/dhcpserver.c:76:static const u32_t magic_cookie  = 0x63538263;
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/dhcpserver.c:98:void *dhcps_option_info(u8_t op_id, u32_t opt_len)
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/dhcpserver.c:232:    ipadd.addr = *((u32_t *) &server_address);
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/dhcpserver.c:383:    u32_t magic_cookie_temp = magic_cookie;
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/dhcpserver.c:973:static void dhcps_poll_set(u32_t ip)
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/dhcpserver.c:975:    u32_t softap_ip = 0, local_ip = 0;
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/dhcpserver.c:976:    u32_t start_ip = 0;
+/home/gauci/esp/pycom-esp-idf/components/lwip/apps/dhcpserver.c:977:    u32_t end_ip = 0;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/pppoe.c:828:  u32_t retry_wait;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/auth.c:192:int (*allowed_address_hook) (u32_t addr) = NULL;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/auth.c:253:static int  ip_addr_check (u32_t, struct permitted_ip *);
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/auth.c:2034:    u32_t a, mask, ah, offset;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/auth.c:2036:    u32_t suggested_ip = 0;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/auth.c:2079:	mask = ~ (u32_t) 0;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/auth.c:2107:	    a = *(u32_t *)hp->h_addr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/auth.c:2111:		a = htonl ((u32_t)np->n_net);
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/auth.c:2130:	if (a == (u32_t)-1L) {
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/auth.c:2141:	    mask = ~(u32_t)0;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/auth.c:2181:    u32_t addr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/auth.c:2207:    u32_t addr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/auth.c:2222:    u32_t addr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/multilink.c:457:	u32_t addr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/multilink.c:470:		addr = *(u32_t *)hp->h_addr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/multilink.c:504:		u32_t addr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/multilink.c:575:		u32_t addr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ppp.c:253:  sys_timeout((u32_t)(holdoff*1000), ppp_do_connect, pcb);
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ppp.c:998:int ppp_send_config(ppp_pcb *pcb, int mtu, u32_t accm, int pcomp, int accomp) {
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ppp.c:1014:int ppp_recv_config(ppp_pcb *pcb, int mru, u32_t accm, int pcomp, int accomp) {
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ppp.c:1029:int sifaddr(ppp_pcb *pcb, u32_t our_adr, u32_t his_adr, u32_t netmask) {
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ppp.c:1044:int cifaddr(ppp_pcb *pcb, u32_t our_adr, u32_t his_adr) {
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ppp.c:1058:int sifproxyarp(ppp_pcb *pcb, u32_t his_adr) {
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ppp.c:1069:int cifproxyarp(ppp_pcb *pcb, u32_t his_adr) {
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ppp.c:1080:int sdns(ppp_pcb *pcb, u32_t ns1, u32_t ns2) {
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ppp.c:1095:int cdns(ppp_pcb *pcb, u32_t ns1, u32_t ns2) {
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ppp.c:1172:u32_t get_mask(u32_t addr) {
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ppp.c:1174:  u32_t mask, nmask;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/vj.c:98:    u32_t tmp_ = ntohl(f) + ((cp[1] << 8) | cp[2]); \
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/vj.c:102:    u32_t tmp_ = ntohl(f) + (u32_t)*cp++; \
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/vj.c:145:  u32_t deltaL;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/vj.c:146:  u32_t changes = 0;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/vj.c:165:  th = (struct tcp_hdr *)&((u32_t*)ip)[ilen];
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/vj.c:203:      || *(u32_t*)th != ((u32_t*)&cs->cs_ip)[IPH_HL(&cs->cs_ip)]) {
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/vj.c:224:          && *(u32_t*)th == ((u32_t*)&cs->cs_ip)[IPH_HL(&cs->cs_ip)]) {
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/vj.c:254:  oth = (struct tcp_hdr *)&((u32_t*)&cs->cs_ip)[ilen];
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/vj.c:441:  u32_t hlen;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/vj.c:483:  u32_t tmp;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/vj.c:484:  u32_t vjlen, hlen, changes;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/vj.c:527:      u32_t i = ntohs(IPH_LEN(&cs->cs_ip)) - cs->cs_hlen;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/pppos.c:62:static void pppos_send_config(ppp_pcb *ppp, void *ctx, u32_t accm, int pcomp, int accomp);
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/pppos.c:63:static void pppos_recv_config(ppp_pcb *ppp, void *ctx, u32_t accm, int pcomp, int accomp);
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/pppos.c:742:pppos_send_config(ppp_pcb *ppp, void *ctx, u32_t accm, int pcomp, int accomp)
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/pppos.c:762:pppos_recv_config(ppp_pcb *ppp, void *ctx, u32_t accm, int pcomp, int accomp)
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/pppos.c:837:    u32_t l = pppos->output_cb(pppos->ppp, (u8_t*)nb->payload, nb->len, pppos->ppp->ctx_cb);
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/pppos.c:876:    u32_t l = pppos->output_cb(ppp, (u8_t*)nb->payload, nb->len, ppp->ctx_cb);
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/lcp.c:948:    u32_t cilong;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/lcp.c:1129:    u32_t cilong;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/lcp.c:1590:    u32_t cilong;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/lcp.c:1824:    u32_t cilong;		/* Parse long value */
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/lcp.c:2385:    u32_t cilong;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/lcp.c:2685:    u32_t magic_val;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/lcp.c:2711:    u32_t lcp_magic;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/utils.c:149:    u32_t ip;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/utils.c:269:	    ip = va_arg(args, u32_t);
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/eap.c:347:	u32_t bs_bits;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/eap.c:1139:u32_t flags;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/eap.c:1147:	msglen = EAP_HEADERLEN + 2 * sizeof (u_char) + sizeof (u32_t) +
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/eap.c:1653:				len -= sizeof (u32_t) + SHA_DIGESTSIZE;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/eap.c:1655:					sizeof (u32_t)) != 0) {
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/eap.c:1932:			if (len < sizeof (u32_t) + SHA_DIGESTSIZE) {
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/eap.c:1934:				    sizeof (u32_t) + SHA_DIGESTSIZE);
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/eap.c:2141:	u32_t uval;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/eap.c:2262:				if (len < (int)sizeof (u32_t))
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/eap.c:2265:				len -= sizeof (u32_t);
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/eap.c:2372:				if (len < (int)sizeof (u32_t))
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/eap.c:2375:				len -= sizeof (u32_t);
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:69:u32_t netmask = 0;		/* IP netmask to set on interface */
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:88:void (*ip_choose_hook) (u32_t *) = NULL;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:278:static void create_resolv (u32_t, u32_t);
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:310:static void ipcp_clear_addrs(ppp_pcb *pcb, u32_t ouraddr, u32_t hisaddr, u8_t replacedefaultroute);
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:331:u32_t ipaddr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:376:    u32_t dns;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:380:    if (dns == (u32_t) -1) {
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:386:	dns = *(u32_t *)hp->h_addr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:412:    u32_t wins;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:416:    if (wins == (u32_t) -1) {
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:422:	wins = *(u32_t *)hp->h_addr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:453:    u32_t local, remote;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:470:	if ((local = inet_addr(arg)) == (u32_t) -1) {
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:475:	    local = *(u32_t *)hp->h_addr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:491:	if ((remote = inet_addr(colon)) == (u32_t) -1) {
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:496:	    remote = *(u32_t *)hp->h_addr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:534:    u32_t mask;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:561:    u32_t *vp;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:564:    u32_t v, b;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:822:	    u32_t l; \
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:855:	    u32_t l; \
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:869:	    u32_t l; \
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:884:	    u32_t l; \
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:933:    u32_t cilong;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:947:	u32_t l; \
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:992:	u32_t l; \
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:1009:	u32_t l; \
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:1026:	u32_t l; \
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:1092:    u32_t ciaddr1, ciaddr2, l;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:1094:    u32_t cidnsaddr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:1357:    u32_t cilong;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:1371:	u32_t l; \
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:1416:	u32_t l; \
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:1433:	u32_t l; \
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:1451:	u32_t l; \
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:1524:    u32_t tl, ciaddr1, ciaddr2;/* Parsed address values */
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:1583:		    DECPTR(sizeof(u32_t), p);
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:1606:			DECPTR(sizeof(u32_t), p);
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:1639:		    DECPTR(sizeof(u32_t), p);
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:1670:                DECPTR(sizeof(u32_t), p);
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:1692:                DECPTR(sizeof(u32_t), p);
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:1815:    u32_t local;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:1830:	    local = *(u32_t *)hp->h_addr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:1895:    u32_t mask;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:2169:static void ipcp_clear_addrs(ppp_pcb *pcb, u32_t ouraddr, u32_t hisaddr, u8_t replacedefaultroute) {
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:2214:    u32_t peerdns1, peerdns2;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/ipcp.c:2236:    u32_t cilong;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/demand.c:102:    if (ppp_send_config(pcb, PPP_MRU, (u32_t) 0, 0, 0) < 0
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/demand.c:103:	|| ppp_recv_config(pcb, PPP_MRU, (u32_t) 0, 0, 0) < 0)
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/demand.c:320:    u32_t newip;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/demand.c:378:                * ((u32_t *) (pkt->data + 16)) = newip;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/magic.c:92:static u32_t magic_randomseed;    /* Seed used for random number generation. */
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/magic.c:104:static void magic_churnrand(char *rand_data, u32_t rand_len) {
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/magic.c:115:      u32_t jiffies;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/magic.c:117:      u32_t rand;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/magic.c:164:void magic_random_bytes(unsigned char *buf, u32_t buf_len) {
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/magic.c:167:  u32_t n;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/magic.c:185:u32_t magic(void) {
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/magic.c:186:  u32_t new_rand;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/magic.c:201:static u32_t magic_randomseed;      /* Seed used for random number generation. */
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/magic.c:263:u32_t magic(void) {
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/magic.c:267:  return ((u32_t)rand() << 16) + (u32_t)rand() + magic_randomseed;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/magic.c:274:void magic_random_bytes(unsigned char *buf, u32_t buf_len) {
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/magic.c:275:  u32_t new_rand, n;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/magic.c:290:u32_t magic_pow(u8_t pow) {
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/pppol2tp.c:709:  u32_t retry_wait;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/ppp/pppol2tp.c:947:  u32_t serialnumber;
+/home/gauci/esp/pycom-esp-idf/components/lwip/netif/lowpan6.c:155:    if ((ip6addr->addr[2] == (u32_t)PP_HTONL(0x000000ff)) &&
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/sio.h:98:u32_t sio_read(sio_fd_t fd, u8_t *data, u32_t len);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/sio.h:111:u32_t sio_tryread(sio_fd_t fd, u8_t *data, u32_t len);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/sio.h:125:u32_t sio_write(sio_fd_t fd, u8_t *data, u32_t len);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:51:#define STAT_COUNTER     u32_t
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:115:  u32_t ipinhdrerrors;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:116:  u32_t ipinaddrerrors;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:117:  u32_t ipinunknownprotos;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:118:  u32_t ipindiscards;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:119:  u32_t ipindelivers;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:120:  u32_t ipoutrequests;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:121:  u32_t ipoutdiscards;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:122:  u32_t ipoutnoroutes;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:123:  u32_t ipreasmoks;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:124:  u32_t ipreasmfails;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:125:  u32_t ipfragoks;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:126:  u32_t ipfragfails;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:127:  u32_t ipfragcreates;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:128:  u32_t ipreasmreqds;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:129:  u32_t ipforwdatagrams;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:130:  u32_t ipinreceives;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:133:  u32_t tcpactiveopens;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:134:  u32_t tcppassiveopens;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:135:  u32_t tcpattemptfails;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:136:  u32_t tcpestabresets;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:137:  u32_t tcpoutsegs;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:138:  u32_t tcpretranssegs;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:139:  u32_t tcpinsegs;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:140:  u32_t tcpinerrs;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:141:  u32_t tcpoutrsts;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:144:  u32_t udpindatagrams;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:145:  u32_t udpnoports;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:146:  u32_t udpinerrors;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:147:  u32_t udpoutdatagrams;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:150:  u32_t icmpinmsgs;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:151:  u32_t icmpinerrors;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:152:  u32_t icmpindestunreachs;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:153:  u32_t icmpintimeexcds;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:154:  u32_t icmpinparmprobs;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:155:  u32_t icmpinsrcquenchs;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:156:  u32_t icmpinredirects;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:157:  u32_t icmpinechos;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:158:  u32_t icmpinechoreps;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:159:  u32_t icmpintimestamps;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:160:  u32_t icmpintimestampreps;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:161:  u32_t icmpinaddrmasks;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:162:  u32_t icmpinaddrmaskreps;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:163:  u32_t icmpoutmsgs;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:164:  u32_t icmpouterrors;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:165:  u32_t icmpoutdestunreachs;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:166:  u32_t icmpouttimeexcds;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:167:  u32_t icmpoutechos; /* can be incremented by user application ('ping') */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:168:  u32_t icmpoutechoreps;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:173:  u32_t ifinoctets;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:176:  u32_t ifinucastpkts;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:179:  u32_t ifinnucastpkts;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:183:  u32_t ifindiscards;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:188:  u32_t ifinerrors;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:195:  u32_t ifinunknownprotos;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:197:  u32_t ifoutoctets;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:201:  u32_t ifoutucastpkts;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:205:  u32_t ifoutnucastpkts;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:209:  u32_t ifoutdiscards;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:213:  u32_t ifouterrors;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:218:    u32_t  rx_rawmbox_post_fail;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:219:    u32_t  rx_udpmbox_post_fail;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:220:    u32_t  rx_tcpmbox_post_fail;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:221:    u32_t  err_tcp_rxmbox_post_fail;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:222:    u32_t  err_tcp_acceptmbox_post_fail;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:223:    u32_t  acceptmbox_post_fail;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:224:    u32_t  free_mbox_post_fail;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:225:    u32_t  tcpip_inpkt_post_fail;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:226:    u32_t  tcpip_cb_post_fail;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:229:    u32_t  wlanif_input_pbuf_fail;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/stats.h:230:    u32_t  wlanif_outut_pbuf_fail;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/mem.h:75:typedef u32_t mem_size_t;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/mem.h:108: * start (e.g. if buffer is u8_t[] and actual data will be u32_t*)
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/sys.h:156:u32_t sys_arch_sem_wait(sys_sem_t *sem, u32_t timeout);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/sys.h:181:void sys_msleep(u32_t ms); /* only has a (close to) 1 ms resolution. */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/sys.h:207:u32_t sys_arch_mbox_fetch(sys_mbox_t *mbox, void **msg, u32_t timeout);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/sys.h:215:u32_t sys_arch_mbox_tryfetch(sys_mbox_t *mbox, void **msg);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/sys.h:258:u32_t sys_jiffies(void);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/sys.h:263:u32_t sys_now(void);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/netif.h:303:  u32_t link_speed;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/netif.h:305:  u32_t ts;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/icmp6.h:111:  PACK_STRUCT_FIELD(u32_t data);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/icmp6.h:140:void icmp6_packet_too_big(struct pbuf *p, u32_t mtu);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/icmp6.h:142:void icmp6_param_problem(struct pbuf *p, enum icmp6_pp_code c, u32_t pointer);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/def.h:110:u32_t lwip_htonl(u32_t x);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/def.h:111:u32_t lwip_ntohl(u32_t x);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/nd6.h:66:  /*u32_t pmtu;*/
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/nd6.h:77:    u32_t reachable_time;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/nd6.h:78:    u32_t delay_time;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/nd6.h:79:    u32_t probes_sent;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/nd6.h:80:    u32_t stale_time;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/nd6.h:88:  u32_t age;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/nd6.h:94:  u32_t invalidation_timer;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/nd6.h:105:  u32_t invalidation_timer;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/nd6.h:138:  PACK_STRUCT_FIELD(u32_t reserved);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/nd6.h:178:  PACK_STRUCT_FIELD(u32_t reserved);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/nd6.h:206:  PACK_STRUCT_FIELD(u32_t reachable_time);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/nd6.h:207:  PACK_STRUCT_FIELD(u32_t retrans_timer);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/nd6.h:224:  PACK_STRUCT_FIELD(u32_t reserved);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/nd6.h:266:  PACK_STRUCT_FIELD(u32_t valid_lifetime);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/nd6.h:267:  PACK_STRUCT_FIELD(u32_t preferred_lifetime);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/nd6.h:305:  PACK_STRUCT_FIELD(u32_t mtu);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/nd6.h:323:  PACK_STRUCT_FIELD(u32_t route_lifetime);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/nd6.h:342:extern u32_t reachable_time;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/nd6.h:343:extern u32_t retrans_timer;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/tcp.h:133:typedef u32_t tcpwnd_size_t;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/tcp.h:214:  u32_t tmr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/tcp.h:217:  u32_t rcv_nxt;   /* next seqno expected */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/tcp.h:220:  u32_t rcv_ann_right_edge; /* announced right edge of window */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/tcp.h:228:  u32_t rttest; /* RTT estimate in 500ms ticks */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/tcp.h:229:  u32_t rtseq;  /* sequence number being timed */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/tcp.h:237:  u32_t lastack; /* Highest acknowledged seqno. */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/tcp.h:249:  u32_t snd_nxt;   /* next new seqno to be sent */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/tcp.h:250:  u32_t snd_wl1, snd_wl2; /* Sequence and acknowledgement numbers of last
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/tcp.h:252:  u32_t snd_lbb;       /* Sequence number of next byte to be buffered. */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/tcp.h:290:  u32_t ts_lastacksent;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/tcp.h:291:  u32_t ts_recent;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/tcp.h:295:  u32_t keep_idle;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/tcp.h:297:  u32_t keep_intvl;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/tcp.h:298:  u32_t keep_cnt;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip6_frag.h:84:  u32_t identification;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/opt.h:915: *  (an array of structs name/address, where address is an u32_t in network
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/opt.h:919: *  #define DNS_LOOKUP_LOCAL_EXTERN(x) extern u32_t my_lookup_function(const char *name)
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/inet_chksum.h:51:/** Split an u32_t in two u16_ts and add them up */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip6_addr.h:58:  u32_t addr[4];
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip6_addr.h:68:  PACK_STRUCT_FIELD(u32_t addr[4]);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip6_addr.h:82:  (ip6addr)->addr[index] = ((u32_t)((a) & 0xff) << 24) | \
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip6_addr.h:83:                           ((u32_t)((b) & 0xff) << 16) | \
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip6_addr.h:84:                           ((u32_t)((c) & 0xff) << 8)  | \
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip6_addr.h:85:                            (u32_t)((d) & 0xff)
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip6_addr.h:90:  (ip6addr)->addr[index] = ((u32_t)((d) & 0xff) << 24) | \
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip6_addr.h:91:                           ((u32_t)((c) & 0xff) << 16) | \
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip6_addr.h:92:                           ((u32_t)((b) & 0xff) << 8)  | \
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip6_addr.h:93:                            (u32_t)((a) & 0xff)
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip6_addr.h:96:/** Set a full IPv6 address by passing the 4 u32_t indices in network byte order
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/icmp.h:79:/** This is the standard ICMP header only that the u32_t data
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/snmp.h:91:/* This macro has a precision of ~49 days because sys_now returns u32_t. #define your own if you want ~490 days. */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/timers.h:69:  u32_t time;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/timers.h:80:void sys_timeout_debug(u32_t msecs, sys_timeout_handler handler, void *arg, const char* handler_name);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/timers.h:83:void sys_timeout(u32_t msecs, sys_timeout_handler handler, void *arg);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/timers.h:90:u32_t sys_timeouts_sleeptime(void);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/dhcp.h:61:  u32_t xid;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/dhcp.h:90:  u32_t offered_t0_lease; /* lease period (in seconds) */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/dhcp.h:91:  u32_t offered_t1_renew; /* recommended renew time (usually 50% of lease period) */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/dhcp.h:92:  u32_t offered_t2_rebind; /* recommended rebind time (usually 87.5 of lease period)  */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/dhcp.h:119:  PACK_STRUCT_FIELD(u32_t xid);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/dhcp.h:129:  PACK_STRUCT_FIELD(u32_t cookie);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/inet.h:55:typedef u32_t in_addr_t;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/inet.h:64:    u32_t u32_addr[4];
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/inet.h:137:/* ATTENTION: the next define only works because both s_addr and ip_addr_t are an u32_t effectively! */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/inet.h:157:/* ATTENTION: the next define only works because both in6_addr and ip6_addr_t are an u32_t[4] effectively! */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/sockets.h:79:  u32_t           sin6_flowinfo; /* IPv6 flow information       */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/sockets.h:81:  u32_t           sin6_scope_id; /* Set of interfaces for scope */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/sockets.h:95:  u32_t       s2_data2[3];
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/sockets.h:97:  u32_t       s2_data3[3];
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/sockets.h:104:typedef u32_t socklen_t;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip4_addr.h:47:  u32_t addr;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip4_addr.h:57:  PACK_STRUCT_FIELD(u32_t addr);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip4_addr.h:89:#define IPADDR_NONE         ((u32_t)0xffffffffUL)
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip4_addr.h:91:#define IPADDR_LOOPBACK     ((u32_t)0x7f000001UL)
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip4_addr.h:93:#define IPADDR_ANY          ((u32_t)0x00000000UL)
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip4_addr.h:95:#define IPADDR_BROADCAST    ((u32_t)0xffffffffUL)
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip4_addr.h:101:#define IP_CLASSA(a)        ((((u32_t)(a)) & 0x80000000UL) == 0)
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip4_addr.h:107:#define IP_CLASSB(a)        ((((u32_t)(a)) & 0xc0000000UL) == 0x80000000UL)
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip4_addr.h:113:#define IP_CLASSC(a)        ((((u32_t)(a)) & 0xe0000000UL) == 0xc0000000UL)
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip4_addr.h:118:#define IP_CLASSD(a)        (((u32_t)(a) & 0xf0000000UL) == 0xe0000000UL)
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip4_addr.h:124:#define IP_EXPERIMENTAL(a)  (((u32_t)(a) & 0xf0000000UL) == 0xf0000000UL)
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip4_addr.h:125:#define IP_BADCLASS(a)      (((u32_t)(a) & 0xf0000000UL) == 0xf0000000UL)
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip4_addr.h:133:        (ipaddr)->addr = ((u32_t)((a) & 0xff) << 24) | \
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip4_addr.h:134:                         ((u32_t)((b) & 0xff) << 16) | \
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip4_addr.h:135:                         ((u32_t)((c) & 0xff) << 8)  | \
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip4_addr.h:136:                          (u32_t)((d) & 0xff)
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip4_addr.h:141:        (ipaddr)->addr = ((u32_t)((d) & 0xff) << 24) | \
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip4_addr.h:142:                         ((u32_t)((c) & 0xff) << 16) | \
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip4_addr.h:143:                         ((u32_t)((b) & 0xff) << 8)  | \
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip4_addr.h:144:                          (u32_t)((a) & 0xff)
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip4_addr.h:167:#define ip4_addr_isloopback(ipaddr)    (((ipaddr)->addr & PP_HTONL(IP_CLASSA_NET)) == PP_HTONL(((u32_t)IP_LOOPBACKNET) << 24))
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip4_addr.h:173:/** IPv4 only: set the IP address given as an u32_t */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip4_addr.h:175:/** IPv4 only: get the IP address as an u32_t */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip4_addr.h:199:u8_t ip4_addr_isbroadcast_u32(u32_t addr, const struct netif *netif);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip4_addr.h:202:u8_t ip4_addr_netmask_valid(u32_t netmask);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip4_addr.h:241:u32_t ipaddr_addr(const char *cp);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/api.h:277:void    netconn_recved(struct netconn *conn, u32_t length);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/tcpip.h:75:err_t  tcpip_timeout(u32_t msecs, sys_timeout_handler h, void *arg);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip6.h:80:  PACK_STRUCT_FIELD(u32_t _v_tc_fl);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip6.h:143:  PACK_STRUCT_FIELD(u32_t _identification);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/ip6.h:158:#define IP6H_VTCFL_SET(hdr, v, tc, fl) (hdr)->_v_tc_fl = (htonl((((u32_t)(v)) << 28) | (((u32_t)(tc)) << 20) | (fl)))
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/priv/tcp_priv.h:79:u32_t            tcp_update_rcv_ann_wnd(struct tcp_pcb *pcb);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/priv/tcp_priv.h:100:#define TCP_SEQ_LT(a,b)     ((s32_t)((u32_t)(a) - (u32_t)(b)) < 0)
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/priv/tcp_priv.h:101:#define TCP_SEQ_LEQ(a,b)    ((s32_t)((u32_t)(a) - (u32_t)(b)) <= 0)
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/priv/tcp_priv.h:102:#define TCP_SEQ_GT(a,b)     ((s32_t)((u32_t)(a) - (u32_t)(b)) > 0)
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/priv/tcp_priv.h:103:#define TCP_SEQ_GEQ(a,b)    ((s32_t)((u32_t)(a) - (u32_t)(b)) >= 0)
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/priv/tcp_priv.h:169:  PACK_STRUCT_FIELD(u32_t seqno);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/priv/tcp_priv.h:170:  PACK_STRUCT_FIELD(u32_t ackno);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/priv/tcp_priv.h:331:/** This returns a TCP header option for MSS in an u32_t */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/priv/tcp_priv.h:348:extern u32_t tcp_ticks;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/priv/tcp_priv.h:490:void tcp_rst(u32_t seqno, u32_t ackno,
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/priv/tcp_priv.h:494:u32_t tcp_next_iss(void);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/priv/tcpip_priv.h:149:      u32_t msecs;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/priv/api_msg.h:109:      u32_t time_started;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/priv/api_msg.h:114:      u32_t len;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/lwip/priv/api_msg.h:121:      u32_t time_started;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/apps/sntp/sntp_opts.h:103: * which must return the delay in milliseconds as u32_t.
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/apps/dhcpserver.h:175:	u32_t lease_timer;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/apps/dhcpserver.h:183:typedef u32_t dhcps_time_t;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/apps/dhcpserver.h:196:void *dhcps_option_info(u8_t op_id, u32_t opt_len);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/netif/ppp/magic.h:101:u32_t magic(void);	/* Returns the next magic number */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/netif/ppp/magic.h:113:void magic_random_bytes(unsigned char *buf, u32_t buf_len);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/netif/ppp/magic.h:118:u32_t magic_pow(u8_t pow);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/netif/ppp/ppp.h:246:  u32_t  maxconnect;                  /* Maximum connect time (seconds) */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/netif/ppp/vj.h:123:  u32_t vjs_packets;        /* outbound packets */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/netif/ppp/vj.h:124:  u32_t vjs_compressed;     /* outbound compressed packets */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/netif/ppp/vj.h:125:  u32_t vjs_searches;       /* searches for connection state */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/netif/ppp/vj.h:126:  u32_t vjs_misses;         /* times couldn't find conn. state */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/netif/ppp/vj.h:127:  u32_t vjs_uncompressedin; /* inbound uncompressed packets */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/netif/ppp/vj.h:128:  u32_t vjs_compressedin;   /* inbound compressed packets */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/netif/ppp/vj.h:129:  u32_t vjs_errorin;        /* inbound unknown type packets */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/netif/ppp/vj.h:130:  u32_t vjs_tossed;         /* inbound packets tossed because of error */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/netif/ppp/lcp.h:145:    u32_t asyncmap;		/* Value of async map */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/netif/ppp/lcp.h:146:    u32_t magicnumber;
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/netif/ppp/lcp.h:149:    u32_t lqr_period;	/* Reporting period for LQR 1/100ths second */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/netif/ppp/pppos.h:59:typedef u32_t (*pppos_output_cb_fn)(ppp_pcb *pcb, u8_t *data, u32_t len, void *ctx);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/netif/ppp/pppos.h:80:  u32_t last_xmit;                 /* Time of last transmission. */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/netif/ppp/ipcp.h:105:    u32_t ouraddr, hisaddr;	/* Addresses in NETWORK BYTE ORDER */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/netif/ppp/ipcp.h:107:    u32_t dnsaddr[2];	/* Primary and secondary MS DNS entries */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/netif/ppp/ipcp.h:110:    u32_t winsaddr[2];	/* Primary and secondary MS WINS entries */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/netif/ppp/ipcp.h:120:char *ip_ntoa (u32_t);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/netif/ppp/eap.h:128:	u32_t ea_keyflags;	/* SRP shared key usage flags */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/netif/ppp/ppp_impl.h:155:  void (*send_config)(ppp_pcb *pcb, void *ctx, u32_t accm, int pcomp, int accomp);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/netif/ppp/ppp_impl.h:157:  void (*recv_config)(ppp_pcb *pcb, void *ctx, u32_t accm, int pcomp, int accomp);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/netif/ppp/ppp_impl.h:428:int ppp_send_config(ppp_pcb *pcb, int mtu, u32_t accm, int pcomp, int accomp);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/netif/ppp/ppp_impl.h:429:int ppp_recv_config(ppp_pcb *pcb, int mru, u32_t accm, int pcomp, int accomp);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/netif/ppp/ppp_impl.h:432:int sifaddr(ppp_pcb *pcb, u32_t our_adr, u32_t his_adr, u32_t netmask);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/netif/ppp/ppp_impl.h:433:int cifaddr(ppp_pcb *pcb, u32_t our_adr, u32_t his_adr);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/netif/ppp/ppp_impl.h:435:int sifproxyarp(ppp_pcb *pcb, u32_t his_adr);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/netif/ppp/ppp_impl.h:436:int cifproxyarp(ppp_pcb *pcb, u32_t his_adr);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/netif/ppp/ppp_impl.h:439:int sdns(ppp_pcb *pcb, u32_t ns1, u32_t ns2);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/netif/ppp/ppp_impl.h:440:int cdns(ppp_pcb *pcb, u32_t ns1, u32_t ns2);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/netif/ppp/ppp_impl.h:447:u32_t get_mask(u32_t addr);
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/netif/ppp/ppp_impl.h:585:/* int parse_dotted_ip (char *, u32_t *); */
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/netif/ppp/ppp_impl.h:593:void demand_rexmit (int, u32_t); /* retransmit saved frames for an NP*/
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/netif/ppp/eui64.h:53:    u32_t e32[2];
+/home/gauci/esp/pycom-esp-idf/components/lwip/include/lwip/port/arch/cc.h:48:typedef uint32_t u32_t;
+/home/gauci/esp/pycom-esp-idf/components/lwip/port/freertos/sys_arch.c:158:u32_t
+/home/gauci/esp/pycom-esp-idf/components/lwip/port/freertos/sys_arch.c:159:sys_arch_sem_wait(sys_sem_t *sem, u32_t timeout)
+/home/gauci/esp/pycom-esp-idf/components/lwip/port/freertos/sys_arch.c:275:u32_t
+/home/gauci/esp/pycom-esp-idf/components/lwip/port/freertos/sys_arch.c:276:sys_arch_mbox_fetch(sys_mbox_t *mbox, void **msg, u32_t timeout)
+/home/gauci/esp/pycom-esp-idf/components/lwip/port/freertos/sys_arch.c:341:u32_t
+/home/gauci/esp/pycom-esp-idf/components/lwip/port/freertos/sys_arch.c:446:u32_t
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/api_msg.c:1444:        u32_t remaining = msg->msg.r.len;
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/sockets.c:993:          netconn_recved(sock->conn, (u32_t)off);
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/sockets.c:1016:          netconn_recved(sock->conn, (u32_t)off);
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/sockets.c:1142:    netconn_recved(sock->conn, (u32_t)off);
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/sockets.c:1618:  u32_t waitres = 0;
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/sockets.c:1621:  u32_t msectimeout;
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/sockets.c:2292:                  s, *(u32_t *)optval));
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/sockets.c:2732:      sock->conn->pcb.tcp->keep_idle = (u32_t)(*(const int*)optval);
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/sockets.c:2739:      sock->conn->pcb.tcp->keep_idle = 1000*(u32_t)(*(const int*)optval);
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/sockets.c:2744:      sock->conn->pcb.tcp->keep_intvl = 1000*(u32_t)(*(const int*)optval);
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/sockets.c:2749:      sock->conn->pcb.tcp->keep_cnt = (u32_t)(*(const int*)optval);
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/sockets.c:2757:    sock->conn->pcb.tcp->per_soc_tcp_wnd = ((u32_t)(*(const int*)optval)) * TCP_MSS;
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/sockets.c:2760:    sock->conn->pcb.tcp->per_soc_tcp_snd_buf = ((u32_t)(*(const int*)optval)) * TCP_MSS;
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/sockets.c:2952:    if (argp && *(u32_t*)argp) {
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/api_lib.c:612:netconn_recved(struct netconn *conn, u32_t length)
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/tcpip.c:300:tcpip_timeout(u32_t msecs, sys_timeout_handler h, void *arg)
+/home/gauci/esp/pycom-esp-idf/components/lwip/api/tcpip.c:505:		 (u32_t)xLwipTaskHandle,TCPIP_THREAD_PRIO,TCPIP_THREAD_STACKSIZE);
+/home/gauci/esp/pycom-esp-idf/components/lwip/CHANGELOG:329:  * tcp: fixed bug #45559: Window scaling casts u32_t to u16_t without checks
+/home/gauci/esp/pycom-esp-idf/components/lwip/CHANGELOG:1555:    from struct to typedef (u32_t) - and better code).
+/home/gauci/esp/pycom-esp-idf/components/lwip/CHANGELOG:2402:    snmp_get_sysuptime(u32_t *value), and enable to change "sysuptime" value only
+/home/gauci/esp/pycom-esp-idf/components/lwip/CHANGELOG:2719:  * stats.h, stats.c, msg_in.c: Stats counters can be change to u32_t if necessary with the
+/home/gauci/esp/pycom-esp-idf/components/lwip/CHANGELOG:3505:    u32_t, s32_t typedefs. This solves most debug word-length assumes.
+Binary file /home/gauci/esp/pycom-esp-idf/components/esptool_py/esptool/test/elf2image/esp8266-openrtos-blink-v2.elf matches
+Binary file /home/gauci/esp/pycom-esp-idf/components/esptool_py/esptool/test/elf2image/esp32-app-template.elf matches

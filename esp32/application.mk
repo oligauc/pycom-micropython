@@ -16,6 +16,10 @@ APP_INC += -Itelnet
 APP_INC += -Iftp
 APP_INC += -Ilora
 APP_INC += -Ibootloader
+APP_INC += -Ialljoyn/src/target/esp32
+APP_INC += -Ialljoyn/src/wsl
+APP_INC += -Ialljoyn/inc
+APP_INC += -Ialljoyn/src
 APP_INC += -Ifatfs/src/drivers
 APP_INC += -I$(BUILD)
 APP_INC += -I$(BUILD)/genhdr
@@ -124,6 +128,7 @@ APP_MODS_SRC_C = $(addprefix mods/,\
 	modussl.c \
 	modbt.c \
 	modled.c \
+	modalljoyn.c \
 	)
 endif
 
@@ -155,6 +160,7 @@ APP_MODS_SRC_C = $(addprefix mods/,\
 	modussl.c \
 	modbt.c \
 	modled.c \
+	modalljoyn.c \
 	)
 endif
 
@@ -179,6 +185,8 @@ APP_UTIL_SRC_C = $(addprefix util/,\
 	mpirq.c \
 	mpsleep.c \
 	timeutils.c \
+	alljoyn_interface.c \
+	alljoyn_main.c \
 	)
 
 APP_FATFS_SRC_C = $(addprefix fatfs/src/,\
@@ -221,6 +229,48 @@ APP_FTP_SRC_C = $(addprefix ftp/,\
 	updater.c \
 	)
 
+APP_ALLJOYN_SRC_C = $(addprefix alljoyn/,\
+	src/aj_about.c \
+	src/aj_bufio.c \
+	src/aj_bus.c \
+	src/aj_cert.c \
+	src/aj_crc16.c \
+	src/aj_creds.c \
+	src/aj_debug.c \
+	src/aj_guid.c \
+	src/aj_helper.c \
+	src/aj_init.c \
+	src/aj_disco.c \
+	src/aj_connect.c \
+	src/aj_introspect.c \
+	src/aj_authentication.c \
+	src/aj_authorisation.c \
+	src/aj_conversationhash.c \
+	src/aj_link_timeout.c \
+	src/aj_msg.c \
+	src/nvram/aj_nvram.c \
+	src/aj_peer.c \
+	src/aj_serial.c \
+	src/aj_serial_rx.c \
+	src/aj_serial_tx.c \
+	src/aj_std.c \
+	src/aj_util.c \
+	src/aj_crypto_util.c \
+	src/aj_security.c \
+	src/crypto/aj_crypto_ecc.c \
+	src/crypto/aj_crypto_aes.c \
+	src/crypto/aj_crypto_drbg.c \
+	src/crypto/aj_sw_crypto.c \
+	src/external/sha2/sha2.c \
+	src/crypto/aj_crypto_sha2.c \
+	src/crypto/aj_crypto_ec_p256.c \
+	src/crypto/aj_crypto_field_p256.c \
+	src/target/esp32/aj_net.c \
+	src/target/esp32/aj_target_util.c \
+	src/target/esp32/aj_target_crypto.c \
+	src/target/esp32/aj_target_nvram.c \
+	)
+
 BOOT_SRC_C = $(addprefix bootloader/,\
 	bootloader.c \
 	bootmgr.c \
@@ -230,7 +280,7 @@ BOOT_SRC_C = $(addprefix bootloader/,\
 
 OBJ = $(PY_O)
 OBJ += $(addprefix $(BUILD)/, $(APP_MAIN_SRC_C:.c=.o) $(APP_HAL_SRC_C:.c=.o) $(APP_LIB_SRC_C:.c=.o))
-OBJ += $(addprefix $(BUILD)/, $(APP_MODS_SRC_C:.c=.o) $(APP_STM_SRC_C:.c=.o))
+OBJ += $(addprefix $(BUILD)/, $(APP_MODS_SRC_C:.c=.o) $(APP_STM_SRC_C:.c=.o) $(APP_ALLJOYN_SRC_C:.c=.o))
 OBJ += $(addprefix $(BUILD)/, $(APP_FATFS_SRC_C:.c=.o) $(APP_UTIL_SRC_C:.c=.o) $(APP_TELNET_SRC_C:.c=.o))
 ifeq ($(BOARD), LOPY)
 OBJ += $(addprefix $(BUILD)/, $(APP_LORA_SRC_C:.c=.o) $(APP_LIB_LORA_SRC_C:.c=.o) $(APP_SX1272_SRC_C:.c=.o))

@@ -29,7 +29,7 @@ ESP_IDF_COMP_PATH = $(ESP_IDF_PATH)/components
 
 CFLAGS_XTENSA = -DESP_PLATFORM -Og -g3 -Wpointer-arith -Werror -Wno-error=unused-function \
                 -Wno-error=unused-but-set-variable -Wno-error=unused-variable -Wl,-EL \
-                -mlongcalls -Wall -ffunction-sections -fdata-sections -fno-common
+                -mlongcalls -Wall -ffunction-sections -fdata-sections -fno-common 
 
 CFLAGS = $(CFLAGS_XTENSA) -nostdlib -std=gnu99 -g3 -fstrict-volatile-bitfields -Iboards/$(BOARD)
 

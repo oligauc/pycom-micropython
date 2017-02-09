@@ -215,22 +215,31 @@ void wlan_setup (int32_t mode, const char *ssid, uint32_t ssid_len, uint32_t aut
 
     wlan_set_antenna(antenna);
     wlan_set_mode(mode);
-
-    wifi_ps_type_t wifi_ps_type;
-    if (mode != WIFI_MODE_STA) {
-        wlan_setup_ap (ssid, ssid_len, auth, key, key_len, channel, add_mac);
-        wifi_ps_type = WIFI_PS_NONE;
-    } else {
-        wifi_ps_type = WIFI_PS_MODEM;
-    }
+   
+    //wifi_ps_type_t wifi_ps_type;
+    //if (mode != WIFI_MODE_STA) {
+    //    wlan_setup_ap (ssid, ssid_len, auth, key, key_len, channel, add_mac);
+    //    wifi_ps_type = WIFI_PS_NONE;
+    //} else {
+    //    wifi_ps_type = WIFI_PS_MODEM;
+   // }
 
     // set the power saving mode
-    ESP_ERROR_CHECK(esp_wifi_set_ps(wifi_ps_type));
+    //ESP_ERROR_CHECK(esp_wifi_set_ps(wifi_ps_type));
 
     esp_wifi_start();
 
     // start the servers before returning
     wlan_servers_start();
+    
+    /*const char* ssid1 = "telenet-53D4ED3";
+    uint32_t ssid_len1 = strlen(ssid1);
+    const char* key1 = "jz66pdJdsRad";
+    uint32_t key_len1 = strlen(key1);
+    
+    wlan_do_connect (ssid1, ssid_len1, NULL, key1, key_len1, 8000);*/
+    
+    //init_allJoin();
 }
 
 void wlan_stop (uint32_t timeout) {
@@ -365,7 +374,7 @@ STATIC void wlan_setup_ap (const char *ssid, uint32_t ssid_len, uint32_t auth, c
     wlan_set_security_internal(auth, key, key_len);
     // get the current config and then change it
     wifi_config_t config;
-    esp_wifi_get_config(WIFI_IF_AP, &config);
+    esp_wifi_get_config(WIFI_IF_AP, &config); // 
     memcpy((char *)config.ap.ssid, (char *)wlan_obj.ssid, ssid_len);
     config.ap.ssid_len = ssid_len;
     config.ap.authmode = wlan_obj.auth;

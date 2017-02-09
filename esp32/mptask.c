@@ -205,9 +205,6 @@ soft_reset:
     // reset config variables; they should be set by boot.py
     MP_STATE_PORT(machine_config_main) = MP_OBJ_NULL;
 
-    // enable telnet and ftp
-    servers_start();
-
     if (!safeboot) {
         // run boot.py
         int ret = pyexec_file("boot.py");
@@ -219,6 +216,8 @@ soft_reset:
             mperror_signal_error();
         }
     }
+    
+    //init_allJoin(); 
 
     if (!safeboot) {
         // run the main script from the current directory.
@@ -239,7 +238,7 @@ soft_reset:
             }
         }
     }
-
+    
     // main script is finished, so now go into REPL mode.
     // the REPL mode can change, or it can request a soft reset.
     for ( ; ; ) {
