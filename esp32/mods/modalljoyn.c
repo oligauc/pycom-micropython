@@ -68,7 +68,7 @@ void parse_method_arguments(const char *method, char *args_in, uint8_t *num_in, 
 
 		(*num_in)++;
 	}
-
+        
 	pch = (char *)strchr(method, '>');
 	while (pch != NULL) {
 		args_out[*num_out] = *(pch + 1);
@@ -154,25 +154,18 @@ STATIC mp_obj_t add_interface(mp_uint_t n_args, const mp_obj_t *pos_args, mp_map
     if (args[3].u_obj != MP_OBJ_NULL){
         mp_obj_get_array(args[3].u_obj, &number_callbacks, &callbacks);
     }
-    
-    if (alljoyn_obj.mode == AJ_SERVICE){
         
-        if (number_callbacks == 0){
-            mp_raise_ValueError("Callbacks required for service mode\n");
-        }
+    if (number_callbacks == 0){
+        mp_raise_ValueError("Callbacks required for service mode\n");
+    }
         
-        if (number_callbacks != number_methods){
-            mp_raise_ValueError("Missing callbacks\n");
-        }
+    if (number_callbacks != number_methods){
+        mp_raise_ValueError("Missing callbacks\n");
     }
     
     for (uint8_t idx = 0; idx < number_methods; idx++){
         char *method_name = (char *)mp_obj_str_get_data(interface_methods[idx], &len);
-        if (alljoyn_obj.mode == AJ_SERVICE){
-            addObject((char *)service_path, (char *)interface_name, &method_name, 1, &callbacks[idx]);
-        } else {
-            addObject((char *)service_path, (char *)interface_name, &method_name, 1, callbacks);
-        }
+        addObject((char *)service_path, (char *)interface_name, &method_name, 1, &callbacks[idx]);
     }
             
     return mp_const_none;

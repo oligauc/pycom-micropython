@@ -120,8 +120,10 @@ bool getParametersFromMsgId(uint32_t msgId, char** method, mp_obj_t *callback, b
                         *callback = conductor_interface->callbacks[m_idx];
                     }
                 } else {
-                    if (AJ_PRX_MESSAGE_ID(obj_idx, itf_idx, m_idx - 1) == msgId){
+                    uint32_t reply_id = AJ_REPLY_ID(AJ_PRX_MESSAGE_ID(obj_idx, itf_idx, m_idx - 1));
+                    if (reply_id == msgId){
                         *method = conductor_interface->interface_methods[m_idx];
+                        *callback = conductor_interface->callbacks[m_idx];
                     }
                 }
                     
