@@ -7,10 +7,14 @@
  * available at https://www.pycom.io/opensource/licensing
  */
 
-#ifndef ALLJOYN_HELPER_H
-#define	ALLJOYN_HELPER_H
+#ifndef ALLJOYN_MAIN_H
+#define	ALLJOYN_MAIN_H
 
 #include "modalljoyn.h"
+
+/******************************************************************************
+ DECLARE PUBLIC FUNCTIONS
+ ******************************************************************************/
 
 void alljoyn_start_client(alljoyn_obj_t *alljoyn_obj);
 void alljoyn_start_service(alljoyn_obj_t *alljoyn_obj);

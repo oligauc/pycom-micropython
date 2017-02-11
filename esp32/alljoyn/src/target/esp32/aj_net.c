@@ -134,7 +134,6 @@ AJ_Status AJ_Net_Send(AJ_IOBuffer* buf)
     if (tx > 0) {
         ret = send(context->tcpSock, buf->readPtr, tx, MSG_NOSIGNAL);
         if (ret == -1) {
-            printf("AJ_Net_Send(): send() failed. errno=\"%s\", status=AJ_ERR_WRITE\n", strerror(errno));
             AJ_ErrPrintf(("AJ_Net_Send(): send() failed. errno=\"%s\", status=AJ_ERR_WRITE\n", strerror(errno)));
             return AJ_ERR_WRITE;
         }
@@ -145,7 +144,6 @@ AJ_Status AJ_Net_Send(AJ_IOBuffer* buf)
     }
 
     AJ_InfoPrintf(("AJ_Net_Send(): status=AJ_OK\n"));
-    printf("AJ_Net_Send(): status=AJ_OK\n");
     return AJ_OK;
 }
 #endif
@@ -169,7 +167,6 @@ void AJ_Net_Interrupt()
         uint64_t u64;
         if (write(interruptFd, &u64, sizeof(u64)) < 0) {
             AJ_ErrPrintf(("AJ_Net_Interrupt(): write() failed. errno=\"%s\"\n", strerror(errno)));
-            printf("AJ_Net_Interrupt(): write() failed. errno=\"%s\"\n", strerror(errno));
         }
     }
 }
@@ -185,28 +182,22 @@ AJ_Status AJ_Net_Recv(AJ_IOBuffer* buf, uint32_t len, uint32_t timeout)
     int maxFd = context->tcpSock;
     struct timeval tv = { timeout / 1000, 1000 * (timeout % 1000) };
 
-    // AJ_InfoPrintf(("AJ_Net_Recv(buf=0x%p, len=%d, timeout=%d)\n", buf, len, timeout));
-
     assert(buf->direction == AJ_IO_BUF_RX);
 
     FD_ZERO(&fds);
     FD_SET(context->tcpSock, &fds);
-    //if (interruptFd >= 0) {
-    //    FD_SET(interruptFd, &fds);
-    //    maxFd = max(maxFd, interruptFd);
-    //}
+
     blocked = TRUE;
     rc = select(maxFd + 1, &fds, NULL, NULL, &tv);
     blocked = FALSE;
     if (rc == 0) {
-        printf("AJ_Net_Recv - timeout -n");
+        AJ_ErrPrintf("AJ_Net_Recv - timeout -n");
         return AJ_ERR_TIMEOUT;
     }
     if ((interruptFd >= 0) && FD_ISSET(interruptFd, &fds)) {
         uint64_t u64;
         if (read(interruptFd, &u64, sizeof(u64)) < 0) {
             AJ_ErrPrintf(("AJ_Net_Recv(): read() failed during interrupt. errno=\"%s\"\n", strerror(errno)));
-            printf("AJ_Net_Recv(): read() failed during interrupt. errno=\"%s\"\n", strerror(errno));
         }
         return AJ_ERR_INTERRUPTED;
     }
@@ -215,11 +206,9 @@ AJ_Status AJ_Net_Recv(AJ_IOBuffer* buf, uint32_t len, uint32_t timeout)
         ssize_t ret = recv(context->tcpSock, buf->writePtr, rx, 0);
         if ((ret == -1) || (ret == 0)) {
             AJ_ErrPrintf(("AJ_Net_Recv(): recv() failed. errno=\"%s\"\n", strerror(errno)));
-            printf("AJ_Net_Recv(): recv() failed. errno=\"%s\"\n", strerror(errno));
             status = AJ_ERR_READ;
         } else {
             AJ_InfoPrintf(("AJ_Net_Recv(): recv'd %d from tcp\n", ret));
-            printf("AJ_Net_Recv(): recv'd %d from tcp\n", ret);
             buf->writePtr += ret;
         }
     }
@@ -238,19 +227,11 @@ static AJ_Status AJ_TCP_Connect(AJ_BusAttachment* bus, const AJ_Service* service
     socklen_t addrSize;
     int tcpSock = INVALID_SOCKET;
 
-    /*interruptFd = eventfd(0, O_NONBLOCK);  // Use O_NONBLOCK instead of EFD_NONBLOCK due to bug in OpenWrt's uCLibc
-    if (interruptFd < 0) {
-	printf("+++ AJ_TCP_Connect  - eventfd error\n");
-        AJ_ErrPrintf(("AJ_TCP_Connect(): failed to created interrupt event\n"));
-        goto ConnectError;
-    }*/
-
     memset(&addrBuf, 0, sizeof(addrBuf));
 
     tcpSock = socket(AF_INET, SOCK_STREAM, 0);
     if (tcpSock == INVALID_SOCKET) {
         AJ_ErrPrintf(("AJ_TCP_Connect(): socket() failed.  status=AJ_ERR_CONNECT\n"));
-	printf("+++ AJ_TCP_Connect  - tcpSock error\n");
         goto ConnectError;
     }
     if (service->addrTypes & AJ_ADDR_TCP4) {
@@ -260,17 +241,14 @@ static AJ_Status AJ_TCP_Connect(AJ_BusAttachment* bus, const AJ_Service* service
         sa->sin_addr.s_addr = service->ipv4;
         addrSize = sizeof(struct sockaddr_in);
         AJ_InfoPrintf(("AJ_TCP_Connect(): Connect to \"%s:%u\"\n", inet_ntoa(sa->sin_addr), service->ipv4port));
-	printf("+++ AJ_TCP_Connect  - socket TCP4 ok\n");
     } else if (service->addrTypes & AJ_ADDR_TCP6) {
         struct sockaddr_in6* sa = (struct sockaddr_in6*)&addrBuf;
         sa->sin6_family = AF_INET6;
         sa->sin6_port = htons(service->ipv6port);
         memcpy(sa->sin6_addr.s6_addr, service->ipv6, sizeof(sa->sin6_addr.s6_addr));
         addrSize = sizeof(struct sockaddr_in6);
-	printf("+++ AJ_TCP_Connect  - socket TCP6 ok\n");
     } else {
         AJ_ErrPrintf(("AJ_TCP_Connect(): Invalid addrTypes %u, status=AJ_ERR_CONNECT\n", service->addrTypes));
-        printf("+++ AJ_TCP_Connect  - socket error - a\n");
         goto ConnectError;
     }
 
@@ -278,7 +256,6 @@ static AJ_Status AJ_TCP_Connect(AJ_BusAttachment* bus, const AJ_Service* service
     ret = connect(tcpSock, (struct sockaddr*)&addrBuf, addrSize);
     if (ret < 0) {
         AJ_ErrPrintf(("AJ_TCP_Connect(): connect() failed. errno=\"%s\", status=AJ_ERR_CONNECT\n", strerror(errno)));
-         printf("+++ AJ_TCP_Connect  - connect error - a\n");
         goto ConnectError;
     } else {
         netContext.tcpSock = tcpSock;
@@ -287,7 +264,6 @@ static AJ_Status AJ_TCP_Connect(AJ_BusAttachment* bus, const AJ_Service* service
         AJ_IOBufInit(&bus->sock.tx, txData, sizeof(txData), AJ_IO_BUF_TX, &netContext);
         bus->sock.tx.send = AJ_Net_Send;
         AJ_InfoPrintf(("AJ_TCP_Connect(): status=AJ_OK\n"));
-        printf("+++ AJ_TCP_Connect  - connect ok - a\n");
     }
 
     return AJ_OK;
@@ -311,7 +287,6 @@ AJ_Status AJ_Net_Connect(AJ_BusAttachment* bus, const AJ_Service* service)
 {
     AJ_Status status = AJ_ERR_CONNECT;
 
-    printf("AJ_Net_Connect(bus=0x%p, addrType=%d.)\n", bus, service->addrTypes);
     AJ_InfoPrintf(("AJ_Net_Connect(bus=0x%p, addrType=%d.)\n", bus, service->addrTypes));
 
 #ifdef AJ_ARDP
@@ -355,7 +330,6 @@ void AJ_Net_Disconnect(AJ_NetSocket* netSock)
 static uint8_t sendToBroadcast(int sock, uint16_t port, void* ptr, size_t tx)
 {
     ssize_t ret = -1;
-    //printf("++++++++++ sendToBroadcast\n");
     uint8_t sendSucceeded = FALSE;
      struct netif *n = NULL;
  
@@ -372,46 +346,16 @@ static uint8_t sendToBroadcast(int sock, uint16_t port, void* ptr, size_t tx)
     		sin_bcast.sin_addr.s_addr = uIP4bc;
 
 		inet_ntop(AF_INET, &(sin_bcast.sin_addr), buf, sizeof(buf));
-                printf("sendToBroadcast: sending to bcast addr %s\n", buf);
-    		printf("sendToBroadcast: port: %d\n",port);
 		ret = sendto(sock, ptr, tx, MSG_NOSIGNAL, (struct sockaddr*) &sin_bcast, sizeof(struct sockaddr_in));
 
 		if (tx == ret) {
         		sendSucceeded = TRUE;
-        		printf("+++++++++++++++ sendToBroadcast- Success\n");
     		} else {
-        		//printf("+++++++++++++++ sendToBroadcast- Fail\n");
-        		printf("sendToBroadcast(): sendto failed. errno=\"%s\"\n", strerror(errno));
+			AJ_ErrPrintf(("sendToBroadcast(): sendto failed. errno=\"%s\"\n", strerror(errno)));
     		}
 	}
     }
 
-    /*ssize_t ret = -1;
-    //printf("++++++++++ sendToBroadcast\n");
-    uint8_t sendSucceeded = FALSE;
-    
-    ip4_addr_t ip4bc = ip_addr_broadcast.u_addr.ip4;
-    const char *charIP4bc = ip4addr_ntoa(&ip4bc);
-    uint32_t uIP4bc = ipaddr_addr(charIP4bc);
-    printf("++++ Broadcast ip: %s", charIP4bc);
-    
-    char buf[INET_ADDRSTRLEN];
-    struct sockaddr_in sin_bcast;
-    sin_bcast.sin_family = AF_INET;
-    sin_bcast.sin_port = htons(port);
-    sin_bcast.sin_addr.s_addr = uIP4bc;
-    
-    inet_ntop(AF_INET, &(sin_bcast.sin_addr), buf, sizeof(buf));
-    printf("sendToBroadcast: sending to bcast addr %s\n", buf);
-    ret = sendto(sock, ptr, tx, MSG_NOSIGNAL, (struct sockaddr*) &sin_bcast, sizeof(struct sockaddr_in));
-    if (tx == ret) {
-        sendSucceeded = TRUE;
-        printf("+++++++++++++++ sendToBroadcast- Success\n");
-    } else {
-        printf("+++++++++++++++ sendToBroadcast- Fail\n");
-        AJ_ErrPrintf(("sendToBroadcast(): sendto failed. errno=\"%s\"\n", strerror(errno)));
-    }*/
-    
     return sendSucceeded;
 }
 
@@ -511,7 +455,6 @@ AJ_Status AJ_Net_SendTo(AJ_IOBuffer* buf)
     uint8_t sendSucceeded = FALSE;
     size_t tx = AJ_IO_BUF_AVAIL(buf);
     MCastContext* context = (MCastContext*) buf->context;
-    printf("AJ_Net_SendTo(buf=0x%p)\n", buf);
     assert(buf->direction == AJ_IO_BUF_TX);
 
     if (tx > 0) {
@@ -525,12 +468,10 @@ AJ_Status AJ_Net_SendTo(AJ_IOBuffer* buf)
                 if (tx == ret) {
                     sendSucceeded = TRUE;
                 } else {
-                    printf("AJ_Net_SendTo(): sendto AJ IPv4 failed. errno=\"%s\"\n", strerror(errno));
                     AJ_ErrPrintf(("AJ_Net_SendTo(): sendto AJ IPv4 failed. errno=\"%s\"\n", strerror(errno)));
                 }
             } else {
                 AJ_ErrPrintf(("AJ_Net_SendTo(): Invalid AJ IP address. errno=\"%s\"\n", strerror(errno)));
-                printf("AJ_Net_SendTo(): Invalid AJ IP address. errno=\"%s\"\n", strerror(errno));
             }
 
             if (sendToBroadcast(context->udpSock, AJ_UDP_PORT, buf->readPtr, tx) == TRUE) {
@@ -542,7 +483,6 @@ AJ_Status AJ_Net_SendTo(AJ_IOBuffer* buf)
     if (buf->flags & AJ_IO_BUF_MDNS) {
         if (RewriteSenderInfo(buf, context->mDnsRecvAddr, context->mDnsRecvPort) != AJ_OK) {
             AJ_WarnPrintf(("AJ_Net_SendTo(): RewriteSenderInfo failed.\n"));
-            printf("AJ_Net_SendTo(): RewriteSenderInfo failed.\n");
             tx = 0;
         } else {
             tx = AJ_IO_BUF_AVAIL(buf);
@@ -559,14 +499,12 @@ AJ_Status AJ_Net_SendTo(AJ_IOBuffer* buf)
                 ret = sendto(context->mDnsSock, buf->readPtr, tx, MSG_NOSIGNAL, (struct sockaddr*)&sin, sizeof(sin));
                 if (tx == ret) {
                     sendSucceeded = TRUE;
-                    printf("AJ_Net_SendTo(): sendto mDNS IPv4 - succeeded\n");
+                    AJ_InfoPrintf(("AJ_Net_SendTo(): sendto mDNS IPv4 - succeeded\n"));
                 } else {
                     AJ_ErrPrintf(("AJ_Net_SendTo(): sendto mDNS IPv4 failed. errno=\"%s\"\n", strerror(errno)));
-                    printf("AJ_Net_SendTo(): sendto mDNS IPv4 failed. errno=\"%s\"\n", strerror(errno));
                 }
             } else {
                 AJ_ErrPrintf(("AJ_Net_SendTo(): Invalid mDNS IP address. errno=\"%s\"\n", strerror(errno)));
-                printf("AJ_Net_SendTo(): Invalid mDNS IP address. errno=\"%s\"\n", strerror(errno));
             }
 
             if (sendToBroadcast(context->mDnsSock, MDNS_UDP_PORT, buf->readPtr, tx) == TRUE) {
@@ -577,14 +515,12 @@ AJ_Status AJ_Net_SendTo(AJ_IOBuffer* buf)
         if (!sendSucceeded) {
             /* Not a single send succeeded, return an error */
             AJ_ErrPrintf(("AJ_Net_SendTo(): sendto() failed. errno=\"%s\", status=AJ_ERR_WRITE\n", strerror(errno)));
-            printf("AJ_Net_SendTo(): sendto() failed. errno=\"%s\", status=AJ_ERR_WRITE\n", strerror(errno));
             return AJ_ERR_WRITE;
         }
         buf->readPtr += ret;
     }
     AJ_IO_BUF_RESET(buf);
     AJ_InfoPrintf(("AJ_Net_SendTo(): status=AJ_OK\n"));
-    printf("AJ_Net_SendTo(): status=AJ_OK\n");
     return AJ_OK;
 }
 
@@ -599,10 +535,6 @@ AJ_Status AJ_Net_RecvFrom(AJ_IOBuffer* buf, uint32_t len, uint32_t timeout)
     int rc = 0;
     struct timeval tv = { timeout / 1000, 1000 * (timeout % 1000) };
 
-    printf("+++ mDnsRecvSock: %d\n", context->mDnsRecvSock);
-
-    printf("AJ_Net_RecvFrom(buf=0x%p, len=%d, timeout=%d)\n", buf, len, timeout);
-
     assert(buf->direction == AJ_IO_BUF_RX);
     assert(context->mDnsRecvSock != INVALID_SOCKET);
 
@@ -611,14 +543,12 @@ AJ_Status AJ_Net_RecvFrom(AJ_IOBuffer* buf, uint32_t len, uint32_t timeout)
     maxFd = context->mDnsRecvSock;
     if (context->udpSock != INVALID_SOCKET) {
         FD_SET(context->udpSock, &fds);
-        printf("+++ maxFd: %d, udp: %d\n",maxFd,context->udpSock);
         maxFd = max(maxFd, context->udpSock);
     }
 
     rc = select(maxFd + 1, &fds, NULL, NULL, &tv);  
     if (rc == 0) {
         AJ_InfoPrintf(("AJ_Net_RecvFrom(): select() timed out. status=AJ_ERR_TIMEOUT\n"));
-        printf("AJ_Net_RecvFrom(): select() timed out. status=AJ_ERR_TIMEOUT\n");
         return AJ_ERR_TIMEOUT;
     }
 
@@ -631,11 +561,9 @@ AJ_Status AJ_Net_RecvFrom(AJ_IOBuffer* buf, uint32_t len, uint32_t timeout)
             ret = recvfrom(context->mDnsRecvSock, buf->writePtr, rx, 0, NULL, 0);
             if (ret == -1) {
                 AJ_ErrPrintf(("AJ_Net_RecvFrom(): mDnsRecvSock recvfrom() failed. errno=\"%s\"\n", strerror(errno)));
-                printf("AJ_Net_RecvFrom(): mDnsRecvSock recvfrom() failed. errno=\"%s\"\n", strerror(errno));
                 status = AJ_ERR_READ;
             } else {
                 AJ_InfoPrintf(("AJ_Net_RecvFrom(): recv'd %d from mDNS\n", (int) ret));
-                printf("AJ_Net_RecvFrom(): recv'd %d from mDNS\n", (int) ret);
                 buf->flags |= AJ_IO_BUF_MDNS;
                 buf->writePtr += ret;
                 status = AJ_OK;
@@ -651,11 +579,9 @@ AJ_Status AJ_Net_RecvFrom(AJ_IOBuffer* buf, uint32_t len, uint32_t timeout)
             ret = recvfrom(context->udpSock, buf->writePtr, rx, 0, NULL, 0);
             if (ret == -1) {
                 AJ_ErrPrintf(("AJ_Net_RecvFrom(): recvfrom() failed. errno=\"%s\"\n", strerror(errno)));
-                printf("AJ_Net_RecvFrom(): recvfrom() failed. errno=\"%s\"\n", strerror(errno));
                 status = AJ_ERR_READ;
             } else {
                 AJ_InfoPrintf(("AJ_Net_RecvFrom(): recv'd %d from udp\n", (int) ret));
-		printf("AJ_Net_RecvFrom(): recv'd %d from udp\n", (int) ret);
                 buf->flags |= AJ_IO_BUF_AJ;
                 buf->writePtr += ret;
                 status = AJ_OK;
@@ -693,14 +619,12 @@ static int MCastUp4(const char group[], uint16_t port)
     mcastSock = socket(AF_INET, SOCK_DGRAM, 0);
     if (mcastSock == INVALID_SOCKET) {
         AJ_ErrPrintf(("MCastUp4(): socket() fails. status=AJ_ERR_READ\n"));
-        printf("MCastUp4(): socket() fails. status=AJ_ERR_READ\n");
         return INVALID_SOCKET;
     }
 
     ret = setsockopt(mcastSock, SOL_SOCKET, SO_REUSEADDR, &reuse, sizeof(reuse));
     if (ret != 0) {
         AJ_ErrPrintf(("MCastUp4(): setsockopt(SO_REUSEADDR) failed. errno=\"%s\", status=AJ_ERR_READ\n", strerror(errno)));
-        printf("MCastUp4(): setsockopt(SO_REUSEADDR) failed. errno=\"%s\", status=AJ_ERR_READ\n", strerror(errno));
         goto ExitError;
     }
 
@@ -708,7 +632,6 @@ static int MCastUp4(const char group[], uint16_t port)
     // This is needed for bcast router discovery
     int r = setsockopt(mcastSock, SOL_SOCKET, SO_BROADCAST, (void*) &bcast, sizeof(bcast));
     if (r != 0) {
-        printf("BcastUp4(): setsockopt(SOL_SOCKET, SO_BROADCAST) failed. errno=\"%s\"\n", strerror(errno));
         AJ_ErrPrintf(("BcastUp4(): setsockopt(SOL_SOCKET, SO_BROADCAST) failed. errno=\"%s\"\n", strerror(errno)));
         goto ExitError;
     }
@@ -718,11 +641,9 @@ static int MCastUp4(const char group[], uint16_t port)
      */
     sin.sin_family = AF_INET;
     sin.sin_port = htons(port);
-    printf("+++++ Binding to port: %d\n",port);
     sin.sin_addr.s_addr = INADDR_ANY;
     ret = bind(mcastSock, (struct sockaddr*) &sin, sizeof(sin));
     if (ret < 0) {
-        printf("MCastUp4(): bind() failed. errno=\"%s\", status=AJ_ERR_READ\n", strerror(errno));
         AJ_ErrPrintf(("MCastUp4(): bind() failed. errno=\"%s\", status=AJ_ERR_READ\n", strerror(errno)));
         goto ExitError;
     }
@@ -740,7 +661,6 @@ static int MCastUp4(const char group[], uint16_t port)
          * Since we were successful in setting up IPv4 broadcast for
          * this socket, we'll just use that and not use IPv4 multicast.
          */
-       printf("MCastUp4(): setsockopt(IP_ADD_MEMBERSHIP) failed. errno=\"%s\", status=AJ_ERR_READ\n", strerror(errno));
         AJ_WarnPrintf(("MCastUp4(): setsockopt(IP_ADD_MEMBERSHIP) failed. errno=\"%s\", status=AJ_ERR_READ\n", strerror(errno)));
     }
 
@@ -754,8 +674,6 @@ ExitError:
 
 static uint32_t chooseMDnsRecvAddr()
 {
-    printf("++++++++++ chooseMDnsRecvAddr\n");
-    
     uint32_t recvAddr = 0;
     struct netif *n = NULL;
     
@@ -763,15 +681,9 @@ static uint32_t chooseMDnsRecvAddr()
         if ((n->flags & NETIF_FLAG_UP)){ 
             ip4_addr_t ip4Addr = n->ip_addr.u_addr.ip4;
             const char *charIP4Addr = ip4addr_ntoa(&ip4Addr);
-            printf("++++ Our ip: %s", charIP4Addr);
             uint32_t uIP4Addr = ipaddr_addr(charIP4Addr);
-            printf("++++ isLoopback: %d\n",ip_addr_isloopback(&(n->ip_addr)));
-	    printf("++++ isBroadcast: %d\n",ip_addr_isbroadcast(&(n->ip_addr),n));
-            printf("+++++isBroadcast 2: %d\n",n->flags & NETIF_FLAG_BROADCAST);
-            printf("++++ isMulticast: %d\n",ip_addr_ismulticast(&(n->ip_addr)));
             if (uIP4Addr != IPADDR_LOOPBACK){
                 recvAddr = uIP4Addr;
-                printf("++++ Recieve address set: %d\n",uIP4Addr);
             }
         }
     }
@@ -789,13 +701,11 @@ static int MDnsRecvUp()
     recvSock = socket(AF_INET, SOCK_DGRAM, 0);
     if (recvSock == INVALID_SOCKET) {
         AJ_ErrPrintf(("MDnsRecvUp(): socket() fails. status=AJ_ERR_READ\n"));
-        printf("MDnsRecvUp(): socket() fails. status=AJ_ERR_READ\n");
         goto ExitError;
     }
 
     ret = setsockopt(recvSock, SOL_SOCKET, SO_REUSEADDR, &reuse, sizeof(reuse));
     if (ret != 0) {
-        printf("MDnsRecvUp(): setsockopt(SO_REUSEADDR) failed. errno=\"%s\", status=AJ_ERR_READ\n", strerror(errno));
         AJ_ErrPrintf(("MDnsRecvUp(): setsockopt(SO_REUSEADDR) failed. errno=\"%s\", status=AJ_ERR_READ\n", strerror(errno)));
         goto ExitError;
     }
@@ -805,7 +715,6 @@ static int MDnsRecvUp()
     sin.sin_addr.s_addr = INADDR_ANY;
     ret = bind(recvSock, (struct sockaddr*) &sin, sizeof(sin));
     if (ret < 0) {
-        printf("MDnsRecvUp(): bind() failed. errno=\"%s\", status=AJ_ERR_READ\n", strerror(errno));
         AJ_ErrPrintf(("MDnsRecvUp(): bind() failed. errno=\"%s\", status=AJ_ERR_READ\n", strerror(errno)));
         goto ExitError;
     }
@@ -818,23 +727,18 @@ ExitError:
 
 AJ_Status AJ_Net_MCastUp(AJ_MCastSocket* mcastSock)
 {
-    printf("++++++++++ AJ_Net_MCastUp - 1\n");
-    
     struct sockaddr_storage addrBuf;
     socklen_t addrLen = sizeof(addrBuf);
     struct sockaddr_in* sin;
     AJ_Status status = AJ_ERR_READ;
 
     mCastContext.mDnsRecvSock = MDnsRecvUp();
-    printf("+++ mCastContext.mDnsRecvSock: %d\n",mCastContext.mDnsRecvSock);
     if (mCastContext.mDnsRecvSock == INVALID_SOCKET) {
-        printf("++++++++++ AJ_Net_MCastUp - failed 1\n");
         AJ_ErrPrintf(("AJ_Net_MCastUp(): MDnsRecvUp for mDnsRecvPort failed"));
         return status;
     }
     if (getsockname(mCastContext.mDnsRecvSock, (struct sockaddr*) &addrBuf, &addrLen)) {
         AJ_ErrPrintf(("AJ_Net_MCastUp(): getsockname for mDnsRecvPort failed"));
-        printf("++++++++++ AJ_Net_MCastUp - getsockname\n");
         goto ExitError;
     }
     sin = (struct sockaddr_in*) &addrBuf;
@@ -843,11 +747,9 @@ AJ_Status AJ_Net_MCastUp(AJ_MCastSocket* mcastSock)
     mCastContext.mDnsRecvAddr = ntohl(chooseMDnsRecvAddr());
     if (mCastContext.mDnsRecvAddr == 0) {
         AJ_ErrPrintf(("AJ_Net_MCastUp(): no mDNS recv address"));
-        printf("++++++++++ AJ_Net_MCastUp - mDnsRecvAddr\n");
         goto ExitError;
     }
-    printf("AJ_Net_MCastUp(): mDNS recv on %d.%d.%d.%d:%d\n", ((mCastContext.mDnsRecvAddr >> 24) & 0xFF), ((mCastContext.mDnsRecvAddr >> 16) & 0xFF), ((mCastContext.mDnsRecvAddr >> 8) & 0xFF), (mCastContext.mDnsRecvAddr & 0xFF), mCastContext.mDnsRecvPort);
-
+   
     mCastContext.mDnsSock = MCastUp4(MDNS_IPV4_MULTICAST_GROUP, MDNS_UDP_PORT);
     if (AJ_GetMinProtoVersion() < 10) {
         mCastContext.udpSock = MCastUp4(AJ_IPV4_MULTICAST_GROUP, 0);
@@ -859,7 +761,6 @@ AJ_Status AJ_Net_MCastUp(AJ_MCastSocket* mcastSock)
         mcastSock->rx.recv = AJ_Net_RecvFrom;
         AJ_IOBufInit(&mcastSock->tx, txDataMCast, sizeof(txDataMCast), AJ_IO_BUF_TX, &mCastContext);
         mcastSock->tx.send = AJ_Net_SendTo;
-        printf("++++ We found the correct socket in AJ_Net_MCastUp\n");
         status = AJ_OK;
     }
     return status;
@@ -980,7 +881,6 @@ static AJ_Status AJ_Net_ARDP_Connect(AJ_BusAttachment* bus, const AJ_Service* se
 
     interruptFd = eventfd(0, O_NONBLOCK);  // Use O_NONBLOCK instead of EFD_NONBLOCK due to bug in OpenWrt's uCLibc
     if (interruptFd < 0) {
-        printf("AJ_Net_ARDP_Connect(): failed to created interrupt event\n");
         AJ_ErrPrintf(("AJ_Net_ARDP_Connect(): failed to created interrupt event\n"));
         goto ConnectError;
     }
@@ -989,7 +889,6 @@ static AJ_Status AJ_Net_ARDP_Connect(AJ_BusAttachment* bus, const AJ_Service* se
         struct sockaddr_in* sa = (struct sockaddr_in*) &addrBuf;
         udpSock = socket(AF_INET, SOCK_DGRAM, 0);
         if (udpSock == INVALID_SOCKET) {
-            printf("AJ_Net_ARDP_Connect(): socket() failed.  status=AJ_ERR_CONNECT\n");
             AJ_ErrPrintf(("AJ_Net_ARDP_Connect(): socket() failed.  status=AJ_ERR_CONNECT\n"));
             goto ConnectError;
         }
@@ -998,14 +897,12 @@ static AJ_Status AJ_Net_ARDP_Connect(AJ_BusAttachment* bus, const AJ_Service* se
         sa->sin_port = htons(service->ipv4portUdp);
         sa->sin_addr.s_addr = service->ipv4Udp;
         addrSize = sizeof(struct sockaddr_in);
-        printf("AJ_Net_ARDP_Connect(): Connect to \"%s:%u\"\n", inet_ntoa(sa->sin_addr), service->ipv4portUdp);
         AJ_InfoPrintf(("AJ_Net_ARDP_Connect(): Connect to \"%s:%u\"\n", inet_ntoa(sa->sin_addr), service->ipv4portUdp));;
     } else if (service->addrTypes & AJ_ADDR_UDP6) {
         struct sockaddr_in6* sa = (struct sockaddr_in6*) &addrBuf;
         udpSock = socket(AF_INET6, SOCK_DGRAM, 0);
         if (udpSock == INVALID_SOCKET) {
             AJ_ErrPrintf(("AJ_Net_ARDP_Connect(): socket() failed.  status=AJ_ERR_CONNECT\n"));
-            printf("AJ_Net_ARDP_Connect(): Connect to \"%s:%u\"\n", inet_ntoa(sa->sin_addr), service->ipv4portUdp);
             goto ConnectError;
         }
 
@@ -1015,7 +912,6 @@ static AJ_Status AJ_Net_ARDP_Connect(AJ_BusAttachment* bus, const AJ_Service* se
         addrSize = sizeof(struct sockaddr_in6);
     } else {
         AJ_ErrPrintf(("AJ_Net_ARDP_Connect(): Invalid addrTypes %u, status=AJ_ERR_CONNECT\n", service->addrTypes));
-        printf("AJ_Net_ARDP_Connect(): Invalid addrTypes %u, status=AJ_ERR_CONNECT\n", service->addrTypes);
         return AJ_ERR_CONNECT;
     }
 
@@ -1031,10 +927,8 @@ static AJ_Status AJ_Net_ARDP_Connect(AJ_BusAttachment* bus, const AJ_Service* se
         bus->sock.rx.recv = AJ_ARDP_Recv;
         AJ_IOBufInit(&bus->sock.tx, txData, sizeof(txData), AJ_IO_BUF_TX, &netContext);
         bus->sock.tx.send = AJ_ARDP_Send;
-        printf("must do this before calling AJ_MarshalMethodCall\n");
     } else {
         AJ_ErrPrintf(("AJ_Net_ARDP_Connect(): Error connecting\n"));
-        printf("must do this before calling AJ_MarshalMethodCall\n";
         perror("connect");
         goto ConnectError;
     }

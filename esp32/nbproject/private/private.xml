@@ -24,9 +24,6 @@
             <file>file:/home/gauci/esp/pycom-micropython/esp32/util/alljoyn_main.c</file>
             <file>file:/home/gauci/esp/pycom-micropython/esp32/util/alljoyn_interface.h</file>
             <file>file:/home/gauci/esp/pycom-micropython/esp32/mods/modalljoyn.c</file>
-            <file>file:/home/gauci/esp/pycom-micropython/esp32/util/mpirq.c</file>
-            <file>file:/home/gauci/esp/pycom-micropython/esp32/mods/machtimer_alarm.c</file>
-            <file>file:/home/gauci/esp/pycom-micropython/esp32/util/mpirq.h</file>
             <file>file:/home/gauci/esp/pycom-micropython/esp32/util/alljoyn_main.h</file>
         </group>
     </open-files>

@@ -26,51 +26,14 @@
 #include <aj_debug.h>
 #include <aj_config.h>
 #include <aj_security.h>
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
-#include "lwip/sockets.h"
-
-#include "esp_wifi.h"
-#include "esp_wifi_types.h"
-
-#include "py/mphal.h"
-
-#include "alljoyn_interface.h"
 
 /**
  * Turn on per-module debug printing by setting this variable to non-zero value
  * (usually in debugger).
  */
 #ifndef NDEBUG
-uint8_t dbgHELPER = 1;
+uint8_t dbgHELPER = 0;
 #endif
-
-#define ALLJOIN_TASK_STACK_SIZE			2048
-#define ALLJOIN_TASK_PRIO			(configMAX_PRIORITIES - 4)
-#define ALLJOIN_TASK_NAME			"alljoin_task"
-#define ALLJOIN_DEAMON_NAME                     "alljoin_deamon"
-#define ALLJOIN_CONNECT_TIMEOUT                  (1000 * 60)
-#define ALLJOIN_SERVICE_PORT                     25
-#define ALLJOIN_SERVICE_NAME                     "alljoyn.Bus.service"
-
-#define    WIFI_CHANNEL_MAX                (13)
-#define    WIFI_CHANNEL_SWITCH_INTERVAL    (500)
-
-typedef struct {
-    unsigned frame_ctrl:16;
-    unsigned duration_id:16;
-    uint8_t addr1[6]; /* receiver address */
-    uint8_t addr2[6]; /* sender address */
-    uint8_t addr3[6]; /* filtering address */
-    unsigned sequence_ctrl:16;
-    uint8_t addr4[6]; /* optional */
-} wifi_ieee80211_mac_hdr_t;
-
-typedef struct {
-    wifi_ieee80211_mac_hdr_t hdr;
-    uint8_t payload[0]; /* network data ended with 4 bytes csum (CRC32) */
-} wifi_ieee80211_packet_t;
-
 
 /**
  *  Type to describe pending timers
@@ -85,400 +48,6 @@ typedef struct {
 static Timer Timers[AJ_MAX_TIMERS] = {
     { NULL }
 };
-
-//////////////////////////////////////////////////////////////////
-/*static const char ServiceName[] = "org.alljoyn.Bus.sample";
-static const char ServicePath[] = "/sample";
-static const uint16_t ServicePort = 25;
-
-static char fullServiceName[AJ_MAX_SERVICE_NAME_SIZE];
-
-uint8_t dbgBASIC_CLIENT = 1;
-
-static const char* const sampleInterface[] = {
-    "org.alljoyn.Bus.sample",   
-    "?Dummy foo<i",             
-    "?Dummy2 fee<i",            
-    "?cat inStr1<s inStr2<s outStr>s", 
-    NULL
-};
-
-
-static const AJ_InterfaceDescription sampleInterfaces[] = {
-    sampleInterface,
-    NULL
-};
-
-static const AJ_Object AppObjects[] = {
-    { ServicePath, sampleInterfaces },
-    { NULL }
-};
-
-AJ_Object *AppObjects = NULL;
-
-char* sampleInterface2[] = {   
-    "?Dummy foo<i",             
-    "?Dummy2 fee<i",            
-    "?cat inStr1<s inStr2<s outStr>s", 
-};
-
-
-
-#define BASIC_CLIENT_CAT AJ_PRX_MESSAGE_ID(0, 0, 2)
-
-#define CONNECT_TIMEOUT    (1000 * 60)
-#define UNMARSHAL_TIMEOUT  (1000 * 5)
-#define METHOD_TIMEOUT     (100 * 10)
-
-void MakeMethodCall(AJ_BusAttachment* bus, uint32_t sessionId)
-{
-    AJ_Status status;
-    AJ_Message msg;
-
-    status = AJ_MarshalMethodCall(bus, &msg, BASIC_CLIENT_CAT, fullServiceName, sessionId, 0, METHOD_TIMEOUT);
-    printf("+++++++ AJ_MarshalMethodCall Nok: %d\n", status);
-    
-    if (status == AJ_OK) {
-        status = AJ_MarshalArgs(&msg, "ss", "Hello ", "World!");
-        printf("+++++++ AJ_MarshalArgs ok: %d\n", status);
-    }
-
-    if (status == AJ_OK) {
-        status = AJ_DeliverMsg(&msg);
-        printf("+++++ MakeMethodCall status: %d\n", status);
-    }
-
-    printf("MakeMethodCall() resulted in a status of 0x%04x.\n", status);
-}
-
-static void alljoin_task()
-{
-    //addObject("/sample", "org.alljoyn.Bus.sample",sampleInterface2, 3);
-    AppObjects = getAlljoynObjects();
-     
-    AJ_Status status = AJ_OK;
-    AJ_BusAttachment bus;
-    uint8_t connected = FALSE;
-    uint8_t done = FALSE;
-    uint32_t sessionId = 0;
-
-    AJ_Initialize();
-    AJ_PrintXML(AppObjects);
-    AJ_RegisterObjects(NULL, AppObjects);
-
-    while (!done) {
-        AJ_Message msg;
-
-        if (!connected) {
-            printf("++++++++++ Connected\n");
-            status = AJ_StartClientByName(&bus,
-                                          NULL,
-                                          CONNECT_TIMEOUT,
-                                          FALSE,
-                                          ServiceName,
-                                          ServicePort,
-                                          &sessionId,
-                                          NULL,
-                                          fullServiceName);
-
-            if (status == AJ_OK) {
-                printf("StartClient returned %d, sessionId=%u.\n", status, sessionId);
-                connected = TRUE;
-                MakeMethodCall(&bus, sessionId);
-            } else {
-                printf("++++++++++ Client start error\n");
-                AJ_InfoPrintf(("StartClient returned 0x%04x.\n", status));
-                break;
-            }
-        }
-
-        status = AJ_UnmarshalMsg(&bus, &msg, UNMARSHAL_TIMEOUT);
-
-        if (AJ_ERR_TIMEOUT == status) {
-            continue;
-        }
-
-        if (AJ_OK == status) {
-            switch (msg.msgId) {
-            case AJ_REPLY_ID(BASIC_CLIENT_CAT):
-                if (msg.hdr->msgType == AJ_MSG_METHOD_RET) {
-                    AJ_Arg arg;
-
-                    status = AJ_UnmarshalArg(&msg, &arg);
-
-                    if (AJ_OK == status) {
-                        printf("%s.%s (path=%s) returned %s.\n", fullServiceName, "cat",
-                                         ServicePath, arg.val.v_string);
-                        done = TRUE;
-                    } else {
-                        printf("AJ_UnmarshalArg() returned status %d.\n", status);
-                        
-                        MakeMethodCall(&bus, sessionId);
-                    }
-                } else {
-                    const char* info = "";
-                    if (AJ_UnmarshalArgs(&msg, "s", &info) == AJ_OK) {
-                        printf("Method call returned error %s (%s)\n", msg.error, info);
-                    } else {
-                        printf("Method call returned error %s\n", msg.error);
-                    }
-                    done = TRUE;
-                }
-                break;
-
-            case AJ_SIGNAL_SESSION_LOST_WITH_REASON:
-                
-                {
-                    uint32_t id, reason;
-                    AJ_UnmarshalArgs(&msg, "uu", &id, &reason);
-                    printf("Session lost. ID = %u, reason = %u\n", id, reason);
-                }
-                status = AJ_ERR_SESSION_LOST;
-                break;
-
-            default:
-                
-                status = AJ_BusHandleBusMessage(&msg);
-                break;
-            }
-        }
-
-        
-        AJ_CloseMsg(&msg);
-
-        if ((status == AJ_ERR_READ) || (status == AJ_ERR_WRITE) || (status == AJ_ERR_SESSION_LOST)) {
-            printf("AllJoyn disconnect.\n");
-            AJ_Disconnect(&bus);
-            exit(0);
-        }
-    }
-
-    printf("Basic client exiting with status %d.\n", status);
-}
-
-///////////////////////////////////////////////////
-#define CONNECT_ATTEMPTS   10
-static const char ServiceName[] = "org.alljoyn.Bus.sample";
-static const char ServicePath[] = "/sample";
-static const uint16_t ServicePort = 25;
-
-uint8_t dbgBASIC_SERVICE = 0;
-
-static const char* const sampleInterface[] = {
-    "org.alljoyn.Bus.sample",   
-    "?Dummy foo<i",             
-    "?cat inStr1<s inStr2<s outStr>s", 
-    NULL
-};
-
-static const AJ_InterfaceDescription sampleInterfaces[] = {
-    sampleInterface,
-    NULL
-};
-
-static const AJ_Object AppObjects[] = {
-    { ServicePath, sampleInterfaces },
-    { NULL }
-};
-
-
-#define BASIC_SERVICE_CAT AJ_APP_MESSAGE_ID(0, 0, 1)
-
-
-static uint8_t asyncForm = TRUE;
-
-static AJ_Status AppHandleCat(AJ_Message* msg)
-{
-    const char* string0;
-    const char* string1;
-    char buffer[256];
-    AJ_Message reply;
-    AJ_Arg replyArg;
-
-    AJ_UnmarshalArgs(msg, "ss", &string0, &string1);
-
-    strncpy(buffer, string0, ArraySize(buffer));
-    buffer[ArraySize(buffer) - 1] = '\0';
-    strncat(buffer, string1, ArraySize(buffer) - strlen(buffer) - 1);
-    if (asyncForm) {
-        AJ_MsgReplyContext replyCtx;
-        AJ_CloseMsgAndSaveReplyContext(msg, &replyCtx);
-        AJ_MarshalReplyMsgAsync(&replyCtx, &reply);
-    } else {
-        AJ_MarshalReplyMsg(msg, &reply);
-    }
-    AJ_InitArg(&replyArg, AJ_ARG_STRING, 0, buffer, 0);
-    AJ_MarshalArg(&reply, &replyArg);
-
-    return AJ_DeliverMsg(&reply);
-}
-
-#define CONNECT_TIMEOUT     (1000 * 60)
-#define UNMARSHAL_TIMEOUT   (1000 * 5)
-#define SLEEP_TIME          (1000 * 2)
-
-static void alljoin_task(void *arg)
-{
-    AJ_Status status = AJ_OK;
-    AJ_BusAttachment bus;
-    uint8_t connected = FALSE;
-    uint32_t sessionId = 0;
-
-   
-    AJ_Initialize();
-
-   
-    AJ_PrintXML(AppObjects);
-
-    AJ_RegisterObjects(AppObjects, NULL);
-
-    while (TRUE) {
-        AJ_Message msg;
-
-        if (!connected) {
-            status = AJ_StartService(&bus,
-                                     NULL,
-                                     CONNECT_TIMEOUT,
-                                     FALSE,
-                                     ServicePort,
-                                     ServiceName,
-                                     AJ_NAME_REQ_DO_NOT_QUEUE,
-                                     NULL);
-
-            if (status != AJ_OK) {
-                continue;
-            }
-
-            AJ_InfoPrintf(("StartService returned %d, session_id=%u\n", status, sessionId));
-            connected = TRUE;
-        }
-
-        status = AJ_UnmarshalMsg(&bus, &msg, UNMARSHAL_TIMEOUT);
-
-        if (AJ_ERR_TIMEOUT == status) {
-            continue;
-        }
-
-        if (AJ_OK == status) {
-            switch (msg.msgId) {
-            case AJ_METHOD_ACCEPT_SESSION:
-                {
-                    uint16_t port;
-                    char* joiner;
-                    AJ_UnmarshalArgs(&msg, "qus", &port, &sessionId, &joiner);
-                    status = AJ_BusReplyAcceptSession(&msg, TRUE);
-                    AJ_InfoPrintf(("Accepted session session_id=%u joiner=%s\n", sessionId, joiner));
-                }
-                break;
-
-            case BASIC_SERVICE_CAT:
-                status = AppHandleCat(&msg);
-                break;
-
-            case AJ_SIGNAL_SESSION_LOST_WITH_REASON:
-                {
-                    uint32_t id, reason;
-                    AJ_UnmarshalArgs(&msg, "uu", &id, &reason);
-                    AJ_AlwaysPrintf(("Session lost. ID = %u, reason = %u\n", id, reason));
-                }
-                break;
-
-            default:
-                
-                status = AJ_BusHandleBusMessage(&msg);
-                break;
-            }
-        }
-
-        
-        AJ_CloseMsg(&msg);
-
-        if ((status == AJ_ERR_READ) || (status == AJ_ERR_WRITE)) {
-            AJ_AlwaysPrintf(("AllJoyn disconnect.\n"));
-            AJ_Disconnect(&bus);
-            connected = FALSE;
-
-            AJ_Sleep(SLEEP_TIME);
-        }
-    }
-
-    AJ_AlwaysPrintf(("Basic service exiting with status %d.\n", status));
-
-} */
-
-/*void wifi_sniffer_set_channel(uint8_t channel)
-{
-    
-    esp_wifi_set_channel(channel, WIFI_SECOND_CHAN_NONE);
-}
-
-const char *
-wifi_sniffer_packet_type2str(wifi_promiscuous_pkt_type_t type)
-{
-    switch(type) {
-    case WIFI_PKT_CTRL: return "CTRL";
-    case WIFI_PKT_MGMT: return "MGMT";
-    case WIFI_PKT_DATA: return "DATA";
-    default:    
-    case WIFI_PKT_MISC: return "MISC";
-    }
-}
-
-void
-wifi_sniffer_packet_handler(void* buff, wifi_promiscuous_pkt_type_t type)
-{
-
-    const wifi_promiscuous_pkt_t *ppkt = (wifi_promiscuous_pkt_t *)buff;
-    const wifi_ieee80211_packet_t *ipkt = (wifi_ieee80211_packet_t *)ppkt->payload;
-    const wifi_ieee80211_mac_hdr_t *hdr = &ipkt->hdr;
-    
-   
-    printf("PACKET TYPE=%s, CHAN=%02d, RSSI=%02d,"
-        " ADDR1=%02x:%02x:%02x:%02x:%02x:%02x,"
-        " ADDR2=%02x:%02x:%02x:%02x:%02x:%02x,"
-        " ADDR3=%02x:%02x:%02x:%02x:%02x:%02x\n", 
-        wifi_sniffer_packet_type2str(type),
-        ppkt->rx_ctrl.channel,
-        ppkt->rx_ctrl.rssi,
-        
-        hdr->addr1[0],hdr->addr1[1],hdr->addr1[2],
-        hdr->addr1[3],hdr->addr1[4],hdr->addr1[5],
-        
-        hdr->addr2[0],hdr->addr2[1],hdr->addr2[2],
-        hdr->addr2[3],hdr->addr2[4],hdr->addr2[5],
-        
-        hdr->addr3[0],hdr->addr3[1],hdr->addr3[2],
-        hdr->addr3[3],hdr->addr3[4],hdr->addr3[5]
-    );
-}
-
-void sniffpacket(void *arg){
-    uint8_t channel = 1;
-    while (true) {
-        vTaskDelay(WIFI_CHANNEL_SWITCH_INTERVAL / portTICK_PERIOD_MS);
-        wifi_sniffer_set_channel(channel);
-        channel = (channel % WIFI_CHANNEL_MAX) + 1;
-    }
-    
-}*/
-///////////////////////////////////////////////////////////
-/////////////////////////////////////////
-
-AJ_Status init_allJoin(void) {
-    
-    //mp_hal_delay_ms(8000);
-    
-    AJ_Status status = AJ_OK;
-    
-     //esp_wifi_set_promiscuous(true);
-    //esp_wifi_set_promiscuous_rx_cb(&wifi_sniffer_packet_handler);
-   
-    //xTaskCreate(&alljoin_task, ALLJOIN_TASK_NAME, 2048, NULL, 5, NULL);
-    //xTaskCreate(&sniffpacket, ALLJOIN_TASK_NAME, 4096, NULL, 5, NULL);
-    //alljoin_task();
-    
-    return status;
-}
 
 static uint32_t RunExpiredTimers(uint32_t now)
 {
@@ -539,8 +108,6 @@ void AJ_CancelTimer(uint32_t id)
 
 AJ_Status AJ_RunAllJoynService(AJ_BusAttachment* bus, AllJoynConfiguration* config)
 {
-    printf("++++++++ AJ_RunAllJoynService\n");
-    
     uint8_t connected = FALSE;
     AJ_Status status = AJ_OK;
     AJ_InfoPrintf(("AJ_RunAllJoynService(bus=0x%p, config=0x%p)\n", bus, config));
@@ -720,15 +287,10 @@ AJ_Status AJ_StartService(AJ_BusAttachment* bus,
         if (AJ_GetElapsedTime(&timer, TRUE) > timeout) {
             return AJ_ERR_TIMEOUT;
         }
-        
-        printf("+++Main loop\n");
-        
         if (!connected) {
-            printf("+++Not connected\n");
             AJ_InfoPrintf(("AJ_StartService(): AJ_FindBusAndConnect()\n"));
             status = AJ_FindBusAndConnect(bus, daemonName, AJ_CONNECT_TIMEOUT);
             if (status != AJ_OK) {
-                printf("+++Status not ok\n");
                 AJ_WarnPrintf(("AJ_StartService(): connect failed: sleeping for %d seconds\n", AJ_CONNECT_PAUSE / 1000));
                 AJ_Sleep(AJ_CONNECT_PAUSE);
                 continue;
@@ -743,17 +305,13 @@ AJ_Status AJ_StartService(AJ_BusAttachment* bus,
         if (status == AJ_OK) {
             break;
         }
-        printf("+++Disconnect\n");
         AJ_ErrPrintf(("AJ_StartService(): AJ_Disconnect(): status=%s.\n", AJ_StatusText(status)));
         AJ_Disconnect(bus);
     }
 
-    printf("+++Looping before Not started loop\n");
-    
     while (!serviceStarted && (status == AJ_OK)) {
         AJ_Message msg;
 
-        printf("Looping in Not started loop\n");
         status = AJ_UnmarshalMsg(bus, &msg, AJ_UNMARSHAL_TIMEOUT);
         if (status == AJ_ERR_NO_MATCH) {
             // Ignore unknown messages
@@ -868,11 +426,9 @@ AJ_Status StartClient(AJ_BusAttachment* bus,
 
     while (elapsed < timeout) {
         if (!connected) {
-            printf("-------StartClient - not connected\n");
             status = AJ_FindBusAndConnect(bus, daemonName, AJ_CONNECT_TIMEOUT);
             elapsed = AJ_GetElapsedTime(&timer, TRUE);
             if (status != AJ_OK) {
-                printf("-------StartClient - connect nok\n");
                 elapsed += AJ_CONNECT_PAUSE;
                 if (elapsed > timeout) {
                     break;
@@ -881,17 +437,12 @@ AJ_Status StartClient(AJ_BusAttachment* bus,
                 AJ_Sleep(AJ_CONNECT_PAUSE);
                 continue;
             }
-            printf("-------StartClient - connect - AJ_OK\n");
             AJ_InfoPrintf(("AJ_StartClient(): AllJoyn client connected to bus\n"));
         }
-        
-        printf("-------StartClient - cont - 1\n");
-        
         if (name != NULL) {
             /*
              * Kick things off by finding the service names
              */
-            printf("-------StartClient - bus ads\n");
             status = AJ_BusFindAdvertisedName(bus, name, AJ_BUS_START_FINDING);
             AJ_InfoPrintf(("AJ_StartClient(): AJ_BusFindAdvertisedName()\n"));
         } else {
@@ -929,7 +480,6 @@ AJ_Status StartClient(AJ_BusAttachment* bus,
             status = AJ_BusSetSignalRule(bus, rule, AJ_BUS_SIGNAL_ALLOW);
             AJ_InfoPrintf(("AJ_StartClient(): Client SetSignalRule: %s\n", rule));
             AJ_Free(rule);
-            printf("-------StartClient - bus signal\n");
         }
         if (status == AJ_OK) {
             break;
@@ -939,8 +489,6 @@ AJ_Status StartClient(AJ_BusAttachment* bus,
             AJ_Disconnect(bus);
         }
     }
-    
-    printf("-------StartClient - cont - 2\n");
     if (elapsed > timeout) {
         AJ_WarnPrintf(("AJ_StartClient(): Client timed-out trying to connect to bus: status=%s.\n", AJ_StatusText(status)));
         return AJ_ERR_TIMEOUT;
@@ -959,7 +507,7 @@ AJ_Status StartClient(AJ_BusAttachment* bus,
     while (!clientStarted && (status == AJ_OK)) {
         AJ_Message msg;
         const uint32_t timeout2 = min(AJ_UNMARSHAL_TIMEOUT, timeout);
-        printf("-------StartClient - client not started\n");
+
         status = AJ_UnmarshalMsg(bus, &msg, timeout2);
         if ((status == AJ_ERR_TIMEOUT) && !found) {
             /*
@@ -985,7 +533,6 @@ AJ_Status StartClient(AJ_BusAttachment* bus,
 
         case AJ_REPLY_ID(AJ_METHOD_FIND_NAME):
         case AJ_REPLY_ID(AJ_METHOD_FIND_NAME_BY_TRANSPORT):
-        {
             if (msg.hdr->msgType == AJ_MSG_ERROR) {
                 AJ_ErrPrintf(("AJ_StartClient(): AJ_METHOD_FIND_NAME: %s\n", msg.error));
                 status = AJ_ERR_FAILURE;
@@ -997,8 +544,6 @@ AJ_Status StartClient(AJ_BusAttachment* bus,
                     status = AJ_ERR_FAILURE;
                 }
             }
-            printf("-------StartClient - AJ_REPLY_ID\n");
-        }
             break;
 
         case AJ_SIGNAL_FOUND_ADV_NAME:
@@ -1014,13 +559,11 @@ AJ_Status StartClient(AJ_BusAttachment* bus,
                     found = TRUE;
                     status = AJ_BusJoinSession(bus, arg.val.v_string, port, opts);
                 }
-                printf("-------StartClient - J_SIGNAL_FOUND_ADV_NAME\n");
             }
             break;
 
         case AJ_SIGNAL_ABOUT_ANNOUNCE:
             {
-                printf("-------StartClient - AJ_SIGNAL_ABOUT_ANNOUNCE\n");
                 uint16_t aboutVersion, aboutPort;
 #ifdef ANNOUNCE_BASED_DISCOVERY
                 status = AJ_AboutHandleAnnounce(&msg, &aboutVersion, &aboutPort, serviceName, &found);
@@ -1057,7 +600,6 @@ AJ_Status StartClient(AJ_BusAttachment* bus,
 
         case AJ_REPLY_ID(AJ_METHOD_JOIN_SESSION):
             {
-                printf("-------StartClient - AJ_REPLY_ID(AJ_METHOD_JOIN_SESSION)\n");
                 uint32_t replyCode;
 
                 if (msg.hdr->msgType == AJ_MSG_ERROR) {
@@ -1080,7 +622,6 @@ AJ_Status StartClient(AJ_BusAttachment* bus,
              * Force a disconnect
              */
             {
-                printf("-------StartClient - AJ_SIGNAL_SESSION_LOST_WITH_REASON\n");
                 uint32_t id, reason;
                 AJ_UnmarshalArgs(&msg, "uu", &id, &reason);
                 AJ_InfoPrintf(("Session lost. ID = %u, reason = %u", id, reason));
@@ -1093,7 +634,6 @@ AJ_Status StartClient(AJ_BusAttachment* bus,
             /*
              * Pass to the built-in bus message handlers
              */
-            printf("-------StartClient - default\n");
             AJ_InfoPrintf(("AJ_StartClient(): AJ_BusHandleBusMessage()\n"));
             status = AJ_BusHandleBusMessage(&msg);
             break;
@@ -1104,7 +644,6 @@ AJ_Status StartClient(AJ_BusAttachment* bus,
     if ((AJ_OK != status) && !connected) {
         AJ_WarnPrintf(("AJ_StartClient(): Client disconnecting from bus: status=%s\n", AJ_StatusText(status)));
         AJ_Disconnect(bus);
-        printf("-------StartClient - disconnect\n");
         return status;
     }
 

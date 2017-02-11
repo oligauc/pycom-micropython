@@ -620,7 +620,6 @@ AJ_Status AJ_DeliverMsg(AJ_Message* msg)
     if (status == AJ_OK) {
         //#pragma calls = AJ_Net_Send
         status = ioBuf->send(ioBuf);
-        printf("++++++ioBuf->send: %d\n",status);
     }
     memset(msg, 0, sizeof(AJ_Message));
     return status;
@@ -2037,7 +2036,6 @@ static AJ_Status MarshalMsg(AJ_Message* msg, uint8_t msgType, uint32_t msgId, ui
 
     if (!ioBuf->bufStart) {
         AJ_ErrPrintf(("MarshalMsg(): ioBuf has not been initialized\n"));
-        printf("+++ MarshalMsg - io buffer issue\n");
         return AJ_ERR_IO_BUFFER;
     }
 #ifdef AJ_ARDP
@@ -2049,7 +2047,6 @@ static AJ_Status MarshalMsg(AJ_Message* msg, uint8_t msgType, uint32_t msgId, ui
      * initialize the message header fields.
      */
     status = AJ_InitMessageFromMsgId(msg, msgId, msgType, &secure);
-    printf("+++ AJ_InitMessageFromMsgId: %d\n",status);
     if (status != AJ_OK) {
         AJ_ErrPrintf(("MarshalMsg(): status=%s\n", AJ_StatusText(status)));
         return status;
@@ -2192,7 +2189,6 @@ static AJ_Status MarshalMsg(AJ_Message* msg, uint8_t msgType, uint32_t msgId, ui
          * Header must be padded to an 8 byte boundary
          */
         status = WritePad(msg, HEADERPAD(msg->hdr->headerLen));
-        printf("+++ MarshalMsg - WritePad: %d\n", status);
     }
     return status;
 }
@@ -2530,10 +2526,8 @@ AJ_Status AJ_MarshalMethodCall(AJ_BusAttachment* bus, AJ_Message* msg, uint32_t 
     msg->sessionId = sessionId;
     msg->ttl = timeout;
     status = MarshalMsg(msg, AJ_MSG_METHOD_CALL, msgId, flags);
-    printf("+++ AJ_MarshalMethodCall - MarshalMsg: %d\n", status);
     if (status == AJ_OK) {
         status = AJ_AllocReplyContext(msg, timeout);
-        printf("+++ AJ_MarshalMethodCall - AJ_AllocReplyContext: %d\n", status);
     }
     return status;
 }

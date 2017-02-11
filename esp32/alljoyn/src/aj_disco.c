@@ -804,10 +804,10 @@ static AJ_Status ParseMDNSResp(AJ_IOBuffer* rxBuf, const char* prefix, AJ_Servic
     memset(&header, 0, sizeof(MDNSHeader));
     size = ParseMDNSHeader(buffer, bufsize, &header);
     if (size == 0) {
-        printf("Error occured while deserializing header\n");
+        AJ_InfoPrintf(("Error occured while deserializing header\n"));
         return AJ_ERR_NO_MATCH;
     } else {
-        printf("Successfully parsed header with %d answers and %d additional\n", header.anCount, header.arCount);
+        AJ_InfoPrintf(("Successfully parsed header with %d answers and %d additional\n", header.anCount, header.arCount));
     }
 
     if ((header.qrType & MDNS_QR) == 0) {
@@ -826,19 +826,19 @@ static AJ_Status ParseMDNSResp(AJ_IOBuffer* rxBuf, const char* prefix, AJ_Servic
         memset(&r, 0, sizeof(MDNSResourceRecord));
         ret = ParseMDNSResourceRecord(p, bufsize, &r, buffer, paylen, NULL);
         if (ret == 0 || ret > bufsize) {
-            printf("Error while deserializing question record.\n");
+            AJ_InfoPrintf(("Error while deserializing question record.\n"));
             return AJ_ERR_NO_MATCH;
         }
         size += ret;
         bufsize -= ret;
         p += ret;
-        printf("Skipping unexpected question in response, will be silently ignored.\n");
+        AJ_InfoPrintf(("Skipping unexpected question in response, will be silently ignored.\n"));
     }
     for (i = 0; i < header.anCount; i++) {
         memset(&r, 0, sizeof(MDNSResourceRecord));
         ret = ParseMDNSResourceRecord(p, bufsize, &r, buffer, paylen, NULL);
         if (ret == 0 || ret > bufsize) {
-            printf("Error while deserializing answer record.\n");
+            AJ_InfoPrintf(("Error while deserializing answer record.\n"));
             return AJ_ERR_NO_MATCH;
         }
         size += ret;
@@ -847,18 +847,18 @@ static AJ_Status ParseMDNSResp(AJ_IOBuffer* rxBuf, const char* prefix, AJ_Servic
         AJ_InfoPrintf(("Processed answer %d\n", (i + 1)));
 
         if (r.rrType == PTR && !memcmp(r.rrDomainName.name, "_alljoyn._tcp.local", 19)) {
-            printf("Found _alljoyn_.tcp.local PTR record.\n");
+            AJ_InfoPrintf(("Found _alljoyn_.tcp.local PTR record.\n"));
             alljoyn_ptr_record_tcp = 1;
         }
 
         if (r.rrType == PTR && !memcmp(r.rrDomainName.name, "_alljoyn._udp.local", 19)) {
-            printf("Found _alljoyn_._udp.local PTR record.\n");
+            AJ_InfoPrintf(("Found _alljoyn_._udp.local PTR record.\n"));
             alljoyn_ptr_record_udp = 1;
         }
 
         // We ignore the sender's "guid." (32 chars + 1 char for the dot) in the <guid>._alljoyn._tcp.local domain name.
         if (r.rrType == SRV && !memcmp(r.rrDomainName.name + 33, "_alljoyn._tcp.local", 19)) {
-            printf("Found a SRV answer with domain name  %s.\n", r.rdata.srvRData.target.name);
+            AJ_InfoPrintf(("Found a SRV answer with domain name  %s.\n", r.rdata.srvRData.target.name));
             memset(service_target, 0, 256);
             memcpy(service_target, r.rdata.srvRData.target.name, 256);
             service_port_tcp = r.rdata.srvRData.port;
@@ -867,7 +867,7 @@ static AJ_Status ParseMDNSResp(AJ_IOBuffer* rxBuf, const char* prefix, AJ_Servic
 
         // We ignore the sender's "guid." (32 chars + 1 char for the dot) in the <guid>._alljoyn._udp.local domain name.
         if (r.rrType == SRV && !memcmp(r.rrDomainName.name + 33, "_alljoyn._udp.local", 19)) {
-            printf("Found a SRV answer with domain name  %s.\n", r.rdata.srvRData.target.name);
+            AJ_InfoPrintf(("Found a SRV answer with domain name  %s.\n", r.rdata.srvRData.target.name));
             memset(service_target, 0, 256);
             memcpy(service_target, r.rdata.srvRData.target.name, 256);
             service_port_udp = r.rdata.srvRData.port;
@@ -885,29 +885,29 @@ static AJ_Status ParseMDNSResp(AJ_IOBuffer* rxBuf, const char* prefix, AJ_Servic
         memset(&r, 0, sizeof(MDNSResourceRecord));
         ret = ParseMDNSResourceRecord(p, bufsize, &r, buffer, paylen, NULL);
         if (ret == 0 || ret > bufsize) {
-            printf("Error while deserializing authority record.\n");
+            AJ_InfoPrintf(("Error while deserializing authority record.\n"));
             return AJ_ERR_NO_MATCH;
         }
         size += ret;
         bufsize -= ret;
         p += ret;
-        printf("Skipping non-relevant authority record, will be silently ignored.\n");
+        AJ_InfoPrintf(("Skipping non-relevant authority record, will be silently ignored.\n"));
     }
     for (i = 0; i < header.arCount; i++) {
         memset(&r, 0, sizeof(MDNSResourceRecord));
         ret = ParseMDNSResourceRecord(p, bufsize, &r, buffer, paylen, prefix);
         if (ret == 0 || ret > bufsize) {
-            printf("Error while deserializing additional record.\n");
+            AJ_InfoPrintf(("Error while deserializing additional record.\n"));
             return AJ_ERR_NO_MATCH;
         }
         size += ret;
         bufsize -= ret;
         p += ret;
-        printf("Processing additional record %d\n", (i + 1));
+        AJ_InfoPrintf(("Processing additional record %d\n", (i + 1)));
         if (r.rrType == TXT) {
             // Ensure the advertise TXT record refers to the same guid in the SRV record.
             if (!memcmp(r.rrDomainName.name, "advertise.", 10) && !memcmp(r.rrDomainName.name + 10, service_target, 38)) {
-                printf("Found advertise.* TXT record with full label %s.\n", r.rrDomainName.name);
+                AJ_InfoPrintf(("Found advertise.* TXT record with full label %s.\n", r.rrDomainName.name));
                 // Ensure the sender-info TXT record included a transport and had the requested name prefix
                 if (r.rdata.textRData.BusNodeTransport[0] && r.rdata.textRData.BusNodeName[0]) {
                     bus_transport = 1;
@@ -915,7 +915,7 @@ static AJ_Status ParseMDNSResp(AJ_IOBuffer* rxBuf, const char* prefix, AJ_Servic
             }
             // Ensure the sender-info TXT record refers to the same guid in the SRV record.
             if (!memcmp(r.rrDomainName.name, "sender-info.", 12) && !memcmp(r.rrDomainName.name + 12, service_target, 38)) {
-                printf("Found sender-info.* TXT record with full name: %s.\n", r.rrDomainName.name);
+                AJ_InfoPrintf(("Found sender-info.* TXT record with full name: %s.\n", r.rrDomainName.name));
                 // If the sender-info TXT record included the protocol version
                 protocol_version = 0;
                 if (r.rdata.textRData.BusNodeProtocolVersion[0]) {
@@ -936,7 +936,7 @@ static AJ_Status ParseMDNSResp(AJ_IOBuffer* rxBuf, const char* prefix, AJ_Servic
         }
         // Ensure the A record refers to the same guid in the SRV record.
         if (r.rrType == A && !memcmp(r.rrDomainName.name, service_target, 38)) {
-            printf("Found an A additional record.\n");
+            AJ_InfoPrintf(("Found an A additional record.\n"));
             memset(bus_addr, 0, (3 * 4 + 3 + 1));
             memcpy(bus_addr, r.rdata.aRData.ipv4Addr, (3 * 4 + 3 + 1));
             bus_a_record = 1;
@@ -952,10 +952,8 @@ static AJ_Status ParseMDNSResp(AJ_IOBuffer* rxBuf, const char* prefix, AJ_Servic
         // ignore this record if it's TCP-only but we want ARDP-only, or vice-versa
         AJ_Status status = AJ_ERR_NO_MATCH;
 
-        printf("++++ We are in but no tcp or ardp\n");
         // Check for a TCP response, but only if we're looking for TCP responses
 #ifdef AJ_TCP
-        printf("+++++ TCP: %d, %d\n",alljoyn_ptr_record_tcp, service_port_tcp);
         if (alljoyn_ptr_record_tcp && service_port_tcp) {
             service->ipv4port = service_port_tcp;
             memcpy(&service->ipv4, bus_addr, sizeof(service->ipv4));
@@ -968,7 +966,6 @@ static AJ_Status ParseMDNSResp(AJ_IOBuffer* rxBuf, const char* prefix, AJ_Servic
 
         // similarly, check ARDP only if we care about it.
 #ifdef AJ_ARDP
-        printf("+++++ UDP: %d, %d\n",alljoyn_ptr_record_udp, service_port_udp);
         if (alljoyn_ptr_record_udp && service_port_udp) {
             service->ipv4portUdp = service_port_udp;
             memcpy(&service->ipv4Udp, bus_addr, sizeof(service->ipv4Udp));
@@ -1015,14 +1012,12 @@ AJ_Status AJ_Discover(const char* prefix, AJ_Service* service, uint32_t timeout,
     /*
      * Enable multicast I/O for the discovery packets.
      */
-    printf(",,,,,,,,,AJ_Discover - 1\n");
     status = AJ_Net_MCastUp(&sock);
     if (status != AJ_OK) {
         AJ_InfoPrintf(("AJ_Discover(): status=%s\n", AJ_StatusText(status)));
         return status;
     }
 
-    printf(",,,,,,,,,AJ_Discover - 2\n");
     /*
      * Perform discovery until node discovered or overall discover timeout reached
      */
@@ -1035,16 +1030,13 @@ AJ_Status AJ_Discover(const char* prefix, AJ_Service* service, uint32_t timeout,
         /*
          * Only send WHO-HAS if configured to consider pre-14.06 routers.
          */
-        printf(",,,,,,,,,AJ_Discover - 3\n");
         if (AJ_GetMinProtoVersion() < 10) {
             AJ_IO_BUF_RESET(&sock.tx);
             AJ_InfoPrintf(("AJ_Discover(): WHO-HAS \"%s\"\n", prefix));
             status = ComposeWhoHas(&sock.tx, prefix);
-            printf(",,,,,,,,,AJ_Discover - who has: %d\n", status);
             if (status == AJ_OK) {
                 sock.tx.flags |= AJ_IO_BUF_AJ;
                 status = sock.tx.send(&sock.tx);
-                printf(",,,,,,,,,AJ_Discover - send status: %d\n", status);
                 AJ_InfoPrintf(("AJ_Discover(): WHO-HAS send status=%s\n", AJ_StatusText(status)));
                 /*
                  * If the send failed the socket has probably gone away.
@@ -1057,39 +1049,32 @@ AJ_Status AJ_Discover(const char* prefix, AJ_Service* service, uint32_t timeout,
                  * If compose failed just continue on
                  */
                 status = AJ_OK;
-                printf(",,,,,,,,,AJ_Discover - compose failed\n");
             }
         }
 
         status = AJ_GetLocalGUID(&guid);
-        printf(",,,,,,,,,AJ_Discover - local guid: %d\n", status);
         if (status != AJ_OK) {
             AJ_ErrPrintf(("AJ_Discover(): No GUID!\n"));
             goto _Exit;
         }
 
-        printf(",,,,,,,,,AJ_Discover - 4\n");
         AJ_IO_BUF_RESET(&sock.tx);
         AJ_InfoPrintf(("AJ_Discover(): mDNS \"%s\"\n", prefix));
         status = ComposeMDnsReq(&sock.tx, prefix, &guid, searchId);
-        printf(",,,,,,,,,AJ_Discover - ComposeMDnsReq: %d\n", status);
         if (status == AJ_OK) {
             sock.tx.flags |= AJ_IO_BUF_MDNS;
             status = sock.tx.send(&sock.tx);
-            printf(",,,,,,,,,AJ_Discover - ComposeMDnsReq send : %d\n", status);
             AJ_InfoPrintf(("AJ_Discover(): mDNS send status=%s\n", AJ_StatusText(status)));
             if (status != AJ_OK) {
                 goto _Exit;
             }
         } else {
-            printf(",,,,,,,,,AJ_Discover - ComposeMDnsReq nok\n");
             status = AJ_OK;
         }
 
         /*
          * Calculate listen interval
          */
-        printf(",,,,,,,,,AJ_Discover - 5\n");
         if (burstCount >= AJ_BURST_COUNT) {
             burstCount = 0;
             searchId++;
@@ -1127,12 +1112,10 @@ AJ_Status AJ_Discover(const char* prefix, AJ_Service* service, uint32_t timeout,
         while (listenInt > 0) {
             AJ_IO_BUF_RESET(&sock.rx);
             status = sock.rx.recv(&sock.rx, AJ_IO_BUF_SPACE(&sock.rx), listenInt);
-            printf(",,,,,,,,,AJ_Discover - 6 - send staus: %d\n", status);
             if (status != AJ_OK) {
                 /*
                  * Anything other than AJ_ERR_TIMEOUT means bail
                  */
-                printf(",,,,,,,,,AJ_Discover - TIMEOUT\n");
                 if (status != AJ_ERR_TIMEOUT) {
                     goto _Exit;
                 }
@@ -1140,7 +1123,6 @@ AJ_Status AJ_Discover(const char* prefix, AJ_Service* service, uint32_t timeout,
                 if (sock.rx.flags & AJ_IO_BUF_MDNS) {
                     memset(service, 0, sizeof(AJ_Service));
                     status = ParseMDNSResp(&sock.rx, prefix, service);
-                    printf("++++++++ ******* AJ_Discover - ParseMDNSResp: %d, prefix: %s\n", status, prefix);
                     if (status == AJ_OK) {
                         printf("AJ_Discover(): mDNS discovered \"%s\"\n", prefix);
 
@@ -1155,7 +1137,6 @@ AJ_Status AJ_Discover(const char* prefix, AJ_Service* service, uint32_t timeout,
                 if (sock.rx.flags & AJ_IO_BUF_AJ) {
                     memset(service, 0, sizeof(AJ_Service));
                     status = ParseIsAt(&sock.rx, prefix, service);
-                    printf(",,,,,,,,,AJ_Discover - ParseIsAt: %d\n", status);
                     if (status == AJ_OK) {
                         AJ_InfoPrintf(("AJ_Discover(): IS-AT discovered \"%s\"\n", prefix));
 
@@ -1172,8 +1153,6 @@ AJ_Status AJ_Discover(const char* prefix, AJ_Service* service, uint32_t timeout,
         }
        
         selection -= AJ_GetElapsedTime(&selectionTimer, FALSE);
-        printf("AJ_Discover -> seconds: %d, milliseconds: %d\n",selectionTimer.seconds,selectionTimer.milliseconds);
-        printf("selection: %d, AJ_GetRoutingNodeResponseListSize(): %d",selection,AJ_GetRoutingNodeResponseListSize());
         if (selection < 0 && AJ_GetRoutingNodeResponseListSize() > 0) {
             break;
         }
@@ -1183,7 +1162,6 @@ AJ_Status AJ_Discover(const char* prefix, AJ_Service* service, uint32_t timeout,
 _Exit:
     memset(service, 0, sizeof(AJ_Service));
     status = AJ_SelectRoutingNodeFromResponseList(service);
-    printf("+++++ exit AJ_Discover(): Stop discovery\n");
     /*
      * All done with multicast for now
      */

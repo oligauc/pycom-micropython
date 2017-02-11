@@ -1173,7 +1173,6 @@ static AJ_Status UnpackMsgId(uint32_t msgId, const char** objPath, const char** 
     }
     if (objPath) {
         *objPath = obj->path;
-        printf("++++ objPath: %s\n", *objPath);
     }
     *secure = SecurityApplies(*ifc, obj);
     if (iface) {
@@ -1295,13 +1294,11 @@ AJ_Status AJ_InitMessageFromMsgId(AJ_Message* msg, uint32_t msgId, uint8_t msgTy
         } else {
             msg->msgId = msgId;
             status = UnpackMsgId(msgId, &msg->objPath, &msg->iface, &member, secure);
-            printf("+++ objPath: %s, status: %d\n", msg->objPath, status);
             if (status == AJ_OK) {
                 /*
                  * Validate the object path
                  */
                 if (!msg->objPath) {
-                    printf("+++ objPath error - 1\n");
                     status = AJ_ERR_OBJECT_PATH;
                 } else if (*msg->objPath == '?') {
                     /*
@@ -1309,10 +1306,8 @@ AJ_Status AJ_InitMessageFromMsgId(AJ_Message* msg, uint32_t msgId, uint8_t msgTy
                      * objects. In the message header need a valid object path, it doesn't matter
                      * which one by definition so use the root object because it is always valid.
                      */
-                    printf("+++ objPath error - 2\n");
                     msg->objPath = "/";
                 } else if (*msg->objPath != '/') {
-                    printf("+++ objPath error - 3\n");
                     status = AJ_ERR_OBJECT_PATH;
                 }
                 msg->member = member;

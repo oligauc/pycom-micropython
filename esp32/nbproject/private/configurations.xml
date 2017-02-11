@@ -258,15 +258,12 @@
               <in>aj_target_util.c</in>
             </df>
             <df name="esp32">
-              <in>_aj_net.c</in>
               <in>aj_net.c</in>
               <in>aj_target.h</in>
               <in>aj_target_crypto.c</in>
               <in>aj_target_nvram.c</in>
               <in>aj_target_serial.c</in>
-              <in>aj_target_util (copy).c</in>
               <in>aj_target_util.c</in>
-              <in>esp32_net (copy).c</in>
               <in>esp32_net.c</in>
             </df>
             <df name="freertos-due">
@@ -575,7 +572,7 @@
         </df>
         <df name="WIPY">
           <df name="release">
-            <df name="alljoin">
+            <df name="alljoyn">
               <df name="src">
                 <df name="crypto">
                 </df>

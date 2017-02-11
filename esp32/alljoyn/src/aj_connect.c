@@ -372,7 +372,6 @@ AJ_Status AJ_FindBusAndConnect(AJ_BusAttachment* bus, const char* serviceName, u
     }
 
     while (finished == FALSE) {
-        printf("*******AJ_FindBusAndConnect - 1\n");
         finished = TRUE;
         connectionTime = (int32_t) timeout;
 
@@ -390,7 +389,7 @@ AJ_Status AJ_FindBusAndConnect(AJ_BusAttachment* bus, const char* serviceName, u
         service.ipv4 = 0x6501A8C0; // 192.168.1.101
         service.addrTypes = AJ_ADDR_TCP4;
         AJ_InitTimer(&connectionTimer);
-        printf("AJ_FindBusAndConnect(): Connection timer started\n");
+        AJ_InfoPrintf(("AJ_FindBusAndConnect(): Connection timer started\n"));
         status = AJ_Discover(serviceName, &service, timeout, selectionTimeout);
         if (status != AJ_OK) {
             AJ_InfoPrintf(("AJ_FindBusAndConnect(): AJ_Discover status=%s\n", AJ_StatusText(status)));
@@ -413,7 +412,6 @@ AJ_Status AJ_FindBusAndConnect(AJ_BusAttachment* bus, const char* serviceName, u
         }
 #endif
 
-        printf("*******AJ_FindBusAndConnect - 2\n");
         // this calls into platform code that will decide whether to use UDP or TCP, based on what is available
         status = AJ_Net_Connect(bus, &service);
         if (status != AJ_OK) {
@@ -434,7 +432,6 @@ AJ_Status AJ_FindBusAndConnect(AJ_BusAttachment* bus, const char* serviceName, u
             return AJ_ERR_TIMEOUT;
         }
 #endif
-        printf("*******AJ_FindBusAndConnect - 3\n");
         status = AJ_Authenticate(bus);
         if (status != AJ_OK) {
             AJ_InfoPrintf(("AJ_FindBusAndConnect(): AJ_Authenticate status=%s\n", AJ_StatusText(status)));
@@ -476,7 +473,6 @@ AJ_Status AJ_FindBusAndConnect(AJ_BusAttachment* bus, const char* serviceName, u
             }
 #endif
         }
-        printf("*******AJ_FindBusAndConnect - 4\n");
         if (status != AJ_OK) {
             AJ_InfoPrintf(("AJ_FindBusAndConnect(): AJ_Authenticate status=%s\n", AJ_StatusText(status)));
             goto ExitConnect;
@@ -493,7 +489,6 @@ AJ_Status AJ_FindBusAndConnect(AJ_BusAttachment* bus, const char* serviceName, u
 
 ExitConnect:
     
-    printf("*******AJ_FindBusAndConnect - 5\n");
     AJ_InitRoutingNodeResponselist();
     if (status != AJ_OK) {
         AJ_InfoPrintf(("AJ_FindBusAndConnect(): status=%s\n", AJ_StatusText(status)));
@@ -668,7 +663,6 @@ void AJ_AddRoutingNodeToResponseList(AJ_Service* service)
         candidate = RNResponseListIndex;
     }
 
-    printf("+++ AJ_AddRoutingNodeToResponseList()\n");
     // pass through the list and either update responses already received or
     // identify candidate slot for replacement (the slot with the lowest rank
     // in the list
@@ -676,53 +670,44 @@ void AJ_AddRoutingNodeToResponseList(AJ_Service* service)
         // if this slot is occupied
         if (RNResponseList[i].ipv4 || RNResponseList[i].ipv4Udp) {
             // if the service is already on the list
-            printf("+++ AJ_AddRoutingNodeToResponseList() - 1\n");
             if ((RNResponseList[i].ipv4 &&
                  RNResponseList[i].ipv4 == service->ipv4 && RNResponseList[i].ipv4port == service->ipv4port) ||
                 (RNResponseList[i].ipv4Udp &&
                  RNResponseList[i].ipv4Udp == service->ipv4Udp && RNResponseList[i].ipv4portUdp == service->ipv4portUdp)) {
                 // if the new response has higher protocol
-                printf("+++ AJ_AddRoutingNodeToResponseList() pv : %d, service->pv: %d\n", RNResponseList[i].pv, service->pv);
                 if (RNResponseList[i].pv < service->pv) {
                     // update to the highest protocol version per service
                     RNResponseList[i].pv = service->pv;
                     RNResponseList[i].priority = service->priority;
-                    printf("Updated RN 0x%x pv (pv = %d, port = %d, priority = %d) (slot %d of %d)\n", service->ipv4, service->pv, service->ipv4port, service->priority, i, RNResponseListIndex);
                 } else if (RNResponseList[i].pv == service->pv) {
                     // equal protocol version, update the priority to that of the latest response
                     if (RNResponseList[i].priority != service->priority) {
                         RNResponseList[i].priority = service->priority;
-                        printf("Updated RN 0x%x priority (pv = %d, port = %d, priority = %d) (slot %d of %d)\n", service->ipv4, service->pv, service->ipv4port, service->priority, i, RNResponseListIndex);
+                        AJ_InfoPrintf(("Updated RN 0x%x priority (pv = %d, port = %d, priority = %d) (slot %d of %d)\n", service->ipv4, service->pv, service->ipv4port, service->priority, i, RNResponseListIndex));
                     }
                 }
                 // else existing entry has better protocol version
                 return;
             } else {
                 // this response not on list, find a candidate for replacement
-                printf("+++ AJ_AddRoutingNodeToResponseList() - 3\n");
                 if (RNResponseListIndex == AJ_ROUTING_NODE_RESPONSELIST_SIZE) {
                     if (RNResponseList[i].pv > RNResponseList[candidate].pv) {
                         // this slot has higher protocol version than current candidate
-                        printf("+++ AJ_AddRoutingNodeToResponseList() - 4\n");
                         continue;
                     } else if (RNResponseList[i].pv < RNResponseList[candidate].pv) {
                         // this slot has lower protocol version than current candidate, so new candidate
-                        printf("+++ AJ_AddRoutingNodeToResponseList() - 5\n");
                         candidate = i;
                     } else if (RNResponseList[i].priority < RNResponseList[candidate].priority) {
                         // this slot has better priority than current candidate
-                        printf("+++ AJ_AddRoutingNodeToResponseList() - 6\n");
                         continue;
                     } else if (RNResponseList[i].priority > RNResponseList[candidate].priority) {
                         // this slot has worse priority than current candidate, so new candidate
-                        printf("+++ AJ_AddRoutingNodeToResponseList() - 7\n");
                         candidate = i;
                     }
                 }
             }
         } else {
             // break early if list is not full
-            printf("+++ AJ_AddRoutingNodeToResponseList() - 8\n");
             break;
         }
     }
@@ -731,15 +716,13 @@ void AJ_AddRoutingNodeToResponseList(AJ_Service* service)
     if (RNResponseListIndex == AJ_ROUTING_NODE_RESPONSELIST_SIZE) {
         // if candidate for eviction has higher protocol version do not replace
         if (service->pv < RNResponseList[candidate].pv) {
-            printf("+++ AJ_AddRoutingNodeToResponseList() - 9\n");
             return;
         }
         // if candidate for eviction has equal protocol version but better priority then do not replace
         if (service->pv == RNResponseList[candidate].pv && service->priority >= RNResponseList[candidate].priority) {
-            printf("+++ AJ_AddRoutingNodeToResponseList() - 10\n");
             return;
         }
-        printf("Evicting slot number %d\n", candidate);
+        AJ_InfoPrintf(("Evicting slot number %d\n", candidate))
     }
     RNResponseList[candidate].ipv4 = service->ipv4;
     RNResponseList[candidate].ipv4port = service->ipv4port;
@@ -749,10 +732,9 @@ void AJ_AddRoutingNodeToResponseList(AJ_Service* service)
     RNResponseList[candidate].pv = service->pv;
     RNResponseList[candidate].priority = service->priority;
     if (RNResponseListIndex < AJ_ROUTING_NODE_RESPONSELIST_SIZE) {
-        printf("+++ AJ_AddRoutingNodeToResponseList() - 11\n");
         RNResponseListIndex++;
     }
-    printf("Added RN 0x%x (pv = %d, port = %d, priority = %d) to list (slot %d of %d)\n", service->ipv4, service->pv, service->ipv4port, service->priority, candidate, RNResponseListIndex);
+    AJ_InfoPrintf(("Added RN 0x%x (pv = %d, port = %d, priority = %d) to list (slot %d of %d)\n", service->ipv4, service->pv, service->ipv4port, service->priority, candidate, RNResponseListIndex));
 }
 
 AJ_Status AJ_SelectRoutingNodeFromResponseList(AJ_Service* service)
