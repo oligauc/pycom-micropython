@@ -245,32 +245,29 @@ STATIC mp_obj_t service_reply(size_t n_args, const mp_obj_t *args) {
     }
     
     AJ_MarshalReplyMsg(&alljoyn_obj.msg, &reply);
-    for (uint8_t idx = 0; idx < n_args - 1; idx++){
-        AJ_Arg replyArg;
+    for (uint8_t idx = 0; idx < (n_args - 1); idx++){
         
         if (alljoyn_obj.replyArgs[idx] == AJ_ARG_STRING){
             char *reply_str = (char *)mp_obj_str_get_data(args[idx + 1], &len);
-            AJ_InitArg(&replyArg, AJ_ARG_STRING, 0, reply_str, 0);
+            AJ_MarshalArgs(&reply, "s", reply_str);
         } else if (alljoyn_obj.replyArgs[idx] == AJ_ARG_INT32) {
             mp_int_t value = mp_obj_get_int(args[idx + 1]);
-            AJ_InitArg(&replyArg, AJ_ARG_INT32, 0, (void *)value, 0);
+            AJ_MarshalArgs(&reply, "i", (int32_t)value);
         } else if (alljoyn_obj.replyArgs[idx] == AJ_ARG_INT16) {
             mp_int_t value = mp_obj_get_int(args[idx + 1]);
-            AJ_InitArg(&replyArg, AJ_ARG_INT16, 0, (void *)value, 0);
+            AJ_MarshalArgs(&reply, "n", (int16_t)value);
         } else if (alljoyn_obj.replyArgs[idx] == AJ_ARG_UINT32) {
             mp_int_t value = mp_obj_get_int(args[idx + 1]);
-            AJ_InitArg(&replyArg, AJ_ARG_UINT32, 0, (void *)value, 0);
+            AJ_MarshalArgs(&reply, "u", (uint32_t)value);
         } else if (alljoyn_obj.replyArgs[idx] == AJ_ARG_UINT16) {
             mp_int_t value = mp_obj_get_int(args[idx + 1]);
-            AJ_InitArg(&replyArg, AJ_ARG_UINT16, 0, (void *)value, 0);
+            AJ_MarshalArgs(&reply, "q", (uint16_t)value);
         } else if (alljoyn_obj.replyArgs[idx] == AJ_ARG_BOOLEAN) {
             mp_int_t value = mp_obj_get_int(args[idx + 1]);
-            AJ_InitArg(&replyArg, AJ_ARG_BOOLEAN, 0, (void *)value, 0);
+            AJ_MarshalArgs(&reply, "d", (bool)value);
         } else {
             mp_raise_ValueError("Unsupported type\n");
         }
-        
-        AJ_MarshalArg(&reply, &replyArg);
     }
     
     AJ_DeliverMsg(&reply);

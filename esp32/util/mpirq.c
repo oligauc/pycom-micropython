@@ -113,4 +113,4 @@ void IRAM_ATTR mp_irq_queue_interrupt(void (* handler)(void *), void *arg) {
    
 }
 
-#endif  // MICROPY_PY_THREAD*/
+#endif  // MICROPY_PY_THREAD
