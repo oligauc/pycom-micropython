@@ -32,7 +32,7 @@ uint8_t dbgTARGET_UTIL = 0;
 
 void AJ_Sleep(uint32_t ms)
 {
-    mp_hal_delay_ms(ms*1000);
+    mp_hal_delay_ms(ms);
 }
 
 #ifndef NDEBUG

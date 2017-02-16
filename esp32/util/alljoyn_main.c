@@ -239,7 +239,7 @@ static void prepareCallbackArguments(alljoyn_obj_t *alljoyn_obj, char *args, uin
             int value = 0;
             AJ_UnmarshalArgs(&alljoyn_obj->msg, "i", &value);
             alljoyn_obj->pyargs[idx] = mp_obj_new_int(value);
-        } else if (args[idx] == AJ_ARG_INT32 ){
+        } else if (args[idx] == AJ_ARG_INT16 ){
             int value = 0;
             AJ_UnmarshalArgs(&alljoyn_obj->msg, "n", &value);
             alljoyn_obj->pyargs[idx] = mp_obj_new_int(value);

@@ -72,9 +72,9 @@ void getMsgIdList(uint32_t *msgIds, bool isService){
             
             for (int m_idx = 1; m_idx <= conductor_interface->num_methods; m_idx++){
                 if (isService){
-                    msgIds[msgIdx] = AJ_APP_MESSAGE_ID(obj_idx, itf_idx, m_idx - 1);
+                    msgIds[msgIdx++] = AJ_APP_MESSAGE_ID(obj_idx, itf_idx, m_idx - 1);
                 } else {
-                    msgIds[msgIdx] = AJ_PRX_MESSAGE_ID(obj_idx, itf_idx, m_idx - 1);
+                    msgIds[msgIdx++] = AJ_PRX_MESSAGE_ID(obj_idx, itf_idx, m_idx - 1);
                 }
             }
             conductor_interface = conductor_interface->next;
