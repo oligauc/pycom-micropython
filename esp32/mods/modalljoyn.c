@@ -146,19 +146,23 @@ STATIC mp_obj_t add_interface(mp_uint_t n_args, const mp_obj_t *pos_args, mp_map
     // interface methods
     mp_uint_t number_methods = 0;
     mp_obj_t *interface_methods;
-    mp_obj_get_array(args[2].u_obj, &number_methods, &interface_methods);
-    
+    if (MP_OBJ_IS_TYPE(args[2].u_obj, &mp_type_list)) {
+        mp_obj_get_array(args[2].u_obj, &number_methods, &interface_methods);
+    } else {
+        number_methods = 1;
+        interface_methods = &args[2].u_obj;   
+    }
+   
     //callbacks
     mp_uint_t number_callbacks = 0;
     mp_obj_t *callbacks;
-    if (args[3].u_obj != MP_OBJ_NULL){
+    if (MP_OBJ_IS_TYPE(args[3].u_obj, &mp_type_list)) {
         mp_obj_get_array(args[3].u_obj, &number_callbacks, &callbacks);
+    } else {
+        number_callbacks = 1;
+        callbacks = &args[3].u_obj;
     }
-        
-    if (number_callbacks == 0){
-        mp_raise_ValueError("Callbacks required for service mode\n");
-    }
-        
+               
     if (number_callbacks != number_methods){
         mp_raise_ValueError("Missing callbacks\n");
     }
@@ -204,7 +208,11 @@ STATIC mp_obj_t call_method(mp_uint_t n_args, const mp_obj_t *pos_args, mp_map_t
    
     mp_uint_t number_arguments = 0;
     mp_obj_t *arguments;
-    mp_obj_get_array(args[1].u_obj, &number_arguments , &arguments); 
+    if (MP_OBJ_IS_TYPE(args[1].u_obj, &mp_type_tuple)) {
+        mp_obj_get_array(args[1].u_obj, &number_arguments , &arguments); 
+    } else {
+        arguments = &args[1].u_obj;
+    }
     
     alljoyn_marshal_request(interface_method, arguments, number_arguments);
     
