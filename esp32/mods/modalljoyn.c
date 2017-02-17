@@ -22,6 +22,7 @@
 #include "py/stream.h"
 #include "py/mphal.h"
 #include "mpexception.h"
+#include "freertos/semphr.h"
 
 /******************************************************************************
  DECLARE PRIVATE DATA
@@ -31,26 +32,23 @@ static alljoyn_obj_t alljoyn_obj = {
         .service_name = {0},
         .service_port = -1,
         .mode         = AJ_NONE,
-        .aj_args      = NULL,
-        .number_args  = 0,
-        .obj_indices  = {0},
         .msgIds       = NULL,
         .number_msgIds= 0,
-        .callback     = NULL,
-        .pyargs       = NULL,
-        .nparams      = 0,
-        .replyArgs    = {0},
-        .obj_indices  = {0},
-        .aj_args      = NULL,
-        .number_args  = 0,
+        .client       = {0},
+        .service      = NULL 
 };
 
 /******************************************************************************
  DECLARE PRIVATE FUNCTIONS
  ******************************************************************************/
 
+static void free_service_list(void);
+static uint8_t get_num_sl_nodes(void);
+static void init_service_node(aj_service_t **node, AJ_Message *msg);
+static void free_service_node(uint32_t msgId);
 static bool alljoyn_validate_port(uint32_t port);
 static void alljoyn_validate_mode (uint mode);
+static void send_reply_msg(aj_service_t *serviceInfo, mp_obj_t *arguments, mp_uint_t number_arguments);
 static void alljoyn_marshal_request(const char* method_name, mp_obj_t *arguments, mp_uint_t number_arguments);    
 
 /******************************************************************************
@@ -80,10 +78,11 @@ void parse_method_arguments(const char *method, char *args_in, uint8_t *num_in, 
 
 void alljoyn_free_service(void) {
     free(alljoyn_obj.msgIds);
+    free_service_list();
 }
 
 void alljoyn_free_client(void) {
-    free(alljoyn_obj.aj_args);
+    free(alljoyn_obj.client.aj_args);
 }
     
 /******************************************************************************
@@ -202,15 +201,16 @@ STATIC mp_obj_t call_method(mp_uint_t n_args, const mp_obj_t *pos_args, mp_map_t
     const char* interface_name = mp_obj_str_get_data(calling_method[1], &len);
     const char* interface_method = mp_obj_str_get_data(calling_method[2], &len);
     
-    if (!getAJObjectIndex(service_path, interface_name, interface_method, alljoyn_obj.obj_indices)){
+    if (!getAJObjectIndex(service_path, interface_name, interface_method, alljoyn_obj.client.obj_indices)){
         mp_raise_ValueError("calling method not found\n");
     }
    
     mp_uint_t number_arguments = 0;
     mp_obj_t *arguments;
-    if (MP_OBJ_IS_TYPE(args[1].u_obj, &mp_type_tuple)) {
+    if (MP_OBJ_IS_TYPE(args[1].u_obj, &mp_type_list)) {
         mp_obj_get_array(args[1].u_obj, &number_arguments , &arguments); 
     } else {
+        number_arguments = 1;
         arguments = &args[1].u_obj;
     }
     
@@ -232,6 +232,9 @@ STATIC mp_obj_t start_service(mp_obj_t self_in) {
         mp_raise_ValueError("No interfaces found\n");
     }
    
+    alljoyn_obj.access_semaphore = xSemaphoreCreateBinary();
+    xSemaphoreGive(alljoyn_obj.access_semaphore);
+    
     alljoyn_obj.number_msgIds = getTotalNumberMethods();
     alljoyn_obj.msgIds = (uint32_t *)malloc(alljoyn_obj.number_msgIds * sizeof(uint32_t));
     getMsgIdList(alljoyn_obj.msgIds, true);
@@ -242,47 +245,37 @@ STATIC mp_obj_t start_service(mp_obj_t self_in) {
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_1(alljoyn_start_service_obj, start_service);
 
-STATIC mp_obj_t service_reply(size_t n_args, const mp_obj_t *args) {
+STATIC mp_obj_t service_reply(mp_uint_t n_args, const mp_obj_t *pos_args, mp_map_t *kw_args) {
+    STATIC const mp_arg_t service_reply_args[] = {
+        { MP_QSTR_msgId,         MP_ARG_REQUIRED | MP_ARG_KW_ONLY | MP_ARG_OBJ,     {.u_obj = MP_OBJ_NULL} },
+        { MP_QSTR_reply_args,    MP_ARG_OBJ,                                        {.u_obj = MP_OBJ_NULL} },
+    };
     
-    AJ_Message reply;
-    mp_uint_t len = 0;
-    size_t oparams = strlen(alljoyn_obj.replyArgs);
+    // parse args
+    mp_arg_val_t args[MP_ARRAY_SIZE(service_reply_args)];
+    mp_arg_parse_all(n_args - 1, pos_args + 1, kw_args, MP_ARRAY_SIZE(args), service_reply_args, args);
     
-    if ((n_args - 1) != oparams){
-        mp_raise_ValueError("Wrong number of parameters\n");
+    uint32_t msgId = mp_obj_get_int(args[0].u_obj);
+    
+    aj_service_t *serviceInfo;
+    if (!get_service_info(msgId, &serviceInfo)){
+        mp_raise_ValueError("Returned wrong message id\n");
     }
     
-    AJ_MarshalReplyMsg(&alljoyn_obj.msg, &reply);
-    for (uint8_t idx = 0; idx < (n_args - 1); idx++){
-        
-        if (alljoyn_obj.replyArgs[idx] == AJ_ARG_STRING){
-            char *reply_str = (char *)mp_obj_str_get_data(args[idx + 1], &len);
-            AJ_MarshalArgs(&reply, "s", reply_str);
-        } else if (alljoyn_obj.replyArgs[idx] == AJ_ARG_INT32) {
-            mp_int_t value = mp_obj_get_int(args[idx + 1]);
-            AJ_MarshalArgs(&reply, "i", (int32_t)value);
-        } else if (alljoyn_obj.replyArgs[idx] == AJ_ARG_INT16) {
-            mp_int_t value = mp_obj_get_int(args[idx + 1]);
-            AJ_MarshalArgs(&reply, "n", (int16_t)value);
-        } else if (alljoyn_obj.replyArgs[idx] == AJ_ARG_UINT32) {
-            mp_int_t value = mp_obj_get_int(args[idx + 1]);
-            AJ_MarshalArgs(&reply, "u", (uint32_t)value);
-        } else if (alljoyn_obj.replyArgs[idx] == AJ_ARG_UINT16) {
-            mp_int_t value = mp_obj_get_int(args[idx + 1]);
-            AJ_MarshalArgs(&reply, "q", (uint16_t)value);
-        } else if (alljoyn_obj.replyArgs[idx] == AJ_ARG_BOOLEAN) {
-            mp_int_t value = mp_obj_get_int(args[idx + 1]);
-            AJ_MarshalArgs(&reply, "d", (bool)value);
-        } else {
-            mp_raise_ValueError("Unsupported type\n");
-        }
+    mp_uint_t number_arguments = 0;
+    mp_obj_t *arguments;
+    if (MP_OBJ_IS_TYPE(args[1].u_obj, &mp_type_list)) {
+        mp_obj_get_array(args[1].u_obj, &number_arguments , &arguments); 
+    } else {
+        number_arguments = 1;
+        arguments = &args[1].u_obj;
     }
     
-    AJ_DeliverMsg(&reply);
+    send_reply_msg(serviceInfo ,arguments, number_arguments);
      
     return mp_const_none;
 }
-STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(alljoyn_service_reply_obj, 0, 20, service_reply);
+STATIC MP_DEFINE_CONST_FUN_OBJ_KW(alljoyn_service_reply_obj, 1, service_reply);
 
 STATIC const mp_map_elem_t alljoyn_locals_dict_table[] = {
    { MP_OBJ_NEW_QSTR(MP_QSTR_add_interface),                (mp_obj_t)&alljoyn_add_interface_obj},
@@ -325,35 +318,203 @@ static void alljoyn_marshal_request(const char* method_name, mp_obj_t *arguments
     char args_in[MAX_NUMBER_ARGS] = { 0 };
     char args_out[MAX_NUMBER_ARGS] = { 0 };
     
-    alljoyn_obj.number_args = number_arguments;
+    alljoyn_obj.client.number_args = number_arguments;
     parse_method_arguments(method_name, args_in, &num_args_in, args_out, &num_args_out);
     
     if (number_arguments != num_args_in){
         mp_raise_ValueError("Wrong number of parameters\n");
     }
     
-    alljoyn_obj.aj_args = (AJ_Arg *)malloc(sizeof(AJ_Arg) * number_arguments);
+    alljoyn_obj.client.aj_args = (AJ_Arg *)malloc(sizeof(AJ_Arg) * number_arguments);
     for(int idx = 0; idx < number_arguments; idx++){
         if (args_in[idx] == AJ_ARG_STRING){
             char *request_str = (char *)mp_obj_str_get_data(arguments[idx], &len);
-            AJ_InitArg(&alljoyn_obj.aj_args[idx], AJ_ARG_STRING, 0, (void *)request_str, 0);  
+            AJ_InitArg(&alljoyn_obj.client.aj_args[idx], AJ_ARG_STRING, 0, (void *)request_str, 0);  
         } else if (args_in[idx] == AJ_ARG_INT32){
             mp_int_t value = mp_obj_get_int(arguments[idx]);
-            AJ_InitArg(&alljoyn_obj.aj_args[idx], AJ_ARG_INT32, 0, (void *)value, 0);
+            AJ_InitArg(&alljoyn_obj.client.aj_args[idx], AJ_ARG_INT32, 0, (void *)value, 0);
         } else if (args_in[idx] == AJ_ARG_INT16) {
             mp_int_t value = mp_obj_get_int(arguments[idx]);
-            AJ_InitArg(&alljoyn_obj.aj_args[idx], AJ_ARG_INT16, 0, (void *)value, 0);
+            AJ_InitArg(&alljoyn_obj.client.aj_args[idx], AJ_ARG_INT16, 0, (void *)value, 0);
         } else if (args_in[idx] == AJ_ARG_UINT32) {
             mp_int_t value = mp_obj_get_int(arguments[idx]);
-            AJ_InitArg(&alljoyn_obj.aj_args[idx], AJ_ARG_UINT32, 0, (void *)value, 0);
+            AJ_InitArg(&alljoyn_obj.client.aj_args[idx], AJ_ARG_UINT32, 0, (void *)value, 0);
         } else if (args_in[idx] == AJ_ARG_UINT16) {
             mp_int_t value = mp_obj_get_int(arguments[idx]);
-            AJ_InitArg(&alljoyn_obj.aj_args[idx], AJ_ARG_UINT16, 0, (void *)value, 0);
+            AJ_InitArg(&alljoyn_obj.client.aj_args[idx], AJ_ARG_UINT16, 0, (void *)value, 0);
         } else if (args_in[idx] == AJ_ARG_BOOLEAN) {
             mp_int_t value = mp_obj_get_int(arguments[idx]);
-            AJ_InitArg(&alljoyn_obj.aj_args[idx], AJ_ARG_BOOLEAN, 0, (void *)value, 0);
+            AJ_InitArg(&alljoyn_obj.client.aj_args[idx], AJ_ARG_BOOLEAN, 0, (void *)value, 0);
         } else {
-            mp_raise_ValueError("Unsupported type\n");
+           mp_not_implemented("Unsupported type\n");
         }
     }
+}
+
+static void send_reply_msg(aj_service_t *serviceInfo, mp_obj_t *arguments, mp_uint_t number_arguments){
+ 
+    AJ_Message reply;
+    mp_uint_t len = 0;
+    size_t oparams = strlen(serviceInfo->replyArgs);
+    
+    if (number_arguments != oparams){
+        mp_raise_ValueError("Wrong number of parameters\n");
+    }
+    
+    AJ_MarshalReplyMsg(&serviceInfo->msg, &reply);
+    for (uint8_t idx = 0; idx < number_arguments; idx++){
+        
+        if (serviceInfo->replyArgs[idx] == AJ_ARG_STRING){
+            char *reply_str = (char *)mp_obj_str_get_data(arguments[idx], &len);
+            AJ_MarshalArgs(&reply, "s", reply_str);
+        } else if (serviceInfo->replyArgs[idx] == AJ_ARG_INT32) {
+            mp_int_t value = mp_obj_get_int(arguments[idx]);
+            AJ_MarshalArgs(&reply, "i", (int32_t)value);
+        } else if (serviceInfo->replyArgs[idx] == AJ_ARG_INT16) {
+            mp_int_t value = mp_obj_get_int(arguments[idx]);
+            AJ_MarshalArgs(&reply, "n", (int16_t)value);
+        } else if (serviceInfo->replyArgs[idx] == AJ_ARG_UINT32) {
+            mp_int_t value = mp_obj_get_int(arguments[idx]);
+            AJ_MarshalArgs(&reply, "u", (uint32_t)value);
+        } else if (serviceInfo->replyArgs[idx] == AJ_ARG_UINT16) {
+            mp_int_t value = mp_obj_get_int(arguments[idx]);
+            AJ_MarshalArgs(&reply, "q", (uint16_t)value);
+        } else if (serviceInfo->replyArgs[idx] == AJ_ARG_BOOLEAN) {
+            mp_int_t value = mp_obj_get_int(arguments[idx]);
+            AJ_MarshalArgs(&reply, "d", (bool)value);
+        } else {
+            mp_not_implemented("Unsupported type\n");
+        }
+    }
+    
+    AJ_DeliverMsg(&reply);
+    
+    free_service_node(serviceInfo->msg.msgId);
+    printf("Messages in list: %hu\n",get_num_sl_nodes());
+}
+
+bool get_service_info(uint32_t msgId, aj_service_t **serviceInfo){
+    
+    bool success = false;
+    
+    xSemaphoreTake(alljoyn_obj.access_semaphore, portMAX_DELAY);
+    aj_service_t *conductor = alljoyn_obj.service;
+    
+    while (conductor != NULL){
+        if (conductor->msg.msgId == msgId){
+            *serviceInfo = conductor;
+            success = true;
+            break;
+        }
+        
+        conductor = conductor->next;
+    }
+    xSemaphoreGive(alljoyn_obj.access_semaphore);
+ 
+    return success;
+}
+
+static void init_service_node(aj_service_t **node, AJ_Message *msg){
+    
+    *node = (aj_service_t *)malloc(sizeof(aj_service_t));
+    (*node)->msg = *msg;
+    (*node)->nparams = 0;
+    (*node)->next = NULL;
+    memset((*node)->replyArgs,0,MAX_NUMBER_ARGS);
+    
+}
+
+void add_service_info(AJ_Message *msg){
+    
+    xSemaphoreTake(alljoyn_obj.access_semaphore, portMAX_DELAY);
+    
+    if (alljoyn_obj.service == NULL){
+        init_service_node(&alljoyn_obj.service, msg);
+    } else {
+        
+        aj_service_t *conductor = alljoyn_obj.service;
+        
+        while (conductor != NULL){      
+            conductor = conductor->next;
+        }
+        
+        init_service_node(&conductor, msg);
+    }
+    
+    xSemaphoreGive(alljoyn_obj.access_semaphore);
+}
+
+static void free_service_node(uint32_t msgId){
+    
+    xSemaphoreTake(alljoyn_obj.access_semaphore, portMAX_DELAY);
+    
+    if (alljoyn_obj.service == NULL){
+        mp_raise_ValueError("Message not in list\n");
+        xSemaphoreGive(alljoyn_obj.access_semaphore);
+        return;
+    }
+    
+    aj_service_t *conductor = alljoyn_obj.service;
+    
+    //free root node
+    if (alljoyn_obj.service->msg.msgId == msgId) {
+        
+        alljoyn_obj.service = conductor->next;
+        free(conductor);
+        xSemaphoreGive(alljoyn_obj.access_semaphore);
+        return;
+    } else {
+        
+        while (conductor->next != NULL) {
+            
+            if (conductor->next->msg.msgId == msgId){
+                break;
+            }
+                
+            conductor = conductor->next;
+        }
+        
+        if (conductor->next == NULL){
+            xSemaphoreGive(alljoyn_obj.access_semaphore);
+            mp_raise_ValueError("Message not in list\n");
+            return;
+        }
+        
+        //Node found
+        aj_service_t *toFree = conductor->next;
+        conductor->next = conductor->next->next;
+        free(toFree);
+        
+    }
+   
+    xSemaphoreGive(alljoyn_obj.access_semaphore);
+}
+
+static void free_service_list(void){
+    
+    xSemaphoreTake(alljoyn_obj.access_semaphore, portMAX_DELAY);
+    aj_service_t *conductor = alljoyn_obj.service;
+    
+    aj_service_t *previous = NULL;
+    while ((previous = conductor) != NULL){
+        conductor = conductor->next;
+        free(previous);
+    }
+    
+    xSemaphoreGive(alljoyn_obj.access_semaphore);
+}
+
+static uint8_t get_num_sl_nodes(void){
+    
+    uint8_t nodes = 0;
+    xSemaphoreTake(alljoyn_obj.access_semaphore, portMAX_DELAY);
+    aj_service_t *conductor = alljoyn_obj.service;
+    
+    while (conductor != NULL){
+        nodes++;
+        conductor = conductor->next;
+    }
+    
+    xSemaphoreGive(alljoyn_obj.access_semaphore);
+    return nodes;
 }

@@ -33,6 +33,11 @@ static char fullServiceName[AJ_MAX_SERVICE_NAME_SIZE];
 
 static AJ_Object *AppObjects = {NULL};
 
+typedef struct {
+    uint32_t msgId;
+    alljoyn_obj_t *alljoyn_obj;
+} service_callback_t;
+
 /******************************************************************************
  DECLARE PRIVATE FUNCTIONS
  ******************************************************************************/
@@ -41,11 +46,11 @@ static void alljoyn_service_init();
 static void alljoyn_callback_handler(void *arg);
 static void alljoyn_service_task(void *args);
 static uint32_t getMessageId(alljoyn_obj_t *alljoyn_obj);
-static void prepareServiceCallback(alljoyn_obj_t *alljoyn_obj);
+static void prepareServiceCallback(alljoyn_obj_t *alljoyn_obj, uint32_t msgId);
 static void prepareClientCallback(alljoyn_obj_t *alljoyn_obj);
 static void alljoin_client_connect(alljoyn_obj_t *alljoyn_obj);
 static bool isClientCall(alljoyn_obj_t *alljoyn_obj, uint32_t msgId);
-static void prepareCallbackArguments(alljoyn_obj_t *alljoyn_obj, char *args_in, uint8_t num_args_in);
+static void prepareCallbackArguments(alljoyn_obj_t *alljoyn_obj, char *args_in, uint8_t num_args_in, uint32_t msgId);
 static void MakeMethodCall(AJ_BusAttachment* bus, uint32_t sessionId, alljoyn_obj_t *alljoyn_obj);
 
 /******************************************************************************
@@ -81,7 +86,9 @@ static void alljoyn_client_init(){
 
 static uint32_t getMessageId(alljoyn_obj_t *alljoyn_obj){
     
-    return AJ_PRX_MESSAGE_ID(alljoyn_obj->obj_indices[0], alljoyn_obj->obj_indices[1], alljoyn_obj->obj_indices[2]);
+    return AJ_PRX_MESSAGE_ID(alljoyn_obj->client.obj_indices[0], 
+            alljoyn_obj->client.obj_indices[1], 
+            alljoyn_obj->client.obj_indices[2]);
 }
 
 static void MakeMethodCall(AJ_BusAttachment* bus, uint32_t sessionId, alljoyn_obj_t *alljoyn_obj)
@@ -92,8 +99,8 @@ static void MakeMethodCall(AJ_BusAttachment* bus, uint32_t sessionId, alljoyn_ob
     status = AJ_MarshalMethodCall(bus, &msg, getMessageId(alljoyn_obj), fullServiceName, sessionId, 0, METHOD_TIMEOUT);
 
     if (status == AJ_OK) {
-        for (int idx = 0; idx < alljoyn_obj->number_args; idx++){
-            status = AJ_MarshalArg(&msg, &alljoyn_obj->aj_args[idx]);
+        for (int idx = 0; idx < alljoyn_obj->client.number_args; idx++){
+            status = AJ_MarshalArg(&msg, &alljoyn_obj->client.aj_args[idx]);
             if (status != AJ_OK){
                 break;
             }
@@ -158,7 +165,7 @@ static void alljoin_client_connect(alljoyn_obj_t *alljoyn_obj) {
                   
                     if (AJ_OK == status) {
                         
-                        alljoyn_obj->msg = msg;
+                        alljoyn_obj->client.msg = msg;
                         prepareClientCallback(alljoyn_obj);               
                        
                         done = TRUE;
@@ -217,65 +224,95 @@ static void alljoyn_service_init(){
 }
 
 static void alljoyn_callback_handler(void *arg) {
-    alljoyn_obj_t *self = arg;
-    if (self->callback != MP_OBJ_NULL){
-        mp_call_function_n_kw(self->callback,self->nparams,0, self->pyargs);
-        free(self->pyargs);
+    
+    aj_service_t *serviceInfo = NULL;
+    service_callback_t *self = (service_callback_t *)arg;
+   
+    if (self->alljoyn_obj->mode == AJ_SERVICE) {
+        get_service_info(self->msgId, &serviceInfo);
+        mp_call_function_n_kw(serviceInfo->callback,serviceInfo->nparams,0, serviceInfo->pyargs);
+        free(serviceInfo->pyargs);
+        free(self);
+    } else {
+        mp_call_function_n_kw(self->alljoyn_obj->client.callback,self->alljoyn_obj->client.nparams,0, self->alljoyn_obj->client.pyargs);
+        free(self->alljoyn_obj->client.pyargs);
     }
 }
 
-static void prepareCallbackArguments(alljoyn_obj_t *alljoyn_obj, char *args, uint8_t num_args){
+static void prepareCallbackArguments(alljoyn_obj_t *alljoyn_obj, char *args, uint8_t num_args, uint32_t msgId){
     
-    alljoyn_obj->nparams = num_args;
-    alljoyn_obj->pyargs = (mp_obj_t *)malloc(sizeof(mp_obj_t) * num_args);
+    mp_obj_t *pyargs;
+    uint8_t startIdx = 0;
+    aj_service_t *serviceInfo;
+    AJ_Message msg;
     
+    if (alljoyn_obj->mode == AJ_SERVICE) {
+        startIdx = 1;
+        get_service_info(msgId, &serviceInfo);
+        serviceInfo->nparams = num_args + 1;
+        serviceInfo->pyargs = (mp_obj_t *)malloc(sizeof(mp_obj_t) * (num_args + 1));
+        serviceInfo->pyargs[0] = mp_obj_new_int(msgId);
+        pyargs = serviceInfo->pyargs;
+        msg = serviceInfo->msg;
+    } else {
+        alljoyn_obj->client.nparams = num_args;
+        alljoyn_obj->client.pyargs = (mp_obj_t *)malloc(sizeof(mp_obj_t) * num_args);
+        pyargs = alljoyn_obj->client.pyargs;
+        msg = alljoyn_obj->client.msg;
+    }
+     
     for (uint8_t idx = 0; idx < num_args; idx++){
         
         if (args[idx] == AJ_ARG_STRING){
             char *str = NULL;
-            AJ_UnmarshalArgs(&alljoyn_obj->msg, "s", &str);
-            alljoyn_obj->pyargs[idx] = mp_obj_new_str(str, strlen(str), false);
+            AJ_UnmarshalArgs(&msg, "s", &str);
+            pyargs[startIdx] = mp_obj_new_str(str, strlen(str), false);
         } else if (args[idx] == AJ_ARG_INT32) {
             int value = 0;
-            AJ_UnmarshalArgs(&alljoyn_obj->msg, "i", &value);
-            alljoyn_obj->pyargs[idx] = mp_obj_new_int(value);
+            AJ_UnmarshalArgs(&msg, "i", &value);
+            pyargs[startIdx] = mp_obj_new_int(value);
         } else if (args[idx] == AJ_ARG_INT16 ){
             int value = 0;
-            AJ_UnmarshalArgs(&alljoyn_obj->msg, "n", &value);
-            alljoyn_obj->pyargs[idx] = mp_obj_new_int(value);
+            AJ_UnmarshalArgs(&msg, "n", &value);
+            pyargs[startIdx] = mp_obj_new_int(value);
         } else if (args[idx] == AJ_ARG_UINT16) {
             unsigned int value = 0;
-            AJ_UnmarshalArgs(&alljoyn_obj->msg, "q", &value);
-            alljoyn_obj->pyargs[idx] = mp_obj_new_int_from_uint(value);
+            AJ_UnmarshalArgs(&msg, "q", &value);
+            pyargs[startIdx] = mp_obj_new_int_from_uint(value);
         } else if (args[idx] == AJ_ARG_UINT32){
             unsigned int value = 0;
-            AJ_UnmarshalArgs(&alljoyn_obj->msg, "u", &value);
-            alljoyn_obj->pyargs[idx] = mp_obj_new_int_from_uint(value);
+            AJ_UnmarshalArgs(&msg, "u", &value);
+            pyargs[startIdx] = mp_obj_new_int_from_uint(value);
         } else if (args[idx] == AJ_ARG_BOOLEAN){
             bool value = 0;
-            AJ_UnmarshalArgs(&alljoyn_obj->msg, "b", &value);
-            alljoyn_obj->pyargs[idx] = mp_obj_new_bool(value);
+            AJ_UnmarshalArgs(&msg, "b", &value);
+            pyargs[startIdx] = mp_obj_new_bool(value);
         } else {
             mp_raise_ValueError("Unsupported type\n");
         }
         
+        startIdx++;
     }
 }
 
-static void prepareServiceCallback(alljoyn_obj_t *alljoyn_obj){
+static void prepareServiceCallback(alljoyn_obj_t *alljoyn_obj, uint32_t msgId){
     
     char *method = NULL;
     uint8_t num_args_in = 0;
     uint8_t num_args_out = 0;
+    aj_service_t *serviceInfo;
     char args_in[MAX_NUMBER_ARGS] = { 0 };
     
-    memset(alljoyn_obj->replyArgs,0,MAX_NUMBER_ARGS);
+    get_service_info(msgId, &serviceInfo);
+    getParametersFromMsgId(msgId, &method, &serviceInfo->callback, true);
+    parse_method_arguments(method, args_in, &num_args_in, serviceInfo->replyArgs, &num_args_out);
+    prepareCallbackArguments(alljoyn_obj, args_in, num_args_in, msgId);
     
-    getParametersFromMsgId(alljoyn_obj->msg.msgId, &method, &alljoyn_obj->callback, true);
-    parse_method_arguments(method, args_in, &num_args_in, alljoyn_obj->replyArgs, &num_args_out);
-    prepareCallbackArguments(alljoyn_obj, args_in, num_args_in);
+    service_callback_t *callbackArgs = (service_callback_t *)malloc(sizeof(service_callback_t));
+    callbackArgs->msgId = msgId;
+    callbackArgs->alljoyn_obj = alljoyn_obj;
     
-    mp_irq_queue_interrupt(alljoyn_callback_handler, (void *)alljoyn_obj);
+    mp_irq_queue_interrupt(alljoyn_callback_handler, (void *)callbackArgs);
 }
 
 static bool isClientCall(alljoyn_obj_t *alljoyn_obj, uint32_t msgId){
@@ -297,9 +334,9 @@ static void prepareClientCallback(alljoyn_obj_t *alljoyn_obj){
     char args_in[MAX_NUMBER_ARGS] = { 0 };
     char args_out[MAX_NUMBER_ARGS] = { 0 };
     
-    getParametersFromMsgId(alljoyn_obj->msg.msgId, &method, &alljoyn_obj->callback, false);
+    getParametersFromMsgId(alljoyn_obj->client.msg.msgId, &method, &alljoyn_obj->client.callback, false);
     parse_method_arguments(method, args_in, &num_args_in, args_out, &num_args_out);
-    prepareCallbackArguments(alljoyn_obj, args_out, num_args_out);
+    prepareCallbackArguments(alljoyn_obj, args_out, num_args_out,0);
     
     mp_irq_queue_interrupt(alljoyn_callback_handler, (void *)alljoyn_obj);
 }
@@ -336,7 +373,7 @@ static void alljoyn_service_task(void *args){
         }
 
         status = AJ_UnmarshalMsg(&bus, &msg, UNMARSHAL_TIMEOUT);
-
+        
         if (AJ_ERR_TIMEOUT == status) {
             continue;
         }
@@ -357,11 +394,11 @@ static void alljoyn_service_task(void *args){
                
                 printf("Received message with Id: %u\n", msg.msgId);
                 
-                alljoyn_obj->msg = msg;
-                prepareServiceCallback(alljoyn_obj);
+                add_service_info(&msg);
+                prepareServiceCallback(alljoyn_obj, msg.msgId);
                
             } else {
-                /* Pass to the built-in handlers. */
+                // Pass to the built-in handlers. 
                 status = AJ_BusHandleBusMessage(&msg);
             }
             
