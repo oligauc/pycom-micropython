@@ -27,6 +27,7 @@
 /******************************************************************************
  DECLARE PRIVATE DATA
  ******************************************************************************/
+static char      *SupportedTypes = "sinqudb";
 
 static alljoyn_obj_t alljoyn_obj = {
         .service_name = {0},
@@ -48,6 +49,10 @@ static void init_service_node(aj_service_t **node, AJ_Message *msg);
 static void free_service_node(uint32_t msgId);
 static bool alljoyn_validate_port(uint32_t port);
 static void alljoyn_validate_mode (uint mode);
+static void alljoyn_validate_request_type(const char *request);
+static void alljoyn_validate_arguments(const char *request);
+static void alljoyn_validate_service_path(const char *service_path);
+static void validate_client_call(const char *request, const char *service_path);
 static void send_reply_msg(aj_service_t *serviceInfo, mp_obj_t *arguments, mp_uint_t number_arguments);
 static void alljoyn_marshal_request(const char* method_name, mp_obj_t *arguments, mp_uint_t number_arguments);    
 
@@ -128,7 +133,7 @@ STATIC mp_obj_t add_interface(mp_uint_t n_args, const mp_obj_t *pos_args, mp_map
         { MP_QSTR_service_path,     MP_ARG_REQUIRED | MP_ARG_KW_ONLY | MP_ARG_OBJ,     {.u_obj = MP_OBJ_NULL} },
         { MP_QSTR_interface_name,   MP_ARG_REQUIRED | MP_ARG_KW_ONLY | MP_ARG_OBJ,     {.u_obj = MP_OBJ_NULL} },
         { MP_QSTR_interface_methods,MP_ARG_REQUIRED | MP_ARG_KW_ONLY | MP_ARG_OBJ,     {.u_obj = MP_OBJ_NULL} },
-        { MP_QSTR_callbacks,        MP_ARG_KW_ONLY  | MP_ARG_OBJ,                      {.u_obj = MP_OBJ_NULL} },
+        { MP_QSTR_callbacks,        MP_ARG_REQUIRED | MP_ARG_KW_ONLY | MP_ARG_OBJ,     {.u_obj = MP_OBJ_NULL} },
     };
     
     // parse args
@@ -138,6 +143,7 @@ STATIC mp_obj_t add_interface(mp_uint_t n_args, const mp_obj_t *pos_args, mp_map
     // service path
     mp_uint_t len = 0;
     const char *service_path = mp_obj_str_get_data(args[0].u_obj, &len);
+    alljoyn_validate_service_path(service_path);
     
     // interface name
     const char *interface_name = mp_obj_str_get_data(args[1].u_obj, &len);
@@ -168,7 +174,11 @@ STATIC mp_obj_t add_interface(mp_uint_t n_args, const mp_obj_t *pos_args, mp_map
     
     for (uint8_t idx = 0; idx < number_methods; idx++){
         char *method_name = (char *)mp_obj_str_get_data(interface_methods[idx], &len);
-        addObject((char *)service_path, (char *)interface_name, &method_name, 1, &callbacks[idx]);
+        
+        alljoyn_validate_request_type(method_name);
+        alljoyn_validate_arguments(method_name);
+        
+        addObject((char *)service_path, (char *)interface_name, method_name, &callbacks[idx]);
     }
             
     return mp_const_none;
@@ -200,6 +210,7 @@ STATIC mp_obj_t call_method(mp_uint_t n_args, const mp_obj_t *pos_args, mp_map_t
     const char* service_path = mp_obj_str_get_data(calling_method[0], &len);
     const char* interface_name = mp_obj_str_get_data(calling_method[1], &len);
     const char* interface_method = mp_obj_str_get_data(calling_method[2], &len);
+    validate_client_call(interface_method, service_path);
     
     if (!getAJObjectIndex(service_path, interface_name, interface_method, alljoyn_obj.client.obj_indices)){
         mp_raise_ValueError("calling method not found\n");
@@ -310,6 +321,60 @@ static bool alljoyn_validate_port(uint32_t port) {
     return true;
 }
 
+static void validate_client_call(const char *request, const char *service_path){
+    
+    alljoyn_validate_arguments(request);
+    alljoyn_validate_request_type(request);
+    alljoyn_validate_service_path(service_path);
+}
+
+static void alljoyn_validate_arguments(const char *request){
+    
+    uint8_t num_args_in = 0;
+    uint8_t num_args_out = 0;
+    char args_in[MAX_NUMBER_ARGS] = { 0 };
+    char args_out[MAX_NUMBER_ARGS] = { 0 };
+    
+    parse_method_arguments(request, args_in, &num_args_in, args_out, &num_args_out);
+    
+    for (int idx = 0; idx < num_args_in; idx++){
+        char *pch = strchr(SupportedTypes, args_in[idx]);
+        
+        if (pch == NULL){
+            mp_not_implemented("Input argument type not supported.\n");
+        }
+    }
+    
+    for (int idx = 0; idx < num_args_out; idx++){
+        char *pch = strchr(SupportedTypes, args_out[idx]);
+        
+        if (pch == NULL){
+            mp_not_implemented("Output argument type not supported.\n");
+        }
+    }
+}
+
+static void alljoyn_validate_request_type(const char *request){
+    
+    size_t len = strlen(request);
+    
+    if (len > 0){
+        if (request[0] != '?'){
+            mp_not_implemented("Request not supported.\n");
+        }
+    }
+}
+
+static void alljoyn_validate_service_path(const char *service_path){
+    
+    size_t len = strlen(service_path);
+    
+    if (len > 0){
+        if (service_path[0] != '/'){
+            mp_raise_ValueError("Service path not in correct format. Usage: /pathName\n");
+        }
+    }
+}
 static void alljoyn_marshal_request(const char* method_name, mp_obj_t *arguments, mp_uint_t number_arguments){
     
     mp_uint_t len = 0;
@@ -332,25 +397,28 @@ static void alljoyn_marshal_request(const char* method_name, mp_obj_t *arguments
             AJ_InitArg(&alljoyn_obj.client.aj_args[idx], AJ_ARG_STRING, 0, (void *)request_str, 0);  
         } else if (args_in[idx] == AJ_ARG_INT32){
             mp_int_t value = mp_obj_get_int(arguments[idx]);
-            AJ_InitArg(&alljoyn_obj.client.aj_args[idx], AJ_ARG_INT32, 0, (void *)value, 0);
+            AJ_InitArg(&alljoyn_obj.client.aj_args[idx], AJ_ARG_INT32, 0, (void *)&value, 0);
         } else if (args_in[idx] == AJ_ARG_INT16) {
             mp_int_t value = mp_obj_get_int(arguments[idx]);
-            AJ_InitArg(&alljoyn_obj.client.aj_args[idx], AJ_ARG_INT16, 0, (void *)value, 0);
+            AJ_InitArg(&alljoyn_obj.client.aj_args[idx], AJ_ARG_INT16, 0, (void *)&value, 0);
         } else if (args_in[idx] == AJ_ARG_UINT32) {
             mp_int_t value = mp_obj_get_int(arguments[idx]);
-            AJ_InitArg(&alljoyn_obj.client.aj_args[idx], AJ_ARG_UINT32, 0, (void *)value, 0);
+            AJ_InitArg(&alljoyn_obj.client.aj_args[idx], AJ_ARG_UINT32, 0, (void *)&value, 0);
         } else if (args_in[idx] == AJ_ARG_UINT16) {
             mp_int_t value = mp_obj_get_int(arguments[idx]);
-            AJ_InitArg(&alljoyn_obj.client.aj_args[idx], AJ_ARG_UINT16, 0, (void *)value, 0);
+            AJ_InitArg(&alljoyn_obj.client.aj_args[idx], AJ_ARG_UINT16, 0, (void *)&value, 0);
+        } else if (args_in[idx] == AJ_ARG_DOUBLE) {
+            double value = (double)mp_obj_get_float(arguments[idx]);
+            AJ_InitArg(&alljoyn_obj.client.aj_args[idx], AJ_ARG_DOUBLE, 0, (void *)&value, 0);
         } else if (args_in[idx] == AJ_ARG_BOOLEAN) {
             mp_int_t value = mp_obj_get_int(arguments[idx]);
-            AJ_InitArg(&alljoyn_obj.client.aj_args[idx], AJ_ARG_BOOLEAN, 0, (void *)value, 0);
+            AJ_InitArg(&alljoyn_obj.client.aj_args[idx], AJ_ARG_BOOLEAN, 0, (void *)&value, 0);
         } else {
            mp_not_implemented("Unsupported type\n");
         }
     }
 }
-
+            
 static void send_reply_msg(aj_service_t *serviceInfo, mp_obj_t *arguments, mp_uint_t number_arguments){
  
     AJ_Message reply;
@@ -379,9 +447,12 @@ static void send_reply_msg(aj_service_t *serviceInfo, mp_obj_t *arguments, mp_ui
         } else if (serviceInfo->replyArgs[idx] == AJ_ARG_UINT16) {
             mp_int_t value = mp_obj_get_int(arguments[idx]);
             AJ_MarshalArgs(&reply, "q", (uint16_t)value);
+        } else if (serviceInfo->replyArgs[idx] == AJ_ARG_DOUBLE){
+            double value = (double)mp_obj_get_float(arguments[idx]);
+            AJ_MarshalArgs(&reply, "d", (double)value);
         } else if (serviceInfo->replyArgs[idx] == AJ_ARG_BOOLEAN) {
             mp_int_t value = mp_obj_get_int(arguments[idx]);
-            AJ_MarshalArgs(&reply, "d", (bool)value);
+            AJ_MarshalArgs(&reply, "b", (bool)value);
         } else {
             mp_not_implemented("Unsupported type\n");
         }
