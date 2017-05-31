@@ -140,7 +140,6 @@ const int CONNECTED_BIT = BIT0;
 STATIC void wlan_clear_data (void);
 //STATIC void wlan_reenable (SlWlanMode_t mode);
 STATIC void wlan_servers_start (void);
-STATIC void wlan_servers_stop (void);
 //STATIC void wlan_reset (void);
 STATIC void wlan_validate_mode (uint mode);
 STATIC void wlan_set_mode (uint mode);
@@ -156,8 +155,6 @@ STATIC void wlan_validate_antenna (uint8_t antenna);
 STATIC void wlan_set_antenna (uint8_t antenna);
 #endif
 static esp_err_t wlan_event_handler(void *ctx, system_event_t *event);
-STATIC modwlan_Status_t wlan_do_connect (const char* ssid, uint32_t ssid_len, const char* bssid,
-                                         const char* key, uint32_t key_len, int32_t timeout);
 //STATIC void wlan_get_sl_mac (void);
 //STATIC void wlan_wep_key_unhexlify (const char *key, char *key_out);
 //STATIC void wlan_lpds_irq_enable (mp_obj_t self_in);
@@ -348,7 +345,7 @@ STATIC void wlan_servers_start (void) {
     }
 }
 
-STATIC void wlan_servers_stop (void) {
+void wlan_servers_stop (void) {
     if (servers_are_enabled()) {
         wlan_obj.enable_servers = true;
     }
@@ -464,7 +461,7 @@ STATIC void wlan_set_antenna (uint8_t antenna) {
 }
 #endif
 
-STATIC modwlan_Status_t wlan_do_connect (const char* ssid, uint32_t ssid_len, const char* bssid,
+modwlan_Status_t wlan_do_connect (const char* ssid, uint32_t ssid_len, const char* bssid,
                                          const char* key, uint32_t key_len, int32_t timeout) {
     wifi_config_t config;
     memset(&config, 0, sizeof(config));

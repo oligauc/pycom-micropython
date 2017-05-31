@@ -61,6 +61,7 @@ AJ_Status AJSVC_RoutingNodeConnect(AJ_BusAttachment* busAttachment, const char* 
 
     while (TRUE) {
 #ifdef ONBOARDING_SERVICE
+        printf("AJSVC_RoutingNodeConnect - Onboarding defined\n");
         status = AJOBS_EstablishWiFi();
         if (status != AJ_OK) {
             AJ_ErrPrintf(("Failed to establish WiFi connectivity with status=%s\n", AJ_StatusText(status)));
@@ -71,8 +72,9 @@ AJ_Status AJSVC_RoutingNodeConnect(AJ_BusAttachment* busAttachment, const char* 
             return status;
         }
 #endif
-        AJ_InfoPrintf(("Attempting to connect to bus '%s'\n", routingNodeName));
+        printf("Attempting to connect to bus '%s'\n", routingNodeName);
         status = AJ_FindBusAndConnect(busAttachment, routingNodeName, connectTimeout);
+        printf("AJ_FindBusAndConnect status: %d\n", status);
         if (status != AJ_OK) {
             AJ_ErrPrintf(("Failed attempt to connect to bus, sleeping for %d seconds\n", connectPause / 1000));
             AJ_Sleep(connectPause);

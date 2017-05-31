@@ -16,7 +16,11 @@ APP_INC += -Itelnet
 APP_INC += -Iftp
 APP_INC += -Ilora
 APP_INC += -Ibootloader
+APP_INC += -Ialljoyn/src/malloc
+APP_INC += -Ialljoyn/src/freertos
 APP_INC += -Ialljoyn/src/target/esp32
+APP_INC += -Ialljoyn/services/include
+APP_INC += -Ialljoyn/dist/include/ajtcl
 APP_INC += -Ialljoyn/src/wsl
 APP_INC += -Ialljoyn/inc
 APP_INC += -Ialljoyn/src
@@ -257,6 +261,7 @@ APP_ALLJOYN_SRC_C = $(addprefix alljoyn/,\
 	src/aj_util.c \
 	src/aj_crypto_util.c \
 	src/aj_security.c \
+	src/freertos/aj_target_rtos.c \
 	src/crypto/aj_crypto_ecc.c \
 	src/crypto/aj_crypto_aes.c \
 	src/crypto/aj_crypto_drbg.c \
@@ -266,9 +271,16 @@ APP_ALLJOYN_SRC_C = $(addprefix alljoyn/,\
 	src/crypto/aj_crypto_ec_p256.c \
 	src/crypto/aj_crypto_field_p256.c \
 	src/target/esp32/aj_net.c \
+	src/target/esp32/aj_wifi_ctrl.c \
 	src/target/esp32/aj_target_util.c \
 	src/target/esp32/aj_target_crypto.c \
 	src/target/esp32/aj_target_nvram.c \
+	services/onboarding/OnboardingService.c \
+	services/onboarding/OnboardingManager.c \
+	services/onboarding/Onboarding.c \
+	services/common/src/ServicesHandlers.c \
+	services/common/src/PropertyStore.c \
+	services/common/src/ServicesCommon.c \
 	)
 
 BOOT_SRC_C = $(addprefix bootloader/,\

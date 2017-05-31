@@ -20,7 +20,7 @@
 #ifndef AJ_WSL_TARGET_H__
 #define AJ_WSL_TARGET_H__
 
-#include "aj_target_platform.h"
+//#include "aj_target_platform.h"
 #include <aj_target.h>
 #include "aj_rtos.h"
 #include <aj_status.h>

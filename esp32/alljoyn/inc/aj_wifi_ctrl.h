@@ -55,10 +55,11 @@ typedef enum {
  * Enumeration of WiFi cipher types.
  */
 typedef enum {
-    AJ_WIFI_CIPHER_NONE = 0x00, /**< No cipher specified */
-    AJ_WIFI_CIPHER_TKIP = 0x01, /**< Legacy TKIP cipher */
-    AJ_WIFI_CIPHER_CCMP = 0x02, /**< CCMP cipher */
-    AJ_WIFI_CIPHER_WEP  = 0x03  /**< WEP cipher */
+    AJ_WIFI_CIPHER_NONE       = 0x00, /**< No cipher specified */
+    AJ_WIFI_CIPHER_TKIP       = 0x01, /**< Legacy TKIP cipher */
+    AJ_WIFI_CIPHER_CCMP       = 0x02, /**< CCMP cipher */
+    AJ_WIFI_CIPHER_WEP        = 0x03,  /**< WEP cipher */
+    AJ_WIFI_CIPHER_TKIP_CCMP  = 0x04  /**< WEP cipher */
 } AJ_WiFiCipherType;
 
 /**

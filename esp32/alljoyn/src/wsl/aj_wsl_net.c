@@ -630,7 +630,7 @@ int8_t AJ_WSL_NET_socket_open(uint16_t domain, uint16_t type, uint16_t protocol)
  */
 AJ_Status AJ_WSL_NET_socket_close(AJ_WSL_SOCKNUM sock)
 {
-    AJ_Status status;
+    AJ_Status status = AJ_OK;
     AJ_BufList* close;
 
     if (AJ_WSL_SOCKET_CONTEXT[sock].valid == TRUE) {

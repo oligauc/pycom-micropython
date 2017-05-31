@@ -38,7 +38,7 @@
 #include <freertos/queue.h>
 #include <freertos/timers.h>
 #include <freertos/semphr.h>
-#include <lwip/src/netif/ppp/randm.h>
+//#include <lwip/src/netif/ppp/randm.h>
 
 #include "aj_rtos.h"
 
@@ -70,13 +70,13 @@ void vApplicationStackOverflowHook(xTaskHandle pxTask, signed char*pcTaskName);
  * Enter a critical region of code. This function will disable all interrupts
  * until AJ_LeaveCriticalRegion() is called
  */
-//void AJ_EnterCriticalRegion(void);
+void AJ_EnterCriticalRegion(void);
 
 /**
  * Leave a critical region of code. This function re-enables interrupts after
  * calling AJ_EnterCriticalRegion()
  */
-//void AJ_LeaveCriticalRegion(void);
+void AJ_LeaveCriticalRegion(void);
 
 /**
  * Generate an ephemeral (random) port.
@@ -99,7 +99,7 @@ uint16_t AJ_EphemeralPort(void);
  *
  * @return              AJ_OK if the task was resumed sucessfully
  */
-AJ_Status AJ_ResumeTask(struct AJ_TaskHandle* handle, uint8_t inISR);
+//AJ_Status AJ_ResumeTask(struct AJ_TaskHandle* handle, uint8_t inISR);
 
 #ifdef __cplusplus
 }

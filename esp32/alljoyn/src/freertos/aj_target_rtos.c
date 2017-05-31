@@ -275,16 +275,17 @@ void AJ_YieldCurrentTask(void)
     taskYIELD();
 }
 
-/*void AJ_EnterCriticalRegion(void)
+void AJ_EnterCriticalRegion(void)
 {
-    portENTER_CRITICAL();
+    //portENTER_CRITICAL();
 }
 
 void AJ_LeaveCriticalRegion(void)
 {
-    taskEXIT_CRITICAL();
+    //taskEXIT_CRITICAL();
 }
-void AJ_PlatformInit(void)
+
+/*void AJ_PlatformInit(void)
 {
     _AJ_PlatformInit();
 }*/
@@ -295,15 +296,15 @@ void AJ_PlatformInit(void)
    }
  */
 
-void AJ_Sleep(uint32_t time)
+/*void AJ_Sleep(uint32_t time)
 {
-    /* This function does not work until AJ_StartScheduler is called */
+    // This function does not work until AJ_StartScheduler is called 
     const portTickType delay = (time / portTICK_RATE_MS);
     vTaskDelay(delay);
 
-}
+}*/
 
-uint32_t AJ_GetElapsedTime(AJ_Time* timer, uint8_t cumulative)
+/*uint32_t AJ_GetElapsedTime(AJ_Time* timer, uint8_t cumulative)
 {
     uint32_t elapsed;
     uint32_t now_msec = xTaskGetTickCount() / portTICK_RATE_MS;
@@ -316,25 +317,26 @@ uint32_t AJ_GetElapsedTime(AJ_Time* timer, uint8_t cumulative)
         timer->milliseconds = now_msec;
     }
     return elapsed;
-}
-void AJ_InitTimer(AJ_Time* timer)
+}*/
+
+/*void AJ_InitTimer(AJ_Time* timer)
 {
     uint32_t now_msec = xTaskGetTickCount() / portTICK_RATE_MS;
     uint32_t now_sec = now_msec / 1000;         //Get the seconds
     now_msec = now_msec - (now_sec * 1000);     //Get the additional msec's
     timer->seconds = now_sec;
     timer->milliseconds = now_msec;
-}
+}*/
 
-int32_t AJ_GetTimeDifference(AJ_Time* timerA, AJ_Time* timerB)
+/*int32_t AJ_GetTimeDifference(AJ_Time* timerA, AJ_Time* timerB)
 {
     int32_t diff;
 
     diff = (1000 * (timerA->seconds - timerB->seconds)) + (timerA->milliseconds - timerB->milliseconds);
     return diff;
-}
+}*/
 
-void AJ_TimeAddOffset(AJ_Time* timerA, uint32_t msec)
+/*void AJ_TimeAddOffset(AJ_Time* timerA, uint32_t msec)
 {
     uint32_t msecNew;
     if (msec == -1) {
@@ -345,10 +347,10 @@ void AJ_TimeAddOffset(AJ_Time* timerA, uint32_t msec)
         timerA->seconds = timerA->seconds + (msecNew / 1000);
         timerA->milliseconds = msecNew % 1000;
     }
-}
+}*/
 
 
-int8_t AJ_CompareTime(AJ_Time timerA, AJ_Time timerB)
+/*int8_t AJ_CompareTime(AJ_Time timerA, AJ_Time timerB)
 {
     if (timerA.seconds == timerB.seconds) {
         if (timerA.milliseconds == timerB.milliseconds) {
@@ -363,33 +365,33 @@ int8_t AJ_CompareTime(AJ_Time timerA, AJ_Time timerB)
     } else {
         return -1;
     }
-}
+}*/
 
-uint64_t AJ_DecodeTime(char* der, const char* fmt)
+/*uint64_t AJ_DecodeTime(char* der, const char* fmt)
 {
     return 0;
-}
+}*/
 
-void* AJ_Malloc(size_t sz)
+/*void* AJ_Malloc(size_t sz)
 {
     return pvPortMalloc(sz);
-}
+}*/
 
-void AJ_Free(void* mem)
+/*void AJ_Free(void* mem)
 {
     if (mem) {
         vPortFree(mem);
     }
-}
+}*/
 
-void AJ_MemZeroSecure(void* s, size_t n)
+/*void AJ_MemZeroSecure(void* s, size_t n)
 {
     volatile unsigned char* p = s;
     while (n--) *p++ = '\0';
     return;
-}
+}*/
 
-void* AJ_Realloc(void* ptr, size_t size)
+/*void* AJ_Realloc(void* ptr, size_t size)
 {
     void* ptrNew;
 #ifdef AJ_HEAP4
@@ -407,9 +409,9 @@ void* AJ_Realloc(void* ptr, size_t size)
     xTaskResumeAll();
 #endif
     return ptrNew;
-}
+}*/
 
-void AJ_SeedRNG(void)
+/*void AJ_SeedRNG(void)
 {
     avRandomInit();
 }
@@ -418,7 +420,7 @@ void AJ_RandBytes(uint8_t* random, uint32_t len)
 {
     AJ_SeedRNG();
     avGenRand((char *)random, len);
-}
+}*/
 
 /*uint16_t AJ_EphemeralPort(void)
 {

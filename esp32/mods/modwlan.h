@@ -76,5 +76,8 @@ extern void wlan_get_ip (uint32_t *ip);
 extern bool wlan_is_connected (void);
 extern void wlan_set_current_time (uint32_t seconds_since_2000);
 extern void wlan_off_on (void);
+extern void wlan_servers_stop (void);
+extern modwlan_Status_t wlan_do_connect (const char* ssid, uint32_t ssid_len, const char* bssid,
+                                         const char* key, uint32_t key_len, int32_t timeout);
 
 #endif /* MODWLAN_H_ */

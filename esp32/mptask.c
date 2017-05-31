@@ -64,6 +64,8 @@
 #include "freertos/semphr.h"
 #include "freertos/queue.h"
 
+#include "onboarding.h"
+
 /******************************************************************************
  DECLARE EXTERNAL FUNCTIONS
  ******************************************************************************/
@@ -207,6 +209,8 @@ soft_reset:
 
     // enable telnet and ftp
     servers_start();
+    
+    startOnboardingService();
 
     if (!safeboot) {
         // run boot.py

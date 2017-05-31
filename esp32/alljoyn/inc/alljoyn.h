@@ -39,4 +39,8 @@
 /**
  * @}
  */
+
+#define AJ_TCP
+#define ONBOARDING_SERVICE
+
 #endif

@@ -210,8 +210,8 @@ static AJ_Status AJApp_DisconnectHandler(AJ_BusAttachment* busAttachment, uint8_
  * Services Provisioning
  */
 
-const char* deviceManufactureName = "COMPANY";
-const char* deviceProductName = "GENERIC BOARD";
+const char* deviceManufactureName = "PYCOM";
+const char* deviceProductName = "WIPY";
 
 /**
  * Config supported PropertyStore provisioning

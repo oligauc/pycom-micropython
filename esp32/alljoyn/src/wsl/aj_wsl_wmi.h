@@ -21,7 +21,7 @@
 
 #include <aj_target.h>
 #include <aj_buf.h>
-#include <aj_target_platform.h>
+//#include <aj_target_platform.h>
 #include <aj_target_rtos.h>
 
 #include <aj_wsl_target.h>
