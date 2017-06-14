@@ -96,6 +96,7 @@ static uint8_t sentManifests = FALSE;
 
 static uint32_t GetAcceptableVersion(uint32_t srcV)
 {
+    printf("GetAcceptableVersion\n");
     uint16_t authV = AJ_UNPACK_AUTH_VERSION(srcV);
     uint16_t keyV = AJ_UNPACK_KEYGEN_VERSION(srcV);
 
@@ -122,8 +123,8 @@ static AJ_Status KeyGen(const char* peerName, uint8_t role, const char* nonce1, 
     uint8_t lens[4];
     const AJ_GUID* peerGuid = AJ_GUID_Find(peerName);
 
-    AJ_InfoPrintf(("KeyGen(peerName=\"%s\", role=%d., nonce1=\"%s\", nonce2=\"%s\", outbuf=%p, len=%d.)\n",
-                   peerName, role, nonce1, nonce2, outBuf, len));
+    printf("KeyGen(peerName=\"%s\", role=%d., nonce1=\"%s\", nonce2=\"%s\", outbuf=%p, len=%d.)\n",
+                   peerName, role, nonce1, nonce2, outBuf, len);
 
     if (NULL == peerGuid) {
         AJ_ErrPrintf(("KeyGen(): AJ_ERR_UNEXPECTED\n"));
@@ -190,7 +191,7 @@ void AJ_ClearAuthContext()
 
 static void HandshakeComplete(AJ_Status status)
 {
-    AJ_InfoPrintf(("HandshakeComplete(status=%d.)\n", status));
+    printf("HandshakeComplete(status=%d.)\n", status);
 
     /* If ECDSA/PSK failed, try NULL */
     if ((AJ_OK != status) &&
@@ -206,13 +207,13 @@ static void HandshakeComplete(AJ_Status status)
     if ((AJ_OK == status) && authContext.expiration) {
         status = SaveMasterSecret(peerContext.peerGuid, authContext.expiration);
         if (AJ_OK != status) {
-            AJ_WarnPrintf(("HandshakeComplete(status=%d): Save master secret error\n", status));
+            printf("HandshakeComplete(status=%d): Save master secret error\n", status);
             goto Exit;
         }
         if (AUTH_SUITE_ECDHE_ECDSA == authContext.suite) {
             status = SaveECDSAContext(peerContext.peerGuid, authContext.expiration);
             if (AJ_OK != status) {
-                AJ_WarnPrintf(("HandshakeComplete(status=%d): Save ecdsa context error\n", status));
+                printf("HandshakeComplete(status=%d): Save ecdsa context error\n", status);
                 goto Exit;
             }
         }
@@ -231,7 +232,7 @@ static AJ_Status SaveMasterSecret(const AJ_GUID* peerGuid, uint32_t expiration)
 {
     AJ_Status status = AJ_ERR_INVALID;
 
-    AJ_InfoPrintf(("SaveMasterSecret(peerGuid=%p, expiration=%d)\n", peerGuid, expiration));
+    printf("SaveMasterSecret(peerGuid=%p, expiration=%d)\n", peerGuid, expiration);
 
     if (NULL == peerGuid) {
         return AJ_ERR_SECURITY;
@@ -256,20 +257,23 @@ static AJ_Status LoadMasterSecret(const AJ_GUID* peerGuid)
     uint32_t expiration;
     AJ_CredField data;
 
-    AJ_InfoPrintf(("LoadMasterSecret(peerGuid=%p)\n", peerGuid));
+    printf("LoadMasterSecret(peerGuid=%p)\n", peerGuid);
 
     if (NULL == peerGuid) {
+        printf("LoadMasterSecret AJ_ERR_SECURITY\n");
         return AJ_ERR_SECURITY;
     }
     /* Write directly to mastersecret buffer */
     data.size = AJ_MASTER_SECRET_LEN;
     data.data = authContext.mastersecret;
     status = AJ_CredentialGetPeer(AJ_GENERIC_MASTER_SECRET, peerGuid, &expiration, &data);
+    printf("LoadMasterSecret AJ_CredentialGetPeer status: %d\n",status);
     if (AJ_OK != status) {
         return status;
     }
     status = AJ_CredentialExpired(expiration);
-
+    printf("LoadMasterSecret AJ_CredentialExpired status: %d\n",status);
+    
     return status;
 }
 
@@ -277,7 +281,7 @@ static AJ_Status SaveECDSAContext(const AJ_GUID* peerGuid, uint32_t expiration)
 {
     AJ_Status status = AJ_ERR_INVALID;
 
-    AJ_InfoPrintf(("SaveECDSAContext(peerGuid=%p, expiration=%d)\n", peerGuid, expiration));
+    printf("SaveECDSAContext(peerGuid=%p, expiration=%d)\n", peerGuid, expiration);
 
     if (NULL == peerGuid) {
         return AJ_ERR_SECURITY;
@@ -302,7 +306,7 @@ static AJ_Status LoadECDSAContext(const AJ_GUID* peerGuid)
     AJ_Status status = AJ_ERR_INVALID;
     AJ_CredField data;
 
-    AJ_InfoPrintf(("LoadECDSAContext(peerGuid=%p)\n", peerGuid));
+    printf("LoadECDSAContext(peerGuid=%p)\n", peerGuid);
 
     /* Check if we have a stored identity thumbprint */
     data.size = AJ_SHA256_DIGEST_LENGTH;
@@ -344,16 +348,17 @@ static AJ_Status HandshakeTimeout() {
      * If handshake started, check peer is still around
      * If peer disappeared, AJ_GUID_DeleteNameMapping writes zeros
      */
+    printf("HandshakeTimeout\n");
     if (peerContext.peerGuid) {
         if (0 == memcmp(peerContext.peerGuid, zero, sizeof (zero))) {
-            AJ_WarnPrintf(("AJ_HandshakeTimeout(): Peer disappeared\n"));
+            printf("AJ_HandshakeTimeout(): Peer disappeared\n");
             peerContext.peerGuid = NULL;
             HandshakeComplete(AJ_ERR_TIMEOUT);
             return AJ_ERR_TIMEOUT;
         }
     }
     if (AJ_GetElapsedTime(&peerContext.timer, TRUE) >= AJ_MAX_AUTH_TIME) {
-        AJ_WarnPrintf(("AJ_HandshakeTimeout(): AJ_ERR_TIMEOUT\n"));
+        printf("AJ_HandshakeTimeout(): AJ_ERR_TIMEOUT\n");
         HandshakeComplete(AJ_ERR_TIMEOUT);
         return AJ_ERR_TIMEOUT;
     }
@@ -362,25 +367,26 @@ static AJ_Status HandshakeTimeout() {
 
 static AJ_Status HandshakeValid(const AJ_GUID* peerGuid)
 {
+    printf("HandshakeValid\n");
     /*
      * Handshake not yet started
      */
     if (!peerContext.peerGuid) {
-        AJ_InfoPrintf(("AJ_HandshakeValid(peerGuid=%p): Invalid peer guid\n", peerGuid));
+        printf("AJ_HandshakeValid(peerGuid=%p): Invalid peer guid\n", peerGuid);
         return AJ_ERR_SECURITY;
     }
     /*
      * Handshake timed out
      */
     if (AJ_OK != HandshakeTimeout()) {
-        AJ_InfoPrintf(("AJ_HandshakeValid(peerGuid=%p): Handshake timed out\n", peerGuid));
+        printf("AJ_HandshakeValid(peerGuid=%p): Handshake timed out\n", peerGuid);
         return AJ_ERR_TIMEOUT;
     }
     /*
      * Handshake call from different peer
      */
     if ((NULL == peerGuid) || (peerGuid != peerContext.peerGuid)) {
-        AJ_WarnPrintf(("AJ_HandshakeValid(peerGuid=%p): Invalid peer guid\n", peerGuid));
+        printf("AJ_HandshakeValid(peerGuid=%p): Invalid peer guid\n", peerGuid);
         return AJ_ERR_RESOURCES;
     }
 
@@ -393,6 +399,7 @@ static AJ_Status HashGuids(AJ_AuthenticationContext* ctx, const AJ_GUID* remoteG
     AJ_Status status;
     uint8_t authVersionLE[4];
 
+    printf("HashGuids\n");
     AJ_ASSERT(remoteGuid != NULL);
     AJ_ASSERT(AJ_ConversationHash_IsInitialized(ctx));
 
@@ -423,8 +430,8 @@ AJ_Status AJ_PeerAuthenticate(AJ_BusAttachment* bus, const char* peerName, AJ_Pe
     char guidStr[2 * AJ_GUID_LEN + 1];
     AJ_GUID localGuid;
 
-    AJ_InfoPrintf(("PeerAuthenticate(bus=%p, peerName=\"%s\", callback=%p, cbContext=%p)\n",
-                   bus, peerName, callback, cbContext));
+    printf("PeerAuthenticate(bus=%p, peerName=\"%s\", callback=%p, cbContext=%p)\n",
+                   bus, peerName, callback, cbContext);
 
     /*
      * If handshake in progress and not timed-out
@@ -432,7 +439,7 @@ AJ_Status AJ_PeerAuthenticate(AJ_BusAttachment* bus, const char* peerName, AJ_Pe
     if (peerContext.peerGuid) {
         status = HandshakeTimeout();
         if (AJ_ERR_TIMEOUT != status) {
-            AJ_InfoPrintf(("PeerAuthenticate(): Handshake in progress\n"));
+            printf("PeerAuthenticate(): Handshake in progress\n");
             return AJ_ERR_RESOURCES;
         }
     }
@@ -503,7 +510,7 @@ AJ_Status AJ_PeerHandleExchangeGUIDs(AJ_Message* msg, AJ_Message* reply)
     AJ_GUID remoteGuid;
     AJ_GUID localGuid;
 
-    AJ_InfoPrintf(("AJ_PeerHandleExchangeGuids(msg=%p, reply=%p)\n", msg, reply));
+    printf("AJ_PeerHandleExchangeGuids(msg=%p, reply=%p)\n", msg, reply);
 
     /*
      * If handshake in progress and not timed-out
@@ -511,7 +518,7 @@ AJ_Status AJ_PeerHandleExchangeGUIDs(AJ_Message* msg, AJ_Message* reply)
     if (peerContext.peerGuid) {
         status = HandshakeTimeout();
         if (AJ_ERR_TIMEOUT != status) {
-            AJ_InfoPrintf(("AJ_PeerHandleExchangeGuids(msg=%p, reply=%p): Handshake in progress\n", msg, reply));
+            printf("AJ_PeerHandleExchangeGuids(msg=%p, reply=%p): Handshake in progress\n", msg, reply);
             return AJ_MarshalErrorMsg(msg, reply, AJ_ErrResources);
         }
     }
@@ -528,7 +535,7 @@ AJ_Status AJ_PeerHandleExchangeGUIDs(AJ_Message* msg, AJ_Message* reply)
     /* Load policy into memory */
     status = AJ_PolicyLoad();
     if (AJ_OK != status) {
-        AJ_InfoPrintf(("AJ_PeerHandleExchangeGuids(msg=%p, reply=%p): No policy\n", msg, reply));
+        printf("AJ_PeerHandleExchangeGuids(msg=%p, reply=%p): No policy\n", msg, reply);
     }
 
     if (msg->bus->pwdCallback) {
@@ -538,23 +545,26 @@ AJ_Status AJ_PeerHandleExchangeGUIDs(AJ_Message* msg, AJ_Message* reply)
 
     status = AJ_UnmarshalArgs(msg, "su", &str, &authContext.version);
     if (AJ_OK != status) {
-        AJ_InfoPrintf(("AJ_PeerHandleExchangeGuids(msg=%p, reply=%p): Unmarshal error\n", msg, reply));
+        printf("AJ_PeerHandleExchangeGuids(msg=%p, reply=%p): Unmarshal error\n", msg, reply);
         HandshakeComplete(AJ_ERR_SECURITY);
+        printf("AJ_ErrSecurityViolation - 7\n");
         return AJ_MarshalErrorMsg(msg, reply, AJ_ErrSecurityViolation);
     }
     status = AJ_GUID_FromString(&remoteGuid, str);
     if (AJ_OK != status) {
-        AJ_InfoPrintf(("AJ_PeerHandleExchangeGuids(msg=%p, reply=%p): Invalid GUID\n", msg, reply));
+        printf("AJ_PeerHandleExchangeGuids(msg=%p, reply=%p): Invalid GUID\n", msg, reply);
         HandshakeComplete(AJ_ERR_SECURITY);
+        printf("AJ_ErrSecurityViolation - 8\n");
         return AJ_MarshalErrorMsg(msg, reply, AJ_ErrSecurityViolation);
     }
     status = AJ_GUID_AddNameMapping(msg->bus, &remoteGuid, msg->sender, NULL);
     if (AJ_OK != status) {
-        AJ_InfoPrintf(("AJ_PeerHandleExchangeGuids(msg=%p, reply=%p): Add name mapping error\n", msg, reply));
+        printf("AJ_PeerHandleExchangeGuids(msg=%p, reply=%p): Add name mapping error\n", msg, reply);
         HandshakeComplete(AJ_ERR_RESOURCES);
         return AJ_MarshalErrorMsg(msg, reply, AJ_ErrResources);
     }
     peerContext.peerGuid = AJ_GUID_Find(msg->sender);
+    printf("peerContext.peerGuid -1\n");
     /*
      * Reset access control from previous peer
      */
@@ -581,7 +591,7 @@ AJ_Status AJ_PeerHandleExchangeGUIDs(AJ_Message* msg, AJ_Message* reply)
     if (0 == authContext.version) {
         authContext.version = REQUIRED_AUTH_VERSION;
     }
-    AJ_InfoPrintf(("AJ_PeerHandleExchangeGuids(msg=%p, reply=%p): Version %x\n", msg, reply, authContext.version));
+    printf("AJ_PeerHandleExchangeGuids(msg=%p, reply=%p): Version %x\n", msg, reply, authContext.version);
 
     status = AJ_MarshalReplyMsg(msg, reply);
     if (AJ_OK != status) {
@@ -592,6 +602,7 @@ AJ_Status AJ_PeerHandleExchangeGUIDs(AJ_Message* msg, AJ_Message* reply)
         goto Exit;
     }
     status = AJ_GUID_ToString(&localGuid, guidStr, sizeof(guidStr));
+    printf("GUID: %s", guidStr);
     if (AJ_OK != status) {
         goto Exit;
     }
@@ -600,10 +611,13 @@ AJ_Status AJ_PeerHandleExchangeGUIDs(AJ_Message* msg, AJ_Message* reply)
         goto Exit;
     }
 
+    printf("AJ_PeerHandleExchangeGuids status: %d\n", status);
+    
     return status;
 
 Exit:
     HandshakeComplete(AJ_ERR_SECURITY);
+    printf("AJ_ErrSecurityViolation - 6\n");
     return AJ_MarshalErrorMsg(msg, reply, AJ_ErrSecurityViolation);
 }
 
@@ -613,10 +627,10 @@ AJ_Status AJ_PeerHandleExchangeGUIDsReply(AJ_Message* msg)
     const char* guidStr;
     AJ_GUID remoteGuid;
 
-    AJ_InfoPrintf(("AJ_PeerHandleExchangeGUIDsReply(msg=%p)\n", msg));
+    printf("AJ_PeerHandleExchangeGUIDsReply(msg=%p)\n", msg);
 
     if (msg->hdr->msgType == AJ_MSG_ERROR) {
-        AJ_WarnPrintf(("AJ_PeerHandleExchangeGUIDsReply(msg=%p): error=%s.\n", msg, msg->error));
+        printf("AJ_PeerHandleExchangeGUIDsReply(msg=%p): error=%s.\n", msg, msg->error);
         if (0 == strncmp(msg->error, AJ_ErrResources, sizeof(AJ_ErrResources))) {
             status = AJ_ERR_RESOURCES;
         } else {
@@ -632,24 +646,24 @@ AJ_Status AJ_PeerHandleExchangeGUIDsReply(AJ_Message* msg)
     if (peerContext.peerGuid) {
         status = HandshakeTimeout();
         if (AJ_ERR_TIMEOUT != status) {
-            AJ_WarnPrintf(("AJ_PeerHandleExchangeGUIDsReply(msg=%p): Handshake in progress\n", msg));
+            printf("AJ_PeerHandleExchangeGUIDsReply(msg=%p): Handshake in progress\n", msg);
             return AJ_ERR_RESOURCES;
         }
     }
 
     status = AJ_UnmarshalArgs(msg, "su", &guidStr, &authContext.version);
     if (status != AJ_OK) {
-        AJ_WarnPrintf(("AJ_PeerHandleExchangeGUIDsReply(msg=%p): Unmarshal error\n", msg));
+        printf("AJ_PeerHandleExchangeGUIDsReply(msg=%p): Unmarshal error\n", msg);
         goto Exit;
     }
     authContext.version = GetAcceptableVersion(authContext.version);
     if (0 == authContext.version) {
-        AJ_WarnPrintf(("AJ_PeerHandleExchangeGUIDsReply(msg=%p): Invalid version\n", msg));
+        printf("AJ_PeerHandleExchangeGUIDsReply(msg=%p): Invalid version\n", msg);
         goto Exit;
     }
     status = AJ_GUID_FromString(&remoteGuid, guidStr);
     if (AJ_OK != status) {
-        AJ_WarnPrintf(("AJ_PeerHandleExchangeGUIDsReply(msg=%p): Invalid GUID\n", msg));
+        printf("AJ_PeerHandleExchangeGUIDsReply(msg=%p): Invalid GUID\n", msg);
         goto Exit;
     }
 
@@ -658,13 +672,14 @@ AJ_Status AJ_PeerHandleExchangeGUIDsReply(AJ_Message* msg)
      */
     status = AJ_GUID_AddNameMapping(msg->bus, &remoteGuid, msg->sender, peerContext.peerName);
     if (AJ_OK != status) {
-        AJ_WarnPrintf(("AJ_PeerHandleExchangeGUIDsReply(msg=%p): Add name mapping error\n", msg));
+        printf("AJ_PeerHandleExchangeGUIDsReply(msg=%p): Add name mapping error\n", msg);
         goto Exit;
     }
     /*
      * Remember which peer is being authenticated
      */
     peerContext.peerGuid = AJ_GUID_Find(msg->sender);
+  
     /*
      * Reset access control from previous peer
      */
@@ -705,7 +720,7 @@ static AJ_Status ExchangeSuites(AJ_Message* msg)
     uint32_t suites[AJ_AUTH_SUITES_NUM];
     size_t num = 0;
 
-    AJ_InfoPrintf(("ExchangeSuites(msg=%p)\n", msg));
+    printf("ExchangeSuites(msg=%p)\n", msg);
 
     authContext.role = AUTH_CLIENT;
 
@@ -771,11 +786,13 @@ AJ_Status AJ_PeerHandleExchangeSuites(AJ_Message* msg, AJ_Message* reply)
     size_t numsuites;
     uint32_t i;
     const AJ_GUID* peerGuid = AJ_GUID_Find(msg->sender);
+    printf("AJ_PeerHandleExchangeSuites peerGuid -2\n");
 
-    AJ_InfoPrintf(("AJ_PeerHandleExchangeSuites(msg=%p, reply=%p)\n", msg, reply));
+    printf("AJ_PeerHandleExchangeSuites(msg=%p, reply=%p)\n", msg, reply);
 
     status = HandshakeValid(peerGuid);
     if (AJ_OK != status) {
+        printf("AJ_PeerHandleExchangeSuites HandshakeValid not valid\n");
         return AJ_MarshalErrorMsg(msg, reply, AJ_ErrResources);
     }
 
@@ -785,10 +802,12 @@ AJ_Status AJ_PeerHandleExchangeSuites(AJ_Message* msg, AJ_Message* reply)
      */
     if (!AJ_ConversationHash_IsInitialized(&authContext)) {
         status = AJ_ConversationHash_Initialize(&authContext);
+        printf("AJ_ConversationHash_Initialize status: %d\n", status);
         if (AJ_OK != status) {
             goto Exit;
         }
         status = HashGuids(&authContext, peerGuid);
+        printf("HashGuids status: %d\n", status);
         if (AJ_OK != status) {
             goto Exit;
         }
@@ -804,19 +823,22 @@ AJ_Status AJ_PeerHandleExchangeSuites(AJ_Message* msg, AJ_Message* reply)
      */
     status = AJ_UnmarshalArgs(msg, "au", &suites, &numsuites);
     if (AJ_OK != status) {
-        AJ_InfoPrintf(("AJ_PeerHandleExchangeSuites(msg=%p, reply=%p): Unmarshal error\n", msg, reply));
+        printf("AJ_PeerHandleExchangeSuites(msg=%p, reply=%p): Unmarshal error\n", msg, reply);
         goto Exit;
     }
     numsuites /= sizeof (uint32_t);
+    printf("numsuites: %d\n", numsuites);
 
     /*
      * Calculate common suites
      */
     status = AJ_MarshalReplyMsg(msg, reply);
+    printf("AJ_MarshalReplyMsg status: %d\n", status);
     if (AJ_OK != status) {
         goto Exit;
     }
     status = AJ_MarshalContainer(reply, &array, AJ_ARG_ARRAY);
+    printf("AJ_MarshalContainer status: %d\n", status);
     if (AJ_OK != status) {
         goto Exit;
     }
@@ -826,6 +848,7 @@ AJ_Status AJ_PeerHandleExchangeSuites(AJ_Message* msg, AJ_Message* reply)
     for (i = 0; i < numsuites; i++) {
         if (AJ_IsSuiteEnabled(msg->bus, suites[i], AJ_UNPACK_AUTH_VERSION(authContext.version))) {
             status = AJ_MarshalArgs(reply, "u", suites[i]);
+            printf("AJ_MarshalArgs suite status: %d\n", status);
             if (AJ_OK != status) {
                 goto Exit;
             }
@@ -833,13 +856,13 @@ AJ_Status AJ_PeerHandleExchangeSuites(AJ_Message* msg, AJ_Message* reply)
     }
     status = AJ_MarshalCloseContainer(reply, &array);
     if (AJ_OK != status) {
-        AJ_WarnPrintf(("AJ_PeerHandleExchangeSuites(msg=%p, reply=%p): Marshal error\n", msg, reply));
+        printf("AJ_PeerHandleExchangeSuites(msg=%p, reply=%p): Marshal error\n", msg, reply);
         goto Exit;
     }
 
     AJ_ConversationHash_Update_Message(&authContext, CONVERSATION_V4, reply, HASH_MSG_MARSHALED);
 
-    AJ_InfoPrintf(("Exchange Suites Complete\n"));
+    printf("Exchange Suites Complete\n");
     return status;
 
 Exit:
@@ -849,6 +872,7 @@ Exit:
     }
 
     HandshakeComplete(AJ_ERR_SECURITY);
+    printf("AJ_ErrSecurityViolation - 5\n");
     status = AJ_MarshalErrorMsg(msg, reply, AJ_ErrSecurityViolation);
     if (AJ_OK == status) {
         AJ_ConversationHash_Update_Message(&authContext, CONVERSATION_V4, reply, HASH_MSG_MARSHALED);
@@ -864,7 +888,7 @@ AJ_Status AJ_PeerHandleExchangeSuitesReply(AJ_Message* msg)
     size_t i;
     const AJ_GUID* peerGuid = AJ_GUID_Find(msg->sender);
 
-    AJ_InfoPrintf(("AJ_PeerHandleExchangeSuitesReply(msg=%p)\n", msg));
+    printf("AJ_PeerHandleExchangeSuitesReply(msg=%p)\n", msg);
 
     status = HandshakeValid(peerGuid);
     if (AJ_OK != status) {
@@ -917,6 +941,7 @@ Exit:
 
 static AJ_Status AJ_SetKeyAuthContext(AJ_AuthenticationContext* ctx, const char* peerName)
 {
+    printf("AJ_SetKeyAuthContext\n");
     AJ_Status status = AJ_ERR_INVALID;
 
     if (ctx->suite == AUTH_SUITE_ECDHE_SPEKE) {
@@ -938,7 +963,7 @@ static AJ_Status KeyExchange(AJ_BusAttachment* bus)
     uint8_t suiteb8[sizeof (uint32_t)];
     AJ_Message call;
 
-    AJ_InfoPrintf(("KeyExchange(bus=%p)\n", bus));
+    printf("KeyExchange(bus=%p)\n", bus);
 
     AJ_InfoPrintf(("Authenticating using suite %x\n", authContext.suite));
 
@@ -983,10 +1008,12 @@ AJ_Status AJ_PeerHandleKeyExchange(AJ_Message* msg, AJ_Message* reply)
     AJ_Status status = AJ_ERR_INVALID;
     uint8_t suiteb8[sizeof (uint32_t)];
     const AJ_GUID* peerGuid = AJ_GUID_Find(msg->sender);
+    printf("AJ_PeerHandleKeyExchange peerGuid: -3");
 
-    AJ_InfoPrintf(("AJ_PeerHandleKeyExchange(msg=%p, reply=%p)\n", msg, reply));
+    printf("AJ_PeerHandleKeyExchange(msg=%p, reply=%p)\n", msg, reply);
 
     status = HandshakeValid(peerGuid);
+    printf("HandshakeValid status: %d\n", status);
     if (AJ_OK != status) {
         return AJ_MarshalErrorMsg(msg, reply, AJ_ErrResources);
     }
@@ -1040,11 +1067,12 @@ AJ_Status AJ_PeerHandleKeyExchange(AJ_Message* msg, AJ_Message* reply)
     }
     AJ_ConversationHash_Update_Message(&authContext, CONVERSATION_V4, reply, HASH_MSG_MARSHALED);
     peerContext.state = AJ_AUTH_EXCHANGED;
-    AJ_InfoPrintf(("Key Exchange Complete\n"));
+    printf("Key Exchange Complete\n");
     return status;
 
 Exit:
     HandshakeComplete(AJ_ERR_SECURITY);
+    printf("AJ_ErrSecurityViolation - 4\n");
     status = AJ_MarshalErrorMsg(msg, reply, AJ_ErrSecurityViolation);
     if (AJ_OK == status) {
         AJ_ConversationHash_Update_Message(&authContext, CONVERSATION_V4, reply, HASH_MSG_MARSHALED);
@@ -1059,7 +1087,7 @@ AJ_Status AJ_PeerHandleKeyExchangeReply(AJ_Message* msg)
     uint8_t suiteb8[sizeof (uint32_t)];
     const AJ_GUID* peerGuid = AJ_GUID_Find(msg->sender);
 
-    AJ_InfoPrintf(("AJ_PeerHandleKeyExchangeReply(msg=%p)\n", msg));
+    printf("AJ_PeerHandleKeyExchangeReply(msg=%p)\n", msg);
 
     if (msg->hdr->msgType == AJ_MSG_ERROR) {
         AJ_WarnPrintf(("AJ_PeerHandleKeyExchangeReply(msg=%p): error=%s.\n", msg, msg->error));
@@ -1104,7 +1132,7 @@ AJ_Status AJ_PeerHandleKeyExchangeReply(AJ_Message* msg)
      * Key exchange complete - start the authentication
      */
     peerContext.state = AJ_AUTH_EXCHANGED;
-    AJ_InfoPrintf(("Key Exchange Complete\n"));
+    printf("Key Exchange Complete\n");
     status = KeyAuthentication(msg);
     return status;
 
@@ -1119,7 +1147,7 @@ static AJ_Status KeyAuthentication(AJ_Message* msg)
     AJ_Message call;
     const AJ_GUID* peerGuid = AJ_GUID_Find(msg->sender);
 
-    AJ_InfoPrintf(("AJ_KeyAuthentication(msg=%p)\n", msg));
+    printf("AJ_KeyAuthentication(msg=%p)\n", msg);
 
     status = HandshakeValid(peerGuid);
     if (AJ_OK != status) {
@@ -1161,7 +1189,7 @@ AJ_Status AJ_PeerHandleKeyAuthentication(AJ_Message* msg, AJ_Message* reply)
     AJ_Status status = AJ_ERR_INVALID;
     const AJ_GUID* peerGuid = AJ_GUID_Find(msg->sender);
 
-    AJ_InfoPrintf(("AJ_PeerHandleKeyAuthentication(msg=%p, reply=%p)\n", msg, reply));
+    printf("AJ_PeerHandleKeyAuthentication(msg=%p, reply=%p)\n", msg, reply);
 
     status = HandshakeValid(peerGuid);
     if (AJ_OK != status) {
@@ -1220,6 +1248,7 @@ AJ_Status AJ_PeerHandleKeyAuthentication(AJ_Message* msg, AJ_Message* reply)
 
 Exit:
     HandshakeComplete(AJ_ERR_SECURITY);
+    printf("AJ_ErrSecurityViolation - 3\n");
     status = AJ_MarshalErrorMsg(msg, reply, AJ_ErrSecurityViolation);
     if (AJ_OK == status) {
         AJ_ConversationHash_Update_Message(&authContext, CONVERSATION_V4, reply, HASH_MSG_MARSHALED);
@@ -1232,7 +1261,7 @@ AJ_Status AJ_PeerHandleKeyAuthenticationReply(AJ_Message* msg)
     AJ_Status status = AJ_ERR_INVALID;
     const AJ_GUID* peerGuid = AJ_GUID_Find(msg->sender);
 
-    AJ_InfoPrintf(("AJ_PeerHandleKeyAuthenticationReply(msg=%p)\n", msg));
+    printf("AJ_PeerHandleKeyAuthenticationReply(msg=%p)\n", msg);
 
     status = HandshakeValid(peerGuid);
     if (AJ_OK != status) {
@@ -1297,7 +1326,7 @@ static AJ_Status GenSessionKey(AJ_Message* msg)
     char guidStr[33];
     AJ_GUID localGuid;
 
-    AJ_InfoPrintf(("GenSessionKey(msg=%p)\n", msg));
+    printf("GenSessionKey(msg=%p)\n", msg);
 
     status = AJ_MarshalMethodCall(msg->bus, &call, AJ_METHOD_GEN_SESSION_KEY, msg->sender, 0, AJ_NO_FLAGS, AJ_CALL_TIMEOUT);
     if (AJ_OK != status) {
@@ -1371,7 +1400,7 @@ AJ_Status AJ_PeerHandleGenSessionKey(AJ_Message* msg, AJ_Message* reply)
      */
     char verifier[AJ_SESSION_KEY_LEN + AJ_VERIFIER_LEN];
 
-    AJ_InfoPrintf(("AJ_PeerHandleGenSessionKey(msg=%p, reply=%p)\n", msg, reply));
+    printf("AJ_PeerHandleGenSessionKey(msg=%p, reply=%p)\n", msg, reply);
 
     status = HandshakeValid(peerGuid);
     if (AJ_OK != status) {
@@ -1450,6 +1479,7 @@ AJ_Status AJ_PeerHandleGenSessionKey(AJ_Message* msg, AJ_Message* reply)
 
 Exit:
     HandshakeComplete(AJ_ERR_SECURITY);
+    printf("AJ_ErrSecurityViolation -1 ");
     status = AJ_MarshalErrorMsg(msg, reply, AJ_ErrSecurityViolation);
     if (AJ_OK == status) {
         AJ_ConversationHash_Update_Message(&authContext, CONVERSATION_V4, reply, HASH_MSG_MARSHALED);
@@ -1475,7 +1505,7 @@ AJ_Status AJ_PeerHandleGenSessionKeyReply(AJ_Message* msg)
     AJ_Message call;
     uint8_t groupKey[AJ_SESSION_KEY_LEN];
 
-    AJ_InfoPrintf(("AJ_PeerHandleGenSessionKeyReply(msg=%p)\n", msg));
+    printf("AJ_PeerHandleGenSessionKeyReply(msg=%p)\n", msg);
 
     status = HandshakeValid(peerGuid);
     if (AJ_OK != status) {
@@ -1546,7 +1576,7 @@ AJ_Status AJ_PeerHandleExchangeGroupKeys(AJ_Message* msg, AJ_Message* reply)
     const AJ_GUID* peerGuid = AJ_GUID_Find(msg->sender);
     uint8_t groupKey[AJ_SESSION_KEY_LEN];
 
-    AJ_InfoPrintf(("AJ_PeerHandleExchangeGroupKeys(msg=%p, reply=%p)\n", msg, reply));
+    printf("AJ_PeerHandleExchangeGroupKeys(msg=%p, reply=%p)\n", msg, reply);
 
     if (msg->hdr->msgType == AJ_MSG_ERROR) {
         AJ_WarnPrintf(("AJ_PeerHandleExchangeGroupKeys(msg=%p): error=%s.\n", msg, msg->error));
@@ -1610,6 +1640,7 @@ AJ_Status AJ_PeerHandleExchangeGroupKeys(AJ_Message* msg, AJ_Message* reply)
 
 Exit:
     HandshakeComplete(AJ_ERR_SECURITY);
+    printf("AJ_PeerHandleExchangeGroupKeys AJ_ErrSecurityViolation\n");
     return AJ_MarshalErrorMsg(msg, reply, AJ_ErrSecurityViolation);
 }
 
@@ -1619,7 +1650,7 @@ AJ_Status AJ_PeerHandleExchangeGroupKeysReply(AJ_Message* msg)
     AJ_Arg arg;
     const AJ_GUID* peerGuid = AJ_GUID_Find(msg->sender);
 
-    AJ_InfoPrintf(("AJ_PeerHandleExchangeGroupKeysReply(msg=%p)\n", msg));
+    printf("AJ_PeerHandleExchangeGroupKeysReply(msg=%p)\n", msg);
 
     status = HandshakeValid(peerGuid);
     if (AJ_OK != status) {
@@ -1678,7 +1709,7 @@ AJ_Status AJ_PeerSendManifests(AJ_Message* msg, uint8_t outgoing)
     AJ_ManifestArray* manifests = NULL;
     uint8_t mustClearAuthContext = FALSE;
 
-    AJ_InfoPrintf(("AJ_PeerSendManifests(msg=%p, outgoing=%u)\n", msg, outgoing));
+    printf("AJ_PeerSendManifests(msg=%p, outgoing=%u)\n", msg, outgoing);
 
     if (sentManifests) {
         /* Already sent. */
@@ -1743,7 +1774,7 @@ AJ_Status AJ_PeerHandleSendManifests(AJ_Message* msg, AJ_Message* reply)
     AJ_ManifestArray* manifests = NULL;
     uint8_t mustClearAuthContext = FALSE;
 
-    AJ_InfoPrintf(("AJ_PeerHandleSendManifests(msg=%p, reply=%p)\n", msg, reply));
+    printf("AJ_PeerHandleSendManifests(msg=%p, reply=%p)\n", msg, reply);
 
     /*
      * This might get called during handshake, or after. If after, load the ECDSA context
@@ -1752,7 +1783,8 @@ AJ_Status AJ_PeerHandleSendManifests(AJ_Message* msg, AJ_Message* reply)
     if (NULL == authContext.bus) {
         status = LoadECDSAContext(peerGuid);
         if (AJ_OK != status) {
-            AJ_InfoPrintf(("AJ_PeerHandleSendManifests(msg=%p, reply=%p): Could not load ECDSA context for peer\n", msg, reply));
+            printf("AJ_PeerHandleSendManifests(msg=%p, reply=%p): Could not load ECDSA context for peer\n", msg, reply);
+            printf("AJ_PeerHandleSendManifests AJ_ErrSecurityViolation\n");
             return AJ_MarshalErrorMsg(msg, reply, AJ_ErrSecurityViolation);
         }
         mustClearAuthContext = TRUE;
@@ -1800,6 +1832,7 @@ Exit:
         sentManifests = TRUE;
         return status;
     } else {
+        printf("AJ_PeerHandleSendManifests AJ_ErrSecurityViolation\n");
         return AJ_MarshalErrorMsg(msg, reply, AJ_ErrSecurityViolation);
     }
 }
@@ -1811,7 +1844,7 @@ AJ_Status AJ_PeerHandleSendManifestsReply(AJ_Message* msg)
     AJ_ManifestArray* manifests = NULL;
     uint8_t mustClearAuthContext = FALSE;
 
-    AJ_InfoPrintf(("AJ_PeerHandleSendManifestsReply(msg=%p)\n", msg));
+    printf("AJ_PeerHandleSendManifestsReply(msg=%p)\n", msg);
 
     if (msg->hdr->msgType == AJ_MSG_ERROR) {
         AJ_WarnPrintf(("AJ_PeerHandleSendManifestsReply(msg=%p): error=%s.\n", msg, msg->error));
@@ -1878,6 +1911,7 @@ static AJ_Status MarshalCertificates(X509CertificateChain* root, AJ_Message* msg
     X509CertificateChain* head;
     uint8_t fmt = CERT_FMT_X509_DER;
 
+    printf("MarshalCertificates\n");
     /*
      * X509CertificateChain is root first.
      * The wire protocol requires leaf first,
@@ -1908,6 +1942,8 @@ static AJ_Status CommonIssuer(X509CertificateChain* root)
     AJ_Status status = AJ_ERR_UNKNOWN;
     X509CertificateChain* node;
     size_t i;
+    
+    printf("CommonIssuer\n");
 
     AJ_ASSERT(root);
     for (i = 1; i < authContext.kactx.ecdsa.num; i++) {
@@ -1938,6 +1974,8 @@ static AJ_Status MarshalMembership(AJ_Message* msg)
     AJ_CredField data;
     X509CertificateChain* root = NULL;
 
+    printf("MarshalMembership\n");
+    
     AJ_ASSERT(SEND_MEMBERSHIPS_LAST != authContext.code);
 
     data.size = 0;
@@ -2024,7 +2062,7 @@ static AJ_Status SendMemberships(AJ_Message* msg)
     AJ_Status status = AJ_ERR_INVALID;
     AJ_Message call;
 
-    AJ_InfoPrintf(("SendMemberships(msg=%p)\n", msg));
+    printf("SendMemberships(msg=%p)\n", msg);
 
     status = AJ_MarshalMethodCall(msg->bus, &call, AJ_METHOD_SEND_MEMBERSHIPS, msg->sender, 0, AJ_FLAG_ENCRYPTED, AJ_AUTH_CALL_TIMEOUT);
     if (AJ_OK != status) {
@@ -2057,6 +2095,8 @@ static void UnmarshalCertificates(AJ_Message* msg)
     DER_Element* group = NULL;
     uint32_t type;
 
+    printf("UnmarshalCertificates\n");
+    
     status = AJ_UnmarshalContainer(msg, &container, AJ_ARG_ARRAY);
     if (AJ_OK != status) {
         goto Exit;
@@ -2159,7 +2199,7 @@ AJ_Status AJ_PeerHandleSendMemberships(AJ_Message* msg, AJ_Message* reply)
     const AJ_GUID* peerGuid = AJ_GUID_Find(msg->sender);
     uint8_t code;
 
-    AJ_InfoPrintf(("AJ_PeerHandleSendMemberships(msg=%p, reply=%p)\n", msg, reply));
+    printf("AJ_PeerHandleSendMemberships(msg=%p, reply=%p)\n", msg, reply);
 
     status = HandshakeValid(peerGuid);
     if (AJ_OK != status) {
@@ -2215,6 +2255,7 @@ AJ_Status AJ_PeerHandleSendMemberships(AJ_Message* msg, AJ_Message* reply)
 
 Exit:
     HandshakeComplete(AJ_ERR_SECURITY);
+    printf("AJ_PeerHandleSendMemberships AJ_ErrSecurityViolation\n");
     return AJ_MarshalErrorMsg(msg, reply, AJ_ErrSecurityViolation);
 }
 
@@ -2224,7 +2265,7 @@ AJ_Status AJ_PeerHandleSendMembershipsReply(AJ_Message* msg)
     const AJ_GUID* peerGuid = AJ_GUID_Find(msg->sender);
     uint8_t code;
 
-    AJ_InfoPrintf(("AJ_PeerHandleSendMembershipsReply(msg=%p)\n", msg));
+    printf("AJ_PeerHandleSendMembershipsReply(msg=%p)\n", msg);
 
     if (msg->hdr->msgType == AJ_MSG_ERROR) {
         AJ_WarnPrintf(("AJ_PeerHandleSendMembershipsReply(msg=%p): error=%s.\n", msg, msg->error));

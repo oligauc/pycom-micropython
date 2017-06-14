@@ -397,7 +397,7 @@ AJ_Status AJ_CredentialSet(uint16_t type, const AJ_CredField* id, uint32_t expir
 
 AJ_Status AJ_CredentialGet(uint16_t type, const AJ_CredField* id, uint32_t* expiration, AJ_CredField* data)
 {
-    AJ_InfoPrintf(("AJ_CredentialGet(type=%04x, id=%p, expiration=%p, data=%p)\n", type, id, expiration, data));
+    printf("AJ_CredentialGet(type=%04x, id=%p, expiration=%p, data=%p)\n", type, id, expiration, data);
     return CredentialFind(type, id, expiration, data, AJ_CREDS_NV_ID_BEGIN) ? AJ_OK : AJ_ERR_UNKNOWN;
 }
 
@@ -466,6 +466,7 @@ AJ_Status AJ_GetLocalGUID(AJ_GUID* guid)
     AJ_InfoPrintf(("AJ_GetLocalGUID(guid=%p)\n", guid));
 
     status = CredentialGetLocal(AJ_LOCAL_GUID_NV_ID, (uint8_t*) guid, sizeof (AJ_GUID));
+    printf("AJ_GetLocalGUID CredentialGetLocal status: %d\n", status);
     if (AJ_OK != status) {
         AJ_RandBytes((uint8_t*) guid, sizeof (AJ_GUID));
         status = CredentialSetGUID(guid);

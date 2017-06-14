@@ -277,7 +277,9 @@ APP_ALLJOYN_SRC_C = $(addprefix alljoyn/,\
 	src/target/esp32/aj_target_nvram.c \
 	services/onboarding/OnboardingService.c \
 	services/onboarding/OnboardingManager.c \
-	services/onboarding/Onboarding.c \
+	services/main/ServicesMain.c \
+	services/PWA/PWAService.c \
+	services/PWA/PWAUart.c \
 	services/common/src/ServicesHandlers.c \
 	services/common/src/PropertyStore.c \
 	services/common/src/ServicesCommon.c \

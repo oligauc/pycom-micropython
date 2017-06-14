@@ -310,9 +310,11 @@ static AJ_Status AboutPropGetter(AJ_Message* msg, const char* language)
         filter.bit0About = TRUE;
         langIndex = AJSVC_PropertyStore_GetLanguageIndex(language);
         status = (langIndex == AJSVC_PROPERTY_STORE_ERROR_LANGUAGE_INDEX) ? AJ_ERR_UNKNOWN : AJ_OK;
+        printf("AJSVC_PropertyStore_GetLanguageIndex status: %d\n", status);
     }
     if (status == AJ_OK) {
         status = AJSVC_PropertyStore_ReadAll(msg, filter, langIndex);
+        printf("AboutPropGetter ReadAll status: %d\n", status);
     }
     return status;
 }

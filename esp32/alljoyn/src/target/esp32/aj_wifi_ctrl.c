@@ -207,8 +207,8 @@ AJ_Status AJ_Wifi_DriverStop(void)
     }
 
     esp_wifi_stop();
-    esp_wifi_set_mode(WIFI_MODE_NULL);
-    esp_wifi_deinit();
+    //esp_wifi_set_mode(WIFI_MODE_NULL);
+    //esp_wifi_deinit();
            
     return AJ_OK;
 }

@@ -407,7 +407,7 @@ AJ_Status AJ_FindBusAndConnect(AJ_BusAttachment* bus, const char* serviceName, u
         AJ_InfoPrintf(("AJ_FindBusAndConnect(): Connection timer started\n"));
         status = AJ_Discover(serviceName, &service, timeout, selectionTimeout);
         if (status != AJ_OK) {
-            AJ_InfoPrintf(("AJ_FindBusAndConnect(): AJ_Discover status=%s\n", AJ_StatusText(status)));
+            printf("AJ_FindBusAndConnect(): AJ_Discover status=%s\n", AJ_StatusText(status));
             goto ExitConnect;
         }
 #endif
@@ -415,7 +415,7 @@ AJ_Status AJ_FindBusAndConnect(AJ_BusAttachment* bus, const char* serviceName, u
         // this calls into platform code that will decide whether to use UDP or TCP, based on what is available
         status = AJ_Net_Connect(bus, &service);
         if (status != AJ_OK) {
-            AJ_InfoPrintf(("AJ_FindBusAndConnect(): AJ_Net_Connect status=%s\n", AJ_StatusText(status)));
+            printf("AJ_FindBusAndConnect(): AJ_Net_Connect status=%s\n", AJ_StatusText(status));
             goto ExitConnect;
         }
 

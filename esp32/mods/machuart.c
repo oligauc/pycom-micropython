@@ -10,7 +10,6 @@
 #include <stdint.h>
 
 #include "py/mpconfig.h"
-#include "py/obj.h"
 #include "py/runtime.h"
 #include "py/objlist.h"
 #include "py/stream.h"
@@ -33,7 +32,6 @@
 #include "soc/dport_reg.h"
 #include "soc/gpio_sig_map.h"
 
-#include "uart.h"
 #include "machuart.h"
 #include "mpexception.h"
 #include "utils/interrupt_char.h"
@@ -77,21 +75,12 @@ static void uart_intr_handler(void *para);
 /******************************************************************************
  DEFINE PRIVATE TYPES
  ******************************************************************************/
-struct _mach_uart_obj_t {
-    mp_obj_base_t base;
-    volatile byte *read_buf;            // read buffer pointer
-    uart_config_t config;
-    uart_intr_config_t intr_config;
-    volatile uint32_t read_buf_head;    // indexes the first empty slot
-    volatile uint32_t read_buf_tail;    // indexes the first full slot (not full if equals head)
-    uint8_t irq_flags;
-    uint8_t uart_id;
-};
+
 
 /******************************************************************************
  DECLARE PRIVATE DATA
  ******************************************************************************/
-static mach_uart_obj_t mach_uart_obj[MACH_NUM_UARTS];
+mach_uart_obj_t mach_uart_obj[MACH_NUM_UARTS];
 static const mp_obj_t mach_uart_def_pin[MACH_NUM_UARTS][2] = { {&PIN_MODULE_P1,  &PIN_MODULE_P0},
                                                                {&PIN_MODULE_P3,  &PIN_MODULE_P4},
                                                                {&PIN_MODULE_P8,  &PIN_MODULE_P9} };
@@ -247,7 +236,7 @@ static IRAM_ATTR void uart_intr_handler(void *para) {
 // waits at most timeout microseconds for at least 1 char to become ready for
 // reading (from buf or for direct reading).
 // returns true if something available, false if not.
-STATIC bool uart_rx_wait (mach_uart_obj_t *self) {
+bool uart_rx_wait (mach_uart_obj_t *self) {
     int timeout = MACHUART_RX_TIMEOUT_US(self->config.baud_rate);
     for ( ; ; ) {
         if (uart_rx_any(self)) {

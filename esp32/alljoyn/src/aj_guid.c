@@ -156,7 +156,7 @@ void AJ_GUID_DeleteNameMapping(AJ_BusAttachment* bus, const char* uniqueName)
 const AJ_GUID* AJ_GUID_Find(const char* name)
 {
     NameToGUID* mapping = LookupName(name);
-    AJ_InfoPrintf(("AJ_GUID_Find(name=\"%s\")\n", name));
+    printf("AJ_GUID_Find(name=\"%s\")\n", name);
 
     return mapping ? &mapping->guid : NULL;
 }

@@ -35,7 +35,7 @@
  * based on the approach from
  *
  *     J. A. Solinas. Generalized Mersenne numbers.
- *     Technical Report CORR 99–39, Centre for Applied Cryptographic
+ *     Technical Report CORR 99ï¿½39, Centre for Applied Cryptographic
  *     Research, University of Waterloo, 1999.
  *
  * but adopted to 64-bit limbs.

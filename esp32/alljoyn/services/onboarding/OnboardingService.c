@@ -293,36 +293,45 @@ AJ_Status AJOBS_ConnectedHandler(AJ_BusAttachment* bus)
 
 AJSVC_ServiceStatus AJOBS_MessageProcessor(AJ_BusAttachment* busAttachment, AJ_Message* msg, AJ_Status* msgStatus)
 {
+    printf("AJOBS_MessageProcessor onboarding\n");
+    
     AJSVC_ServiceStatus serviceStatus = AJSVC_SERVICE_STATUS_HANDLED;
 
     if (*msgStatus == AJ_OK) {
         switch (msg->msgId) {
 
         case OBS_GET_PROP:
+            printf("AJOBS_MessageProcessor AJ_BusPropGet\n");
             *msgStatus = AJ_BusPropGet(msg, AJOBS_PropGetHandler, NULL);
             break;
 
         case OBS_SET_PROP:
+            printf("AJOBS_MessageProcessor AJ_BusPropSet\n");
             *msgStatus = AJ_BusPropSet(msg, AJOBS_PropSetHandler, NULL);
             break;
 
         case OBS_CONFIGURE_WIFI:
+            printf("AJOBS_MessageProcessor AJOBS_ConfigureWiFiHandler\n");
             *msgStatus = AJOBS_ConfigureWiFiHandler(msg);
             break;
 
         case OBS_CONNECT:
+            printf("AJOBS_MessageProcessor AJOBS_ConnectWiFiHandler\n");
             *msgStatus = AJOBS_ConnectWiFiHandler(msg);
             break;
 
         case OBS_OFFBOARD:
+            printf("AJOBS_MessageProcessor AJOBS_OffboardWiFiHandler\n");
             *msgStatus = AJOBS_OffboardWiFiHandler(msg);
             break;
 
         case OBS_GET_SCAN_INFO:
+            printf("AJOBS_MessageProcessor AJOBS_GetScanInfoHandler\n");
             *msgStatus = AJOBS_GetScanInfoHandler(msg);
             break;
 
         default:
+            printf("AJOBS_MessageProcessor AJSVC_SERVICE_STATUS_NOT_HANDLED\n");
             serviceStatus = AJSVC_SERVICE_STATUS_NOT_HANDLED;
             break;
         }

@@ -253,7 +253,7 @@ void ec_double_jacobian(ecpoint_jacobian_t* P)
     digit_t temps[P256_TEMPS];
 
     /* SECURITY NOTE: this function does not produce exceptions on prime-order Weierstrass curves (such as NIST P256). */
-
+    
     fpsqr_p256(P->Z, t1, temps);          /* t1 = z^2  */
     fpmul_p256(P->Z, P->Y, t4, temps);    /* t4 = zy  */
     fpadd_p256(P->X, t1, t2);             /* t2 = x + z^2  */
@@ -333,6 +333,27 @@ void ec_doubleadd(ecpoint_chudnovsky_t* Q, ecpoint_jacobian_t* P, ec_t* curve)
     fpsub_p256(t5, t2, P->Y);               /* Yfinal = theta.(Xfinal-x1'*omega^2) - y1'*omega^3  */
 
     /* cleanup */
+    if (t1 == NULL) {
+        printf("tl is Null\n");
+    }
+    if (t2 == NULL) {
+        printf("t2 is Null\n");
+    }
+    if (t3 == NULL) {
+        printf("t3 is Null\n");
+    }
+    if (t4 == NULL) {
+        printf("t4 is Null\n");
+    }
+    if (t5 == NULL) {
+        printf("t5 is Null\n");
+    }
+    if (t6 == NULL) {
+        printf("t6 is Null\n");
+    }
+    if (t7 == NULL) {
+        printf("t7 is Null\n");
+    }
     fpzero_p256(t1);
     fpzero_p256(t2);
     fpzero_p256(t3);
@@ -355,7 +376,7 @@ static void ecadd_precomp(ecpoint_jacobian_t* P, ecpoint_chudnovsky_t* Q, ecpoin
 {
     digit256_t t1, t2, t3, t4;
     digit_t temps[P256_TEMPS];
-
+    
     /* SECURITY NOTE: this function does not produce exceptions in the context of variable-base precomputation. */
 
     fpsub_p256(Q->X, P->X, t1);                 /* t1 = x2-x1  */
@@ -399,7 +420,7 @@ static void ec_precomp(const ecpoint_t* P, ecpoint_chudnovsky_t* T, unsigned int
     digit_t temps[P256_TEMPS];
 
     UNREFERENCED_PARAMETER(curve);
-
+    
     /* SECURITY NOTE: this function does not produce exceptions in the context of variable-base scalar multiplication and double-scalar multiplication. */
 
     /* Generating 2P = 2(x,y) = (X2,Y2,Z2) and P = (x,y) = (X1',Y1',Z1',Z1^2',Z1^3') = (x*y^2, y*y^3, y, y^2, y^3)  */

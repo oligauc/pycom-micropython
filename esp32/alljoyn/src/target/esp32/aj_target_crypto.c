@@ -27,6 +27,7 @@
 #include <aj_crypto.h>
 #include <aj_crypto_aes_priv.h>
 #include <aj_crypto_drbg.h>
+#include <esp_system.h>
 
 /*
  * Context for AES-128 CTR DRBG
@@ -44,10 +45,10 @@ uint32_t AJ_PlatformEntropy(uint8_t* data, uint32_t size)
     uint32_t val;
 
     /*
-     * Start accumulating entropy one bit at a time
+     * Start accumulating entropy 
      */
     /*for (i = 0; i < (8 * size); ++i) {
-        val = analogRead(analogPin);
+        val = esp_random();
         data[i / 8] ^= ((val & 1) << (i & 7));
     }*/
     return size;
@@ -62,6 +63,7 @@ void AJ_RandBytes(uint8_t* rand, uint32_t size)
         status = AES_CTR_DRBG_Generate(&drbgctx, rand, size);
         if (AJ_OK != status) {
             // Reseed required
+            printf("AJ_RandBytes: %d\n", status);
             AJ_PlatformEntropy(seed, sizeof (seed));
             AES_CTR_DRBG_Reseed(&drbgctx, seed, sizeof (seed));
             status = AES_CTR_DRBG_Generate(&drbgctx, rand, size);

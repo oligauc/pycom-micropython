@@ -187,7 +187,7 @@ AJ_Status AJ_SecurityInit(AJ_BusAttachment* bus)
      */
     AJ_InfoPrintf(("AJ_SecurityInit(bus=%p): Bind Session Port %d\n", bus, AJ_SECURE_MGMT_PORT));
     status = AJ_BusBindSessionPort(bus, AJ_SECURE_MGMT_PORT, NULL, 0);
-
+    
     return status;
 }
 
@@ -831,6 +831,7 @@ Exit:
         AJ_ClearCredentials(AJ_CERTIFICATE_IDN_X509 | AJ_CRED_TYPE_CERTIFICATE);
         AJ_ClearCredentials(AJ_CRED_TYPE_MANIFESTS);
         AJ_ClearCredentials(AJ_POLICY_DEFAULT | AJ_CRED_TYPE_POLICY);
+        printf("aj_security -1\n");
         return AJ_MarshalStatusMsg(msg, reply, status);
     }
 }
@@ -842,7 +843,7 @@ AJ_Status AJ_SecurityResetMethod(AJ_Message* msg, AJ_Message* reply)
 {
     AJ_Status status;
 
-    AJ_InfoPrintf(("AJ_SecurityResetMethod(msg=%p, reply=%p)\n", msg, reply));
+    printf("AJ_SecurityResetMethod(msg=%p, reply=%p)\n", msg, reply);
 
     status = AJ_SecurityReset(msg->bus);
 
@@ -1233,7 +1234,7 @@ AJ_Status AJ_SecurityStartManagementMethod(AJ_Message* msg, AJ_Message* reply)
 {
     AJ_Status status;
 
-    AJ_InfoPrintf(("AJ_SecurityStartManagementMethod(msg=%p, reply=%p)\n", msg, reply));
+    printf("AJ_SecurityStartManagementMethod(msg=%p, reply=%p)\n", msg, reply);
 
     status = AJ_SecurityStartManagement(msg->bus);
 
@@ -1263,7 +1264,7 @@ AJ_Status AJ_SecurityEndManagementMethod(AJ_Message* msg, AJ_Message* reply)
 {
     AJ_Status status;
 
-    AJ_InfoPrintf(("AJ_SecurityEndManagementMethod(msg=%p, reply=%p)\n", msg, reply));
+    printf("AJ_SecurityEndManagementMethod(msg=%p, reply=%p)\n", msg, reply);
 
     status = AJ_SecurityEndManagement(msg->bus);
 

@@ -1425,6 +1425,7 @@ AJ_Status AJ_UnmarshalMsg(AJ_BusAttachment* bus, AJ_Message* msg, uint32_t timeo
                     AJ_Message reply;
                     AJ_Status replyStatus;
                     status = AJ_ERR_SECURITY;
+                    printf("AJ_UnmarshalMsg AJ_MarshalStatusMsg - 2\n");
                     replyStatus = AJ_MarshalStatusMsg(msg, &reply, status);
                     if (AJ_OK == replyStatus) {
                         replyStatus = AJ_DeliverMsg(&reply);
@@ -1449,6 +1450,7 @@ AJ_Status AJ_UnmarshalMsg(AJ_BusAttachment* bus, AJ_Message* msg, uint32_t timeo
             status = AJ_IdentifyMessage(msg);
         }
 
+        printf("AJ_UnmarshalMsg - a\n");
         /*
          * If this is the Peer.Authentication interface,
          * load the entire message into the buffer.
@@ -1460,19 +1462,26 @@ AJ_Status AJ_UnmarshalMsg(AJ_BusAttachment* bus, AJ_Message* msg, uint32_t timeo
             }
         }
 
+        printf("AJ_UnmarshalMsg - b\n");
+        
         /*
          * Check incoming policy
          */
         if ((AJ_OK == status) && (msg->hdr->flags & AJ_FLAG_ENCRYPTED)) {
+            printf("AJ_UnmarshalMsg - c\n");
             status = AuthoriseIncomingMessage(msg);
             if ((AJ_OK != status) && (msg->hdr->msgType == AJ_MSG_METHOD_CALL) && !(msg->hdr->flags & AJ_FLAG_NO_REPLY_EXPECTED)) {
+                printf("AJ_UnmarshalMsg - d\n");
                 AJ_Message reply;
                 AJ_Status replyStatus;
+                printf("AJ_UnmarshalMsg AJ_MarshalStatusMsg - 1\n");
                 replyStatus = AJ_MarshalStatusMsg(msg, &reply, status);
                 if (AJ_OK == replyStatus) {
+                    printf("AJ_UnmarshalMsg - e\n");
                     replyStatus = AJ_DeliverMsg(&reply);
                 }
                 if (AJ_OK != replyStatus) {
+                    printf("AJ_UnmarshalMsg - f\n");
                     /* Fail to send an error reply, log and continue */
                     AJ_InfoPrintf(("AJ_UnmarshalMsg(): %s\n", AJ_StatusText(replyStatus)));
                 }
@@ -1485,18 +1494,24 @@ AJ_Status AJ_UnmarshalMsg(AJ_BusAttachment* bus, AJ_Message* msg, uint32_t timeo
         ioBuf->readPtr = endOfHeader + hdrPad;
     }
     if (status == AJ_OK) {
+        printf("AJ_UnmarshalMsg - g\n");
         AJ_DumpMsg("RECEIVED", msg, FALSE);
     } else {
         /*
          * Silently discard message unless in debug mode
          */
+        
+        printf("AJ_UnmarshalMsg - h\n");
         AJ_WarnPrintf(("Discarding unknown message %s\n", AJ_StatusText(status)));
         AJ_DumpMsg("DISCARDING", msg, FALSE);
         AJ_CloseMsg(msg);
     }
     if (status == AJ_OK) {
+        printf("AJ_UnmarshalMsg - i\n");
         status = ProcessBusMessages(msg);
     }
+    
+    printf("AJ_UnmarshalMsg - j\n");
     return status;
 }
 
@@ -2601,6 +2616,7 @@ static const char* StatusToErrorStrings(AJ_Status status, const char** info)
 
     case AJ_ERR_SECURITY:
         *info = NULL;
+        printf("StatusToErrorStrings AJ_ErrSecurityViolation\n");
         return AJ_ErrSecurityViolation;
 
     case  AJ_ERR_ACCESS:

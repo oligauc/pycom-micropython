@@ -486,7 +486,7 @@ AJ_Status AJ_BusHandleBusMessage(AJ_Message* msg)
     uint32_t session;
     char* joiner;
 
-    AJ_InfoPrintf(("AJ_BusHandleBusMessage(msg=0x%p)\n", msg));
+    printf("AJ_BusHandleBusMessage(msg=0x%p)\n", msg);
     memset(&reply, 0, sizeof(AJ_Message));
     /*
      * Check we actually have a message to handle
@@ -497,78 +497,78 @@ AJ_Status AJ_BusHandleBusMessage(AJ_Message* msg)
 
     switch (msg->msgId) {
     case AJ_METHOD_PING:
-        AJ_InfoPrintf(("AJ_BusHandleBusMessage(): AJ_METHOD_PING\n"));
+        printf("AJ_BusHandleBusMessage(): AJ_METHOD_PING\n");
         status = AJ_MarshalReplyMsg(msg, &reply);
         break;
 
     case AJ_METHOD_GET_MACHINE_ID:
-        AJ_InfoPrintf(("AJ_BusHandleBusMessage(): AJ_METHOD_GET_MACHINE_ID\n"));
+        printf("AJ_BusHandleBusMessage(): AJ_METHOD_GET_MACHINE_ID\n");
         status = HandleGetMachineId(msg, &reply);
         break;
 
     case AJ_METHOD_INTROSPECT:
-        AJ_InfoPrintf(("AJ_BusHandleBusMessage(): AJ_METHOD_INTROSPECT\n"));
+        printf("AJ_BusHandleBusMessage(): AJ_METHOD_INTROSPECT\n");
         status = AJ_GetIntrospectionData(msg, &reply);
         break;
 
     case AJ_METHOD_GET_DESCRIPTION_LANG:
-        AJ_InfoPrintf(("AJ_BusHandleBusMessage(): AJ_METHOD_GET_DESCRIPTION_LANG\n"));
+        printf("AJ_BusHandleBusMessage(): AJ_METHOD_GET_DESCRIPTION_LANG\n");
         status = AJ_HandleGetDescriptionLanguages(msg, &reply);
         break;
 
     case AJ_METHOD_INTROSPECT_WITH_DESC:
-        AJ_InfoPrintf(("AJ_BusHandleBusMessage(): AJ_METHOD_INTROSPECT_WITH_DESC\n"));
+        printf("AJ_BusHandleBusMessage(): AJ_METHOD_INTROSPECT_WITH_DESC\n");
         AJ_UnmarshalArgs(msg, "s", &languageTag);
         status = AJ_HandleIntrospectRequest(msg, &reply, languageTag);
         break;
 
     case AJ_METHOD_EXCHANGE_GUIDS:
-        AJ_InfoPrintf(("AJ_BusHandleBusMessage(): AJ_METHOD_EXCHANGE_GUIDS\n"));
+        printf("AJ_BusHandleBusMessage(): AJ_METHOD_EXCHANGE_GUIDS\n");
         status = AJ_PeerHandleExchangeGUIDs(msg, &reply);
         break;
 
     case AJ_METHOD_GEN_SESSION_KEY:
-        AJ_InfoPrintf(("AJ_BusHandleBusMessage(): AJ_METHOD_GEN_SESSION_KEY\n"));
+        printf("AJ_BusHandleBusMessage(): AJ_METHOD_GEN_SESSION_KEY\n");
         status = AJ_PeerHandleGenSessionKey(msg, &reply);
         break;
 
     case AJ_METHOD_EXCHANGE_GROUP_KEYS:
-        AJ_InfoPrintf(("AJ_BusHandleBusMessage(): AJ_METHOD_EXCHANGE_GROUP_KEYS\n"));
+        printf("AJ_BusHandleBusMessage(): AJ_METHOD_EXCHANGE_GROUP_KEYS\n");
         status = AJ_PeerHandleExchangeGroupKeys(msg, &reply);
         break;
 
     case AJ_METHOD_EXCHANGE_SUITES:
-        AJ_InfoPrintf(("AJ_BusHandleBusMessage(): AJ_METHOD_EXCHANGE_SUITES\n"));
+        printf("AJ_BusHandleBusMessage(): AJ_METHOD_EXCHANGE_SUITES\n");
         status = AJ_PeerHandleExchangeSuites(msg, &reply);
         break;
 
     case AJ_METHOD_KEY_EXCHANGE:
-        AJ_InfoPrintf(("AJ_BusHandleBusMessage(): AJ_METHOD_KEY_EXCHANGE\n"));
+        printf("AJ_BusHandleBusMessage(): AJ_METHOD_KEY_EXCHANGE\n");
         status = AJ_PeerHandleKeyExchange(msg, &reply);
         break;
 
     case AJ_METHOD_KEY_AUTHENTICATION:
-        AJ_InfoPrintf(("AJ_BusHandleBusMessage(): AJ_METHOD_KEY_AUTHENTICATION\n"));
+        printf("AJ_BusHandleBusMessage(): AJ_METHOD_KEY_AUTHENTICATION\n");
         status = AJ_PeerHandleKeyAuthentication(msg, &reply);
         break;
 
     case AJ_METHOD_SEND_MANIFESTS:
-        AJ_InfoPrintf(("AJ_BusHandleBusMessage(): AJ_METHOD_SEND_MANIFESTS\n"));
+        printf("AJ_BusHandleBusMessage(): AJ_METHOD_SEND_MANIFESTS\n");
         status = AJ_PeerHandleSendManifests(msg, &reply);
         break;
 
     case AJ_METHOD_SEND_MEMBERSHIPS:
-        AJ_InfoPrintf(("AJ_BusHandleBusMessage(): AJ_METHOD_SEND_MEMBERSHIPS\n"));
+        printf("AJ_BusHandleBusMessage(): AJ_METHOD_SEND_MEMBERSHIPS\n");
         status = AJ_PeerHandleSendMemberships(msg, &reply);
         break;
 
     case AJ_REPLY_ID(AJ_METHOD_EXCHANGE_GUIDS):
-        AJ_InfoPrintf(("AJ_BusHandleBusMessage(): AJ_REPLY_ID(AJ_METHOD_EXCHANGE_GUIDS)\n"));
+        printf("AJ_BusHandleBusMessage(): AJ_REPLY_ID(AJ_METHOD_EXCHANGE_GUIDS)\n");
         status = AJ_PeerHandleExchangeGUIDsReply(msg);
         break;
 
     case AJ_REPLY_ID(AJ_METHOD_GEN_SESSION_KEY):
-        AJ_InfoPrintf(("AJ_BusHandleBusMessage(): AJ_REPLY_ID(AJ_METHOD_GEN_SESSION_KEY)\n"));
+        printf("AJ_BusHandleBusMessage(): AJ_REPLY_ID(AJ_METHOD_GEN_SESSION_KEY)\n");
         status = AJ_PeerHandleGenSessionKeyReply(msg);
         break;
 
@@ -578,17 +578,17 @@ AJ_Status AJ_BusHandleBusMessage(AJ_Message* msg)
         break;
 
     case AJ_REPLY_ID(AJ_METHOD_EXCHANGE_SUITES):
-        AJ_InfoPrintf(("AJ_BusHandleBusMessage(): AJ_REPLY_ID(AJ_METHOD_EXCHANGE_SUITES)\n"));
+        printf("AJ_BusHandleBusMessage(): AJ_REPLY_ID(AJ_METHOD_EXCHANGE_SUITES)\n");
         status = AJ_PeerHandleExchangeSuitesReply(msg);
         break;
 
     case AJ_REPLY_ID(AJ_METHOD_KEY_EXCHANGE):
-        AJ_InfoPrintf(("AJ_BusHandleBusMessage(): AJ_REPLY_ID(AJ_METHOD_KEY_EXCHANGE)\n"));
+        printf("AJ_BusHandleBusMessage(): AJ_REPLY_ID(AJ_METHOD_KEY_EXCHANGE)\n");
         status = AJ_PeerHandleKeyExchangeReply(msg);
         break;
 
     case AJ_REPLY_ID(AJ_METHOD_KEY_AUTHENTICATION):
-        AJ_InfoPrintf(("AJ_BusHandleBusMessage(): AJ_REPLY_ID(AJ_METHOD_KEY_AUTHENTICATION)\n"));
+        printf("AJ_BusHandleBusMessage(): AJ_REPLY_ID(AJ_METHOD_KEY_AUTHENTICATION)\n");
         status = AJ_PeerHandleKeyAuthenticationReply(msg);
         break;
 
@@ -812,12 +812,13 @@ static AJ_Status PropAccess(AJ_Message* msg, PropCallback* cb, uint8_t op)
     uint32_t propId;
     const char* sig;
 
-    AJ_InfoPrintf(("PropAccess(msg=0x%p, cb=0x%p, op=%s)\n", msg, cb, (op == AJ_PROP_GET) ? "get" : "set"));
+    printf("PropAccess(msg=0x%p, cb=0x%p, op=%s)\n", msg, cb, (op == AJ_PROP_GET) ? "get" : "set");
 
     /*
      * Find out which property is being accessed and whether the access is a GET or SET
      */
     status = AJ_UnmarshalPropertyArgs(msg, &propId, &sig);
+    printf("PropAccess AJ_UnmarshalPropertyArgs status: %d\n",status);
     if (status == AJ_OK) {
         AJ_MarshalReplyMsg(msg, &reply);
         /*
@@ -826,6 +827,7 @@ static AJ_Status PropAccess(AJ_Message* msg, PropCallback* cb, uint8_t op)
         if (op == AJ_PROP_GET) {
             AJ_MarshalVariant(&reply, sig);
             status = cb->Get(&reply, propId, cb->context);
+            printf("PropAccess get status: %d\n",status);
         } else {
             const char* variant;
             AJ_UnmarshalVariant(msg, &variant);
@@ -834,13 +836,15 @@ static AJ_Status PropAccess(AJ_Message* msg, PropCallback* cb, uint8_t op)
              */
             if (strcmp(sig, variant) == 0) {
                 status = cb->Set(msg, propId, cb->context);
+                printf("PropAccess set status: %d\n",status);
             } else {
-                AJ_InfoPrintf(("PropAccess(): AJ_ERR_SIGNATURE\n"));
+                printf("PropAccess(): AJ_ERR_SIGNATURE\n");
                 status = AJ_ERR_SIGNATURE;
             }
         }
     }
     if (status != AJ_OK) {
+        printf("PropAccess AJ_MarshalStatusMsg - 1\n");
         AJ_MarshalStatusMsg(msg, &reply, status);
     }
     return AJ_DeliverMsg(&reply);
@@ -862,6 +866,7 @@ static AJ_Status PropAccessAll(AJ_Message* msg, PropCallback* cb)
         status = AJ_MarshalAllPropertiesArgs(&reply, iface, cb->Get, cb->context);
     }
     if (status != AJ_OK) {
+        printf("PropAccessAll AJ_MarshalStatusMsg - 1\n");
         AJ_MarshalStatusMsg(msg, &reply, status);
     }
     return AJ_DeliverMsg(&reply);
@@ -904,7 +909,7 @@ AJ_Status AJ_BusEnableSecurity(AJ_BusAttachment* bus, const uint32_t* suites, si
 {
     size_t i;
 
-    AJ_InfoPrintf(("AJ_BusEnableSecurity(bus=0x%p, suites=0x%p)\n", bus, suites));
+    printf("AJ_BusEnableSecurity(bus=0x%p, suites=0x%p)\n", bus, suites);
 
     /* Disable all first to undo any previous calls */
     memset((uint8_t*) bus->suites, 0, sizeof (bus->suites));
@@ -912,6 +917,7 @@ AJ_Status AJ_BusEnableSecurity(AJ_BusAttachment* bus, const uint32_t* suites, si
         AJ_EnableSuite(bus, suites[i]);
     }
 
+    printf("AJ_BusEnableSecurity - exit\n");
     return AJ_SecurityInit(bus);
 }
 

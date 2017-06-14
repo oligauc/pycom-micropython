@@ -1032,7 +1032,7 @@ AJ_Status AJ_Discover(const char* prefix, AJ_Service* service, uint32_t timeout,
          */
         if (AJ_GetMinProtoVersion() < 10) {
             AJ_IO_BUF_RESET(&sock.tx);
-            AJ_InfoPrintf(("AJ_Discover(): WHO-HAS \"%s\"\n", prefix));
+            AJ_InfoPrintf(("AJ_Discover(): alljoyn who -HAS \"%s\"\n", prefix));
             status = ComposeWhoHas(&sock.tx, prefix);
             if (status == AJ_OK) {
                 sock.tx.flags |= AJ_IO_BUF_AJ;

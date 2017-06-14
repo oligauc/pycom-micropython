@@ -51,6 +51,10 @@
 #include <services/TimeServiceClient.h>
 #endif
 
+#ifdef PWA_SERVICE
+#include <services/PWAService.h>
+#endif
+
 #include <aj_config.h>
 #include <aj_link_timeout.h>
 
@@ -103,6 +107,9 @@ AJ_Status AJSVC_RoutingNodeConnect(AJ_BusAttachment* busAttachment, const char* 
     if (isConnected != NULL) {
         *isConnected = TRUE;
     }
+    
+    printf("AJSVC_RoutingNodeConnect exit status: %d\n", status);
+    
     return status;
 }
 
@@ -152,7 +159,13 @@ AJ_Status AJSVC_ConnectedHandler(AJ_BusAttachment* busAttachment)
         goto ErrorExit;
     }
 #endif
-
+#ifdef PWA_SERVICE
+    status = AJAPP_ConnectedHandler(busAttachment);
+    if (status != AJ_OK) {
+        goto ErrorExit;
+    }
+#endif
+    
     return status;
 
 ErrorExit:
@@ -321,7 +334,11 @@ AJSVC_ServiceStatus AJSVC_MessageProcessorAndDispatcher(AJ_BusAttachment* busAtt
             serviceStatus = AJTS_Client_MessageProcessor(busAttachment, msg, status);
         }
 #endif
-
+#ifdef PWA_SERVICE
+        if (serviceStatus == AJSVC_SERVICE_STATUS_NOT_HANDLED) {
+            serviceStatus = PWA_MessageProcessor(busAttachment, msg, status);
+        }
+#endif
     }
     return serviceStatus;
 }

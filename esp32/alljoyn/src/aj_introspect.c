@@ -1438,18 +1438,20 @@ AJ_Status AJ_UnmarshalPropertyArgs(AJ_Message* msg, uint32_t* propId, const char
     status = AJ_UnmarshalArgs(msg, "ss", &iface, &prop);
     if (status == AJ_OK) {
         status = AJ_IdentifyProperty(msg, iface, prop, propId, sig, &secure);
+        printf("AJ_UnmarshalPropertyArgs AJ_IdentifyProperty status: %d\n", status);
         /*
          * If the interface is secure check the message must be encrypted
          */
         if ((status == AJ_OK) && secure) {
             if (!(msg->hdr->flags & AJ_FLAG_ENCRYPTED)) {
-                AJ_WarnPrintf(("Security violation accessing property\n"));
+                printf("AJ_UnmarshalPropertyArgs - Security violation accessing property\n");
                 return AJ_ERR_SECURITY;
             }
             /*
              * Check incoming access policy
              */
             status = AJ_AccessControlCheckProperty(msg, *propId, msg->sender, AJ_ACCESS_INCOMING);
+            printf("AJ_UnmarshalPropertyArgs AJ_AccessControlCheckProperty status: %d\n", status);
         }
     }
     return status;
@@ -1588,6 +1590,7 @@ AJ_Status AJ_IdentifyMessage(AJ_Message* msg)
             AJ_Message reply;
 
             AJ_DumpMsg("Rejecting unidentified method call", msg, FALSE);
+            printf("AJ_IdentifyMessage AJ_MarshalStatusMsg - 1\n");
             AJ_MarshalStatusMsg(msg, &reply, status);
             status = AJ_DeliverMsg(&reply);
             /*

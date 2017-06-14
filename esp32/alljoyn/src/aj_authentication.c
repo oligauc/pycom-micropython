@@ -54,7 +54,7 @@ static AJ_Status ComputeMasterSecret(AJ_AuthenticationContext* ctx, uint8_t* pms
 
     AJ_ASSERT(len <= UINT8_MAX);
 
-    AJ_InfoPrintf(("ComputeMasterSecret(ctx=%p, pms=%p, len=%u)\n", ctx, pms, (uint32_t)len));
+    printf("ComputeMasterSecret(ctx=%p, pms=%p, len=%u)\n", ctx, pms, (uint32_t)len);
 
     data[0] = pms;
     lens[0] = (uint8_t) len;
@@ -113,7 +113,7 @@ static AJ_Status ECDHEMarshalV1(AJ_AuthenticationContext* ctx, AJ_Message* msg)
     AJ_Status status = AJ_ERR_INVALID;
     uint8_t buf[1 + KEY_ECC_OLD_SZ];
 
-    AJ_InfoPrintf(("ECDHEMarshalV1(ctx=%p, msg=%p)\n", ctx, msg));
+    printf("ECDHEMarshalV1(ctx=%p, msg=%p)\n", ctx, msg);
 
     // Encode the public key
     buf[0] = KEY_CRV_NISTP256;
@@ -129,7 +129,7 @@ static AJ_Status ECDHEMarshalV3(AJ_AuthenticationContext* ctx, AJ_Message* msg)
 {
     AJ_Status status = AJ_ERR_INVALID;
 
-    AJ_InfoPrintf(("ECDHEMarshalV3(ctx=%p, msg=%p)\n", ctx, msg));
+    printf("ECDHEMarshalV3(ctx=%p, msg=%p)\n", ctx, msg);
 
     // Marshal the encoded key
     status = AJ_MarshalArgs(msg, "v", "(yay)", ctx->kectx.pub.crv, ctx->kectx.pub.x, KEY_ECC_PUB_SZ);

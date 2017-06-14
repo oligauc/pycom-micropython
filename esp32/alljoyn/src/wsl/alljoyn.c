@@ -29,7 +29,7 @@
  * (usually in debugger).
  */
 #ifndef NDEBUG
-AJ_EXPORT uint8_t dbgALLJOYN = 0;
+AJ_EXPORT uint8_t dbgALLJOYN = 1;
 #endif
 
 #define NET_UP_TIMEOUT  5000

@@ -4,6 +4,7 @@ progs = [
     sample_env.Program('SecureClient', ['SecureClient.c']),
     sample_env.Program('SecureService', ['SecureService.c']),
     sample_env.Program('SecureClientECDHE', ['SecureClientECDHE.c']),
+    sample_env.Program('onboardingClient', ['onboardingClient.c']),
     sample_env.Program('SecureServiceECDHE', ['SecureServiceECDHE.c'])
 ]
 sample_env.Install("#dist/bin", progs)
