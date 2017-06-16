@@ -12,6 +12,8 @@
 #include "py/obj.h"
 
 #define PWA_UART_ID                   0x01
+#define PWA_CMD_TIMEOUT               0x7D0
+
 #define PWA_GET_MSG_LEN               0x04
 #define PWA_SET_MSG_LEN               0x08
 #define PWA_SET_DATA_LEN              0x04
@@ -62,9 +64,9 @@
 #define PWA_SET_MAX_DAYS_BT_REGEN     10040
 #define PWA_SET_PRESENT_TIME_OF_DAY   10052
 
-int8_t get_pwa_data(uint8_t cmd, uint16_t data_id, char *value);
+AJ_Status get_pwa_data(uint8_t cmd, uint16_t data_id, char *value, uint8_t *cmdStatus);
 
-int8_t set_pwa_data(uint8_t cmd, uint16_t data_id, int32_t value);
+AJ_Status set_pwa_data(uint8_t cmd, uint16_t data_id, int32_t value, uint8_t *cmdStatus);
 
 
 #endif	/* PWAUART_H */

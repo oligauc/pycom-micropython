@@ -68,9 +68,10 @@ AJ_Status AJ_GetStatus(AJ_Message* msg)
     AJ_Status status = AJ_OK;
     AJ_Message reply;
     char PWAStatus[PWA_RET_DATA_LEN] = {0};
+    uint8_t cmdStatus = 0;
     
-    if (get_pwa_data(PWA_COMMAND_GET1, PWA_GET_STATUS, PWAStatus) == -1){
-        status = AJ_ERR_FAILURE;
+    status = get_pwa_data(PWA_COMMAND_GET1, PWA_GET_STATUS, PWAStatus, &cmdStatus); 
+    if (status != AJ_OK) {
         goto ErrorExit;
     }
   
@@ -98,9 +99,10 @@ AJ_Status AJ_GetTimeOfDay(AJ_Message* msg)
     AJ_Status status = AJ_OK;
     AJ_Message reply;
     char TimeOfDay[PWA_RET_DATA_LEN] = {0};
+    uint8_t cmdStatus = 0;
     
-    if (get_pwa_data(PWA_COMMAND_GET1, PWA_GET_TIMEOFDAY, TimeOfDay) == -1){
-        status = AJ_ERR_FAILURE;
+    status = get_pwa_data(PWA_COMMAND_GET1, PWA_GET_TIMEOFDAY, TimeOfDay, &cmdStatus);
+    if (status != AJ_OK) {
         goto ErrorExit;
     }
   
@@ -130,9 +132,10 @@ AJ_Status AJ_GetSaltLevel(AJ_Message* msg)
     AJ_Status status = AJ_OK;
     AJ_Message reply;
     char level[PWA_RET_DATA_LEN] = {0};
+    uint8_t cmdStatus = 0;
     
-    if (get_pwa_data(PWA_COMMAND_GET1, PWA_GET_SALT_LEVEL, level) == -1){
-        status = AJ_ERR_FAILURE;
+    status = get_pwa_data(PWA_COMMAND_GET1, PWA_GET_SALT_LEVEL, level, &cmdStatus);
+    if (status != AJ_OK) {
         goto ErrorExit;
     }
   
@@ -162,9 +165,10 @@ AJ_Status AJ_GetSaltAlarm(AJ_Message* msg)
     AJ_Status status = AJ_OK;
     AJ_Message reply;
     char alarm[PWA_RET_DATA_LEN] = {0};
+    uint8_t cmdStatus = 0;
     
-    if (get_pwa_data(PWA_COMMAND_GET1, PWA_GET_SALT_ALARM, alarm) == -1){
-        status = AJ_ERR_FAILURE;
+    status = get_pwa_data(PWA_COMMAND_GET1, PWA_GET_SALT_ALARM, alarm, &cmdStatus);
+    if (status != AJ_OK) {
         goto ErrorExit;
     }
   
@@ -192,9 +196,10 @@ AJ_Status AJ_GetPWAUInt32(AJ_Message* msg, uint16_t getCommand)
     AJ_Status status = AJ_OK;
     AJ_Message reply;
     char value[PWA_RET_DATA_LEN] = {0};
+    uint8_t cmdStatus = 0;
     
-    if (get_pwa_data(PWA_COMMAND_GET1, getCommand, value) == -1){
-        status = AJ_ERR_FAILURE;
+    status = get_pwa_data(PWA_COMMAND_GET1, getCommand, value, &cmdStatus);
+    if (status != AJ_OK) {
         goto ErrorExit;
     }
   
@@ -223,9 +228,10 @@ AJ_Status AJ_GetPWAInt32(AJ_Message* msg, uint16_t getCommand)
     AJ_Status status = AJ_OK;
     AJ_Message reply;
     char value[PWA_RET_DATA_LEN] = {0};
+    uint8_t cmdStatus = 0;
     
-    if (get_pwa_data(PWA_COMMAND_GET1, getCommand, value) == -1){
-        status = AJ_ERR_FAILURE;
+    status = get_pwa_data(PWA_COMMAND_GET1, getCommand, value, &cmdStatus);
+    if (status != AJ_OK) {
         goto ErrorExit;
     }
   
@@ -254,9 +260,10 @@ AJ_Status AJ_GetPWAUInt16(AJ_Message* msg, uint16_t getCommand)
     AJ_Status status = AJ_OK;
     AJ_Message reply;
     char value[PWA_RET_DATA_LEN] = {0};
+    uint8_t cmdStatus = 0;
     
-    if (get_pwa_data(PWA_COMMAND_GET1, getCommand, value) == -1){
-        status = AJ_ERR_FAILURE;
+    status = get_pwa_data(PWA_COMMAND_GET1, getCommand, value, &cmdStatus);
+    if (status != AJ_OK) {
         goto ErrorExit;
     }
   
@@ -285,20 +292,24 @@ AJ_Status AJ_SetPWAInt32(AJ_Message* msg, uint16_t setCommand)
     AJ_Status status = AJ_OK;
     AJ_Message reply;
     int32_t value = 0;
+    uint8_t cmdStatus = 0;
    
     status = AJ_UnmarshalArgs(msg, "i", &value);
     if (status != AJ_OK) {
         goto ErrorExit;
     }
    
-    int8_t pwaStatus = set_pwa_data(PWA_COMMAND_PUT1, setCommand, value);
+    status = set_pwa_data(PWA_COMMAND_PUT1, setCommand, value, &cmdStatus);
+    if (status != AJ_OK) {
+        goto ErrorExit;
+    }
     
     status = AJ_MarshalReplyMsg(msg, &reply);
     if (status != AJ_OK) {
         goto ErrorExit;
     }
     
-    status = AJ_MarshalArgs(&reply, "y", pwaStatus);
+    status = AJ_MarshalArgs(&reply, "y", cmdStatus);
     if (status != AJ_OK) {
         goto ErrorExit;
     }
