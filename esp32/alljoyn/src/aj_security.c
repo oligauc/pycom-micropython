@@ -87,6 +87,7 @@ static AJ_Status SaveClaimConfig()
     AJ_Status status = AJ_OK;
     AJ_CredField data;
 
+    printf("++ SaveClaimConfig\n");
     data.size = sizeof (g_config);
     data.data = (uint8_t*) &g_config;
     status = AJ_CredentialSet(AJ_CONFIG_CLAIMSTATE | AJ_CRED_TYPE_CONFIG, NULL, 0xFFFFFFFF, &data);
@@ -99,11 +100,13 @@ static AJ_Status LoadClaimConfig()
     AJ_Status status = AJ_OK;
     AJ_CredField data;
 
+    printf("LoadClaimConfig\n");
     data.size = sizeof (g_config);
     data.data = (uint8_t*) &g_config;
     status = AJ_CredentialGet(AJ_CONFIG_CLAIMSTATE | AJ_CRED_TYPE_CONFIG, NULL, NULL, &data);
     if (AJ_OK != status) {
-        AJ_InfoPrintf(("LoadClaimConfig(): No stored config - using defaults\n"));
+        printf("LoadClaimConfig(): No stored config - using defaults\n");
+        printf("+++ Setting APP_STATE_NOT_CLAIMABLE in LoadClaimConfig\n");
         g_config.state = APP_STATE_NOT_CLAIMABLE;
         g_config.capabilities = 0;
         g_config.info = 0;
@@ -120,12 +123,13 @@ void AJ_SecuritySetClaimConfig(AJ_BusAttachment* bus, uint16_t state, uint16_t c
      * Update state and emit signal.
      * Its up to the application to set/change this to a sensible option.
      */
+    printf("++ AJ_SecuritySetClaimConfig\n");
     g_config.state = state;
     g_config.capabilities = capabilities;
     g_config.info = info;
     status = SaveClaimConfig();
     if (AJ_OK != status) {
-        AJ_ErrPrintf(("AJ_SecuritySetClaimConfig(): failed to save claim config %s\n", AJ_StatusText(status)));
+        printf("AJ_SecuritySetClaimConfig(): failed to save claim config %s\n", AJ_StatusText(status));
     }
     /* Explicitly emit the signal */
     emit = TRUE;
@@ -134,6 +138,8 @@ void AJ_SecuritySetClaimConfig(AJ_BusAttachment* bus, uint16_t state, uint16_t c
 
 void AJ_SecurityGetClaimConfig(uint16_t* state, uint16_t* capabilities, uint16_t* info)
 {
+    printf("++ AJ_SecurityGetClaimConfig\n");
+    
     *state = g_config.state;
     *capabilities = g_config.capabilities;
     *info = g_config.info;
@@ -145,6 +151,7 @@ AJ_Status AJ_SecurityInit(AJ_BusAttachment* bus)
     AJ_ECCPublicKey pub;
     AJ_ECCPrivateKey prv;
 
+    printf("++ AJ_SecurityInit\n");
     AJ_InfoPrintf(("AJ_SecurityInit(bus=%p): Initialised = %x\n", bus, initialised));
 
     if (initialised) {
@@ -193,6 +200,7 @@ AJ_Status AJ_SecurityInit(AJ_BusAttachment* bus)
 
 AJ_Status AJ_SecurityBound(AJ_BusAttachment* bus)
 {
+    printf("++ AJ_SecurityBound\n");
     AJ_InfoPrintf(("AJ_SecurityBound(bus=%p): Bind OK\n", bus));
 
     initialised = TRUE;
@@ -206,7 +214,7 @@ void AJ_SecurityClose(AJ_BusAttachment* bus)
     AJ_Message msg;
 
     AJ_InfoPrintf(("AJ_SecurityClose(bus=%p)\n", bus));
-
+    printf("++ AJ_SecurityClose\n");
     /* We don't need to wait for the response */
     status = AJ_MarshalMethodCall(bus, &msg, AJ_METHOD_UNBIND_SESSION, AJ_BusDestination, 0, AJ_FLAG_NO_REPLY_EXPECTED, 0);
     if (status == AJ_OK) {
@@ -280,6 +288,7 @@ AJ_Status AJ_GetCertificateId(X509CertificateChain* root, AJ_CertificateId* id)
 
 static AJ_Status SetDefaultPolicy(AJ_PermissionPeer* ca, AJ_PermissionPeer* admin)
 {
+    printf("++ SetDefaultPolicy\n");
     AJ_Status status = AJ_OK;
     AJ_CredField data = { 0, NULL };
 
@@ -304,6 +313,7 @@ Exit:
 //SIG = a(ayayyyayay)
 static AJ_Status MarshalMembershipIds(AJ_Message* msg)
 {
+    printf("++ MarshalMembershipIds\n");
     AJ_Status status = AJ_OK;
     AJ_Arg container;
     AJ_CredField data = { 0, NULL };
@@ -356,9 +366,10 @@ AJ_Status AJ_ApplicationStateSignal(AJ_BusAttachment* bus)
     AJ_Message msg;
     AJ_ECCPublicKey pub;
 
+    printf("++++ AJ_ApplicationStateSignal clear flag: %d\n", clear);
     /* Clear session keys if required */
     if (clear) {
-        AJ_InfoPrintf(("AJ_ApplicationStateSignal(bus=%p): Clear session keys\n", bus));
+        printf("AJ_ApplicationStateSignal(bus=%p): Clear session keys\n", bus);
         AJ_GUID_ClearNameMap();
         clear = FALSE;
     }
@@ -367,24 +378,30 @@ AJ_Status AJ_ApplicationStateSignal(AJ_BusAttachment* bus)
     }
     emit = FALSE;
 
-    AJ_InfoPrintf(("AJ_ApplicationStateSignal(bus=%p)\n", bus));
+    printf("AJ_ApplicationStateSignal(bus=%p)\n", bus);
 
     status = AJ_MarshalSignal(bus, &msg, AJ_SIGNAL_APPLICATION_STATE, NULL, 0, ALLJOYN_FLAG_SESSIONLESS, 0);
     if (AJ_OK != status) {
+        printf("AJ_ApplicationStateSignal - 1\n");
         return status;
     }
     status = AJ_CredentialGetECCPublicKey(AJ_ECC_SIG, NULL, NULL, &pub);
     if (AJ_OK != status) {
+        printf("AJ_ApplicationStateSignal - 2\n");
         return status;
     }
     status = AJ_MarshalArgs(&msg, "(yyayay)", pub.alg, pub.crv, pub.x, sizeof (pub.x), pub.y, sizeof (pub.y));
     if (AJ_OK != status) {
+        printf("AJ_ApplicationStateSignal - 3\n");
         return status;
     }
     status = AJ_MarshalArgs(&msg, "q", g_config.state);
     if (AJ_OK != status) {
+        printf("AJ_ApplicationStateSignal - 4\n");
         return status;
     }
+    
+    printf("AJ_ApplicationStateSignal - Deliver message\n");
     status = AJ_DeliverMsg(&msg);
 
     return status;
@@ -405,7 +422,7 @@ static AJ_Status SecurityGetProperty(AJ_Message* reply, uint32_t id, void* conte
     AJ_CertificateId certificate;
     X509CertificateChain* root = NULL;
 
-    AJ_InfoPrintf(("SecurityGetProperty(reply=%p, id=%x, context=%p)\n", reply, id, context));
+    printf("+++ SecurityGetProperty(reply=%p, id=%x, context=%p)\n", reply, id, context);
 
     switch (id) {
     case AJ_PROPERTY_APPLICATION_VERSION:
@@ -624,6 +641,7 @@ static AJ_Status VerifyMembershipCertificateChain(X509CertificateChain* root)
     AJ_ECCPublicKey pub;
     X509Certificate* leaf;
 
+    printf("++ VerifyMembershipCertificateChain\n");
     leaf = AJ_X509LeafCertificate(root);
     if (NULL == leaf) {
         status = AJ_ERR_SECURITY;
@@ -667,10 +685,11 @@ AJ_Status AJ_SecurityClaimMethod(AJ_Message* msg, AJ_Message* reply)
     AJ_ManifestArray* manifests = NULL;
     AJ_CredField manifests_data = { 0, NULL };
 
+    printf("++ AJ_SecurityClaimMethod\n");
     AJ_InfoPrintf(("AJ_SecurityClaimMethod(msg=%p, reply=%p)\n", msg, reply));
 
     if (APP_STATE_CLAIMABLE != g_config.state) {
-        AJ_InfoPrintf(("AJ_SecurityClaimMethod(msg=%p, reply=%p): Not in claimable state\n", msg, reply));
+        printf("++++ AJ_SecurityClaimMethod(msg=%p, reply=%p): Not in claimable state\n", msg, reply);
         return AJ_MarshalErrorMsg(msg, reply, AJ_ErrPermissionDenied);
     }
 
@@ -807,6 +826,7 @@ AJ_Status AJ_SecurityClaimMethod(AJ_Message* msg, AJ_Message* reply)
     AJ_ClearCredentials(AJ_GENERIC_ECDSA_KEYS | AJ_CRED_TYPE_GENERIC);
 
     /* Set claim state and save to nvram */
+    printf("+++ Setting APP_STATE_CLAIMED in AJ_SecurityClaimMethod\n");
     g_config.state = APP_STATE_CLAIMED;
     status = SaveClaimConfig();
     if (AJ_OK != status) {
@@ -860,6 +880,7 @@ AJ_Status AJ_SecurityReset(AJ_BusAttachment* bus)
     AJ_ECCPublicKey pub;
     AJ_ECCPrivateKey prv;
 
+    printf("+++ AJ_SecurityReset\n");
     if (bus->factoryResetCallback) {
         status = bus->factoryResetCallback();
         if (AJ_OK != status) {
@@ -887,9 +908,13 @@ AJ_Status AJ_SecurityReset(AJ_BusAttachment* bus)
     }
 
     /* Set claim state and save to nvram */
+    // ATTN: If g_config.state = APP_STATE_NOT_CLAIMABLE; and we reset security, the bus will 
+    // not be claimable any more.
     g_config.state = APP_STATE_NOT_CLAIMABLE;
+    printf("+++ Setting APP_STATE_NOT_CLAIMABLE in AJ_SecurityReset\n");
     status = SaveClaimConfig();
     if (AJ_OK != status) {
+        printf("++++ Saving to NVRAM failed\n");
         AJ_ErrPrintf(("AJ_SecurityResetMethod(): failed to save claim config %s\n", AJ_StatusText(status)));
         goto Exit;
     }
@@ -916,6 +941,7 @@ AJ_Status AJ_SecurityUpdateIdentityMethod(AJ_Message* msg, AJ_Message* reply)
     AJ_ManifestArray* manifests = NULL;
     AJ_CredField manifests_data = { 0, NULL };
 
+    printf("+++ AJ_SecurityUpdateIdentityMethod\n");
     AJ_InfoPrintf(("AJ_SecurityUpdateIdentityMethod(msg=%p, reply=%p)\n", msg, reply));
 
     /* Unmarshal identity certificate */
@@ -991,6 +1017,7 @@ AJ_Status AJ_SecurityUpdateIdentityMethod(AJ_Message* msg, AJ_Message* reply)
     /* If state was need update, set back to claimed and emit notification */
     if (APP_STATE_NEED_UPDATE == g_config.state) {
         /* Set claim state and save to nvram */
+        printf("+++ setting APP_STATE_CLAIMED in AJ_SecurityUpdateIdentityMethod\n");
         g_config.state = APP_STATE_CLAIMED;
         status = SaveClaimConfig();
         if (AJ_OK != status) {
@@ -1019,6 +1046,7 @@ AJ_Status AJ_SecurityUpdatePolicyMethod(AJ_Message* msg, AJ_Message* reply)
     AJ_CredField policy_data = { 0, NULL };
     uint32_t version = 0;
 
+    printf("+++ AJ_SecurityUpdatePolicyMethod\n");
     AJ_InfoPrintf(("AJ_SecurityUpdatePolicyMethod(msg=%p, reply=%p)\n", msg, reply));
 
     /* Get current version */
@@ -1081,6 +1109,7 @@ Exit:
 
 AJ_Status AJ_SecurityResetPolicyMethod(AJ_Message* msg, AJ_Message* reply)
 {
+    printf("+++ AJ_SecurityResetPolicyMethod\n");
     AJ_InfoPrintf(("AJ_SecurityResetPolicyMethod(msg=%p, reply=%p)\n", msg, reply));
 
     /* Delete installed policy, do not fail on error (missing entry) */
@@ -1106,6 +1135,7 @@ AJ_Status AJ_SecurityInstallMembershipMethod(AJ_Message* msg, AJ_Message* reply)
     AJ_CertificateId certificate;
     uint8_t* tmp;
 
+    printf("+++ J_SecurityInstallMembershipMethod\n");
     AJ_InfoPrintf(("AJ_SecurityInstallMembershipMethod(msg=%p, reply=%p)\n", msg, reply));
 
     /* Unmarshal membership certificate */
@@ -1182,6 +1212,7 @@ AJ_Status AJ_SecurityRemoveMembershipMethod(AJ_Message* msg, AJ_Message* reply)
     size_t ylen;
     uint8_t* tmp;
 
+    printf("+++ AJ_SecurityRemoveMembershipMethod\n");
     AJ_InfoPrintf(("AJ_SecurityRemoveMembershipMethod(msg=%p, reply=%p)\n", msg, reply));
 
     status = AJ_UnmarshalArgs(msg, "(ayay(yyayay))",
@@ -1234,6 +1265,7 @@ AJ_Status AJ_SecurityStartManagementMethod(AJ_Message* msg, AJ_Message* reply)
 {
     AJ_Status status;
 
+    printf("+++ AJ_SecurityStartManagementMethod\n");
     printf("AJ_SecurityStartManagementMethod(msg=%p, reply=%p)\n", msg, reply);
 
     status = AJ_SecurityStartManagement(msg->bus);
@@ -1247,6 +1279,8 @@ AJ_Status AJ_SecurityStartManagementMethod(AJ_Message* msg, AJ_Message* reply)
 
 AJ_Status AJ_SecurityStartManagement(AJ_BusAttachment* bus)
 {
+    printf("+++ AJ_SecurityStartManagement\n");
+    
     if (bus->managementStarted) {
         return AJ_ERR_MANAGEMENT_ALREADY_STARTED;
     }
@@ -1277,6 +1311,8 @@ AJ_Status AJ_SecurityEndManagementMethod(AJ_Message* msg, AJ_Message* reply)
 
 AJ_Status AJ_SecurityEndManagement(AJ_BusAttachment* bus)
 {
+     printf("+++ AJ_SecurityEndManagement\n");
+     
     if (!bus->managementStarted) {
         return AJ_ERR_MANAGEMENT_NOT_STARTED;
     }
@@ -1292,6 +1328,8 @@ AJ_Status AJ_SecurityEndManagement(AJ_BusAttachment* bus)
 
 AJ_Status AJ_SecurityInstallManifestsMethod(AJ_Message* msg, AJ_Message* reply)
 {
+    printf("+++ AJ_SecurityInstallManifestsMethod\n");
+    
     AJ_Status status;
     AJ_ManifestArray* currentManifests = NULL;
     AJ_ManifestArray* newManifests = NULL;

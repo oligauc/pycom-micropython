@@ -189,8 +189,6 @@ APP_UTIL_SRC_C = $(addprefix util/,\
 	mpirq.c \
 	mpsleep.c \
 	timeutils.c \
-	alljoyn_interface.c \
-	alljoyn_main.c \
 	)
 
 APP_FATFS_SRC_C = $(addprefix fatfs/src/,\

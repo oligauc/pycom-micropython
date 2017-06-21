@@ -20,6 +20,7 @@
 #define PWA_RET_DATA_LEN              0x04 
 #define PWA_GET_DATA_LEN              0x08
 #define PWA_SET_REPLY_MSG_LEN         0x02
+#define PWA_GET_ERR_REPLY_LEN         0x02
 #define PWA_CHECKSUM_SEED             0xA5
 
 
@@ -58,9 +59,9 @@
 #define PWA_GET_RESIN_ALERT           10094
 
 /* PWA Set */
-#define PWA_SET_RECHARGE_NOW          02
-#define PWA_SET_RECHARGE_TONIGTH      02  
+#define PWA_SET_RECHARGE_NOWORTONIGTH 02 
 #define PWA_SET_SALT_LEVEL            11
+#define PWA_SET_RECHARGE_TIME         28
 #define PWA_SET_MAX_DAYS_BT_REGEN     10040
 #define PWA_SET_PRESENT_TIME_OF_DAY   10052
 

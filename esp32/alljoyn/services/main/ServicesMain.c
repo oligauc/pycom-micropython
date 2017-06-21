@@ -42,6 +42,7 @@
 #include <ServicesHandlers.h>
 #include "PropertyStoreOEMProvisioning.h"
 #include "ServicesMain.h"
+#include "PWAService.h"
 
 /*
  * Logger definition
@@ -73,6 +74,8 @@ uint8_t isBusConnected = FALSE;
 AJ_BusAttachment busAttachment;
 
 extern AJ_Object AJApp_ObjectList[];
+extern const char PWAServicePath[];
+extern const char PWAInterfaceName[];
 
 /**
  * Application handlers
@@ -377,12 +380,14 @@ static const char InterfaceName[] = "org.alljoyn.Onboarding";
 static const char ServicePath[] = "/Onboarding";
 
 static AJ_PermissionMember members[] = { { "*", AJ_MEMBER_TYPE_ANY, AJ_ACTION_PROVIDE | AJ_ACTION_OBSERVE, NULL } };
-static AJ_PermissionRule rules[] = { { ServicePath, InterfaceName, members, NULL } };
+static AJ_PermissionRule rules[] = { { ServicePath, InterfaceName, members, NULL },
+                                    { PWAServicePath, PWAInterfaceName, members, NULL }};
 
 AJ_Status Security_Init(AJ_BusAttachment* bus) {
     assert(bus != NULL && "bus cannot be null");
     AJ_Status status = AJ_OK;
 
+    printf("+++ Security_Init main\n");
     uint16_t state;
     uint16_t capabilities;
     uint16_t info;
@@ -398,6 +403,7 @@ AJ_Status Security_Init(AJ_BusAttachment* bus) {
     AJ_SecurityGetClaimConfig(&state, &capabilities, &info);
     /* Set app claimable if not already claimed */
     if (APP_STATE_CLAIMED != state) {
+        printf("++++ Setting APP_STATE_CLAIMABLE in Security_Init\n");
         AJ_SecuritySetClaimConfig(bus, APP_STATE_CLAIMABLE, CLAIM_CAPABILITY_ECDHE_SPEKE, 0);
     } else {
         AJ_WarnPrintf(("Already claimed\n"));
@@ -523,7 +529,7 @@ static uint8_t IsValueValid(const char* key, const char* value)
  * The AllJoyn Message Loop
  */
 
-void onboarding_task(void *args)
+void alljoyn_task(void *args)
 {
     AJ_Status status = AJ_OK;
     uint8_t isUnmarshalingSuccessful = FALSE;
@@ -560,7 +566,7 @@ void onboarding_task(void *args)
         status = AJ_OK;
         serviceStatus = AJSVC_SERVICE_STATUS_NOT_HANDLED;
 
-        //printf("onboarding_task: %u\n",isBusConnected);
+        printf("Main Service task: %u\n",isBusConnected);
         if (!isBusConnected) {
             status = AJSVC_RoutingNodeConnect(&busAttachment, ROUTING_NODE_NAME, AJAPP_CONNECT_TIMEOUT, AJAPP_CONNECT_PAUSE, AJAPP_BUS_LINK_TIMEOUT, &isBusConnected);
             if (!isBusConnected) { // Failed to connect to Routing Node?
@@ -629,7 +635,7 @@ Exit:
 }
 
 void startAlljoynServices(void){
-    xTaskCreate(&onboarding_task, "onboarding_task", 8096, NULL, 5, NULL);
+    xTaskCreate(&alljoyn_task, "alljoyn_task", 9216, NULL, 5, NULL);
 }
 
 

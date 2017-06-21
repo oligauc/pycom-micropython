@@ -124,10 +124,10 @@ AJ_Status AJ_NVRAM_Create(uint16_t id, uint16_t capacity)
     uint8_t* ptr;
     NV_EntryHeader header;
 
-    AJ_InfoPrintf(("AJ_NVRAM_Create(id=%d., capacity=%d.)\n", id, capacity));
+    printf("+++++ AJ_NVRAM_Create(id=%d., capacity=%d.)\n", id, capacity);
 
     if (id == INVALID_DATA || !capacity || AJ_NVRAM_Exist(id)) {
-        AJ_ErrPrintf(("AJ_NVRAM_Create(): AJ_ERR_FAILURE\n"));
+        printf("AJ_NVRAM_Create(): AJ_ERR_FAILURE\n");
         return AJ_ERR_FAILURE;
     }
 
@@ -135,13 +135,13 @@ AJ_Status AJ_NVRAM_Create(uint16_t id, uint16_t capacity)
     ptr = AJ_FindNVEntry(INVALID_DATA);
     if (!ptr || (ptr + ENTRY_HEADER_SIZE + capacity > AJ_NVRAM_END_ADDRESS)) {
         if (!isCompact) {
-            AJ_InfoPrintf(("AJ_NVRAM_Create(): _AJ_CompactNVStorage()\n"));
+            printf("AJ_NVRAM_Create(): _AJ_CompactNVStorage()\n");
             _AJ_CompactNVStorage();
             isCompact = TRUE;
         }
         ptr = AJ_FindNVEntry(INVALID_DATA);
         if (!ptr || ptr + ENTRY_HEADER_SIZE + capacity > AJ_NVRAM_END_ADDRESS) {
-            AJ_InfoPrintf(("AJ_NVRAM_Create(): AJ_ERR_FAILURE\n"));
+            printf("AJ_NVRAM_Create(): AJ_ERR_FAILURE\n");
             return AJ_ERR_FAILURE;
         }
     }
@@ -216,19 +216,19 @@ AJ_NV_DATASET* AJ_NVRAM_Open(uint16_t id, const char* mode, uint16_t capacity)
     uint8_t* entry = NULL;
     AJ_NV_DATASET* handle = NULL;
 
-    AJ_InfoPrintf(("AJ_NVRAM_Open(id=%d., mode=\"%s\", capacity=%d.)\n", id, mode, capacity));
+    printf("AJ_NVRAM_Open(id=%d., mode=\"%s\", capacity=%d.)\n", id, mode, capacity);
 
     if (!id || id == INVALID_DATA) {
-        AJ_ErrPrintf(("AJ_NVRAM_Open(): invalid id\n"));
+        printf("AJ_NVRAM_Open(): invalid id\n");
         goto OPEN_ERR_EXIT;
     }
     if (!mode || mode[1] || (*mode != 'r' && *mode != 'w')) {
-        AJ_ErrPrintf(("AJ_NVRAM_Open(): invalid access mode\n"));
+        printf("AJ_NVRAM_Open(): invalid access mode\n");
         goto OPEN_ERR_EXIT;
     }
     if (*mode == AJ_NV_DATASET_MODE_WRITE) {
         if (capacity == 0) {
-            AJ_ErrPrintf(("AJ_NVRAM_Open(): invalid capacity\n"));
+            printf("AJ_NVRAM_Open(): invalid capacity\n");
             goto OPEN_ERR_EXIT;
         }
 
@@ -236,31 +236,31 @@ AJ_NV_DATASET* AJ_NVRAM_Open(uint16_t id, const char* mode, uint16_t capacity)
             status = AJ_NVRAM_Delete(id);
         }
         if (status != AJ_OK) {
-            AJ_ErrPrintf(("AJ_NVRAM_Open(): AJ_NVRAM_Delete() failure: status=%s\n", AJ_StatusText(status)));
+            printf("AJ_NVRAM_Open(): AJ_NVRAM_Delete() failure: status=%s\n", AJ_StatusText(status));
             goto OPEN_ERR_EXIT;
         }
 
         status = AJ_NVRAM_Create(id, capacity);
         if (status != AJ_OK) {
-            AJ_ErrPrintf(("AJ_NVRAM_Open(): AJ_NVRAM_Create() failure: status=%s\n", AJ_StatusText(status)));
+            printf("AJ_NVRAM_Open(): AJ_NVRAM_Create() failure: status=%s\n", AJ_StatusText(status));
             goto OPEN_ERR_EXIT;
         }
         entry = AJ_FindNVEntry(id);
         if (!entry) {
-            AJ_ErrPrintf(("AJ_NVRAM_Open(): Data set %d. does not exist\n", id));
+            printf("AJ_NVRAM_Open(): Data set %d. does not exist\n", id);
             goto OPEN_ERR_EXIT;
         }
     } else {
         entry = AJ_FindNVEntry(id);
         if (!entry) {
-            AJ_WarnPrintf(("AJ_NVRAM_Open(): Data set %d. does not exist\n", id));
+            printf("AJ_NVRAM_Open(): Data set %d. does not exist\n", id);
             goto OPEN_ERR_EXIT;
         }
     }
 
     handle = (AJ_NV_DATASET*)AJ_Malloc(sizeof(AJ_NV_DATASET));
     if (!handle) {
-        AJ_ErrPrintf(("AJ_NVRAM_Open(): AJ_Malloc() failure\n"));
+        printf("AJ_NVRAM_Open(): AJ_Malloc() failure\n");
         goto OPEN_ERR_EXIT;
     }
 
@@ -276,7 +276,7 @@ OPEN_ERR_EXIT:
         AJ_Free(handle);
         handle = NULL;
     }
-    AJ_ErrPrintf(("AJ_NVRAM_Open(): failure: status=%s\n", AJ_StatusText(status)));
+    printf("AJ_NVRAM_Open(): failure: status=%s\n", AJ_StatusText(status));
     return NULL;
 }
 

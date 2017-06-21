@@ -23,6 +23,7 @@
  */
 #define AJ_MODULE TARGET_NVRAM
 
+#include "ff.h"
 #include <aj_nvram.h>
 #include <aj_debug.h>
 #include "../../aj_target_nvram.h"
@@ -40,7 +41,7 @@ uint8_t* AJ_NVRAM_BASE_ADDRESS;
 
 extern void AJ_NVRAM_Layout_Print();
 
-#define NV_FILE "ajtcl.nvram"
+#define NV_FILE "/flash/ajtcl.nvram"
 
 const char* nvFile = NV_FILE;
 
@@ -87,29 +88,64 @@ void _AJ_NVRAM_Clear()
 
 AJ_Status _AJ_LoadNVFromFile()
 {
-    FILE* f = fopen(nvFile, "r");
+    FIL fp;		
+    FRESULT res = FR_OK;
+
+    res = f_open(&fp, nvFile, FA_OPEN_EXISTING | FA_READ);
+    printf("+++ _AJ_LoadNVFromFile f_open return status %d\n",res);
+    if (res != FR_OK){
+	printf("_AJ_LoadNVFromFile(): LoadNVFromFile() failed. status=AJ_ERR_FAILURE\n");
+        return AJ_ERR_FAILURE;
+    }
+     
+    memset(AJ_NVRAM_BASE_ADDRESS, INVALID_DATA_BYTE, AJ_NVRAM_SIZE);
+
+    UINT sz_out = 0;
+    res = f_read (&fp, AJ_NVRAM_BASE_ADDRESS, AJ_NVRAM_SIZE, &sz_out);
+    printf("_AJ_StoreNVToFile - f_read res: %d, read: %d\n", res, sz_out);
+     
+    f_close(&fp);
+    return AJ_OK;
+
+    /*FILE* f = fopen(nvFile, "r");
     if (f == NULL) {
-        AJ_ErrPrintf(("_AJ_LoadNVFromFile(): LoadNVFromFile() failed. status=AJ_ERR_FAILURE\n"));
+        printf("_AJ_LoadNVFromFile(): LoadNVFromFile() failed. status=AJ_ERR_FAILURE\n");
         return AJ_ERR_FAILURE;
     }
 
     memset(AJ_NVRAM_BASE_ADDRESS, INVALID_DATA_BYTE, AJ_NVRAM_SIZE);
     fread(AJ_NVRAM_BASE_ADDRESS, AJ_NVRAM_SIZE, 1, f);
     fclose(f);
-    return AJ_OK;
+    return AJ_OK;*/
 }
 
 AJ_Status _AJ_StoreNVToFile()
 {
-    FILE* f = fopen(nvFile, "w");
+    FIL fp;		
+    FRESULT res = FR_OK;
+
+    res = f_open(&fp, nvFile, FA_CREATE_ALWAYS | FA_WRITE);
+    printf("+++ _AJ_StoreNVToFile f_open return status %d\n",res);
+    if (res != FR_OK){
+	printf("_AJ_StoreNVToFile(): StoreNVToFile() failed. status=AJ_ERR_FAILURE\n");
+        return AJ_ERR_FAILURE;
+    }
+
+    UINT n;
+    res = f_write(&fp, AJ_NVRAM_BASE_ADDRESS, AJ_NVRAM_SIZE, &n);
+    printf("_AJ_StoreNVToFile - f_write res: %d, written: %d\n", res,n);
+    f_close(&fp);
+    return AJ_OK;
+
+    /*FILE* f = fopen(nvFile, "w");
     if (!f) {
-        AJ_ErrPrintf(("_AJ_StoreNVToFile(): StoreNVToFile() failed. status=AJ_ERR_FAILURE\n"));
+        printf("_AJ_StoreNVToFile(): StoreNVToFile() failed. status=AJ_ERR_FAILURE\n");
         return AJ_ERR_FAILURE;
     }
 
     fwrite(AJ_NVRAM_BASE_ADDRESS, AJ_NVRAM_SIZE, 1, f);
     fclose(f);
-    return AJ_OK;
+    return AJ_OK;*/
 }
 
 // Compact the storage by removing invalid entries

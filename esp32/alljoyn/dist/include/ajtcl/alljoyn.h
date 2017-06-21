@@ -41,7 +41,7 @@
  */
 
 #define AJ_TCP
-//#define ONBOARDING_SERVICE
+#define ONBOARDING_SERVICE
 #define PWA_SERVICE
 
 #endif

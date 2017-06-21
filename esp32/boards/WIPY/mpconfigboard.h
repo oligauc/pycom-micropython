@@ -14,7 +14,7 @@
 #define MICROPY_HW_HB_PIN_NUM                                   (0)
 #define MICROPY_HW_SAFE_PIN_NUM                                 (21)
 
-#define DEFAULT_AP_SSID                                         "wipy-wlan"
+#define DEFAULT_AP_SSID                                         "AJ_OFF"
 
 #define MICROPY_HW_FLASH_SIZE                                   (4 * 1024 * 1024)
 

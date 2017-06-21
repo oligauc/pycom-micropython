@@ -112,19 +112,26 @@ static AJ_Status OnboardingReadInfo(AJOBS_Info* info)
 
     if (NULL == info) {
         status = AJ_ERR_NULL;
-        AJ_ErrPrintf(("Failed to read info: info buffer is NULL\n"));
+        printf("Failed to read info: info buffer is NULL\n");
         goto ErrorExit;
     }
 
     if (!AJ_NVRAM_Exist(AJ_OBS_OBINFO_NV_ID)) {
-        AJ_WarnPrintf(("Failed to read info: info handle in NVRAM (%d) not found\n", AJ_OBS_OBINFO_NV_ID));
+        printf("Failed to read info: info handle in NVRAM (%d) not found\n", AJ_OBS_OBINFO_NV_ID);
         goto ErrorExit;
     }
 
     memset(info, 0, size);
     nvramHandle = AJ_NVRAM_Open(AJ_OBS_OBINFO_NV_ID, "r", 0);
+    
+    if(nvramHandle == NULL){
+        printf("AJ_NVRAM_Open failed\n");
+    }
+    
     if (nvramHandle != NULL) {
         sizeRead = AJ_NVRAM_Read(info, size, nvramHandle);
+        printf("++++ ssid: %s\n", info->ssid);
+        printf("++++ pc: %s\n", info->pc);
         status = AJ_NVRAM_Close(nvramHandle);
         if (sizeRead != size) {
             status = AJ_ERR_NVRAM_READ;
@@ -140,6 +147,7 @@ ErrorExit:
 
 static AJ_Status OnboardingWriteInfo(AJOBS_Info* info)
 {
+    printf("++++ OnboardingWriteInfo\n");
     AJ_Status status = AJ_OK;
     size_t size = sizeof(AJOBS_Info);
     AJ_NV_DATASET* nvramHandle;
@@ -153,6 +161,8 @@ static AJ_Status OnboardingWriteInfo(AJOBS_Info* info)
 
     nvramHandle = AJ_NVRAM_Open(AJ_OBS_OBINFO_NV_ID, "w", size);
     if (nvramHandle != NULL) {
+        printf("Writing ssid to NVRAM: %s\n", info->ssid);
+        printf("Writing pc to NVRAM: %s\n", info->pc);
         sizeWritten = AJ_NVRAM_Write(info, size, nvramHandle);
         status = AJ_NVRAM_Close(nvramHandle);
         if (sizeWritten != size) {
@@ -249,6 +259,7 @@ AJ_Status AJOBS_Start(const AJOBS_Settings* settings)
 
     // Check if just started and setup globals from persisted info
     if (status == AJ_OK) {
+        printf("++++++++ Reading onboaring info\n");
         status = OnboardingReadInfo(&g_obInfo);
         if (status == AJ_OK) {
             status = OnboardingReadLastErrorCode((int8_t *)&g_obLastError.code);
@@ -690,7 +701,7 @@ static AJ_Status DoConnectWifi()
         raw[hexLen / 2] = 0;
     }
 
-    AJ_InfoPrintf(("Attempting to connect to %s with passcode=%s and auth=%d\n", g_obInfo.ssid, g_obInfo.pc, g_obInfo.authType));
+    printf("Attempting to connect to %s with passcode=%s and auth=%d\n", g_obInfo.ssid, g_obInfo.pc, g_obInfo.authType);
 
     switch (g_obInfo.authType) {
     case AJOBS_AUTH_TYPE_ANY:
@@ -723,14 +734,16 @@ static AJ_Status DoConnectWifi()
 
     secType = GetSecType(fallback);
     cipherType = GetCipherType(fallback);
-    AJ_InfoPrintf(("Trying to connect with auth=%d (secType=%d, cipherType=%d)\n", fallback, secType, cipherType));
+    printf("Trying to connect with auth=%d (secType=%d, cipherType=%d)\n", fallback, secType, cipherType);
 
     while (1) {
         // Setup the password
         if ((AJ_WIFI_SECURITY_WEP == secType) && ((hexLen / 2) & 1)) { // Ensure that the HEX encoded password is passed for WEP when raw password is not HEX
             password = g_obInfo.pc;
+            printf("Password Hex: %s\n", password);
         } else {
             password = (char*)raw;
+            printf("Password Raw: %s\n", password);
         }
 
         if (prevObState == AJOBS_STATE_CONFIGURED_NOT_VALIDATED) {
@@ -739,7 +752,8 @@ static AJ_Status DoConnectWifi()
             g_obState = AJOBS_STATE_CONFIGURED_VALIDATING;
         }
 
-        status = AJ_ConnectWiFi(g_obInfo.ssid, secType, cipherType, password);
+        printf("++++ Raw password: %s\n", raw);
+        status = AJ_ConnectWiFi(g_obInfo.ssid, secType, cipherType,password);
         AJ_InfoPrintf(("AJ_ConnectWifi returned %s\n", AJ_StatusText(status)));
 
         wifiConnectState = AJ_GetWifiConnectState();
@@ -776,8 +790,8 @@ static AJ_Status DoConnectWifi()
             g_obState = AJOBS_STATE_CONFIGURED_ERROR;
         }
 
-        AJ_WarnPrintf(("Warning - DoConnectWifi wifiConnectState = %s\n", AJ_WiFiConnectStateText(wifiConnectState)));
-        AJ_WarnPrintf(("Last error set to \"%s\" (code=%d)\n", g_obLastError.message, g_obLastError.code));
+        printf("Warning - DoConnectWifi wifiConnectState = %s\n", AJ_WiFiConnectStateText(wifiConnectState));
+        printf("Last error set to \"%s\" (code=%d)\n", g_obLastError.message, g_obLastError.code);
 
         // Check if retry limit reached
         if (retries++ >= g_obSettings->AJOBS_MAX_RETRIES) {
@@ -789,23 +803,23 @@ static AJ_Status DoConnectWifi()
                     secType = GetSecType(fallback);
                     cipherType = GetCipherType(fallback);
                     retries = 0;
-                    AJ_InfoPrintf(("Trying to connect with fallback auth=%d (secType=%d, cipherType=%d)\n", fallback, secType, cipherType));
+                    printf("Trying to connect with fallback auth=%d (secType=%d, cipherType=%d)\n", fallback, secType, cipherType);
                     continue;
                 }
                 g_obLastError.code = AJOBS_STATE_LAST_ERROR_UNSUPPORTED_PROTOCOL;
                 strncpy(g_obLastError.message, "Unsupported protocol", AJOBS_ERROR_MESSAGE_LEN);
                 g_obState = AJOBS_STATE_CONFIGURED_ERROR;
-                AJ_WarnPrintf(("Warning - all fallbacks were exhausted\n"));
-                AJ_WarnPrintf(("Last error set to \"%s\" (code=%d)\n", g_obLastError.message, g_obLastError.code));
+                printf("Warning - all fallbacks were exhausted\n");
+                printf("Last error set to \"%s\" (code=%d)\n", g_obLastError.message, g_obLastError.code);
             }
             if (g_obInfo.validationPending) {
                 /* Failed to validate, so delete these credentials */
-                AJ_WarnPrintf(("Warning - Clearing un-Validated Onboarding Credentials\n"));
+                printf("Warning - Clearing un-Validated Onboarding Credentials\n");
                 AJOBS_ClearInfo();
             }
             break; // Leave retry loop
         }
-        AJ_InfoPrintf(("Retry number %d out of %d\n", retries, g_obSettings->AJOBS_MAX_RETRIES));
+        printf("Retry number %d out of %d\n", retries, g_obSettings->AJOBS_MAX_RETRIES);
     }
 
     // If succeeded through a fallback loop set the successful authType

@@ -690,6 +690,7 @@ AJ_Status AJ_BusHandleBusMessage(AJ_Message* msg)
         return AJ_SecurityGetProperty(msg);
 
     case AJ_METHOD_CLAIMABLE_CLAIM:
+        printf("+++++++ AJ_METHOD_CLAIMABLE_CLAIM\n");
         status = AJ_SecurityClaimMethod(msg, &reply);
         break;
 

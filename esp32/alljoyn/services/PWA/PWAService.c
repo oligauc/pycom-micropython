@@ -8,48 +8,55 @@
 #define AJ_PWA_MESSAGE_ID(p, i, m)       AJ_ENCODE_MESSAGE_ID(AJAPP_OBJECTS_LIST_INDEX, p, i, m)
 #define AJ_PWA_PROPERTY_ID(p, i, m)      AJ_ENCODE_PROPERTY_ID(AJAPP_OBJECTS_LIST_INDEX, p, i, m)
     
-#define PWA_STATUS_MSG                  AJ_PWA_MESSAGE_ID(PWA_OBJECT_INDEX, 0, 0)
-#define PWA_TIMEOFDAY_MSG               AJ_PWA_MESSAGE_ID(PWA_OBJECT_INDEX, 0, 1)
-#define PWA_SALT_LEVEL_MSG              AJ_PWA_MESSAGE_ID(PWA_OBJECT_INDEX, 0, 2)
-#define PWA_SALT_ALARM_MSG              AJ_PWA_MESSAGE_ID(PWA_OBJECT_INDEX, 0, 3)
-#define PWA_WATER_AVAILABLE_MSG         AJ_PWA_MESSAGE_ID(PWA_OBJECT_INDEX, 0, 4)
-#define PWA_AVG_WATER_USE_MSG           AJ_PWA_MESSAGE_ID(PWA_OBJECT_INDEX, 0, 5)
-#define PWA_WATER_USE_TODAY_MSG         AJ_PWA_MESSAGE_ID(PWA_OBJECT_INDEX, 0, 6)
-#define PWA_TOTAL_WATER_USED_MSG        AJ_PWA_MESSAGE_ID(PWA_OBJECT_INDEX, 0, 7)
-#define PWA_CURR_FLOW_MSG               AJ_PWA_MESSAGE_ID(PWA_OBJECT_INDEX, 0, 8)
-#define PWA_DAYS_POWERED_MSG            AJ_PWA_MESSAGE_ID(PWA_OBJECT_INDEX, 0, 9)
-#define PWA_TOTAL_RECHARGES_MSG         AJ_PWA_MESSAGE_ID(PWA_OBJECT_INDEX, 0, 10)
-#define PWA_DAYS_BTW_RECHARGES_MSG      AJ_PWA_MESSAGE_ID(PWA_OBJECT_INDEX, 0, 11)
-#define PWA_ERROR_CODE_MSG              AJ_PWA_MESSAGE_ID(PWA_OBJECT_INDEX, 0, 12)
-#define PWA_WATER_HARDNESS_MSG          AJ_PWA_MESSAGE_ID(PWA_OBJECT_INDEX, 0, 13)
-#define PWA_RESIN_ALERT_MSG             AJ_PWA_MESSAGE_ID(PWA_OBJECT_INDEX, 0, 14)
+#define PWA_STATUS_MSG                    AJ_PWA_MESSAGE_ID(PWA_OBJECT_INDEX, 0, 0)
+#define PWA_TIMEOFDAY_MSG                 AJ_PWA_MESSAGE_ID(PWA_OBJECT_INDEX, 0, 1)
+#define PWA_SALT_LEVEL_MSG                AJ_PWA_MESSAGE_ID(PWA_OBJECT_INDEX, 0, 2)
+#define PWA_SALT_ALARM_MSG                AJ_PWA_MESSAGE_ID(PWA_OBJECT_INDEX, 0, 3)
+#define PWA_WATER_AVAILABLE_MSG           AJ_PWA_MESSAGE_ID(PWA_OBJECT_INDEX, 0, 4)
+#define PWA_AVG_WATER_USE_MSG             AJ_PWA_MESSAGE_ID(PWA_OBJECT_INDEX, 0, 5)
+#define PWA_WATER_USE_TODAY_MSG           AJ_PWA_MESSAGE_ID(PWA_OBJECT_INDEX, 0, 6)
+#define PWA_TOTAL_WATER_USED_MSG          AJ_PWA_MESSAGE_ID(PWA_OBJECT_INDEX, 0, 7)
+#define PWA_CURR_FLOW_MSG                 AJ_PWA_MESSAGE_ID(PWA_OBJECT_INDEX, 0, 8)
+#define PWA_DAYS_POWERED_MSG              AJ_PWA_MESSAGE_ID(PWA_OBJECT_INDEX, 0, 9)
+#define PWA_TOTAL_RECHARGES_MSG           AJ_PWA_MESSAGE_ID(PWA_OBJECT_INDEX, 0, 10)
+#define PWA_DAYS_BTW_RECHARGES_MSG        AJ_PWA_MESSAGE_ID(PWA_OBJECT_INDEX, 0, 11)
+#define PWA_ERROR_CODE_MSG                AJ_PWA_MESSAGE_ID(PWA_OBJECT_INDEX, 0, 12)
+#define PWA_WATER_HARDNESS_MSG            AJ_PWA_MESSAGE_ID(PWA_OBJECT_INDEX, 0, 13)
+#define PWA_RESIN_ALERT_MSG               AJ_PWA_MESSAGE_ID(PWA_OBJECT_INDEX, 0, 14)
+#define PWA_RECHARGE_TIME_MSG             AJ_PWA_MESSAGE_ID(PWA_OBJECT_INDEX, 0, 15)
 
-#define PWA_SET_TIMEOFDAY_MSG           AJ_PWA_MESSAGE_ID(PWA_OBJECT_INDEX, 0, 15)
-#define PWA_SET_SALT_LEVEL_MSG          AJ_PWA_MESSAGE_ID(PWA_OBJECT_INDEX, 0, 16)
-#define PWA_SET_DAYS_BT_REGEN_MSG       AJ_PWA_MESSAGE_ID(PWA_OBJECT_INDEX, 0, 17)
+#define PWA_SET_TIMEOFDAY_MSG             AJ_PWA_MESSAGE_ID(PWA_OBJECT_INDEX, 0, 16)
+#define PWA_SET_SALT_LEVEL_MSG            AJ_PWA_MESSAGE_ID(PWA_OBJECT_INDEX, 0, 17)
+#define PWA_SET_DAYS_BT_REGEN_MSG         AJ_PWA_MESSAGE_ID(PWA_OBJECT_INDEX, 0, 18)
+#define PWA_SET_RECHARGE_TIME_MSG         AJ_PWA_MESSAGE_ID(PWA_OBJECT_INDEX, 0, 19)
+#define PWA_SET_RECHARGE_NOWORTONIGHT_MSG AJ_PWA_MESSAGE_ID(PWA_OBJECT_INDEX, 0, 20)
 
-static const char PWAServicePath[] = "/PWA";
+const char PWAServicePath[] = "/PWA";
+const char PWAInterfaceName[] = "org.alljoyn.PWA";
 
 static const char* const PWAInterface[] = {
     "$org.alljoyn.PWA",
-    "?Status value>y",
-    "?TimeOfDay time>i",
-    "?SaltLevel level>y",
-    "?LowSaltAlarm flag>b",
-    "?WaterAvailable gallons>i",
-    "?AverageWaterUsed liters>u",
-    "?WaterUsedToday liters>u",
-    "?TotalWaterUsed liters>u",
-    "?CurrentFlowRate flow>i",
-    "?DaysPoweredUp days>i",
-    "?TotalRecharges value>i",
-    "?DaysBetweenRecharges value>i",
-    "?ErrorCode error>i",
-    "?WaterHardness hardness>q",
-    "?ResinCleanAlert flag>i",
+    "?Status value>y status>y",
+    "?TimeOfDay time>i status>y",
+    "?SaltLevel level>y status>y",
+    "?LowSaltAlarm flag>b status>y",
+    "?WaterAvailable gallons>i status>y",
+    "?AverageWaterUsed liters>u status>y",
+    "?WaterUsedToday liters>u status>y",
+    "?TotalWaterUsed liters>u status>y",
+    "?CurrentFlowRate flow>i status>y",
+    "?DaysPoweredUp days>i status>y",
+    "?TotalRecharges value>i status>y",
+    "?DaysBetweenRecharges value>i status>y",
+    "?ErrorCode error>i status>y",
+    "?WaterHardness hardness>q status>y",
+    "?ResinCleanAlert flag>i status>y",
+    "?RechargeTime time>i status>y",
     "?SetTimeOfDay time<i status>y",
     "?SetSaltLevel level<i status>y",
     "?SetDaysBtRegenerations days<i status>y",
+    "?SetRechargeTime time<i status>y",
+    "?SetRechargeNowOrTonight time<i status>y",
     NULL
 };
 
@@ -80,7 +87,7 @@ AJ_Status AJ_GetStatus(AJ_Message* msg)
         goto ErrorExit;
     }
     
-    status = AJ_MarshalArgs(&reply, "y", PWAStatus[3]);
+    status = AJ_MarshalArgs(&reply, "yy", PWAStatus[0], cmdStatus);
     if (status != AJ_OK) {
         goto ErrorExit;
     }
@@ -111,9 +118,9 @@ AJ_Status AJ_GetTimeOfDay(AJ_Message* msg)
         goto ErrorExit;
     }
     
-    int32_t currentTime = (TimeOfDay[0] << 24 ) + (TimeOfDay[1] << 16 ) + (TimeOfDay[2] << 8 ) + TimeOfDay[3];
-    printf("Time of day %d %d %d %d %d\n", (int)TimeOfDay[0],(int)TimeOfDay[1], (int)TimeOfDay[2], (int)TimeOfDay[3], currentTime);
-    status = AJ_MarshalArgs(&reply, "i", currentTime);
+    int32_t currentTime = (TimeOfDay[3] << 24 ) + (TimeOfDay[2] << 16 ) + (TimeOfDay[1] << 8 ) + TimeOfDay[0];
+    printf("Time of day %d %d %d %d %d\n", (int)TimeOfDay[3],(int)TimeOfDay[2], (int)TimeOfDay[1], (int)TimeOfDay[0], currentTime);
+    status = AJ_MarshalArgs(&reply, "iy", currentTime, cmdStatus);
     if (status != AJ_OK) {
         goto ErrorExit;
     }
@@ -146,7 +153,7 @@ AJ_Status AJ_GetSaltLevel(AJ_Message* msg)
     }
     
     //printf("Level %d %d %d %d\n", level[0], level[1],level[2],level[3]);
-    status = AJ_MarshalArgs(&reply, "y", level[3]);
+    status = AJ_MarshalArgs(&reply, "yy", level[0], cmdStatus);
     if (status != AJ_OK) {
         goto ErrorExit;
     }
@@ -177,7 +184,7 @@ AJ_Status AJ_GetSaltAlarm(AJ_Message* msg)
         goto ErrorExit;
     }
     
-    status = AJ_MarshalArgs(&reply, "b", alarm[3]);
+    status = AJ_MarshalArgs(&reply, "by", alarm[0], cmdStatus);
     if (status != AJ_OK) {
         goto ErrorExit;
     }
@@ -208,8 +215,8 @@ AJ_Status AJ_GetPWAUInt32(AJ_Message* msg, uint16_t getCommand)
         goto ErrorExit;
     }
     
-    uint32_t uint32Value = (value[0] << 24 ) + (value[1] << 16 ) + (value[2] << 8 ) + value[3];
-    status = AJ_MarshalArgs(&reply, "u", uint32Value);
+    uint32_t uint32Value = (value[3] << 24 ) + (value[3] << 16 ) + (value[1] << 8 ) + value[0];
+    status = AJ_MarshalArgs(&reply, "uy", uint32Value, cmdStatus);
     if (status != AJ_OK) {
         goto ErrorExit;
     }
@@ -240,8 +247,9 @@ AJ_Status AJ_GetPWAInt32(AJ_Message* msg, uint16_t getCommand)
         goto ErrorExit;
     }
     
-    int32_t int32Value = (value[0] << 24 ) + (value[1] << 16 ) + (value[2] << 8 ) + value[3];
-    status = AJ_MarshalArgs(&reply, "i", int32Value);
+    int32_t int32Value = (value[3] << 24 ) + (value[2] << 16 ) + (value[1] << 8 ) + value[0];
+    printf("AJ_GetPWAInt32: %u\n", int32Value);
+    status = AJ_MarshalArgs(&reply, "iy", int32Value, cmdStatus);
     if (status != AJ_OK) {
         goto ErrorExit;
     }
@@ -272,8 +280,8 @@ AJ_Status AJ_GetPWAUInt16(AJ_Message* msg, uint16_t getCommand)
         goto ErrorExit;
     }
     
-    uint16_t int16Value =  (value[2] << 8 ) + value[3];
-    status = AJ_MarshalArgs(&reply, "q", int16Value);
+    uint16_t int16Value =  (value[1] << 8 ) + value[0];
+    status = AJ_MarshalArgs(&reply, "qy", int16Value, cmdStatus);
     if (status != AJ_OK) {
         goto ErrorExit;
     }
@@ -405,6 +413,11 @@ AJSVC_ServiceStatus PWA_MessageProcessor(AJ_BusAttachment* busAttachment, AJ_Mes
                 *msgStatus = AJ_GetPWAInt32(msg,PWA_GET_RESIN_ALERT);
                 break;
                 
+            case PWA_RECHARGE_TIME_MSG:
+                printf("AJApp_MessageProcessor - Recharge time\n");
+                *msgStatus = AJ_GetPWAInt32(msg,PWA_GET_RECHARGE_TIME);
+                break;
+                
             case PWA_SET_TIMEOFDAY_MSG:
                 printf("AJApp_MessageProcessor - Set time of day\n");
                 *msgStatus = AJ_SetPWAInt32(msg, PWA_SET_PRESENT_TIME_OF_DAY);
@@ -418,6 +431,16 @@ AJSVC_ServiceStatus PWA_MessageProcessor(AJ_BusAttachment* busAttachment, AJ_Mes
             case PWA_SET_DAYS_BT_REGEN_MSG:
                 printf("AJApp_MessageProcessor - Set Days between regenerations\n");
                 *msgStatus = AJ_SetPWAInt32(msg, PWA_SET_MAX_DAYS_BT_REGEN);
+                break;
+                
+            case PWA_SET_RECHARGE_TIME_MSG:
+                printf("AJApp_MessageProcessor - Set Recharge time\n");
+                *msgStatus = AJ_SetPWAInt32(msg, PWA_SET_RECHARGE_TIME);
+                break;
+                
+            case PWA_SET_RECHARGE_NOWORTONIGHT_MSG:
+                printf("AJApp_MessageProcessor - Set Recharge now or tonight\n");
+                *msgStatus = AJ_SetPWAInt32(msg, PWA_SET_RECHARGE_NOWORTONIGTH);
                 break;
                 
             default:

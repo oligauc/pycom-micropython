@@ -429,6 +429,7 @@ int AJ_Main(void)
                 AJ_SecurityGetClaimConfig(&state, &capabilities, &info);
                 /* Set app claimable if not already claimed */
                 if (APP_STATE_CLAIMED != state) {
+                    printf("Setting APP_STATE_CLAIMABLE in AuthCallback\n");
                     AJ_SecuritySetClaimConfig(&bus, APP_STATE_CLAIMABLE, CLAIM_CAPABILITY_ECDHE_PSK, 0);
                 }
 
