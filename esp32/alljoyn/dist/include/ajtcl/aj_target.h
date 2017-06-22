@@ -67,6 +67,8 @@ int AJ_SetLogFile(const char* file, uint32_t maxLen);
 
 void AJ_Printf(const char* fmat, ...);
 
+void AJ_Reboot(void);
+
 #ifndef NDEBUG
 extern uint8_t dbgCONFIGUREME;
 extern uint8_t dbgINIT;
@@ -84,7 +86,6 @@ extern uint8_t dbgTARGET_UTIL;
 /*
  * AJ_Reboot() is a NOOP on this platform
  */
-#define AJ_Reboot()
 
 #define AJ_CreateNewGUID AJ_RandBytes
 

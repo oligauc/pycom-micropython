@@ -37,8 +37,10 @@
 #include "antenna.h"
 #include "mpconfigport.h"
 
+#include "freertos/event_groups.h"
 
 extern wlan_obj_t wlan_obj;
+extern EventGroupHandle_t wifi_event_group;
 
 //#include <aj_wsl_target.h>
 //#include <aj_wsl_wmi.h>
@@ -82,10 +84,18 @@ static const uint8_t IP6RoutePrefix[16] = { 0x20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
 #define PREFIX_LEN          64
 #define PREFIX_LIFETIME  12000
 
+static const int CONNECTED_BIT = BIT0;
 static uint8_t wifi_initialized = TRUE;
 AJ_WiFiConnectState AJ_ESP32_connectState = AJ_WIFI_IDLE;
 //static uint32_t athSecType = AJ_WIFI_SECURITY_NONE;
 
+static bool AJ_Wifi_isConnected(){
+    if (xEventGroupGetBits(wifi_event_group) & CONNECTED_BIT) {
+        return true;
+    }
+    return false;
+}
+    
 static int AJ_GetNumSTAs(void)
 {
     wifi_sta_list_t sta_list = {.num = 0};
@@ -106,9 +116,11 @@ AJ_WiFiConnectState AJ_GetWifiConnectState(void)
     if (esp_wifi_get_mode(&mode) == ESP_OK) {
         //printf("AJ_GetWifiConnectState mode: %u\n", mode);
         if ((mode == WIFI_MODE_STA) || (mode == WIFI_MODE_APSTA)){
-            if (!wlan_obj.disconnected){
+            if (AJ_Wifi_isConnected()){
                 AJ_ESP32_connectState = AJ_WIFI_CONNECT_OK;
                 //printf("AJ_GetWifiConnectState AJ_WIFI_CONNECT_OK\n");
+            } else {
+                AJ_ESP32_connectState = AJ_WIFI_CONNECTING;
             }
         } else if (mode == WIFI_MODE_AP){
             if (AJ_GetNumSTAs() <= 0){
@@ -207,7 +219,7 @@ AJ_Status AJ_Wifi_DriverStop(void)
     }
 
     esp_wifi_stop();
-    //esp_wifi_set_mode(WIFI_MODE_NULL);
+    esp_wifi_set_mode(WIFI_MODE_NULL);
     //esp_wifi_deinit();
            
     return AJ_OK;
@@ -272,37 +284,33 @@ AJ_Status AJ_ConnectWiFiHelper(const char* ssid, AJ_WiFiSecurityType secType, co
         memcpy(config.sta.password, passphrase, pass_len);
     }
     
-    /*if (bssid) {
-        memcpy(config.sta.bssid, bssid, sizeof(config.sta.bssid));
-        config.sta.bssid_set = true;
-    }*/
-
     esp_wifi_set_config(WIFI_IF_STA, &config);
-    esp_err_t err = esp_wifi_connect();
-    if (err == ESP_OK){
+    esp_wifi_connect();
+    
+    AJ_Sleep(10000);
+    
+    if (AJ_Wifi_isConnected()){
+        printf("+++ Wifi connected\n");
+        //xEventGroupSetBits(wifi_event_group, CONNECTED_BIT);
         AJ_ESP32_connectState = AJ_WIFI_CONNECT_OK;
         status = AJ_OK;
-    } else if ((err == ESP_ERR_WIFI_CONN) || (err == ESP_ERR_WIFI_SSID)) {
-        AJ_ESP32_connectState = AJ_WIFI_CONNECT_FAILED;
-        status = AJ_ERR_CONNECT;
     } else {
-        AJ_ESP32_connectState = AJ_WIFI_IDLE;
-        status = AJ_ERR_DRIVER;
+        printf("+++ Wifi not connected\n");
+        wlan_obj.disconnected = true;
+        //xEventGroupClearBits(wifi_event_group, CONNECTED_BIT);
+        AJ_ESP32_connectState = AJ_WIFI_CONNECT_FAILED;
+        status = AJ_ERR_SECURITY;
     }
-    
+   
     return status;
 }
 
 AJ_Status AJ_ConnectWiFi(const char* ssid, AJ_WiFiSecurityType secType, AJ_WiFiCipherType cipherType, const char* passphrase)
 {
     printf("AJ_ConnectWiFi\n");
-   
-    AJ_Status status = AJ_Network_Up();
-    if (status != AJ_OK) {
-        AJ_ErrPrintf(("AJ_ConnectWiFi(): AJ_Network_Up error"));
-        return status;
-    }
-   
+     
+    AJ_Status status = AJ_OK;
+    
     wlan_setup (WIFI_MODE_STA, NULL, 0, secType, NULL, 0,
                  DEFAULT_STA_CHANNEL, ANTENNA_TYPE_INTERNAL, false);
      
@@ -362,13 +370,8 @@ AJ_Status AJ_EnableSoftAP(const char* ssid, uint8_t hidden, const char* passphra
 {
     printf("AJ_EnableSoftAP\n");
     
-    AJ_Status status = AJ_Network_Up();
+    AJ_Status status = AJ_OK;
     uint32_t time2 = 0;
-
-    if (status != AJ_OK) {
-        AJ_ErrPrintf(("AJ_EnableSoftAP(): AJ_Network_Up error"));
-        return status;
-    }
 
     status = AJ_EnableSoftAPHelper(ssid, hidden, passphrase);
     if (status != AJ_OK) {
@@ -468,7 +471,6 @@ static AJ_Status AJ_Network_Down()
 
     if (wifi_initialized == TRUE) {
         wifi_initialized = FALSE;
-        wlan_obj.disconnected = true;
         
         err = AJ_Wifi_DriverStop();
         if (err != AJ_OK) {
@@ -493,7 +495,7 @@ AJ_Status AJ_ResetWiFi(void)
         return status;
     }
     wifi_initialized = FALSE; // restarting _everything_
-    status = AJ_Network_Up();
+    //status = AJ_Network_Up();
     
     return status;
 }

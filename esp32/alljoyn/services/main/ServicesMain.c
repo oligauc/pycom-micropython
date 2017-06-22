@@ -622,6 +622,7 @@ void alljoyn_task(void *args)
                 rebootRequired = (status == AJ_ERR_RESTART_APP);
                 AJApp_DisconnectHandler(&busAttachment, forcedDisconnnect);
                 AJSVC_RoutingNodeDisconnect(&busAttachment, forcedDisconnnect, AJAPP_SLEEP_TIME, AJAPP_SLEEP_TIME, &isBusConnected);
+                printf("rebootRequired: %d\n",rebootRequired);
                 if (rebootRequired) {
                     AJ_Reboot();
                 }

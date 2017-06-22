@@ -28,6 +28,8 @@
 #include <aj_util.h>
 #include "py/mphal.h"
 
+#include "esp_system.h"
+
 uint8_t dbgTARGET_UTIL = 0;
 
 void AJ_Sleep(uint32_t ms)
@@ -264,4 +266,10 @@ void AJ_Printf(const char* fmat, ...)
 {
     /* Not implemented yet*/
     return;
+}
+
+void AJ_Reboot(void)
+{
+    printf("******* Esp restart\n");
+    esp_restart();
 }

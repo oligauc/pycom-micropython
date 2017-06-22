@@ -123,7 +123,7 @@
 //
 //STATIC const mp_irq_methods_t wlan_irq_methods;
 
-static EventGroupHandle_t wifi_event_group;
+EventGroupHandle_t wifi_event_group;
 
 
 // Event bits
@@ -280,12 +280,14 @@ void wlan_off_on (void) {
 //*****************************************************************************
 
 STATIC esp_err_t wlan_event_handler(void *ctx, system_event_t *event) {
+    
     switch(event->event_id) {
     case SYSTEM_EVENT_STA_START:
         esp_wifi_connect();
         break;
     case SYSTEM_EVENT_STA_CONNECTED:
     {
+        printf("++++++++++ SYSTEM_EVENT_STA_CONNECTED\n");
         system_event_sta_connected_t *_event = (system_event_sta_connected_t *)&event->event_info;
         memcpy(wlan_obj.bssid, _event->bssid, 6);
         wlan_obj.channel = _event->channel;
@@ -293,9 +295,11 @@ STATIC esp_err_t wlan_event_handler(void *ctx, system_event_t *event) {
     }
         break;
     case SYSTEM_EVENT_STA_GOT_IP:
+        printf("******* setting connected bit\n");
         xEventGroupSetBits(wifi_event_group, CONNECTED_BIT);
         break;
     case SYSTEM_EVENT_STA_DISCONNECTED:
+        printf("******* clear connected bit\n");
         xEventGroupClearBits(wifi_event_group, CONNECTED_BIT);
         system_event_sta_disconnected_t *disconn = &event->event_info.disconnected;
         switch (disconn->reason) {
